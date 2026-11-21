@@ -1,0 +1,103 @@
+{
+    "version": 2,
+    "name": "Night Post: A Quiet First Shift",
+    "speed": 38.0,
+    "features": {
+        "forecast": true,
+        "bookmarks": true,
+        "time_bubble": true,
+        "recycling": true
+    },
+    "missiles": [
+        {
+            "x": 150,
+            "target": 1,
+            "time": 3
+        },
+        {
+            "x": 1000,
+            "target": 7,
+            "time": 6
+        },
+        {
+            "x": 320,
+            "target": 3,
+            "time": 9
+        },
+        {
+            "x": 820,
+            "target": 5,
+            "time": 12
+        },
+        {
+            "x": 520,
+            "target": 2,
+            "time": 15
+        },
+        {
+            "x": 630,
+            "target": 6,
+            "time": 18
+        },
+        {
+            "x": 160,
+            "target": 2,
+            "time": 23
+        },
+        {
+            "x": 310,
+            "target": 1,
+            "time": 24
+        },
+        {
+            "x": 840,
+            "target": 7,
+            "time": 26
+        },
+        {
+            "x": 980,
+            "target": 6,
+            "time": 27
+        },
+        {
+            "x": 470,
+            "target": 4,
+            "time": 30
+        },
+        {
+            "x": 680,
+            "target": 4,
+            "time": 31
+        },
+        {
+            "x": 210,
+            "target": 3,
+            "time": 35
+        },
+        {
+            "x": 420,
+            "target": 5,
+            "time": 36
+        },
+        {
+            "x": 760,
+            "target": 2,
+            "time": 37
+        },
+        {
+            "x": 950,
+            "target": 6,
+            "time": 38
+        },
+        {
+            "x": 50,
+            "target": 0,
+            "time": 42
+        },
+        {
+            "x": 1100,
+            "target": 8,
+            "time": 43
+        }
+    ]
+}

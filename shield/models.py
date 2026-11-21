@@ -1,12 +1,13 @@
 """
-The visible objects in Missile Shield.
+the visible objects for missile shield.
 
-Authors: Joon Lee (jl4875) + Richard Li (rl998)
-Date: December 6, 2026
+authors: joon lee (jl4875) + richard li (rl998)
+date: december 6, 2026
 
-The provided game2d framework and assignment starter are by Walker M. White.
-The images and fonts used here are the assets provided with the assignment.
-Each object keeps its own information. It does not look inside a Wave or app.
+the supplied game2d framework and starter are by walker m. white.
+the pictures and fonts also come from the assignment package.
+each object tracks the data it needs, so it never looks inside a Wave or
+the app to figure out what to do.
 """
 from consts import *
 from game2d import *
@@ -14,30 +15,30 @@ from game2d import *
 
 class Silo(GImage):
     """
-    A missile silo with a visible count of its remaining ammunition.
+    a missile silo with a number showing how many rockets are left.
 
-    A silo stays on screen after a bomb hits it. The controller responds to
-    that hit by setting its ammunition to zero. The inherited x and y are
-    the center of the picture, while bottom is the bottom of the picture.
+    the picture stays on screen after a bomb hits because the controller just
+    sets the ammo to zero. x and y still give the center of the picture, and
+    bottom gives the bottom edge, like the usual properties of a GImage.
     """
-    # Attribute _ammunition: The number of rockets left in this silo.
-    # Invariant: _ammunition is an int greater than or equal to zero.
-    # Attribute _ammunition_label: The number drawn over the silo picture.
-    # Invariant: _ammunition_label is a GLabel with text str(_ammunition).
+    # _ammunition: how many rockets are left in this silo.
+    # invariant: _ammunition is an int greater than or equal to zero.
+    # _ammunition_label: the number shown on top of the silo picture.
+    # invariant: _ammunition_label is a GLabel with text str(_ammunition).
 
     def getAmmo(self):
         """
-        Returns the number of rockets left in this silo, as an int.
+        returns how many rockets are left in this silo as an int.
         """
         remaining_ammunition = self._ammunition
         return remaining_ammunition
 
     def setAmmo(self, amount):
         """
-        Changes the ammunition count and the number shown on the silo.
+        sets the ammo count and updates the number on the picture too.
 
-        Parameter amount: The new number of rockets in this silo.
-        Precondition: amount is an int greater than or equal to zero.
+        parameter amount: the new number of rockets in this silo.
+        precondition: amount is an int greater than or equal to zero.
         """
         assert type(amount) == int
         assert amount >= 0
@@ -47,10 +48,10 @@ class Silo(GImage):
 
     def __init__(self, x):
         """
-        Initializes a full silo centered horizontally at x, on the ground.
+        sets up a full silo with the bottom on the ground and center at x.
 
-        Parameter x: The horizontal coordinate of the silo's center.
-        Precondition: x is a number (int or float).
+        parameter x: the horizontal coordinate of the center of the silo.
+        precondition: x is a number (int or float).
         """
         silo_center_height = SILO_HEIGHT / 2
         super().__init__(x=x, y=silo_center_height, width=SILO_WIDTH,
@@ -66,10 +67,10 @@ class Silo(GImage):
 
     def draw(self, view):
         """
-        Draws the silo picture and then its ammunition number.
+        draws the silo first, then puts the ammo number on top.
 
-        Parameter view: The view where this silo should be drawn.
-        Precondition: view is a GView.
+        parameter view: where to draw this silo.
+        precondition: view is a GView.
         """
         super().draw(view)
         self._ammunition_label.x = self.x
@@ -79,27 +80,27 @@ class Silo(GImage):
 
 class City(GImage):
     """
-    A city that is drawn until it is destroyed.
+    a city that stays visible until a bomb destroys it.
 
-    Keeping the object after its destruction preserves its original target
-    location. A later bomb can reach that same location without shifting
-    the positions of any of the other cities.
+    the object stays in the target list even after the picture disappears,
+    because later bombs still need the same destination. so destroying one
+    city does not shift the positions of the other cities.
     """
-    # Attribute _alive: Whether this city is still standing.
-    # Invariant: _alive is a bool; a destroyed city never becomes alive again.
+    # _alive: whether this city is still standing.
+    # invariant: _alive is a bool; a destroyed city never comes back.
 
     def getAlive(self):
         """
-        Returns True if this city is still standing; otherwise returns False.
+        returns True if this city is still standing, or False if it is gone.
         """
         return self._alive
 
     def __init__(self, x):
         """
-        Initializes a living city with its bottom at CITY_OFFSET.
+        sets up a living city with the bottom edge at CITY_OFFSET.
 
-        Parameter x: The horizontal coordinate of the city's center.
-        Precondition: x is a number (int or float).
+        parameter x: the horizontal coordinate of the center of the city.
+        precondition: x is a number (int or float).
         """
         half_city_height = CITY_HEIGHT / 2
         city_center_height = CITY_OFFSET + half_city_height
@@ -109,17 +110,17 @@ class City(GImage):
 
     def destroy(self):
         """
-        Marks this city as destroyed, including if it was already destroyed.
+        marks this city as destroyed, even if an earlier bomb already hit it.
         """
         # a second bomb cannot make an already gone city extra gone 😭
         self._alive = False
 
     def draw(self, view):
         """
-        Draws this city only if it has not been destroyed.
+        draws the city if it is still standing, but draws nothing if it is gone.
 
-        Parameter view: The view where this city should be drawn.
-        Precondition: view is a GView.
+        parameter view: where to draw this city.
+        precondition: view is a GView.
         """
         if self._alive:
             super().draw(view)
@@ -127,26 +128,26 @@ class City(GImage):
 
 class Target(GImage):
     """
-    The aiming reticule and its current movement speed.
+    the aiming reticule and how fast it is moving right now.
 
-    The controller checks the arrow keys and chooses the new position. The
-    inherited position and size properties remain public, as in GImage.
+    the controller reads the arrow keys and picks the next position. position
+    and size stay public because those properties already come from GImage.
     """
-    # Attribute _movement_speed: The current arrow-key movement speed.
-    # Invariant: _movement_speed is a number from 0 to AIM_SPEED_LIMIT.
+    # _movement_speed: how fast the arrow keys move the reticule right now.
+    # invariant: _movement_speed is a number from 0 to AIM_SPEED_LIMIT.
 
     def getSpeed(self):
         """
-        Returns the reticule's current movement speed, as a number.
+        returns the current movement speed of the reticule as a number.
         """
         return self._movement_speed
 
     def setSpeed(self, speed):
         """
-        Changes the movement speed to speed.
+        sets the movement speed to speed.
 
-        Parameter speed: The new movement speed.
-        Precondition: speed is a number from 0 to AIM_SPEED_LIMIT, inclusive.
+        parameter speed: how fast the reticule should move.
+        precondition: speed is a number from 0 to AIM_SPEED_LIMIT, inclusive.
         """
         assert type(speed) == int or type(speed) == float
         assert speed >= 0
@@ -155,12 +156,12 @@ class Target(GImage):
 
     def __init__(self, x, y):
         """
-        Initializes a stationary aiming reticule centered at (x, y).
+        sets up a reticule centered at (x, y), starting with zero speed.
 
-        Parameter x: The horizontal coordinate of the reticule's center.
-        Precondition: x is a number (int or float).
-        Parameter y: The vertical coordinate of the reticule's center.
-        Precondition: y is a number (int or float).
+        parameter x: the horizontal coordinate of the center of the reticule.
+        precondition: x is a number (int or float).
+        parameter y: the vertical coordinate of the center of the reticule.
+        precondition: y is a number (int or float).
         """
         super().__init__(x=x, y=y, width=AIM_WIDTH, height=AIM_HEIGHT,
                          source=AIM_IMAGE)
@@ -170,55 +171,56 @@ class Target(GImage):
 
 class Bomb(GEllipse):
     """
-    A bomb moving in a straight line toward a fixed city or silo location.
+    a bomb that moves straight toward one fixed city or silo location.
 
-    A bomb remembers when it should drop, but the controller decides when
-    to start updating and drawing it. Its tail begins at its original
-    location. Reaching the destination sets a flag for the controller.
+    the bomb saves the drop time, but the controller decides when to start
+    moving and drawing it. the tail always starts at the original position,
+    and reaching the destination sets a flag so the controller can handle
+    that hit.
     """
-    # Attribute _starting_x: The horizontal coordinate of the tail's start.
-    # Invariant: _starting_x is a number and does not change.
-    # Attribute _starting_y: The vertical coordinate of the tail's start.
-    # Invariant: _starting_y is a number and does not change.
-    # Attribute _destination_x: The horizontal coordinate of the impact.
-    # Invariant: _destination_x is a number and does not change.
-    # Attribute _destination_y: The vertical coordinate of the impact.
-    # Invariant: _destination_y is a number and does not change.
-    # Attribute _drop_time: Seconds from the beginning of the wave to launch.
-    # Invariant: _drop_time is a nonnegative number and does not change.
-    # Attribute _target_slot: The original target's position among nine slots.
-    # Invariant: _target_slot is an int from 0 through 8 and does not change.
-    # Attribute _arrived: Whether this bomb has reached its impact location.
-    # Invariant: _arrived is a bool; True implies (x, y) is the destination.
-    # Attribute _tail: The line from the bomb's start to its current position.
-    # Invariant: _tail is a GPath with four coordinates and BOMB_TAIL color.
+    # _starting_x: the horizontal coordinate where the tail starts.
+    # invariant: _starting_x is a number and does not change.
+    # _starting_y: the vertical coordinate where the tail starts.
+    # invariant: _starting_y is a number and does not change.
+    # _destination_x: the horizontal coordinate where this bomb will hit.
+    # invariant: _destination_x is a number and does not change.
+    # _destination_y: the vertical coordinate where this bomb will hit.
+    # invariant: _destination_y is a number and does not change.
+    # _drop_time: seconds from the start of the wave until this bomb drops.
+    # invariant: _drop_time is a nonnegative number and does not change.
+    # _target_slot: the original position of the target among nine slots.
+    # invariant: _target_slot is an int from 0 through 8 and does not change.
+    # _arrived: whether this bomb has reached the impact location.
+    # invariant: _arrived is a bool; True means (x, y) is the destination.
+    # _tail: the line from the start of the bomb to the current position.
+    # invariant: _tail is a GPath with four coordinates and BOMB_TAIL color.
 
     def getStartTime(self):
         """
-        Returns the scheduled drop time, in seconds from the wave's start.
+        returns the drop time in seconds from the start of the wave.
         """
         return self._drop_time
 
     def getTargetSlot(self):
         """
-        Returns the original target's slot number, as an int from 0 to 8.
+        returns the original slot of the target as an int from 0 through 8.
         """
         return self._target_slot
 
     def getArrived(self):
         """
-        Returns True if this bomb has reached its destination; False otherwise.
+        returns True if the bomb reached the destination, or False otherwise.
         """
         return self._arrived
 
     def getRemainingTime(self, speed):
         """
-        Returns the seconds needed to reach the destination at speed.
+        returns how many seconds are left before impact at the given speed.
 
-        This estimate assumes that the bomb keeps moving at the given speed.
+        the estimate assumes the bomb keeps that speed for the whole trip.
 
-        Parameter speed: The speed to use for this estimate, in pixels/second.
-        Precondition: speed is a number greater than zero.
+        parameter speed: the speed for the estimate, in pixels per second.
+        precondition: speed is a number greater than zero.
         """
         remaining_distance = self._distance_to_destination()
         remaining_seconds = remaining_distance / speed
@@ -226,15 +228,16 @@ class Bomb(GEllipse):
 
     def getFuturePosition(self, seconds, speed):
         """
-        Returns the predicted (x, y) tuple after seconds, without moving.
+        returns the predicted (x, y) tuple after seconds, without moving.
 
-        A prediction past impact returns the destination. The result assumes
-        a constant speed, so a later change to the speed changes the estimate.
+        the result stops at the destination if the prediction would go past it.
+        this assumes a constant speed, so changing the speed later also changes
+        the estimate.
 
-        Parameter seconds: How far into the future to look, in seconds.
-        Precondition: seconds is a nonnegative number.
-        Parameter speed: The predicted movement speed, in pixels/second.
-        Precondition: speed is a nonnegative number.
+        parameter seconds: how many seconds ahead to look.
+        precondition: seconds is a nonnegative number.
+        parameter speed: the predicted movement speed in pixels per second.
+        precondition: speed is a nonnegative number.
         """
         horizontal_difference = self._destination_x - self.x
         vertical_difference = self._destination_y - self.y
@@ -256,20 +259,20 @@ class Bomb(GEllipse):
     def __init__(self, start_x, start_y, target_x, target_y,
                  drop_time, target_slot):
         """
-        Initializes a bomb from (start_x, start_y) to (target_x, target_y).
+        sets up a bomb from (start_x, start_y) to (target_x, target_y).
 
-        Parameter start_x: The horizontal starting coordinate.
-        Precondition: start_x is a number (int or float).
-        Parameter start_y: The vertical starting coordinate.
-        Precondition: start_y is a number (int or float).
-        Parameter target_x: The fixed horizontal destination coordinate.
-        Precondition: target_x is a number (int or float).
-        Parameter target_y: The fixed vertical destination coordinate.
-        Precondition: target_y is a number (int or float).
-        Parameter drop_time: Seconds from the wave's start until this drops.
-        Precondition: drop_time is a nonnegative number.
-        Parameter target_slot: The target's original position in the row.
-        Precondition: target_slot is an int from 0 through 8.
+        parameter start_x: the horizontal coordinate where the bomb starts.
+        precondition: start_x is a number (int or float).
+        parameter start_y: the vertical coordinate where the bomb starts.
+        precondition: start_y is a number (int or float).
+        parameter target_x: the fixed horizontal coordinate of the destination.
+        precondition: target_x is a number (int or float).
+        parameter target_y: the fixed vertical coordinate of the destination.
+        precondition: target_y is a number (int or float).
+        parameter drop_time: seconds from the start of the wave to this drop.
+        precondition: drop_time is a nonnegative number.
+        parameter target_slot: the original position of the target in the row.
+        precondition: target_slot is an int from 0 through 8.
         """
         bomb_diameter = 2 * BOMB_RADIUS
         super().__init__(x=start_x, y=start_y, width=bomb_diameter,
@@ -287,15 +290,15 @@ class Bomb(GEllipse):
 
     def update(self, dt, speed):
         """
-        Moves this bomb toward its destination without passing it.
+        moves this bomb toward the destination but never past it.
 
-        The controller only calls this after the scheduled drop time. A bomb
-        already at its destination stays there until the controller removes it.
+        the controller only calls this after the drop time. if the bomb already
+        arrived, it stays there until the controller removes it.
 
-        Parameter dt: The number of seconds to move this bomb.
-        Precondition: dt is a nonnegative number.
-        Parameter speed: This bomb's speed for this step, in pixels/second.
-        Precondition: speed is a nonnegative number.
+        parameter dt: how many seconds to move this bomb.
+        precondition: dt is a nonnegative number.
+        parameter speed: speed of the bomb this step, in pixels per second.
+        precondition: speed is a nonnegative number.
         """
         if self._arrived:
             return
@@ -310,17 +313,17 @@ class Bomb(GEllipse):
 
     def draw(self, view):
         """
-        Draws the bomb's translucent tail and then its white circular head.
+        draws the see-through tail first, then the white circle of the bomb.
 
-        Parameter view: The view where this bomb should be drawn.
-        Precondition: view is a GView.
+        parameter view: where to draw this bomb.
+        precondition: view is a GView.
         """
         self._tail.draw(view)
         super().draw(view)
 
     def _distance_to_destination(self):
         """
-        Returns the nonnegative distance from the bomb to its destination.
+        returns the distance from the bomb to the destination, at least 0.
         """
         horizontal_difference = self._destination_x - self.x
         vertical_difference = self._destination_y - self.y
@@ -335,39 +338,40 @@ class Bomb(GEllipse):
 
 class Rocket(GEllipse):
     """
-    A rocket that travels to a fixed point and then slowly expands.
+    a rocket that flies to a fixed point and then grows into an explosion.
 
-    The destination is copied when the rocket is created. Moving the aiming
-    reticule later does not move that destination. The controller removes
-    finished rockets before updating the remaining ones so that an explosion
-    is drawn at its maximum radius for one frame before disappearing.
+    the destination is copied at launch, so moving the reticule later does
+    not move the rocket destination. the controller removes finished rockets
+    before updating the others, which gives each explosion one frame at full
+    size before it disappears.
     """
-    # Attribute _starting_x: The horizontal coordinate where this was fired.
-    # Invariant: _starting_x is a number and does not change.
-    # Attribute _starting_y: The vertical coordinate where this was fired.
-    # Invariant: _starting_y is a number and does not change.
-    # Attribute _destination_x: The horizontal coordinate chosen at launch.
-    # Invariant: _destination_x is a number and does not change.
-    # Attribute _destination_y: The vertical coordinate chosen at launch.
-    # Invariant: _destination_y is a number and does not change.
-    # Attribute _exploding: Whether this rocket has reached its destination.
-    # Invariant: _exploding is a bool; True implies (x, y) is the destination.
-    # Attribute _tail: The line from the silo to the current rocket position.
-    # Invariant: _tail is a GPath, drawn only when _exploding is False.
-    # Invariant: width == height, with radius from MIN to MAX rocket radius.
+    # _starting_x: the horizontal coordinate where this rocket was fired.
+    # invariant: _starting_x is a number and does not change.
+    # _starting_y: the vertical coordinate where this rocket was fired.
+    # invariant: _starting_y is a number and does not change.
+    # _destination_x: the horizontal coordinate of the aim point at launch.
+    # invariant: _destination_x is a number and does not change.
+    # _destination_y: the vertical coordinate of the aim point at launch.
+    # invariant: _destination_y is a number and does not change.
+    # _exploding: whether this rocket has reached the destination.
+    # invariant: _exploding is a bool; True means (x, y) is the destination.
+    # _tail: the line from the silo to the current position of the rocket.
+    # invariant: _tail is a GPath, drawn only when _exploding is False.
+    # invariant: width == height; the radius stays from ROCKET_MIN_RADIUS
+    # through ROCKET_MAX_RADIUS, including both limits.
 
     def getExploding(self):
         """
-        Returns True if this rocket is expanding at its destination.
+        returns True if the rocket has arrived and is now growing an explosion.
         """
         return self._exploding
 
     def getFinished(self):
         """
-        Returns True if this explosion has reached its maximum radius.
+        returns True if the explosion has reached the maximum radius.
 
-        A True result means the controller should remove it at the start of
-        the next update, after it has been drawn at full size.
+        True tells the controller to remove this when the next update starts,
+        so the full-size explosion gets drawn once before disappearing.
         """
         current_radius = self.width / 2
         if self._exploding:
@@ -377,16 +381,16 @@ class Rocket(GEllipse):
 
     def __init__(self, start_x, start_y, target_x, target_y):
         """
-        Initializes a rocket traveling from its silo to a fixed aim point.
+        sets up a rocket that travels from the silo to a fixed aiming point.
 
-        Parameter start_x: The horizontal starting coordinate at the silo.
-        Precondition: start_x is a number (int or float).
-        Parameter start_y: The vertical starting coordinate at the silo.
-        Precondition: start_y is a number (int or float).
-        Parameter target_x: The horizontal aiming coordinate at launch.
-        Precondition: target_x is a number (int or float).
-        Parameter target_y: The vertical aiming coordinate at launch.
-        Precondition: target_y is a number (int or float).
+        parameter start_x: the horizontal starting coordinate at the silo.
+        precondition: start_x is a number (int or float).
+        parameter start_y: the vertical starting coordinate at the silo.
+        precondition: start_y is a number (int or float).
+        parameter target_x: the horizontal aiming coordinate copied at launch.
+        precondition: target_x is a number (int or float).
+        parameter target_y: the vertical aiming coordinate copied at launch.
+        precondition: target_y is a number (int or float).
         """
         rocket_diameter = 2 * ROCKET_MIN_RADIUS
         super().__init__(x=start_x, y=start_y, width=rocket_diameter,
@@ -403,14 +407,14 @@ class Rocket(GEllipse):
 
     def update(self, dt):
         """
-        Moves the rocket or grows its explosion for dt seconds.
+        moves the rocket or grows the explosion for dt seconds.
 
-        If it arrives during this update, the remaining part of dt is used
-        to grow the explosion. A large dt cannot move it past the destination
-        or make its explosion larger than ROCKET_MAX_RADIUS.
+        if the rocket arrives during this step, the leftover time grows the
+        explosion. even a large dt cannot send it past the destination or make
+        the radius larger than ROCKET_MAX_RADIUS.
 
-        Parameter dt: The number of seconds to advance the rocket.
-        Precondition: dt is a nonnegative number.
+        parameter dt: how many seconds to advance the rocket.
+        precondition: dt is a nonnegative number.
         """
         if self._exploding:
             self._grow_explosion(dt)
@@ -419,10 +423,10 @@ class Rocket(GEllipse):
 
     def draw(self, view):
         """
-        Draws the traveling rocket and tail, or only its expanding explosion.
+        draws the moving rocket and tail, or just the explosion after arrival.
 
-        Parameter view: The view where this rocket should be drawn.
-        Precondition: view is a GView.
+        parameter view: where to draw this rocket.
+        precondition: view is a GView.
         """
         if not self._exploding:
             self._tail.draw(view)
@@ -430,10 +434,10 @@ class Rocket(GEllipse):
 
     def _move_toward_destination(self, dt):
         """
-        Moves toward the destination and starts the explosion on arrival.
+        moves toward the destination and starts the explosion when it arrives.
 
-        Parameter dt: The number of seconds available for movement.
-        Precondition: dt is a nonnegative number and this is not exploding.
+        parameter dt: how many seconds are available for movement.
+        precondition: dt is a nonnegative number and this is not exploding.
         """
         horizontal_difference = self._destination_x - self.x
         vertical_difference = self._destination_y - self.y
@@ -455,10 +459,10 @@ class Rocket(GEllipse):
 
     def _start_explosion(self, remaining_seconds):
         """
-        Stops at the destination and begins a translucent explosion.
+        stops at the destination and starts a see-through explosion.
 
-        Parameter remaining_seconds: The time left after arriving this step.
-        Precondition: remaining_seconds is a nonnegative number.
+        parameter remaining_seconds: time left after arrival during this step.
+        precondition: remaining_seconds is a nonnegative number.
         """
         # the little blue dot finally gets to be a big blue dot 😭
         self.x = self._destination_x
@@ -469,10 +473,10 @@ class Rocket(GEllipse):
 
     def _grow_explosion(self, dt):
         """
-        Increases the radius by ROCKET_STEP_RADIUS per second, up to the max.
+        grows the radius by ROCKET_STEP_RADIUS per second, but stops at the max.
 
-        Parameter dt: The number of seconds available for growth.
-        Precondition: dt is a nonnegative number and this is exploding.
+        parameter dt: how many seconds are available for growth.
+        precondition: dt is a nonnegative number and this is exploding.
         """
         old_radius = self.width / 2
         added_radius = ROCKET_STEP_RADIUS * dt
@@ -485,7 +489,7 @@ class Rocket(GEllipse):
 
     def _distance_to_destination(self):
         """
-        Returns the nonnegative distance from this rocket to its destination.
+        returns the distance from this rocket to the destination, at least 0.
         """
         horizontal_difference = self._destination_x - self.x
         vertical_difference = self._destination_y - self.y

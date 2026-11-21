@@ -1,11 +1,11 @@
 """
-The application controller for Missile Shield: Night Post.
+the main controller for missile shield: night post.
 
-This file handles the welcome screen, loading, pausing, and final messages.
-Wave handles the game itself. The artwork and fonts come from the starter.
+this file handles the menu, loading, pausing, and the final messages, so
+Wave can handle the actual game. the art and fonts came with the starter.
 
-Authors: Joon Lee (jl4875) + Richard Li (rl998)
-Date: December 6, 2026
+authors: joon lee (jl4875) + richard li (rl998)
+date: december 6, 2026
 """
 from consts import *
 from game2d import *
@@ -17,19 +17,20 @@ from kivy.logger import Logger
 
 class MissileShield(GameApp):
     """
-    The main controller for one complete wave of Missile Shield.
+    handles the screens and the six states of one complete game.
 
-    This controller owns messages and changes between the six game states.
-    It passes input and elapsed time to Wave only during active gameplay.
-    It never reads Wave's hidden attributes or accesses the model classes.
+    this controller sends input and elapsed time to Wave while the game is
+    active. it only uses public methods of Wave, because the hidden wave
+    attributes and the model objects belong to the other files.
 
-    STATE_LOADING creates a new wave on its next update. STATE_CONTINUE
-    clears the pause message on its next update without creating a wave.
-    A loading failure uses STATE_COMPLETE, allowing R to retry or M to
-    return home. The inherited view and input are GView and GInput objects.
+    STATE_LOADING makes a fresh wave on the next update. similarly,
+    STATE_CONTINUE clears the pause screen on the next update, but keeps
+    the existing wave. a loading error uses STATE_COMPLETE, so r can retry
+    and m can return to the menu. the inherited view and input are GView
+    and GInput objects.
 
-    The title exists only in STATE_INACTIVE. The main message is None
-    during STATE_ACTIVE. All added instance attributes are hidden.
+    the title is only present in STATE_INACTIVE. the main message is None
+    in STATE_ACTIVE, and every added instance attribute is hidden.
     """
     # _state: one of the six STATE constants imported from consts.
     # _wave: a Wave, or None before loading or after a loading failure.
@@ -37,17 +38,17 @@ class MissileShield(GameApp):
     # _sky_tint: a GRectangle giving the background a dark, readable tint.
     # _title: a GLabel in STATE_INACTIVE, and None in every other state.
     # _text: a GLabel message, or None; always None in STATE_ACTIVE.
-    # _screen_labels: a list of GLabels for the current menu or message.
-    # _screen_shapes: a list of GRectangles for menu and message decoration.
+    # _screen_labels: GLabels for the current menu or message.
+    # _screen_shapes: GRectangles that decorate the menu or message.
     # _selected_wave_file: a nonempty string naming the wave to load/retry.
 
     def start(self):
         """
-        Initializes the application after the window is ready.
+        sets up the app once the window is ready.
 
-        This replaces an initializer for this GameApp subclass. It creates
-        the background, initializes every hidden attribute, and opens the
-        welcome screen. It does not create a Wave until the player starts.
+        this takes the place of an initializer for this GameApp subclass, so
+        it creates the background, gives every hidden attribute a starting
+        value, and opens the menu. the wave waits until the player starts.
         """
         self._state = STATE_INACTIVE
         self._wave = None
@@ -67,15 +68,15 @@ class MissileShield(GameApp):
 
     def update(self, dt):
         """
-        Updates the current application state for one animation frame.
+        handles one frame using the state at the start of this call.
 
-        Inactive waits for S or C. Loading creates a fresh wave. Active
-        runs Wave unless P pauses it. Paused waits for R or M. Continue
-        removes the pause screen. Complete allows R to retry or M to exit.
-        Each call handles only the state present at its beginning.
+        inactive waits for s or c, and loading makes a fresh wave. active
+        updates Wave unless p pauses it, while paused waits for r or m.
+        continue clears the pause screen, and complete waits for a retry
+        or a return to the menu. only one of these branches runs each frame.
 
-        Parameter dt: the real seconds since the previous update
-        Precondition: dt is a nonnegative int or float
+        parameter dt: real seconds since the previous update
+        precondition: dt is a nonnegative int or float
         """
         if self._state == STATE_INACTIVE:
             self._update_menu()
@@ -92,11 +93,11 @@ class MissileShield(GameApp):
 
     def draw(self):
         """
-        Draws the background, wave, and current application message.
+        draws the background, then the wave, then the current screen text.
 
-        Wave draws all active game objects and its own HUD. Menu and pause
-        panels are drawn afterward so their instructions stay readable.
-        Drawing does not advance a timer or change the game state.
+        Wave draws the game objects and the heads-up display. the menu and
+        pause panels go on top, because the controls still need to be easy
+        to read. drawing does not move a timer or change the game state.
         """
         self._background.draw(self.view)
         self._sky_tint.draw(self.view)
@@ -113,10 +114,10 @@ class MissileShield(GameApp):
 
     def _clear_messages(self):
         """
-        Removes the old title, messages, and foreground decoration.
+        clears the title, messages, and shapes from the previous screen.
 
-        The background and current Wave are left in place. This helper
-        prepares the next screen without changing the application state.
+        the background and current Wave stay in place, so this helper can
+        prepare a new screen without changing the application state.
         """
         self._title = None
         self._text = None
@@ -125,10 +126,10 @@ class MissileShield(GameApp):
 
     def _open_menu(self):
         """
-        Returns to the welcome screen and discards the previous wave.
+        opens the welcome screen and lets go of the previous wave.
 
-        S will load DEFAULT_WAVE, including a command-line override.
-        C will load the separate nightpost.json demonstration wave.
+        s uses DEFAULT_WAVE, including a filename from the command line.
+        c uses nightpost.json, so the custom wave has a separate start key.
         """
         self._clear_messages()
         self._wave = None
@@ -143,10 +144,10 @@ class MissileShield(GameApp):
 
     def _update_menu(self):
         """
-        Starts the selected wave with S or Night Post with C.
+        starts the selected file with s or the night post wave with c.
 
-        Only a new key press starts a game. Holding a firing key while
-        reading the menu does not dismiss it.
+        the key has to be newly pressed, so holding a firing key while
+        reading the menu does not accidentally start the game.
         """
         if self.input.is_key_pressed('s'):
             self._begin_loading(DEFAULT_WAVE)
@@ -155,10 +156,10 @@ class MissileShield(GameApp):
 
     def _begin_loading(self, filename):
         """
-        Prepares a fresh wave to be loaded on the next animation frame.
+        gets the screen ready to load a fresh wave on the next frame.
 
-        Parameter filename: the wave file to start or retry
-        Precondition: filename is a nonempty string
+        parameter filename: the wave file to start or retry
+        precondition: filename is a nonempty string
         """
         self._clear_messages()
         self._wave = None
@@ -171,35 +172,58 @@ class MissileShield(GameApp):
 
     def _load_wave(self):
         """
-        Loads the selected JSON file and starts its Wave.
+        loads the selected json file and makes its Wave.
 
-        The starter's load_json returns None for a missing or malformed
-        file. This converts that result into a caught ValueError. Other
-        loading errors are also logged and displayed without a crash.
+        the screen says which step failed and shows the actual exception,
+        because a setup error does not always mean the json file is bad.
+        the full traceback also goes to the kivy log. a failure leaves
+        _wave as None and lets r retry or m return to the menu.
         """
+        loading_step = 'Could not read the wave file.'
+        next_step = 'Check the selected file inside the Data folder.'
         try:
-            wave_information = self.load_json(self._selected_wave_file)
-            # im so tired bro 😴
-            if wave_information is None:
-                failure = 'Missing or malformed wave: '
-                raise ValueError(failure + self._selected_wave_file)
+            wave_information = self._read_wave_file()
+            loading_step = 'Could not create the wave.'
+            next_step = 'Check the wave values and use '
+            next_step = next_step + 'one complete shield folder.'
             next_wave = Wave(wave_information)
             self._wave = next_wave
             self._clear_messages()
             self._state = STATE_ACTIVE
         except Exception as e:
-            Logger.info(type(e).__name__ + ': ' + str(e))
-            self._show_load_error()
+            error_details = type(e).__name__ + ': ' + str(e)
+            Logger.exception('MissileShield: ' + error_details)
+            self._show_load_error(loading_step, error_details, next_step)
+
+    def _read_wave_file(self):
+        """
+        returns the selected wave data, or raises a clear loading error.
+
+        is_json checks the Data folder of this app, so launching from a
+        different folder does not change where the game looks. a missing
+        file raises FileNotFoundError. load_json returns None for bad json,
+        so that result raises ValueError instead. valid json with the wrong
+        wave structure goes to Wave, which checks the contents separately.
+        """
+        if not self.is_json(self._selected_wave_file):
+            missing_file = 'Missing file: Data/' + self._selected_wave_file
+            raise FileNotFoundError(missing_file)
+        wave_information = self.load_json(self._selected_wave_file)
+        if wave_information is None:
+            invalid_file = 'Could not read JSON: Data/'
+            raise ValueError(invalid_file + self._selected_wave_file)
+        return wave_information
 
     def _update_active(self, dt):
         """
-        Pauses on P or lets Wave advance and checks its result.
+        pauses on p, or advances the wave and checks how it ended.
 
-        Losing is checked before winning. Wave decides both conditions;
-        this controller only displays the appropriate completion screen.
+        loss comes before victory because the last city might disappear on
+        this frame. Wave decides both results, so this controller only picks
+        the matching completion screen.
 
-        Parameter dt: the real seconds since the previous update
-        Precondition: dt is nonnegative and _wave is a Wave
+        parameter dt: real seconds since the previous update
+        precondition: dt is nonnegative and _wave is a Wave
         """
         if self.input.is_key_pressed('p'):
             self._pause_wave()
@@ -212,10 +236,10 @@ class MissileShield(GameApp):
 
     def _pause_wave(self):
         """
-        Freezes the wave and displays its controls in a readable panel.
+        freezes the wave and puts the controls on a readable pause panel.
 
-        Custom controls are shown only for a wave with extra features.
-        No Wave update occurs while this pause screen is displayed.
+        the extra controls only appear for a custom wave. Wave does not
+        update while paused, so its bombs and resource meters stay put.
         """
         self._clear_messages()
         self._state = STATE_PAUSED
@@ -238,10 +262,10 @@ class MissileShield(GameApp):
 
     def _update_paused(self):
         """
-        Waits for R to resume the existing wave or M to leave it.
+        waits for r to resume the same wave or m to leave it.
 
-        Resuming first enters STATE_CONTINUE. It does not load another
-        wave and does not advance the existing wave on this frame.
+        r first enters STATE_CONTINUE, so this frame does not advance the
+        wave or load a replacement for it.
         """
         if self.input.is_key_pressed('r'):
             self._state = STATE_CONTINUE
@@ -250,20 +274,20 @@ class MissileShield(GameApp):
 
     def _continue_wave(self):
         """
-        Clears the pause message and makes the existing wave active.
+        clears the pause message and makes the existing wave active again.
 
-        This is the one-frame STATE_CONTINUE transition. Gameplay starts
-        advancing again on the following call to update.
+        this is the one-frame STATE_CONTINUE step, so the wave starts moving
+        again on the following call to update.
         """
         self._clear_messages()
         self._state = STATE_ACTIVE
 
     def _finish_wave(self, player_won):
         """
-        Stops gameplay and displays the win or loss message.
+        stops gameplay and puts up the matching win or loss message.
 
-        Parameter player_won: whether the wave was successfully cleared
-        Precondition: player_won is a bool and _wave is a Wave
+        parameter player_won: whether the player cleared the wave
+        precondition: player_won is a bool and _wave is a Wave
         """
         self._clear_messages()
         self._state = STATE_COMPLETE
@@ -281,45 +305,81 @@ class MissileShield(GameApp):
 
     def _update_complete(self):
         """
-        Restarts the selected file with R or returns to the menu with M.
+        restarts the selected file with r or returns to the menu with m.
 
-        The same keys also work after a loading failure. A restart creates
-        a new Wave, with fresh cities, ammunition, and feature resources.
+        these keys also work after a loading error. restarting makes a new
+        Wave, so the cities, ammo, and extra resources all start fresh.
         """
         if self.input.is_key_pressed('r'):
             self._begin_loading(self._selected_wave_file)
         elif self.input.is_key_pressed('m'):
             self._open_menu()
 
-    def _show_load_error(self):
+    def _show_load_error(self, loading_step, error_details, next_step):
         """
-        Shows a recoverable loading failure with the selected filename.
+        shows the failed step, filename, exception, and retry controls.
 
-        The technical exception is already in the Kivy log. The visible
-        message tells the player how to retry or choose another wave.
+        long errors get three wrapped lines, while the log keeps the full
+        traceback. this clears any unfinished Wave and uses STATE_COMPLETE,
+        so r and m still work after either a file error or a setup error.
+
+        parameter loading_step: a short description of what failed
+        parameter error_details: the exception type and its message
+        parameter next_step: a short suggestion for fixing the problem
+        precondition: all three parameters are nonempty strings
         """
         self._clear_messages()
         self._wave = None
         self._state = STATE_COMPLETE
-        self._make_panel(410)
-        self._add_center_label('DELIVERY FAILED', 563, 36,
+        self._make_panel(530)
+        self._add_center_label('DELIVERY FAILED', 638, 36,
                                introcs.RGB(254, 193, 123), THEME_FONT)
-        self._text = self._make_label('This wave could not be loaded.',
-                                     self.width / 2, 493, 28, 'white')
-        self._add_center_label(self._selected_wave_file, 442, 22,
+        self._text = self._make_label(loading_step,
+                                     self.width / 2, 579, 27, 'white')
+        self._add_center_label(self._selected_wave_file, 535, 22,
                                introcs.RGB(123, 231, 230))
-        detail = 'Check the JSON file and the terminal error message.'
-        self._add_center_label(detail, 387, 18,
+        self._add_error_details(error_details)
+        self._add_center_label(next_step, 350, 18,
+                               introcs.RGB(191, 207, 216))
+        log_hint = 'The terminal log has the full error and its location.'
+        self._add_center_label(log_hint, 317, 16,
                                introcs.RGB(191, 207, 216))
         self._add_center_label('R  retry       M  return to menu',
-                               300, 20, 'white')
+                               236, 20, 'white')
+
+    def _add_error_details(self, error_details):
+        """
+        adds up to three lines of the actual loading error to the panel.
+
+        each line has at most 48 characters before the final ellipsis.
+        words stay together when possible, but a long path can split too.
+        extra text stays in the log, so the retry controls remain visible.
+
+        parameter error_details: the exception type and its message
+        precondition: error_details is a nonempty string
+        """
+        remaining_text = error_details.replace('\n', ' ').strip()
+        for line_number in range(3):
+            if len(remaining_text) > 48:
+                split_position = remaining_text.rfind(' ', 0, 48)
+                if split_position < 1:
+                    split_position = 48
+            else:
+                split_position = len(remaining_text)
+            current_line = remaining_text[:split_position]
+            remaining_text = remaining_text[split_position:].lstrip()
+            if line_number == 2 and remaining_text != '':
+                current_line = current_line + '...'
+            line_height = 476 - 29 * line_number
+            self._add_center_label(current_line, line_height, 19,
+                                   introcs.RGB(254, 193, 123))
 
     def _make_menu_decoration(self):
         """
-        Adds the postal border, quiet stars, and two menu card backgrounds.
+        adds the postal border, small stars, and two menu card backgrounds.
 
-        These are cosmetic shapes only. They never appear in Wave's lists
-        and cannot interact with bombs, rockets, cities, or ammunition.
+        these are just decorations. they stay out of the lists of Wave, so
+        they cannot change bombs, rockets, cities, or ammo.
         """
         stripe_colors = [introcs.RGB(123, 231, 230, 210),
                          introcs.RGB(254, 193, 123, 210)]
@@ -338,10 +398,10 @@ class MissileShield(GameApp):
 
     def _add_menu_stars(self):
         """
-        Places a fixed set of small decorative stars around the menu.
+        puts a fixed set of little stars around the menu.
 
-        The positions are deliberately fixed so the menu is stable and
-        does not require a random module or another animation timer.
+        the positions stay the same, because a quiet menu does not need
+        random numbers or another timer just to place a few stars.
         """
         star_positions = [[93, 708], [174, 563], [1040, 706], [992, 565],
                           [66, 505], [1086, 512], [196, 746], [937, 750]]
@@ -355,10 +415,10 @@ class MissileShield(GameApp):
 
     def _make_menu_heading(self):
         """
-        Creates the title and the short premise above the two start cards.
+        puts the title and short game description above the start cards.
 
-        Magnetar is reserved for the title. The smaller instructions use
-        the more readable Roboto font supplied with the assignment.
+        the title uses magnetar, but the smaller instructions use roboto
+        because it is easier to read. both fonts came with the assignment.
         """
         cyan_color = introcs.RGB(123, 231, 230)
         self._add_center_label('N I G H T   P O S T', 746, 22, cyan_color)
@@ -372,10 +432,10 @@ class MissileShield(GameApp):
 
     def _make_standard_card(self):
         """
-        Labels the selected-file option and its command-line wave choice.
+        labels the selected-file card with the command-line wave choice.
 
-        A long filename is reduced to a smaller font so it stays inside
-        the card. The selected filename itself is never changed.
+        a long filename gets a smaller font so it fits in the card. this
+        only changes the display, so the actual filename stays the same.
         """
         self._add_card_label('S   SELECTED WAVE', 309, 420, 25, 'white')
         self._add_card_label('START THE SELECTED WAVE', 309, 381, 13,
@@ -390,10 +450,10 @@ class MissileShield(GameApp):
 
     def _make_custom_card(self):
         """
-        Labels the optional custom wave and its four extra tools.
+        labels the custom wave card and explains its four extra tools.
 
-        Each row gives a control or a clear automatic effect. These tools
-        belong only to a custom wave; S still uses the chosen base file.
+        each row gives a key or an automatic effect. these tools belong to
+        custom waves, but s still starts whichever file was selected.
         """
         cyan_color = introcs.RGB(123, 231, 230)
         self._add_card_label('C   NIGHT POST', 843, 420, 25, cyan_color)
@@ -410,7 +470,7 @@ class MissileShield(GameApp):
 
     def _make_menu_controls(self):
         """
-        Displays shared controls and the two start choices below the cards.
+        puts the shared controls and both start choices below the cards.
         """
         controls = 'ARROWS  aim       1 / 2 / 3  fire       P  pause'
         self._add_center_label(controls, 174, 19, 'white')
@@ -424,10 +484,10 @@ class MissileShield(GameApp):
 
     def _make_custom_help(self):
         """
-        Explains the four optional tools while a custom wave is paused.
+        explains the four optional tools while a custom wave is paused.
 
-        All tool behavior is implemented in Wave. These are instructions
-        only; displaying them does not consume or refill a resource.
+        Wave handles what the tools do, so showing this help does not spend
+        or refill any resource.
         """
         pale_color = introcs.RGB(221, 232, 236)
         self._add_center_label('F  toggle 1.5-second forecast ghosts',
@@ -447,7 +507,7 @@ class MissileShield(GameApp):
 
     def _make_standard_help(self):
         """
-        Shows a short explanation of the normal game's goal and controls.
+        shows the normal goal and controls in a few short lines.
         """
         pale_color = introcs.RGB(221, 232, 236)
         self._add_center_label('Fire from the left, middle, or right silo.',
@@ -462,10 +522,10 @@ class MissileShield(GameApp):
 
     def _make_win_message(self):
         """
-        Displays a successful wave's final city and ammunition score.
+        shows the final score from living cities and leftover ammo.
 
-        The score is read from Wave rather than recalculated here. The
-        already-finished wave remains visible behind the completion panel.
+        the score comes from Wave, so this file does not calculate it again.
+        the finished wave stays visible behind the completion panel.
         """
         self._add_center_label('DELIVERED', 550, 43,
                                introcs.RGB(123, 231, 230), THEME_FONT)
@@ -481,9 +541,10 @@ class MissileShield(GameApp):
 
     def _make_loss_message(self):
         """
-        Displays the immediate loss when no cities remain.
+        shows the loss as soon as no cities remain.
 
-        It does not wait for the remaining rockets or bombs to finish.
+        remaining rockets and bombs do not delay this screen, because the
+        player has already lost when the last city disappears.
         """
         self._add_center_label('LIGHTS OUT', 550, 43,
                                introcs.RGB(254, 193, 123), THEME_FONT)
@@ -496,10 +557,10 @@ class MissileShield(GameApp):
 
     def _make_panel(self, panel_height):
         """
-        Adds a dark veil and a centered message panel over the current game.
+        adds a dark veil and a centered message panel over the game.
 
-        Parameter panel_height: the height of the readable center panel
-        Precondition: panel_height is a positive number <= self.height
+        parameter panel_height: height of the readable center panel
+        precondition: panel_height is a positive number <= self.height
         """
         veil_color = introcs.RGB(5, 12, 24, 115)
         veil = GRectangle(x=self.width / 2, y=self.height / 2,
@@ -511,16 +572,16 @@ class MissileShield(GameApp):
 
     def _add_card(self, center_x, center_y, width, height, highlighted):
         """
-        Adds a dark rectangular card and a narrow colored top border.
+        adds a dark rectangular card with a thin colored border on top.
 
-        Parameter center_x: the card's horizontal center
-        Parameter center_y: the card's vertical center
-        Parameter width: the card width
-        Parameter height: the card height
-        Precondition: centers are numbers; width and height are positive
+        parameter center_x: horizontal center of the card
+        parameter center_y: vertical center of the card
+        parameter width: width of the card
+        parameter height: height of the card
+        precondition: centers are numbers; width and height are positive
 
-        Parameter highlighted: whether the border uses the cyan accent
-        Precondition: highlighted is a bool
+        parameter highlighted: whether the top border uses the cyan accent
+        precondition: highlighted is a bool
         """
         background_color = introcs.RGB(9, 23, 40, 239)
         if highlighted:
@@ -537,10 +598,10 @@ class MissileShield(GameApp):
 
     def _add_rule(self, vertical_position):
         """
-        Adds a thin horizontal divider to the menu.
+        adds a thin horizontal divider to the menu.
 
-        Parameter vertical_position: the divider's height on the screen
-        Precondition: vertical_position is between 0 and self.height
+        parameter vertical_position: height of the divider on the screen
+        precondition: vertical_position is between 0 and self.height
         """
         divider_color = introcs.RGB(166, 201, 212, 100)
         divider = GRectangle(x=self.width / 2, y=vertical_position,
@@ -550,13 +611,13 @@ class MissileShield(GameApp):
 
     def _add_center_label(self, words, y, size, color, font=BASIC_FONT):
         """
-        Adds one centered label to the current screen's text list.
+        adds one centered label to the text list of the current screen.
 
-        Parameter words: the text to display; must be a string
-        Parameter y: the vertical center; must be a number
-        Parameter size: the desired font size; must be a positive number
-        Parameter color: the text color; must be a valid game2d color
-        Parameter font: the font file; must name a supplied .ttf font
+        parameter words: text to display; must be a string
+        parameter y: vertical center; must be a number
+        parameter size: wanted font size; must be a positive number
+        parameter color: text color; must be a valid game2d color
+        parameter font: font file; must name a supplied .ttf font
         """
         current_label = self._make_label(words, self.width / 2, y,
                                          size, color, font)
@@ -564,13 +625,13 @@ class MissileShield(GameApp):
 
     def _add_card_label(self, words, x, y, size, color):
         """
-        Adds a label that fits inside a 498-pixel menu card.
+        adds a label that fits inside a menu card with a width of 498 pixels.
 
-        Parameter words: the displayed text; must be a string
-        Parameter x: the horizontal center; must be a number
-        Parameter y: the vertical center; must be a number
-        Parameter size: the desired font size; must be a positive number
-        Parameter color: the text color; must be a valid game2d color
+        parameter words: text to display; must be a string
+        parameter x: horizontal center; must be a number
+        parameter y: vertical center; must be a number
+        parameter size: wanted font size; must be a positive number
+        parameter color: text color; must be a valid game2d color
         """
         current_label = self._make_label(words, x, y, size, color,
                                          BASIC_FONT, 450)
@@ -579,19 +640,19 @@ class MissileShield(GameApp):
     def _make_label(self, words, x, y, size, color,
                     font=BASIC_FONT, limit=None):
         """
-        Returns a label, reducing its font if a long line would not fit.
+        returns a label with a smaller font if the line is too wide.
 
-        A fresh label is made after each reduction because GLabel expands
-        its rectangle for text but does not automatically shrink it.
+        each size change makes a fresh label, because GLabel expands its
+        rectangle for text but does not shrink that rectangle automatically.
 
-        Parameter words: the displayed text; must be a string
-        Parameter x: the horizontal center; must be a number
-        Parameter y: the vertical center; must be a number
-        Parameter size: the desired font size; must be a positive number
-        Parameter color: the text color; must be a valid game2d color
-        Parameter font: the font file; must name a supplied .ttf font
-        Parameter limit: the maximum width, or None for the screen width
-        Precondition: limit is None or a positive number
+        parameter words: text to display; must be a string
+        parameter x: horizontal center; must be a number
+        parameter y: vertical center; must be a number
+        parameter size: wanted font size; must be a positive number
+        parameter color: text color; must be a valid game2d color
+        parameter font: font file; must name a supplied .ttf font
+        parameter limit: maximum width, or None to use the screen width
+        precondition: limit is None or a positive number
         """
         if limit is None:
             available_width = self.width - 120

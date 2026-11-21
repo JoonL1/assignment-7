@@ -1,0 +1,223 @@
+{
+    "version": 2,
+    "name": "Night Post: Letters from Tomorrow",
+    "speed": 62.0,
+    "features": {
+        "forecast": true,
+        "bookmarks": true,
+        "time_bubble": true,
+        "recycling": true
+    },
+    "missiles": [
+        {
+            "x": 155,
+            "target": 1,
+            "time": 2
+        },
+        {
+            "x": 960,
+            "target": 7,
+            "time": 3.5
+        },
+        {
+            "x": 310,
+            "target": 3,
+            "time": 5
+        },
+        {
+            "x": 800,
+            "target": 5,
+            "time": 6.5
+        },
+        {
+            "x": 520,
+            "target": 2,
+            "time": 8
+        },
+        {
+            "x": 620,
+            "target": 6,
+            "time": 9.5
+        },
+        {
+            "x": 95,
+            "target": 6,
+            "time": 13
+        },
+        {
+            "x": 1040,
+            "target": 2,
+            "time": 13.8
+        },
+        {
+            "x": 420,
+            "target": 5,
+            "time": 14.6
+        },
+        {
+            "x": 720,
+            "target": 3,
+            "time": 15.4
+        },
+        {
+            "x": 20,
+            "target": 0,
+            "time": 16.2
+        },
+        {
+            "x": 1120,
+            "target": 8,
+            "time": 17
+        },
+        {
+            "x": 180,
+            "target": 1,
+            "time": 21
+        },
+        {
+            "x": 310,
+            "target": 2,
+            "time": 21.5
+        },
+        {
+            "x": 440,
+            "target": 3,
+            "time": 22
+        },
+        {
+            "x": 705,
+            "target": 5,
+            "time": 22.5
+        },
+        {
+            "x": 830,
+            "target": 6,
+            "time": 23
+        },
+        {
+            "x": 970,
+            "target": 7,
+            "time": 23.5
+        },
+        {
+            "x": 360,
+            "target": 0,
+            "time": 27
+        },
+        {
+            "x": 360,
+            "target": 3,
+            "time": 27.8
+        },
+        {
+            "x": 360,
+            "target": 6,
+            "time": 28.6
+        },
+        {
+            "x": 790,
+            "target": 2,
+            "time": 29.4
+        },
+        {
+            "x": 790,
+            "target": 5,
+            "time": 30.2
+        },
+        {
+            "x": 790,
+            "target": 8,
+            "time": 31
+        },
+        {
+            "x": 110,
+            "target": 7,
+            "time": 35
+        },
+        {
+            "x": 1045,
+            "target": 1,
+            "time": 35.4
+        },
+        {
+            "x": 540,
+            "target": 4,
+            "time": 35.8
+        },
+        {
+            "x": 610,
+            "target": 4,
+            "time": 36.2
+        },
+        {
+            "x": 280,
+            "target": 5,
+            "time": 36.6
+        },
+        {
+            "x": 870,
+            "target": 3,
+            "time": 37
+        },
+        {
+            "x": 64,
+            "target": 1,
+            "time": 41
+        },
+        {
+            "x": 192,
+            "target": 2,
+            "time": 41.5
+        },
+        {
+            "x": 320,
+            "target": 3,
+            "time": 42
+        },
+        {
+            "x": 448,
+            "target": 5,
+            "time": 42.5
+        },
+        {
+            "x": 704,
+            "target": 6,
+            "time": 43
+        },
+        {
+            "x": 960,
+            "target": 7,
+            "time": 43.5
+        },
+        {
+            "x": 85,
+            "target": 8,
+            "time": 47
+        },
+        {
+            "x": 1080,
+            "target": 0,
+            "time": 47.7
+        },
+        {
+            "x": 280,
+            "target": 6,
+            "time": 48.4
+        },
+        {
+            "x": 875,
+            "target": 2,
+            "time": 49.1
+        },
+        {
+            "x": 460,
+            "target": 7,
+            "time": 49.8
+        },
+        {
+            "x": 690,
+            "target": 1,
+            "time": 50.5
+        }
+    ]
+}
