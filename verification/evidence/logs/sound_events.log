@@ -1,0 +1,14 @@
+test_city_impact_plays_once_and_destroys_the_target (__main__.WaveSoundChecks.test_city_impact_plays_once_and_destroys_the_target) ... ok
+test_empty_silo_only_plays_empty_feedback (__main__.WaveSoundChecks.test_empty_silo_only_plays_empty_feedback) ... ok
+test_explosion_plays_once_at_arrival_not_every_growth_step (__main__.WaveSoundChecks.test_explosion_plays_once_at_arrival_not_every_growth_step) ... ok
+test_interception_plays_once_even_with_two_collision_passes (__main__.WaveSoundChecks.test_interception_plays_once_even_with_two_collision_passes) ... ok
+test_launch_cue_follows_one_key_press_not_held_frames (__main__.WaveSoundChecks.test_launch_cue_follows_one_key_press_not_held_frames) ... ok
+test_mute_and_stop_public_api_do_not_change_gameplay (__main__.WaveSoundChecks.test_mute_and_stop_public_api_do_not_change_gameplay) ... ok
+test_refund_cue_only_when_an_ammo_round_is_actually_added (__main__.WaveSoundChecks.test_refund_cue_only_when_an_ammo_round_is_actually_added) ... ok
+test_start_cue_requires_explicit_start (__main__.WaveSoundChecks.test_start_cue_requires_explicit_start) ... ok
+test_wave_finish_stops_old_cues_then_requests_one_result_cue (__main__.WaveSoundChecks.test_wave_finish_stops_old_cues_then_requests_one_result_cue) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.003s
+
+OK

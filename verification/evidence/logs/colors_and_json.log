@@ -1,0 +1,21 @@
+checked source json: {'path': 'Data/immediate.json', 'keys': ['missiles', 'speed'], 'missile_count': 9}
+checked source json: {'path': 'Data/doubletap.json', 'keys': ['missiles', 'speed'], 'missile_count': 18}
+checked source json: {'path': 'Data/medium.json', 'keys': ['missiles', 'speed'], 'missile_count': 21}
+checked source json: {'path': 'Data/malformed.json', 'expected_invalid_json': True, 'error_line': 23, 'error_column': 3}
+checked source json: {'path': 'Data/easy.json', 'keys': ['missiles', 'speed'], 'missile_count': 9}
+checked source json: {'path': 'Data/staggered.json', 'keys': ['missiles', 'speed'], 'missile_count': 9}
+checked source json: {'path': 'Data/hard.json', 'keys': ['missiles', 'speed'], 'missile_count': 30}
+checked real kivy color: tuple 3 / grectangle
+checked real kivy color: tuple 3 / gellipse
+checked real kivy color: tuple 3 / gpath
+checked real kivy color: tuple 4 / grectangle
+checked real kivy color: tuple 4 / gellipse
+checked real kivy color: tuple 4 / gpath
+checked real kivy color: list 3 / grectangle
+checked real kivy color: list 3 / gellipse
+checked real kivy color: list 3 / gpath
+checked real kivy color: list 4 / grectangle
+checked real kivy color: list 4 / gellipse
+checked real kivy color: list 4 / gpath
+pass: six original waves use missiles; malformed stays intentionally invalid
+pass: all 12 tuple/list, rgb/rgba, shape cases drew with real kivy

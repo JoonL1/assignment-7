@@ -1,0 +1,1508 @@
+{
+  "source_archive": "shield (2).zip",
+  "source_archive_sha256": "92db8c51e3ef3e13df3611c7fcca9d6be06ec43a22e2d159fe24728411f2ad12",
+  "resource_comparison": {
+    "protected_files": {
+      "checked": 17,
+      "all_identical": true
+    },
+    "asset_files": {
+      "checked": 43,
+      "all_identical": true
+    }
+  },
+  "modules": {
+    "app.py": {
+      "template_sha256": "037e8f5089fab0047064d628e2782fcf8b4efef489b029245aedb9571cbd1948",
+      "baseline_sha256": "df5b3b16e9172937176107ec3ed203f17dbac96430db67f6c402666a7e5ebeb6",
+      "template_documentation": {
+        "<module>": {
+          "original_raw": "\"\"\"\nPrimary module for Missile Shield\n\nThis module contains the main controller class for the MissileShield application. \nThere is no need for any any need for additional classes in this module. If you \nneed more classes, 99% of the time they belong in either the wave module or the \nmodels module. If you are ensure about where a new class should go, post a \nquestion on Ed Discussion.\n\n# YOUR NAME(S) AND NETID(S) HERE\n# DATE COMPLETED HERE\n\"\"\"",
+          "expected_raw": "\"\"\"\nPrimary module for Missile Shield\n\nThis module contains the main controller class for the MissileShield application. \nThere is no need for any any need for additional classes in this module. If you \nneed more classes, 99% of the time they belong in either the wave module or the \nmodels module. If you are ensure about where a new class should go, post a \nquestion on Ed Discussion.\n\nauthors: joon lee (jl4875) + richard li (rl998)\ndate: december 6, 2026\n\"\"\""
+        },
+        "MissileShield": {
+          "original_raw": "\"\"\"\n    The primary controller class for the Missile Shiled application\n    \n    This class extends GameApp and implements the various methods necessary for \n    processing the player inputs and starting/running a game.\n    \n        Method start begins the application.\n    \n        Method update either changes the state or updates the Level object\n    \n        Method draw displays the Level object and any other elements on screen\n    \n    Because of some of the weird ways that Kivy works, you SHOULD NOT create an\n    initializer __init__ for this class. Any initialization should be done in\n    the start method instead. This is only for this class. All other classes\n    behave normally.\n    \n    Most of the work handling the game is actually provided in the class Level.\n    Level should be modeled after subcontrollers.py from lecture, and will have\n    its own update and draw method.\n    \n    The primary purpose of this class is managing the game state: when is the\n    game started, paused, completed, etc. It keeps track of that in a hidden\n    attribute\n    \n    Attribute view: The game view, used in drawing (see examples from class)\n    Invariant: view is an instance of GView and is inherited from GameApp\n    \n    Attribute input: The user input, used to control the ship and change state\n    Invariant: input is an instance of GInput and is inherited from GameApp\n    \"\"\"",
+          "expected_raw": "\"\"\"\n    The primary controller class for the Missile Shiled application\n    \n    This class extends GameApp and implements the various methods necessary for \n    processing the player inputs and starting/running a game.\n    \n        Method start begins the application.\n    \n        Method update either changes the state or updates the Level object\n    \n        Method draw displays the Level object and any other elements on screen\n    \n    Because of some of the weird ways that Kivy works, you SHOULD NOT create an\n    initializer __init__ for this class. Any initialization should be done in\n    the start method instead. This is only for this class. All other classes\n    behave normally.\n    \n    Most of the work handling the game is actually provided in the class Level.\n    Level should be modeled after subcontrollers.py from lecture, and will have\n    its own update and draw method.\n    \n    The primary purpose of this class is managing the game state: when is the\n    game started, paused, completed, etc. It keeps track of that in a hidden\n    attribute\n    \n    Attribute view: The game view, used in drawing (see examples from class)\n    Invariant: view is an instance of GView and is inherited from GameApp\n    \n    Attribute input: The user input, used to control the ship and change state\n    Invariant: input is an instance of GInput and is inherited from GameApp\n    \"\"\""
+        },
+        "MissileShield.start": {
+          "original_raw": "\"\"\"\n        Initializes the application.\n        \n        This method is distinct from the built-in initializer __init__ (which \n        you should not override or change). This method is called once the \n        game is running. You should use it to initialize any game specific \n        attributes.\n        \n        This method should make sure that all of the attributes satisfy the \n        given invariants. When done, it sets the state to STATE_INACTIVE and \n        creates both the title and a message saying that the user should press \n        a key to play a game.\n        \"\"\"",
+          "expected_raw": "\"\"\"\n        Initializes the application.\n        \n        This method is distinct from the built-in initializer __init__ (which \n        you should not override or change). This method is called once the \n        game is running. You should use it to initialize any game specific \n        attributes.\n        \n        This method should make sure that all of the attributes satisfy the \n        given invariants. When done, it sets the state to STATE_INACTIVE and \n        creates both the title and a message saying that the user should press \n        a key to play a game.\n        \"\"\""
+        },
+        "MissileShield.update": {
+          "original_raw": "\"\"\"\n        It is the method that does most of the work. It is NOT in charge of \n        playing the game. That is the purpose of the class Level. The primary \n        purpose of this game is to determine the current state, and -- if the \n        game is active -- pass the input to the Level object to play the game.\n        \n        As part of the assignment, you are allowed to add your own states. \n        However, at a minimum you must support the following states: \n        STATE_INACTIVE, STATE_LOADING, STATE_ACTIVE, STATE_PAUSED, and \n        STATE_COMPLETE. Each one of these does its own thing and might even \n        need its own helper. We describe these below.\n        \n        STATE_INACTIVE: This is the state when the application first opens. \n        It is a paused state, waiting for the player to start the game. It \n        displays the title and a simple message on the screen. The application \n        remains in this state so long as the player never presses a key.\n        \n        STATE_LOADING: This is the state that creates a new wave and shows it \n        on the screen. The application switches to this state if the state was \n        STATE_INACTIVE in the previous frame, and the player pressed a key. \n        This state only lasts one animation frame (the amount of time to load\n        the data from the file) before switching to STATE_ACTIVE. One of the\n        key things about this level is that it resizes the window to match the\n        level file.\n        \n        STATE_ACTIVE: This is a session of normal gameplay. The missiles will\n        start to arrive and the player can defend against them. All of this \n        should be handled inside of class Wave (NOT in this class). Hence the \n        Wave class should have  an update() method, just like the subcontroller \n        example in lecture.\n        \n        STATE_PAUSED: Like STATE_INACTIVE, this is a paused state. However, \n        the game is still visible on the screen.\n        \n        STATE_CONTINUE: Like STATE_LOADING, in that is the frame before playing\n        the game. However, instead of loading a new game, it resumes an existing\n        game.\n        \n        STATE_COMPLETE: The level is over (all cities are destroyed or all \n        missiles are shot down), and is either won or lost.\n        \n        You are allowed to add more states if you wish. Should you do so, you \n        should describe them here.\n        \n        Parameter dt: The time in seconds since last update\n        Precondition: dt is a number (int or float)\n        \"\"\"",
+          "expected_raw": "\"\"\"\n        It is the method that does most of the work. It is NOT in charge of \n        playing the game. That is the purpose of the class Level. The primary \n        purpose of this game is to determine the current state, and -- if the \n        game is active -- pass the input to the Level object to play the game.\n        \n        As part of the assignment, you are allowed to add your own states. \n        However, at a minimum you must support the following states: \n        STATE_INACTIVE, STATE_LOADING, STATE_ACTIVE, STATE_PAUSED, and \n        STATE_COMPLETE. Each one of these does its own thing and might even \n        need its own helper. We describe these below.\n        \n        STATE_INACTIVE: This is the state when the application first opens. \n        It is a paused state, waiting for the player to start the game. It \n        displays the title and a simple message on the screen. The application \n        remains in this state so long as the player never presses a key.\n        \n        STATE_LOADING: This is the state that creates a new wave and shows it \n        on the screen. The application switches to this state if the state was \n        STATE_INACTIVE in the previous frame, and the player pressed a key. \n        This state only lasts one animation frame (the amount of time to load\n        the data from the file) before switching to STATE_ACTIVE. One of the\n        key things about this level is that it resizes the window to match the\n        level file.\n        \n        STATE_ACTIVE: This is a session of normal gameplay. The missiles will\n        start to arrive and the player can defend against them. All of this \n        should be handled inside of class Wave (NOT in this class). Hence the \n        Wave class should have  an update() method, just like the subcontroller \n        example in lecture.\n        \n        STATE_PAUSED: Like STATE_INACTIVE, this is a paused state. However, \n        the game is still visible on the screen.\n        \n        STATE_CONTINUE: Like STATE_LOADING, in that is the frame before playing\n        the game. However, instead of loading a new game, it resumes an existing\n        game.\n        \n        STATE_COMPLETE: The level is over (all cities are destroyed or all \n        missiles are shot down), and is either won or lost.\n        \n        You are allowed to add more states if you wish. Should you do so, you \n        should describe them here.\n        \n        Parameter dt: The time in seconds since last update\n        Precondition: dt is a number (int or float)\n        \"\"\""
+        },
+        "MissileShield.draw": {
+          "original_raw": "\"\"\"\n        Draws the game objects to the view.\n        \n        Every single thing you want to draw in this game is a GObject. To draw \n        a GObject g, simply use the method g.draw(self.view). It is that easy!\n        \n        While this class will draw the welcome message, most of the game \n        terrain (e.g. silos and cities) are attributes of Wave. In order to \n        draw them, you either need to add getters for these attributes or you \n        need to add a draw method to the class Wave. We suggest the latter. \n        See the example subcontroller.py from lecture.\n        \"\"\"",
+          "expected_raw": "\"\"\"\n        Draws the game objects to the view.\n        \n        Every single thing you want to draw in this game is a GObject. To draw \n        a GObject g, simply use the method g.draw(self.view). It is that easy!\n        \n        While this class will draw the welcome message, most of the game \n        terrain (e.g. silos and cities) are attributes of Wave. In order to \n        draw them, you either need to add getters for these attributes or you \n        need to add a draw method to the class Wave. We suggest the latter. \n        See the example subcontroller.py from lecture.\n        \"\"\""
+        }
+      },
+      "template_comments": [
+        {
+          "text": "# PRIMARY RULE: MissileShield can only access attributes in wave.py via getters/setters",
+          "scope": "<module>",
+          "line": 21,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "ClassDef:MissileShield",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "ClassDef:MissileShield",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# MissileShield is NOT allowed to access anything in wave.py or models.py.",
+          "scope": "<module>",
+          "line": 22,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "ClassDef:MissileShield",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "ClassDef:MissileShield",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# HIDDEN ATTRIBUTES",
+          "scope": "MissileShield",
+          "line": 57,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# Attribute _state: The current state of the game (taken from const.py)",
+          "scope": "MissileShield",
+          "line": 58,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# Invariant: _state is one of STATE_INACTIVE, STATE_LOADING, STATE_ACTIVE, ",
+          "scope": "MissileShield",
+          "line": 59,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "#            STATE_PAUSED, STATE_CONTINUE, STATE_COMPLETE",
+          "scope": "MissileShield",
+          "line": 60,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "#",
+          "scope": "MissileShield",
+          "line": 61,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# Attribute _wave: The subcontroller for a wave, managing the game",
+          "scope": "MissileShield",
+          "line": 62,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# Invariant: _wave is a Wave object or None if no wave is currently active",
+          "scope": "MissileShield",
+          "line": 63,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "#",
+          "scope": "MissileShield",
+          "line": 64,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# Attribute _background: The background image",
+          "scope": "MissileShield",
+          "line": 65,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# Invariant: _background is a GImage",
+          "scope": "MissileShield",
+          "line": 66,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "#",
+          "scope": "MissileShield",
+          "line": 67,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# Attribute _title: The title of the game",
+          "scope": "MissileShield",
+          "line": 68,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# Invariant: _title is a GLabel, or None if there is no title to display",
+          "scope": "MissileShield",
+          "line": 69,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "#",
+          "scope": "MissileShield",
+          "line": 70,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# Attribute _text: A message to display to the player",
+          "scope": "MissileShield",
+          "line": 71,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# Invariant: _text is a GLabel, or None if there is no message to display",
+          "scope": "MissileShield",
+          "line": 72,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# LIST MORE ATTRIBUTES (AND THEIR INVARIANTS) HERE IF NECESSARY",
+          "scope": "MissileShield",
+          "line": 74,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# DO NOT MAKE A NEW INITIALIZER!",
+          "scope": "MissileShield",
+          "line": 76,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# THREE MAIN GAMEAPP METHODS",
+          "scope": "MissileShield",
+          "line": 78,
+          "column": 4,
+          "next_member": "start",
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "start",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# IMPLEMENT ME",
+          "scope": "MissileShield.start",
+          "line": 93,
+          "column": 13,
+          "next_member": null,
+          "next_statement": null,
+          "inline_prefix": "pass",
+          "placement": {
+            "inline_prefix": "",
+            "before_implementation": true
+          }
+        },
+        {
+          "text": "# IMPLEMENT ME",
+          "scope": "MissileShield.update",
+          "line": 143,
+          "column": 13,
+          "next_member": null,
+          "next_statement": null,
+          "inline_prefix": "pass",
+          "placement": {
+            "inline_prefix": "",
+            "before_implementation": true
+          }
+        },
+        {
+          "text": "# IMPLEMENT ME",
+          "scope": "MissileShield.draw",
+          "line": 158,
+          "column": 13,
+          "next_member": null,
+          "next_statement": null,
+          "inline_prefix": "pass",
+          "placement": {
+            "inline_prefix": "",
+            "before_implementation": true
+          }
+        },
+        {
+          "text": "# HELPER METHODS FOR THE STATES GO HERE",
+          "scope": "MissileShield",
+          "line": 160,
+          "column": 4,
+          "next_member": null,
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "on_stop",
+            "inline_prefix": ""
+          }
+        }
+      ],
+      "added_documentation": {},
+      "added_method_blocks": {
+        "MissileShield.on_stop": "7c9d3db6bd1a5e7b4f3cc92ab012ba3e26859859091e07f1c941ca1f8365dc68",
+        "MissileShield._clear_messages": "6ccee89b821d6c95b1cbefdd00408da87148d6cdfa49c9cf48a5b4173d55470e",
+        "MissileShield._open_menu": "5eda412296198c2a6703551306ec801aef53e2d27beef3abf20616f087b7d9c3",
+        "MissileShield._update_menu": "1f48e0a16d89b2105d7d12562096fb716fb64af64247de9894ac65eeb5327db1",
+        "MissileShield._begin_loading": "46f5d98ffb412c4ca020ff41f667c67634bb01a8740acf6dd9cbcb74dcb4872f",
+        "MissileShield._load_wave": "feefaa9afda5aaf6ac154a1b8d8a7a819e3bdc6b4beec75a9064a4518e586eb9",
+        "MissileShield._read_wave_file": "5dee9e72fa4e28371f6b1df33695e42e0d5a81e45d65a96c29d5bbeeadf87127",
+        "MissileShield._update_active": "8ab994a33bc706a80d6199b84824ee46ca112cf4e1d290c142dcbed290f64e95",
+        "MissileShield._pause_wave": "074181adec18cba95f380aecffcd3c9aaaedbd396d0ba394c5afd2091d6b0307",
+        "MissileShield._update_paused": "ccd55a3f261bae25696ae743eb4f76f43971de9bd92667bd23636b10c1681f32",
+        "MissileShield._continue_wave": "b6f6c041b8788466c243f9d72bd50f0baf96c3da5c8d8996f8a063cd32b67875",
+        "MissileShield._finish_wave": "7c6b1e87a027ddd601be4a19da912a7eac76f245d65c1402d76f3be68b82d426",
+        "MissileShield._update_complete": "92ee0bdd52447888c72c20eb1f96bc9b2daeac29bcce1699b96b872c01fda068",
+        "MissileShield._show_load_error": "1f59f71a50e28a02ec46205e86977ea18c8cbad0c2f7c52adf656427b13ded32",
+        "MissileShield._add_error_details": "80c3bf00304cd55199a64bdab1162aa6da11ba8ae099e174438c8c785c236ee0",
+        "MissileShield._make_menu_decoration": "cc40294f74add77cdf7c683f1d285763b1b5860ceb5c7ee573a821aef93c3111",
+        "MissileShield._make_sky_map": "d8ff72962857dbce4b67982bfa47a1d30f990dc19e9eca1509eedc74e13dc8c6",
+        "MissileShield._make_map_details": "dec830a61d1965bfa03c18b2eb9e3cf3ff6a7b6fe0f08443991bf9bb50e4c3f8",
+        "MissileShield._make_menu_heading": "6f5b29a4a650e6a38c6bb83e4e84664ef23d00f4760e7ab92e0eb2116c03e31c",
+        "MissileShield._make_standard_card": "9e0a01ed2fc90c5af3be1a5b99d5023598a93509fbc1bfc7f71ffbfc310bb24e",
+        "MissileShield._make_custom_card": "c46d9b5617aadf93f1ddcbb3dd24dc0255812d5a71ac68fa8d5b6e42c8e37ff1",
+        "MissileShield._make_menu_controls": "94e1484711f2605f692babe8e9f9f884f8c6eb633b36dd19d19c766aae0150e8",
+        "MissileShield._make_custom_help": "62cfbda33a208883cb0c398d3e8233089acfaaa9e287aa7fe27821e44ecbe46e",
+        "MissileShield._make_standard_help": "04f6913fcfb1a36a1824965149fdfb935e7a065fa4151e52e43950b38212c17f",
+        "MissileShield._make_win_message": "300012a4a2bdc78229ca7f84e804109896e8a984e510256d5f497959ba494b27",
+        "MissileShield._make_loss_message": "faf47fff6d2b3e44a2df1abf37a6f82aef924b8c76dc711617c8861de8ecaa73",
+        "MissileShield._make_panel": "d06f0ec237102066d4b11207b7c2a0700607e911841d240b6b2931020149f5fb",
+        "MissileShield._add_card": "551611909c34a943432dbd642460337840df835930cda1bc470a18d5071e4ad3",
+        "MissileShield._add_rule": "33e47c8859a2f6d10ccc45763f1ee2869fb8671ddaa85ca9b996c65c9a9bbabf",
+        "MissileShield._add_keycap": "43a7cbe0bcb958b12a730c21ca45910692f739ff3c22a77726e4a98f034cb33e",
+        "MissileShield._add_key_hint": "68e1881d26b30a3f4599398a7c153976e0a7e75ad785bee111db493ab49fb585",
+        "MissileShield._read_audio_toggle": "3f5fbc95bdcad91ded992ed7c9209cf90366203c7b718f81c42c6d980ac2267b",
+        "MissileShield._stop_wave_audio": "1217d6e69409e3ba672d015f830760bda174c1092c7f1f4c907d6f4b1de89143",
+        "MissileShield._get_audio_words": "b4a2bbba06dfb3b06b87851fc2f7bee7d93248d13f50b2559ff52942ba4e9d7d",
+        "MissileShield._make_audio_label": "4d38c9bd06d1c6901db34b868533b02103d27a880fb2432543b860c5b1ea0bc4",
+        "MissileShield._add_center_label": "4120ff4cf0b983c7a6c865a0c8e93d84bd3f583a2ceddd2bdbcec135463a7277",
+        "MissileShield._add_left_label": "f5a08edf7ceaf8d5531a31810945328e01046b35ee57dd249e6c9f5b21a6ad63",
+        "MissileShield._make_label": "cae0337f036750ec1ddcf90d245478f33df2e3dc15dc8145c776e00d779ca3bd"
+      },
+      "baseline_executable_signatures": {
+        "ast_sha256": "a4c2d6adceebf7140b3c08e1e87788113855257cec4965b1620d6684f74bb0e1",
+        "token_sha256": "330968aee7d13cfc942fd2ede0ed48b0539556c4261fd291a30f5fa9af15eec5"
+      },
+      "metadata_replacements": {
+        "# YOUR NAME(S) AND NETID(S) HERE": "authors: joon lee (jl4875) + richard li (rl998)",
+        "# DATE COMPLETED HERE": "date: december 6, 2026"
+      }
+    },
+    "wave.py": {
+      "template_sha256": "d41e3201a0dbecc216fac5ecc4ab9344762a85d7b5dbab283c29780e4559d28d",
+      "baseline_sha256": "e028332b37ca0ccd42e924c2fa0f25c4bdc5d4a706c35a79aac3c71fc5005e7d",
+      "template_documentation": {
+        "<module>": {
+          "original_raw": "\"\"\"\nSubcontroller module for Missile Shield\n\nThis module contains the subcontroller to manage a single wave in the Missile \nShield game. Instances of Wave represent a single game, read from a JSON. \nWhenever you load a new wave, you are expected to make a new instance of this \nclass.\n\nThe subcontroller Wave manages the silos, cities and all of the incoming\nmissiles. However, those classes are all defined in models.py. In general, this \nmodule should not contain any classes other than Wave. If you need a new \nclass, it should go in the the models.py module.\n\n# YOUR NAME(S) AND NETID(S) HERE\n# DATE COMPLETED HERE\n\"\"\"",
+          "expected_raw": "\"\"\"\nSubcontroller module for Missile Shield\n\nThis module contains the subcontroller to manage a single wave in the Missile \nShield game. Instances of Wave represent a single game, read from a JSON. \nWhenever you load a new wave, you are expected to make a new instance of this \nclass.\n\nThe subcontroller Wave manages the silos, cities and all of the incoming\nmissiles. However, those classes are all defined in models.py. In general, this \nmodule should not contain any classes other than Wave. If you need a new \nclass, it should go in the the models.py module.\n\nauthors: joon lee (jl4875) + richard li (rl998)\ndate: december 6, 2026\n\"\"\""
+        },
+        "Wave": {
+          "original_raw": "\"\"\"\n    This class controls a single level of Missile Command.\n    \n    This subcontroller has a reference to the silos, the cities, and the target\n    reticule. It also generates the missile from the JSON file. Aside from the\n    target reticule, all of these are classes defined in models.py.\n    \n    If you want to pause the game, tell this controller to draw, but do not \n    update. See subcontrollers.py from lecture for an example. This class will \n    be similar to that one in many ways.\n    \n    All attributes of this class are to be hidden. No attribute should be \n    accessed  without going through a getter/setter first. However, just \n    because you have an attribute does not mean that you have to have a getter \n    for it. For example, the MissileShielf app probably never needs to access \n    the attribute for the target reticule, so there is no need for a getter.\n    \"\"\"",
+          "expected_raw": "\"\"\"\n    This class controls a single level of Missile Command.\n    \n    This subcontroller has a reference to the silos, the cities, and the target\n    reticule. It also generates the missile from the JSON file. Aside from the\n    target reticule, all of these are classes defined in models.py.\n    \n    If you want to pause the game, tell this controller to draw, but do not \n    update. See subcontrollers.py from lecture for an example. This class will \n    be similar to that one in many ways.\n    \n    All attributes of this class are to be hidden. No attribute should be \n    accessed  without going through a getter/setter first. However, just \n    because you have an attribute does not mean that you have to have a getter \n    for it. For example, the MissileShielf app probably never needs to access \n    the attribute for the target reticule, so there is no need for a getter.\n    \"\"\""
+        }
+      },
+      "template_comments": [
+        {
+          "text": "# PRIMARY RULE: Wave can only access attributes in models.py using getters",
+          "scope": "<module>",
+          "line": 22,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "ClassDef:Wave",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "ClassDef:Wave",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# and setters. Wave is NOT allowed to access anything in app.py (Subcontrollers ",
+          "scope": "<module>",
+          "line": 23,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "ClassDef:Wave",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "ClassDef:Wave",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# are not permitted to access anything in their parent. To see why, take CS 3152)",
+          "scope": "<module>",
+          "line": 24,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "ClassDef:Wave",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "ClassDef:Wave",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# LIST ALL HIDDEN ATTRIBUTES HERE",
+          "scope": "Wave",
+          "line": 46,
+          "column": 4,
+          "next_member": null,
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "getLost",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)",
+          "scope": "Wave",
+          "line": 48,
+          "column": 4,
+          "next_member": null,
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "getLost",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# INITIALIZER (standard form) TO LAYOUT THE MODELS",
+          "scope": "Wave",
+          "line": 50,
+          "column": 4,
+          "next_member": null,
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "__init__",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# UPDATE METHOD TO MOVE THE TARGETS, BOMBS, AND ROCKETS",
+          "scope": "Wave",
+          "line": 52,
+          "column": 4,
+          "next_member": null,
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "update",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# DRAW METHOD TO DRAW THE GAME OBJECTS",
+          "scope": "Wave",
+          "line": 54,
+          "column": 4,
+          "next_member": null,
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "draw",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# ANY NECESSARY HELPERS (SHOULD BE HIDDEN)",
+          "scope": "Wave",
+          "line": 56,
+          "column": 4,
+          "next_member": null,
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "_check_wave_data",
+            "inline_prefix": ""
+          }
+        }
+      ],
+      "added_documentation": {},
+      "added_method_blocks": {
+        "Wave.getLost": "dc20c43f9f3cbc90fbcd21990da98199103e6d70ea5f446d6727d0d950d1abd7",
+        "Wave.getWon": "b9de68a6e8f952a86a3dd702eb57f5f1206d1906891e70996d071be207eae2e3",
+        "Wave.getCustomEnabled": "6f980b220972742cbfbad7319449022e849a5ce340281df59db4c0debd251120",
+        "Wave.getModeName": "62db04cc868c3f97027f8348c134cb5f7fff40c3e4c766d71ea74ac25cc9319a",
+        "Wave.getHelpRows": "7de9c1cc616f4ed4e4e1292b9e39eecd84ccad2e1f746704ed6e6d6246ae3acc",
+        "Wave.getCitiesLeft": "d200207dc7dc710e2bd15bf88873abf8b5f5cefa5d672d48d401a6fac1c90327",
+        "Wave.getAmmoCounts": "290f5cfb32de240a44d99a6bdaa44272774089b53bdd1f6b66517121b7248453",
+        "Wave.getScore": "26833f81fc20c7b2d84ffa9e16f4b2494cbfbbe66a6bb20774fdfdf9fb94744c",
+        "Wave.getSoundsEnabled": "8387f4bb5ee1a15d0ea62fc603d9ae900374c789b96c01db8deb1be47e2b55e6",
+        "Wave.getSoundsAvailable": "3f2eb0ee264637b070222e5c464207b5d60c91f03c47dcb1b1a9c1e457faa557",
+        "Wave.setSoundsEnabled": "bc038be9e60183712f4eede8ac7beb89d1f9d627b4a798b06667cdd6fe816e1f",
+        "Wave.__init__": "98533e1f7e0b761b5225482fb2f7547fe59b82cc71b8802c9b7af09a89de12b1",
+        "Wave.update": "f472295399d69eabef2cbe284c8b920dad53602d812c9bd6d13ff9daeffc73e2",
+        "Wave.draw": "23245a78cb20ec28cc8c43cba914866d22de86aa5fc3af0d58d1f34764cf6067",
+        "Wave.startSounds": "974a0346a0a2913e033ea218ee675b43b4b7f97f37444f6baa330a646e9f040c",
+        "Wave.stopSounds": "51889902103e49053e48c3292905f36eab102ad80997cb2dfc87d8be3f112d63",
+        "Wave.finishSounds": "c5f641baf737a08617b8e37bf2ef9929aa3a2a39ecbd3207c6c8951c47f0b7e3",
+        "Wave._check_wave_data": "f3aa8d615487a780c4ce20b971b3950bca93a8de790eeb89d3e75ce6bcb66d12",
+        "Wave._is_finite_number": "c6898dd0cac4fb36e2beccb40f929445e505eccb209ce3f42a1ed0355b08ded6",
+        "Wave._check_missile_data": "b1e8c38e687013ca8a507cc3d95011dd7764c3dcb1d8bacfc11d81f434c0c1a9",
+        "Wave._check_feature_data": "012c06f9e3273c2f2ef782d9590e56e9cf4a76198e95589864a9d73096442114",
+        "Wave._make_defenses": "01d47ee0436948360ff435246ef8327a3502e063b8647b2fce4b3ca944434606",
+        "Wave._make_bombs": "f154ad717bc0add5b99e071efb6f2de4993c22983f9a824694607a0e66b36076",
+        "Wave._make_bonus_state": "05bad5d6df25454ca47c6aa0b7a0bee5d7d11c6c4be4a15a8b701878b7c30176",
+        "Wave._move_target": "9da0a9e080e82af58e95299bdf8ba2fd6a8c9007a45b8a16f84813ac41ae59be",
+        "Wave._read_directions": "a187841a47f5e159d912975bb94c9eae7f3828591e721c75d0f853e7ca8d10a5",
+        "Wave._keep_target_inside": "f180d91979318f3712ba90f421977bab45e259012835eb1f10706dc2e1c80f8e",
+        "Wave._read_launch_keys": "55149ab52fd803a146ed8473c2dba233962a9e99b07eb5846d760d92fdcef043",
+        "Wave._launch_from_silo": "3770e1838b42f60ddc386c1d99fa57daebaeb808804b6d24983f0e61687c419f",
+        "Wave._remove_finished_rockets": "3751b6651274a462fdf7cfc041d34686ca4c30a86be18cb8ae8df5458183995f",
+        "Wave._advance_world": "941c381e7409244ead6d830b5d86edb4079c3060953e8512970a364419ebdd18",
+        "Wave._step_world": "84317cb0bca72838ecfe96e8e42addb76819dfdf9d312d88d60f88698f641fa3",
+        "Wave._move_rockets": "e5576ba7acea211062cd207c5f5880967506393c51f97f5027aab4a7f2a357a6",
+        "Wave._release_bombs": "2a2e35f65e97b48a365f3707988a47826dbb937c1402370b27e82f1db089fd0d",
+        "Wave._move_bombs": "42361a572d74682d0fa26b4e5aebedfc8135d83ffc218366d57cebba47bba310",
+        "Wave._resolve_interceptions": "c3fc75a2146573bc641bb4414b2576656e0cee827af21902ffc3318be13bdedf",
+        "Wave._is_inside_explosion": "586a2b67ab0cdca6cf168e3f1c5efe93da08d2df13ab5d38cafe0ea62b608669",
+        "Wave._resolve_impacts": "50a479aa918a0ae6803d4eba72268bc046c1f9125865473ea882bb8526be659c",
+        "Wave._check_finished": "9d541d13199e70a80729ca8519f5ce41ca69f91878c8cd1a60be7761ff2fbd75",
+        "Wave._finish_loss": "f6f476cd3a6f863bb541fe7436b36dd34a8d7884fdabee15c776f0cc20854040",
+        "Wave._read_bonus_keys": "c67a7b6c797f9c3b25607424231d035b5fa1e35dc57ca7e00490d39a20294dc9",
+        "Wave._save_bookmark": "293e27ee19387c94a6676083badc5a8d853175b09afe05944a8c7fef2cbf6470",
+        "Wave._recall_bookmark": "49e8d384b62f5947a809e21fc94107221b58fff0ad834e4d82a26066ff165e64",
+        "Wave._update_bubble_charge": "a32c51849ef5ff484cc18735a3f4f303de8949af0c5ddf5829b66934b5b78277",
+        "Wave._get_bomb_speed": "96f4961c0e6c4e331b172121729bdc933bae67871bcb6575267336ec7b90dcbd",
+        "Wave._record_interception": "2a8223b40c724bad2380815d521ee3bff03fc27ca9ac70dc0ed5749b76382d92",
+        "Wave._recycle_ammunition": "35f0d23823823318f7518ee580aa8f681891e48badb21171ff6ef8a12f9173e3",
+        "Wave._show_notice": "f3d5d3b1e880c002841678a9d62b43e1d74ca9607e2fde0bb69d6f8528f8b78a",
+        "Wave._update_notice": "24045ccc8f59229816569cc4e2c335282f9fabaebdc7141ad2951828072e5717",
+        "Wave._make_hud": "8dea415498337e03b3b4e4120397ac28b461b9fed8cb2ca3c5d9351bc1f64a8f",
+        "Wave._make_label": "9e6c4fba730b22f37ce478d8aa9f1228b7deaefbe5921a22b6cdd38383770f89",
+        "Wave._make_metric_labels": "1113ad5587ba8f5bdd82ec5b3329631833809d349e57294fe40047f6f00b8244",
+        "Wave._make_tool_cards": "c3ed9222846f439ec92607802524579fbeb960597d9e3765fbcee1e8c8d641cb",
+        "Wave._make_tool_card": "a226cbe0ebbe0eae5945bba42af0b5e3f4636545357055951d587a6066a65353",
+        "Wave._make_notice_label": "212b6510ef1a09591e733e6e42c1ee56fcd803fc195df556e0fd21019b6b41c7",
+        "Wave._make_bubble_meter": "62d92f7f2e75291fe857cff28a215b0f7e87f7277a175c69ecea3a04a796c130",
+        "Wave._make_slot_labels": "118a3371017e89e9a86f1fb476bd1b5f0031240109313292a3b42853ec79c899",
+        "Wave._make_bookmark_labels": "74297f40d5512f12a9ab1ad2ca4ccb419025af454d311ff7106295d00188c402",
+        "Wave._update_hud": "87e17b4acf83a2dfea56a9cd62c292b3996644032b902b67994f2c6fe6f62130",
+        "Wave._update_audio_label": "8d4da2cee29a2c830a60661465c801f686cd8161e34f872bd6199a641707253b",
+        "Wave._update_bonus_hud": "19caf3f0357635aa143f5578573b2e2aec3cfcde7aa21cec08eaf037033cb583",
+        "Wave._update_bubble_meter": "b6170eddb49035ca295d86e291757d69ae1d9aabe4aca45017a8e8595920eec4",
+        "Wave._update_recycling_meter": "526c7abf1224518c6539073aab7137ccb2667370ff39773009646cddf4870a26",
+        "Wave._update_weather_reports": "19358b2624c8f8adb33007b79ed83363b21f84fc51ea01eae4d442b8abc1c003",
+        "Wave._draw_bonus_guides": "2212babc40fb1374bab23601c4996d6cc22b5fa7a9aa743cc7098ecd88e0f433",
+        "Wave._draw_forecasts": "5eb97ce7e0192bcda093b1cac6e02ada84c217bbac03de1839998d8fa32b166a",
+        "Wave._draw_bookmarks": "a4fdd6f55799cfd971fa652df0c51a7eeb9f01392b857c11ee6a4624ed433bc1",
+        "Wave._draw_bubble": "7a8905ea5fb9b2bf1b35e2b031b8e5318310530f53fb8614808496044a15f845",
+        "Wave._draw_constellations": "13db4538d44c8092a54b0edb072d22f3789c6bcf1532382c7d550bb781adef1a",
+        "Wave._draw_aim": "ba055816d0d037b94581ce07c15bbddb9b4a1b59c1fc6ef8da5563e9c0ab2774",
+        "Wave._draw_hud": "983036301db5031961205a0812af3f93a6c389443cb1837a9a7602f5b0a276e7",
+        "Wave._draw_hud_surfaces": "268c5fc4041155edddbda748e991e7327d6b81e00940154ba8d346c933076712",
+        "Wave._draw_tool_labels": "b6baa9d6c2ab01f107830da3b402a66806504677eb60589d3f3470f243c41928"
+      },
+      "baseline_executable_signatures": {
+        "ast_sha256": "3eaf91c1e3404f2d055f95096f0fa3fac8fb6057551bed7d2ba6f4eb77a77bce",
+        "token_sha256": "f1c7ae7d89d96060f310e0276c4d07bf60bfc0c7eb4add46217b2ffe9dde850d"
+      },
+      "metadata_replacements": {
+        "# YOUR NAME(S) AND NETID(S) HERE": "authors: joon lee (jl4875) + richard li (rl998)",
+        "# DATE COMPLETED HERE": "date: december 6, 2026"
+      }
+    },
+    "models.py": {
+      "template_sha256": "e24cd6a410d0f71d1a2d099b046db3ad81307fe43b1ccdcd445690727206df99",
+      "baseline_sha256": "c68ed59b47e8cb90b8b40e8a759ac9e3023ae26fb66c0cd1e20664d9ff3b1294",
+      "template_documentation": {
+        "<module>": {
+          "original_raw": "\"\"\"\nModels module for MissileShield\n\nThis module contains the model classes for the Missile Shield game. Anything \nthat you interact with on the screen is model: the silos, the cities, the \nmissiles, and so on.\n\nThe classes provided in this module are sufficient for the core game. You only\nneed to add classes to this module if you are adding extensions to the game.\nYou are qlwo free to make any changes to these classes if you want. \n\nIf you are unsure about  whether to make a new class or not, please ask on \nEd Discussions. We will answer.\n\n# YOUR NAME(S) AND NETID(S) HERE\n# DATE COMPLETED HERE\n\"\"\"",
+          "expected_raw": "\"\"\"\nModels module for MissileShield\n\nThis module contains the model classes for the Missile Shield game. Anything \nthat you interact with on the screen is model: the silos, the cities, the \nmissiles, and so on.\n\nThe classes provided in this module are sufficient for the core game. You only\nneed to add classes to this module if you are adding extensions to the game.\nYou are qlwo free to make any changes to these classes if you want. \n\nIf you are unsure about  whether to make a new class or not, please ask on \nEd Discussions. We will answer.\n\nauthors: joon lee (jl4875) + richard li (rl998)\ndate: december 6, 2026.\n\"\"\""
+        },
+        "Silo": {
+          "original_raw": "\"\"\"\n    A class representing a silo\n    \n    Silos contain the ammunition for the missile shield. Every time you fire\n    a defensive strike, it must consume ammo from one of your silos. One a\n    silo runs out of ammo it can no longer be used this wave. Hence ammunition\n    is the primary attribute this class must add to GImage.\n    \n    If a missile collides with a silo, it does not destroy it. However, it does\n    immediately destroy all ammunition, making the silo useless.\n    \n    NOTE: The attributes x and y in GImage are NOT hidden (they are properties\n    and do not need getters/setters). You do not need getters and setters for\n    attributes you inherit from GImage. You only need them for new attributes\n    that you create.\n    \"\"\"",
+          "expected_raw": "\"\"\"\n    A class representing a silo\n    \n    Silos contain the ammunition for the missile shield. Every time you fire\n    a defensive strike, it must consume ammo from one of your silos. One a\n    silo runs out of ammo it can no longer be used this wave. Hence ammunition\n    is the primary attribute this class must add to GImage.\n    \n    If a missile collides with a silo, it does not destroy it. However, it does\n    immediately destroy all ammunition, making the silo useless.\n    \n    NOTE: The attributes x and y in GImage are NOT hidden (they are properties\n    and do not need getters/setters). You do not need getters and setters for\n    attributes you inherit from GImage. You only need them for new attributes\n    that you create.\n    \"\"\""
+        },
+        "City": {
+          "original_raw": "\"\"\"\n    A class representing a city that can be blown up.\n    \n    For the most part, citiess are just drawn to the screen. There is no need \n    for a lot of custom methods in this class. Indeed, the primary reason the \n    class exists is so we can keep the image source and size all in one place.\n    With that said, you are unlikely to need any methods here other than the \n    initializer.\n    \n    NOTE: The attributes x and y in GImage are NOT hidden (they are properties\n    and do not need getters/setters). You do not need getters and setters for\n    attributes you inherit from GImage. You only need them for new attributes\n    that you create.\n    \"\"\"",
+          "expected_raw": "\"\"\"\n    A class representing a city that can be blown up.\n    \n    For the most part, citiess are just drawn to the screen. There is no need \n    for a lot of custom methods in this class. Indeed, the primary reason the \n    class exists is so we can keep the image source and size all in one place.\n    With that said, you are unlikely to need any methods here other than the \n    initializer.\n    \n    NOTE: The attributes x and y in GImage are NOT hidden (they are properties\n    and do not need getters/setters). You do not need getters and setters for\n    attributes you inherit from GImage. You only need them for new attributes\n    that you create.\n    \"\"\""
+        },
+        "Target": {
+          "original_raw": "\"\"\"\n    A class representing the target reticule\n    \n    The target reticule is what you use to aim your rockets. Per the \n    instructions, it has a variable speed. When it moves, it starts at\n    AIM_SPEED_STEP pixels per second, and increases until it reaches\n    AIM_SPEED_LIMIT\n    \"\"\"",
+          "expected_raw": "\"\"\"\n    A class representing the target reticule\n    \n    The target reticule is what you use to aim your rockets. Per the \n    instructions, it has a variable speed. When it moves, it starts at\n    AIM_SPEED_STEP pixels per second, and increases until it reaches\n    AIM_SPEED_LIMIT\n    \"\"\""
+        },
+        "Bomb": {
+          "original_raw": "\"\"\"\n    A class representing a dropping bomb\n    \n    Bombs are defined in the wave JSON file. Each bomb has a start time and\n    it should not appear on the screen until its time has past.  A bomb drops\n    until it collides with a silo or city (or where a city should be). At\n    that point it is destroyed.\n    \"\"\"",
+          "expected_raw": "\"\"\"\n    A class representing a dropping bomb\n    \n    Bombs are defined in the wave JSON file. Each bomb has a start time and\n    it should not appear on the screen until its time has past.  A bomb drops\n    until it collides with a silo or city (or where a city should be). At\n    that point it is destroyed.\n    \"\"\""
+        },
+        "Rocket": {
+          "original_raw": "\"\"\"\n    A class representing a defensive rocket\n    \n    Unlike bombs, rockets are created by player input. The player presses a\n    key to fire at the target. The trajectory of the rocket should be from\n    the top center of the appropriate silo to current position of the Target\n    object. When the rocket reaches that position it explodes.\n    \n    Rocket explosions are not instantaneous. The rocket ellipse will grow\n    slowly until it reaches ROCKET_MAX_RADIUS, at which point it is removed.\n    Any Bomb object that comes in contact with that explosion is destroyed.\n    \"\"\"",
+          "expected_raw": "\"\"\"\n    A class representing a defensive rocket\n    \n    Unlike bombs, rockets are created by player input. The player presses a\n    key to fire at the target. The trajectory of the rocket should be from\n    the top center of the appropriate silo to current position of the Target\n    object. When the rocket reaches that position it explodes.\n    \n    Rocket explosions are not instantaneous. The rocket ellipse will grow\n    slowly until it reaches ROCKET_MAX_RADIUS, at which point it is removed.\n    Any Bomb object that comes in contact with that explosion is destroyed.\n    \"\"\""
+        }
+      },
+      "template_comments": [
+        {
+          "text": "# PRIMARY RULE: Models are not allowed to access anything in any module other ",
+          "scope": "<module>",
+          "line": 22,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "ClassDef:Silo",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "ClassDef:Silo",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# than consts.py. If you need extra information from a wave object, then it ",
+          "scope": "<module>",
+          "line": 23,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "ClassDef:Silo",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "ClassDef:Silo",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# should be a parameter in your method.",
+          "scope": "<module>",
+          "line": 24,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "ClassDef:Silo",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "ClassDef:Silo",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# LIST ALL HIDDEN ATTRIBUTES HERE",
+          "scope": "Silo",
+          "line": 44,
+          "column": 4,
+          "next_member": null,
+          "next_statement": "ClassDef:City",
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "getAmmo",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)",
+          "scope": "Silo",
+          "line": 46,
+          "column": 4,
+          "next_member": null,
+          "next_statement": "ClassDef:City",
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "getAmmo",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# INITIALIZER TO SET THE ATTRIBUTES",
+          "scope": "Silo",
+          "line": 48,
+          "column": 4,
+          "next_member": null,
+          "next_statement": "ClassDef:City",
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "__init__",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# ADDITIONAL METHODS AS NEEDED",
+          "scope": "Silo",
+          "line": 50,
+          "column": 4,
+          "next_member": null,
+          "next_statement": "ClassDef:City",
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "draw",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# LIST ALL HIDDEN ATTRIBUTES HERE",
+          "scope": "City",
+          "line": 69,
+          "column": 4,
+          "next_member": null,
+          "next_statement": "ClassDef:Target",
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "getAlive",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)",
+          "scope": "City",
+          "line": 71,
+          "column": 4,
+          "next_member": null,
+          "next_statement": "ClassDef:Target",
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "getAlive",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# INITIALIZER TO SET THE ATTRIBUTES",
+          "scope": "City",
+          "line": 73,
+          "column": 4,
+          "next_member": null,
+          "next_statement": "ClassDef:Target",
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "__init__",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# ADDITIONAL METHODS AS NEEDED",
+          "scope": "City",
+          "line": 75,
+          "column": 4,
+          "next_member": null,
+          "next_statement": "ClassDef:Target",
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "destroy",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# LIST ALL HIDDEN ATTRIBUTES HERE",
+          "scope": "Target",
+          "line": 88,
+          "column": 4,
+          "next_member": null,
+          "next_statement": "ClassDef:Bomb",
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "getSpeed",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)",
+          "scope": "Target",
+          "line": 90,
+          "column": 4,
+          "next_member": null,
+          "next_statement": "ClassDef:Bomb",
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "getSpeed",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# INITIALIZER TO SET THE ATTRIBUTES",
+          "scope": "Target",
+          "line": 92,
+          "column": 4,
+          "next_member": null,
+          "next_statement": "ClassDef:Bomb",
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "__init__",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# ADDITIONAL METHODS AS NEEDED",
+          "scope": "Target",
+          "line": 94,
+          "column": 4,
+          "next_member": null,
+          "next_statement": "ClassDef:Bomb",
+          "inline_prefix": "",
+          "placement": {
+            "next_member": null,
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# LIST ALL HIDDEN ATTRIBUTES HERE",
+          "scope": "Bomb",
+          "line": 107,
+          "column": 4,
+          "next_member": null,
+          "next_statement": "ClassDef:Rocket",
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "getStartTime",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)",
+          "scope": "Bomb",
+          "line": 109,
+          "column": 4,
+          "next_member": null,
+          "next_statement": "ClassDef:Rocket",
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "getStartTime",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# INITIALIZER TO SET THE ATTRIBUTES",
+          "scope": "Bomb",
+          "line": 111,
+          "column": 4,
+          "next_member": null,
+          "next_statement": "ClassDef:Rocket",
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "__init__",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# ADDITIONAL METHODS AS NEEDED",
+          "scope": "Bomb",
+          "line": 113,
+          "column": 4,
+          "next_member": null,
+          "next_statement": "ClassDef:Rocket",
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "update",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# LIST ALL HIDDEN ATTRIBUTES HERE",
+          "scope": "Rocket",
+          "line": 129,
+          "column": 4,
+          "next_member": null,
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "getExploding",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)",
+          "scope": "Rocket",
+          "line": 131,
+          "column": 4,
+          "next_member": null,
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "getExploding",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# INITIALIZER TO SET THE ATTRIBUTES",
+          "scope": "Rocket",
+          "line": 133,
+          "column": 4,
+          "next_member": null,
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "__init__",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# ADDITIONAL METHODS AS NEEDED",
+          "scope": "Rocket",
+          "line": 135,
+          "column": 4,
+          "next_member": null,
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_member": "update",
+            "inline_prefix": ""
+          }
+        }
+      ],
+      "added_documentation": {
+        "SoundEffects": "\"\"\"\n    a little bank of game sounds, kept separate from the game rules.\n\n    each cue gets three voices, so quick launches can overlap. stop a voice\n    before replaying it because game2d cannot restart a Sound already playing.\n    all these wav files come from the approved assignment package. if a file\n    or audio device fails, skip that cue so the game can still keep going.\n    \"\"\""
+      },
+      "added_method_blocks": {
+        "Silo.getAmmo": "70e15f05de12301bdf04a0c768e60f1c5d1eebdca00e29a17b94a99d484459bf",
+        "Silo.setAmmo": "6eec343036677297e940cec3a33263004079ff3fa15a2493082c7a0706fe037e",
+        "Silo.__init__": "4a3996def381300e38970619bd15ef4caf1e604e5ae5b7c186080768356df35e",
+        "Silo.draw": "4ef62381e1c921d3a55324722d60684017dca3ed888f033d99c0e60574fe6b62",
+        "Silo._make_ammo_display": "c4cd4d2c9890db42c844f35ddbc6735d028224ca454769b6849fa0c1721d67e9",
+        "Silo._draw_ammo_display": "c14673d7c10a26ed8e31cf9f04ded4b46314ba10cb3661882a84184b149492bc",
+        "City.getAlive": "339fc5c9a0dd19b253e2834b419f1154d98dccdc905d438267d092eb7a1f350f",
+        "City.__init__": "49a62c330747627a65c0dc65d2e8fba73b0cc9a0007099518a8810e28ad86284",
+        "City.destroy": "ea9433444d3b0c4a36b9a56a75628e6bfa753f6d34c6edc813ea7a66d36021d0",
+        "City.draw": "b9fb904166a6941ac8508a1cfd9e45e681c2695b48e941d2f2196a0cd54f5cf3",
+        "Target.getSpeed": "f28c50d9c08e335df7486c34fc7dcb97913f0fdb83e6cfb1b8fddecbf7446c76",
+        "Target.setSpeed": "fb831fe0e8210cc167fe2254766f10895dd1e90c72edc8227e4519e4d9c08656",
+        "Target.__init__": "0f5db342c5916b05ed270553e7d83ce26ce9d53e37e3b7a97debf3997bf4448f",
+        "Bomb.getStartTime": "83be27454b3c0e74192c9aa5a92efc259e2bce6ff3980bf279110361ea520e35",
+        "Bomb.getTargetSlot": "318fda17556aaef5f68d999342c224e5d845d22692d560b7af1966ca086367f3",
+        "Bomb.getArrived": "2f1398af0c50c4577b50a9dfba47b8df9bb029b40b33e2b2a3f0f8a88326e926",
+        "Bomb.getRemainingTime": "619225c47574d07bf4602ab7fa8faef38f7ee7a6eee1c9aa44bfeb66cbf4da27",
+        "Bomb.getFuturePosition": "92b00749433f0b07b094e4a58479698f1230a73529fe091f0f4a95836791501c",
+        "Bomb.__init__": "a20d51379bd6083ea6af8c08477aae772de391084ecfb4e4977bf863cbc76595",
+        "Bomb.update": "bf6eb3cb3464d033bf1355dd155bd518b8eabedbb29695500b3239617ad8aeb9",
+        "Bomb.draw": "e6f6a0ed28f95c132d61601f15156d87bebdbc7b7eb85c76dc98b4e92d0a13db",
+        "Bomb._distance_to_destination": "2a76349c03689d943dc38d57a25bde0402e425e3517ec141f5576b125507f0e0",
+        "Rocket.getExploding": "1879d290bb2881c80cee932ca9cc32d49671b42b788744e174e28cc85deff98d",
+        "Rocket.getFinished": "fb24fefa4a3214bd939639cbfbf1fea8204646dc8f0e1a0ba88e2f09732dd50a",
+        "Rocket.__init__": "96bb9e83145b1e4b27b7aedffe3e34901edf4e0cd7f92e279082bc6fbe884bf4",
+        "Rocket.update": "f7d5b7cd3d5e803c05b06d1bf7a63816f4edbf5df622a5c477f203f3b7b65816",
+        "Rocket.draw": "06cafe79e9ef53aa02a37835a671f4433b1e59000f6e16077514bf7b6ca65f2b",
+        "Rocket._move_toward_destination": "4f0f520b90a0dc5fb1a08e6b3a035509560b7c13fe8f8d1a38e874b9435d7e4e",
+        "Rocket._start_explosion": "1f6a674d1585525ff4071883a5140f0a61f2c0eb3809b91131a054567b336e20",
+        "Rocket._grow_explosion": "a8dca405af30a7f6bf290d59ff126810d6507b5ba85b39512b7629d874552026",
+        "Rocket._distance_to_destination": "11f093862d23a1d02839595688e4cb68e205619f97b9fa9e27944ee5767dd024",
+        "SoundEffects.getEnabled": "cc845c3cdba31e09572f48ff8dbf227c3bf8a7c1cdb17f282d3f793ac49a5a40",
+        "SoundEffects.getAvailable": "c96656d7513bd87de8a18c094ce5a6152054f309fb195a4172c9c46e00d6e919",
+        "SoundEffects.setEnabled": "ea1362f27ac51b2d2f663da5f67e3175b993394ed180cdd6cbdf70b4ec83280f",
+        "SoundEffects.__init__": "3439bf22f176690f58763ffc9caa225968ebc47bb51f71b1eac59bb261e615c3",
+        "SoundEffects.play": "1cdb328792cab0a564d790cf4a4e5a4ba4803b7840fceb57b5faa6bd87f65706",
+        "SoundEffects.stop": "8502953396da859830e73d5a93bfd611d8d90f29d52f3a1db26ed6e092190984",
+        "SoundEffects._load_cue": "0dfc4b8aa04bbb47af4160140c406021ae705873d11a2edd62455f4d2b20e1ab",
+        "SoundEffects._disable_cue": "3d7f0154b12f489cd8b08b06d56d239f8ef4863569a60956b97e6d39807730b7",
+        "SoundEffects._report_audio_problem": "7c3440adc83629f94c1ec29ee102abd0350b643faeab62928c18c7c742bb760e"
+      },
+      "baseline_executable_signatures": {
+        "ast_sha256": "0ea73e6f0eb23420a4494d36f9cd15b2feb6ebcff4374215bba603089e0de90d",
+        "token_sha256": "25f99ea90099c29a853a19fb5464b72fdf1be41114f662496f32437898e56497"
+      },
+      "metadata_replacements": {
+        "# YOUR NAME(S) AND NETID(S) HERE": "authors: joon lee (jl4875) + richard li (rl998)",
+        "# DATE COMPLETED HERE": "date: december 6, 2026."
+      }
+    },
+    "consts.py": {
+      "template_sha256": "46547898a27d55ca4992ac34496326e2b454f9e556812613cc9dde2649722912",
+      "baseline_sha256": "a727c8a16685a9414483a8bd75826ce6536ce2dbe187c74aec178f930a175920",
+      "template_documentation": {
+        "<module>": {
+          "original_raw": "\"\"\"\nConstants for Froggit\n\nThis module global constants for the game Froggit. These constants need to be \nused in the model, the view, and the controller. As these are spread across \nmultiple modules, we separate the constants into their own module. This allows \nall modules to access them.\n\n# YOUR NAME(S) AND NETID(S) HERE\n# DATE COMPLETED HERE\n\"\"\"",
+          "expected_raw": "\"\"\"\nConstants for Froggit\n\nThis module global constants for the game Froggit. These constants need to be \nused in the model, the view, and the controller. As these are spread across \nmultiple modules, we separate the constants into their own module. This allows \nall modules to access them.\n\nauthors: joon lee (jl4875) + richard li (rl998)\ndate: december 6, 2026\n\"\"\""
+        },
+        "<module>:text:1": {
+          "original_raw": "\"\"\"\nsys.argv is a list of the command line arguments when you run python. These \narguments are everything after the word python. So if you start the game typing\n\n    python shield default.json\n\nPython puts ['shield', 'default.json'] into sys.argv. Below, we take advantage \nof this fact to change the constant DEFAULT_WAVE. This is the wave file to be \nused when you start the game.  \n\"\"\"",
+          "expected_raw": "\"\"\"\nsys.argv is a list of the command line arguments when you run python. These \narguments are everything after the word python. So if you start the game typing\n\n    python shield default.json\n\nPython puts ['shield', 'default.json'] into sys.argv. Below, we take advantage \nof this fact to change the constant DEFAULT_WAVE. This is the wave file to be \nused when you start the game.  \n\"\"\""
+        }
+      },
+      "template_comments": [
+        {
+          "text": "### WINDOW CONSTANTS (all coordinates are in pixels) ###",
+          "scope": "<module>",
+          "line": 15,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:GAME_WIDTH",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:GAME_WIDTH",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# the width of the game display",
+          "scope": "<module>",
+          "line": 17,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:GAME_WIDTH",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:GAME_WIDTH",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# the height of the game display",
+          "scope": "<module>",
+          "line": 19,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:GAME_HEIGHT",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:GAME_HEIGHT",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "### GAME CONSTANTS ###",
+          "scope": "<module>",
+          "line": 23,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:STATE_INACTIVE",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:STATE_INACTIVE",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# state before the game has started",
+          "scope": "<module>",
+          "line": 25,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:STATE_INACTIVE",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:STATE_INACTIVE",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# state when we are loading in a new level",
+          "scope": "<module>",
+          "line": 27,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:STATE_LOADING",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:STATE_LOADING",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# state when the level is activated and in play",
+          "scope": "<module>",
+          "line": 29,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:STATE_ACTIVE",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:STATE_ACTIVE",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# state when we pause the game",
+          "scope": "<module>",
+          "line": 31,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:STATE_PAUSED",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:STATE_PAUSED",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# state when we continue a paused game",
+          "scope": "<module>",
+          "line": 33,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:STATE_CONTINUE",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:STATE_CONTINUE",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "#: state when the game is complete (won or lost)",
+          "scope": "<module>",
+          "line": 35,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:STATE_COMPLETE",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:STATE_COMPLETE",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "### GAME ASSETS ###",
+          "scope": "<module>",
+          "line": 39,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:BACKGROUND",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:BACKGROUND",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# The background image",
+          "scope": "<module>",
+          "line": 41,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:BACKGROUND",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:BACKGROUND",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# The constants for the aim target",
+          "scope": "<module>",
+          "line": 44,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:AIM_IMAGE",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:AIM_IMAGE",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# The constants for a silo",
+          "scope": "<module>",
+          "line": 51,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:SILO_IMAGE",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:SILO_IMAGE",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# The constants for a city",
+          "scope": "<module>",
+          "line": 56,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:CITY_IMAGE",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:CITY_IMAGE",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# The distance from the screen bottom",
+          "scope": "<module>",
+          "line": 60,
+          "column": 17,
+          "next_member": null,
+          "next_statement": "assign:ROCKET_COLOR",
+          "inline_prefix": "CITY_OFFSET = 20",
+          "placement": {
+            "inline_prefix": "CITY_OFFSET = 20"
+          }
+        },
+        {
+          "text": "### ROCKET CONSTANTS ###",
+          "scope": "<module>",
+          "line": 63,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:ROCKET_COLOR",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:ROCKET_COLOR",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# The colors",
+          "scope": "<module>",
+          "line": 65,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:ROCKET_COLOR",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:ROCKET_COLOR",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# The explosion parameters",
+          "scope": "<module>",
+          "line": 69,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:ROCKET_SPEED",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:ROCKET_SPEED",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# The ammo count of each silo",
+          "scope": "<module>",
+          "line": 75,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:AMMO_COUNT",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:AMMO_COUNT",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "### BOMB CONSTANTS ###",
+          "scope": "<module>",
+          "line": 79,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:BOMB_COLOR",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:BOMB_COLOR",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# The colors",
+          "scope": "<module>",
+          "line": 81,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:BOMB_COLOR",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:BOMB_COLOR",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "### WAVE CONSTANTS ###",
+          "scope": "<module>",
+          "line": 88,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:DEFAULT_WAVE",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:DEFAULT_WAVE",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# The default wave file",
+          "scope": "<module>",
+          "line": 90,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:DEFAULT_WAVE",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:DEFAULT_WAVE",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# The score values ",
+          "scope": "<module>",
+          "line": 93,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:SCORE_AMMO",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:SCORE_AMMO",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "### FONT CHOICES ###",
+          "scope": "<module>",
+          "line": 98,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:THEME_FONT",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:THEME_FONT",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# The font choice for titles",
+          "scope": "<module>",
+          "line": 100,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:THEME_FONT",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:THEME_FONT",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# The font choice for messages",
+          "scope": "<module>",
+          "line": 102,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:BASIC_FONT",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:BASIC_FONT",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# A large message or label",
+          "scope": "<module>",
+          "line": 104,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:THEME_LARGE",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:THEME_LARGE",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# A medium message or label",
+          "scope": "<module>",
+          "line": 106,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:THEME_MEDIUM",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:THEME_MEDIUM",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# A small message or label",
+          "scope": "<module>",
+          "line": 108,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "assign:THEME_SMALL",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:THEME_SMALL",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "### USE COMMAND LINE ARGUMENTS TO CHANGE DEFAULT LEVEL FILE",
+          "scope": "<module>",
+          "line": 112,
+          "column": 0,
+          "next_member": null,
+          "next_statement": "text:233a8f3239021bd7960a5ac2a11167de09f1bc9957208cdec89e28b6796d952e",
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "text:233a8f3239021bd7960a5ac2a11167de09f1bc9957208cdec89e28b6796d952e",
+            "inline_prefix": ""
+          }
+        },
+        {
+          "text": "# Use original value",
+          "scope": "<module>",
+          "line": 130,
+          "column": 9,
+          "next_member": null,
+          "next_statement": null,
+          "inline_prefix": "pass",
+          "placement": {
+            "inline_prefix": "pass"
+          }
+        },
+        {
+          "text": "### ADD MORE CONSTANTS (PROPERLY COMMENTED) AS NECESSARY ###",
+          "scope": "<module>",
+          "line": 132,
+          "column": 0,
+          "next_member": null,
+          "next_statement": null,
+          "inline_prefix": "",
+          "placement": {
+            "next_statement": "assign:AIM_FRAME_SCALE",
+            "inline_prefix": ""
+          }
+        }
+      ],
+      "added_documentation": {},
+      "added_method_blocks": {},
+      "baseline_executable_signatures": {
+        "ast_sha256": "e19015e320281360fd052a94a9004afe82a24a92abc9b530ac21903376733431",
+        "token_sha256": "de854655f6691b84eddd01f08ec46ad33f4a3411db55c5f362399d06fe6f0d0e"
+      },
+      "metadata_replacements": {
+        "# YOUR NAME(S) AND NETID(S) HERE": "authors: joon lee (jl4875) + richard li (rl998)",
+        "# DATE COMPLETED HERE": "date: december 6, 2026"
+      }
+    }
+  },
+  "original_width_exemptions": [
+    {
+      "file": "app.py",
+      "original_line": 4,
+      "text": "This module contains the main controller class for the MissileShield application. ",
+      "characters": 82,
+      "maximum_occurrences": 1
+    },
+    {
+      "file": "app.py",
+      "original_line": 21,
+      "text": "# PRIMARY RULE: MissileShield can only access attributes in wave.py via getters/setters",
+      "characters": 87,
+      "maximum_occurrences": 1
+    },
+    {
+      "file": "wave.py",
+      "original_line": 24,
+      "text": "# are not permitted to access anything in their parent. To see why, take CS 3152)",
+      "characters": 81,
+      "maximum_occurrences": 1
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "comparison": "all standalone documentation strings and comments excluded; executable AST and tokens retained",
+  "files": {
+    "app.py": {
+      "input_filename": "app(6).py",
+      "input_sha256": "e25b9904a78a440e1a86e91298ce2795e4689048b27eec8b3c1e4dd06fe52b10",
+      "output_sha256": "14b514cbcc54d359fcc1210d9cd3cb8bede3dc9ef26c02b297dacd401af7ce94",
+      "executable_ast_unchanged": true,
+      "executable_tokens_unchanged": true
+    },
+    "wave.py": {
+      "input_filename": "wave(3).py",
+      "input_sha256": "a2dccbdef67a399f415ebcd479d39385a41ef0dee90d83bf9d6607e40b9cbd1e",
+      "output_sha256": "e544f448232b30afbbc2c698495160d3224b42df9161ea6914695e076c7b937a",
+      "executable_ast_unchanged": true,
+      "executable_tokens_unchanged": true
+    },
+    "models.py": {
+      "input_filename": "models(3).py",
+      "input_sha256": "9cffa1bf039088623a357e731911aa5c1ccac83281e62c072b63ad75a8a17856",
+      "output_sha256": "6662084d41833f3bca1b08c4260d85b5e6787c4c8f0993239a63b7e01904f585",
+      "executable_ast_unchanged": true,
+      "executable_tokens_unchanged": true
+    },
+    "consts.py": {
+      "input_filename": "consts(3).py",
+      "input_sha256": "6e23cf60603cd99083b938c1a5a9284500bcb1333b1b05cc932e49d9f15b5cb9",
+      "output_sha256": "3ec29a4c2b90c55eb050af0fd0de22f088918400a181f8a7d78ee13121a01dea",
+      "executable_ast_unchanged": true,
+      "executable_tokens_unchanged": true
+    }
+  }
+}

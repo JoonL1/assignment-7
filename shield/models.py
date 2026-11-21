@@ -1,46 +1,66 @@
 """
-the visible objects for missile shield.
+Models module for MissileShield
+
+This module contains the model classes for the Missile Shield game. Anything 
+that you interact with on the screen is model: the silos, the cities, the 
+missiles, and so on.
+
+The classes provided in this module are sufficient for the core game. You only
+need to add classes to this module if you are adding extensions to the game.
+You are qlwo free to make any changes to these classes if you want. 
+
+If you are unsure about  whether to make a new class or not, please ask on 
+Ed Discussions. We will answer.
 
 authors: joon lee (jl4875) + richard li (rl998)
 date: december 6, 2026.
-
-the supplied game2d framework and starter are by walker m. white.
-the pictures and fonts also come from the assignment package.
-each object tracks the data it needs, so it never looks inside a Wave or
-the app to figure out what to do.
 """
 from consts import *
 from game2d import *
 
 
+# PRIMARY RULE: Models are not allowed to access anything in any module other 
+# than consts.py. If you need extra information from a wave object, then it 
+# should be a parameter in your method.
+
 class Silo(GImage):
     """
-    a missile silo with a number showing how many rockets are left.
-
-    the picture stays on screen after a bomb hits because the controller just
-    sets the ammo to zero. x and y still give the center of the picture, and
-    bottom gives the bottom edge, like the usual properties of a GImage.
+    A class representing a silo
+    
+    Silos contain the ammunition for the missile shield. Every time you fire
+    a defensive strike, it must consume ammo from one of your silos. One a
+    silo runs out of ammo it can no longer be used this wave. Hence ammunition
+    is the primary attribute this class must add to GImage.
+    
+    If a missile collides with a silo, it does not destroy it. However, it does
+    immediately destroy all ammunition, making the silo useless.
+    
+    NOTE: The attributes x and y in GImage are NOT hidden (they are properties
+    and do not need getters/setters). You do not need getters and setters for
+    attributes you inherit from GImage. You only need them for new attributes
+    that you create.
     """
-    # _ammunition: how many rockets are left in this silo.
+    # LIST ALL HIDDEN ATTRIBUTES HERE
+    # _ammunition: the rockets left here, basically the ammo counter.
     # invariant: _ammunition is an int greater than or equal to zero.
-    # _ammunition_label: the number shown on top of the silo picture.
+    # _ammunition_label: the ammo number sitting over the silo picture.
     # invariant: _ammunition_label is a GLabel with text str(_ammunition).
-    # _ammunition_badge: a dark GRectangle behind the ammo number.
-    # _ammunition_track: a GRectangle showing the full ammo bar length.
-    # _ammunition_fill: a GRectangle showing the fraction of ammo left.
+    # _ammunition_badge: a dark GRectangle so the number stands out.
+    # _ammunition_track: a GRectangle for the whole length of the bar.
+    # _ammunition_fill: a GRectangle for the part of the ammo bar left.
 
+    # GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)
+    
     def getAmmo(self):
-        """
-        returns how many rockets are left in this silo as an int.
-        """
+        """returns the ammo left in this silo, as an int."""
         remaining_ammunition = self._ammunition
         return remaining_ammunition
 
     def setAmmo(self, amount):
         """
-        sets the ammo count and updates the number on the picture too.
+        changes the ammo count, so the number on the picture changes too.
 
-        parameter amount: the new number of rockets in this silo.
+        parameter amount: how many rockets this silo should have now.
         precondition: amount is an int greater than or equal to zero.
         """
         assert type(amount) == int
@@ -49,11 +69,13 @@ class Silo(GImage):
         number_to_display = str(amount)
         self._ammunition_label.text = number_to_display
 
+    # INITIALIZER TO SET THE ATTRIBUTES
+    
     def __init__(self, x):
         """
-        sets up a full silo with the bottom on the ground and center at x.
+        makes a full silo centered at x, with the bottom right on the ground.
 
-        parameter x: the horizontal coordinate of the center of the silo.
+        parameter x: where the center of the silo goes horizontally.
         precondition: x is a number (int or float).
         """
         silo_center_height = SILO_HEIGHT / 2
@@ -62,9 +84,11 @@ class Silo(GImage):
         self._ammunition = AMMO_COUNT
         self._make_ammo_display(x)
 
+    # ADDITIONAL METHODS AS NEEDED
+    
     def draw(self, view):
         """
-        draws the silo first, then puts the ammo badge and bar on top.
+        draws the silo, then pops the ammo badge and bar on top.
 
         parameter view: where to draw this silo.
         precondition: view is a GView.
@@ -74,9 +98,9 @@ class Silo(GImage):
 
     def _make_ammo_display(self, x):
         """
-        makes a quiet badge and bar so the ammo stays easy to read.
+        makes the number, badge, and bar so the ammo is easy to spot.
 
-        parameter x: the horizontal center of this silo.
+        parameter x: where the center of this silo goes horizontally.
         precondition: x is a number (int or float).
         """
         starting_number = str(self._ammunition)
@@ -95,7 +119,7 @@ class Silo(GImage):
 
     def _draw_ammo_display(self, view):
         """
-        follows the silo position and shows the current ammo fraction.
+        keeps the ammo display with the silo and fills the bar for ammo left.
 
         parameter view: where to draw this ammo display.
         precondition: view is a GView.
@@ -119,26 +143,38 @@ class Silo(GImage):
 
 class City(GImage):
     """
-    a city that stays visible until a bomb destroys it.
-
-    the object stays in the target list even after the picture disappears,
-    because later bombs still need the same destination. so destroying one
-    city does not shift the positions of the other cities.
+    A class representing a city that can be blown up.
+    
+    For the most part, citiess are just drawn to the screen. There is no need 
+    for a lot of custom methods in this class. Indeed, the primary reason the 
+    class exists is so we can keep the image source and size all in one place.
+    With that said, you are unlikely to need any methods here other than the 
+    initializer.
+    
+    NOTE: The attributes x and y in GImage are NOT hidden (they are properties
+    and do not need getters/setters). You do not need getters and setters for
+    attributes you inherit from GImage. You only need them for new attributes
+    that you create.
     """
-    # _alive: whether this city is still standing.
+    # LIST ALL HIDDEN ATTRIBUTES HERE
+    # _alive: whether this city is still around.
     # invariant: _alive is a bool; a destroyed city never comes back.
 
+    # GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)
+    
     def getAlive(self):
         """
-        returns True if this city is still standing, or False if it is gone.
+        returns True if this city is still up, or False if it is gone.
         """
         return self._alive
 
+    # INITIALIZER TO SET THE ATTRIBUTES
+    
     def __init__(self, x):
         """
-        sets up a living city with the bottom edge at CITY_OFFSET.
+        makes a city that is still alive, with the bottom at CITY_OFFSET.
 
-        parameter x: the horizontal coordinate of the center of the city.
+        parameter x: where the center of the city goes horizontally.
         precondition: x is a number (int or float).
         """
         half_city_height = CITY_HEIGHT / 2
@@ -147,16 +183,18 @@ class City(GImage):
                          height=CITY_HEIGHT, source=CITY_IMAGE)
         self._alive = True
 
+    # ADDITIONAL METHODS AS NEEDED
+    
     def destroy(self):
         """
-        marks this city as destroyed, even if an earlier bomb already hit it.
+        marks the city as gone, even if another bomb already got there.
         """
         # a second bomb cannot make an already gone city extra gone 😭
         self._alive = False
 
     def draw(self, view):
         """
-        draws the city if it is still standing, but draws nothing if it is gone.
+        draws the city while it is alive, but skips it after a hit.
 
         parameter view: where to draw this city.
         precondition: view is a GView.
@@ -167,25 +205,30 @@ class City(GImage):
 
 class Target(GImage):
     """
-    the aiming reticule and how fast it is moving right now.
-
-    the controller reads the arrow keys and picks the next position. position
-    and size stay public because those properties already come from GImage.
+    A class representing the target reticule
+    
+    The target reticule is what you use to aim your rockets. Per the 
+    instructions, it has a variable speed. When it moves, it starts at
+    AIM_SPEED_STEP pixels per second, and increases until it reaches
+    AIM_SPEED_LIMIT
     """
-    # _movement_speed: how fast the arrow keys move the reticule right now.
+    # LIST ALL HIDDEN ATTRIBUTES HERE
+    # _movement_speed: how fast the arrow keys move the reticule rn.
     # invariant: _movement_speed is a number from 0 to AIM_SPEED_LIMIT.
 
+    # GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)
+    
     def getSpeed(self):
         """
-        returns the current movement speed of the reticule as a number.
+        returns the current speed of the reticule, as a number.
         """
         return self._movement_speed
 
     def setSpeed(self, speed):
         """
-        sets the movement speed to speed.
+        changes the speed of the reticule to speed.
 
-        parameter speed: how fast the reticule should move.
+        parameter speed: how fast the reticule should move now.
         precondition: speed is a number from 0 to AIM_SPEED_LIMIT, inclusive.
         """
         assert type(speed) == int or type(speed) == float
@@ -193,72 +236,79 @@ class Target(GImage):
         assert speed <= AIM_SPEED_LIMIT
         self._movement_speed = speed
 
+    # INITIALIZER TO SET THE ATTRIBUTES
+    
     def __init__(self, x, y):
         """
-        sets up a reticule centered at (x, y), starting with zero speed.
+        puts the reticule at (x, y), with zero speed for now.
 
-        parameter x: the horizontal coordinate of the center of the reticule.
+        parameter x: where the center of the reticule goes horizontally.
         precondition: x is a number (int or float).
-        parameter y: the vertical coordinate of the center of the reticule.
+        parameter y: where the center of the reticule goes vertically.
         precondition: y is a number (int or float).
         """
         super().__init__(x=x, y=y, width=AIM_WIDTH, height=AIM_HEIGHT,
                          source=AIM_IMAGE)
         self._movement_speed = 0
-        # ugh im so busy pls help 🫠
+        # starts still, so the arrow keys can build up speed from zero.
+
+    # ADDITIONAL METHODS AS NEEDED
 
 
 class Bomb(GEllipse):
     """
-    a bomb that moves straight toward one fixed city or silo location.
-
-    the bomb saves the drop time, but the controller decides when to start
-    moving and drawing it. the tail always starts at the original position,
-    and reaching the destination sets a flag so the controller can handle
-    that hit.
+    A class representing a dropping bomb
+    
+    Bombs are defined in the wave JSON file. Each bomb has a start time and
+    it should not appear on the screen until its time has past.  A bomb drops
+    until it collides with a silo or city (or where a city should be). At
+    that point it is destroyed.
     """
-    # _starting_x: the horizontal coordinate where the tail starts.
+    # LIST ALL HIDDEN ATTRIBUTES HERE
+    # _starting_x: where the tail starts horizontally; keep it there.
     # invariant: _starting_x is a number and does not change.
-    # _starting_y: the vertical coordinate where the tail starts.
+    # _starting_y: where the tail starts vertically; keep it there.
     # invariant: _starting_y is a number and does not change.
-    # _destination_x: the horizontal coordinate where this bomb will hit.
+    # _destination_x: where this bomb is headed horizontally.
     # invariant: _destination_x is a number and does not change.
-    # _destination_y: the vertical coordinate where this bomb will hit.
+    # _destination_y: where this bomb is headed vertically.
     # invariant: _destination_y is a number and does not change.
-    # _drop_time: seconds from the start of the wave until this bomb drops.
+    # _drop_time: how many seconds into the wave this bomb should drop.
     # invariant: _drop_time is a nonnegative number and does not change.
-    # _target_slot: the original position of the target among nine slots.
+    # _target_slot: where the target started in the row of nine slots.
     # invariant: _target_slot is an int from 0 through 8 and does not change.
-    # _arrived: whether this bomb has reached the impact location.
+    # _arrived: whether this bomb got all the way to the hit location.
     # invariant: _arrived is a bool; True means (x, y) is the destination.
-    # _tail: the line from the start of the bomb to the current position.
+    # _tail: a line from the original start to where the bomb is now.
     # invariant: _tail is a GPath with four coordinates and BOMB_TAIL color.
 
+    # GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)
+    
     def getStartTime(self):
         """
-        returns the drop time in seconds from the start of the wave.
+        returns when this bomb drops, in seconds since the wave started.
         """
         return self._drop_time
 
     def getTargetSlot(self):
         """
-        returns the original slot of the target as an int from 0 through 8.
+        returns the original slot of the target, as an int from 0 through 8.
         """
         return self._target_slot
 
     def getArrived(self):
         """
-        returns True if the bomb reached the destination, or False otherwise.
+        returns True if the bomb got to the destination, or False if not.
         """
         return self._arrived
 
     def getRemainingTime(self, speed):
         """
-        returns how many seconds are left before impact at the given speed.
+        returns the seconds left until a hit if the bomb keeps this speed.
 
-        the estimate assumes the bomb keeps that speed for the whole trip.
+        so this is an estimate, because a later speed change changes the timing.
 
-        parameter speed: the speed for the estimate, in pixels per second.
+        parameter speed: the speed to assume, in pixels per second.
         precondition: speed is a number greater than zero.
         """
         remaining_distance = self._distance_to_destination()
@@ -267,15 +317,15 @@ class Bomb(GEllipse):
 
     def getFuturePosition(self, seconds, speed):
         """
-        returns the predicted (x, y) tuple after seconds, without moving.
+        returns the predicted (x, y) tuple after seconds; nothing moves yet.
 
-        the result stops at the destination if the prediction would go past it.
-        this assumes a constant speed, so changing the speed later also changes
-        the estimate.
+        the prediction stops at the destination because going past it would make
+        no sense here. it assumes a constant speed, so changing that speed later
+        means the estimate changes too.
 
         parameter seconds: how many seconds ahead to look.
         precondition: seconds is a nonnegative number.
-        parameter speed: the predicted movement speed in pixels per second.
+        parameter speed: the speed to assume, in pixels per second.
         precondition: speed is a nonnegative number.
         """
         horizontal_difference = self._destination_x - self.x
@@ -295,22 +345,24 @@ class Bomb(GEllipse):
             future_y = self.y + vertical_movement
             return (future_x, future_y)
 
+    # INITIALIZER TO SET THE ATTRIBUTES
+    
     def __init__(self, start_x, start_y, target_x, target_y,
                  drop_time, target_slot):
         """
-        sets up a bomb from (start_x, start_y) to (target_x, target_y).
+        makes a bomb going from (start_x, start_y) to (target_x, target_y).
 
-        parameter start_x: the horizontal coordinate where the bomb starts.
+        parameter start_x: where the bomb starts horizontally.
         precondition: start_x is a number (int or float).
-        parameter start_y: the vertical coordinate where the bomb starts.
+        parameter start_y: where the bomb starts vertically.
         precondition: start_y is a number (int or float).
-        parameter target_x: the fixed horizontal coordinate of the destination.
+        parameter target_x: the horizontal destination that stays fixed.
         precondition: target_x is a number (int or float).
-        parameter target_y: the fixed vertical coordinate of the destination.
+        parameter target_y: the vertical destination that stays fixed.
         precondition: target_y is a number (int or float).
-        parameter drop_time: seconds from the start of the wave to this drop.
+        parameter drop_time: how many seconds after the wave starts to drop.
         precondition: drop_time is a nonnegative number.
-        parameter target_slot: the original position of the target in the row.
+        parameter target_slot: the original slot of the target in the row.
         precondition: target_slot is an int from 0 through 8.
         """
         bomb_diameter = 2 * BOMB_RADIUS
@@ -327,16 +379,18 @@ class Bomb(GEllipse):
         self._tail = GPath(points=initial_tail_points,
                            linewidth=BOMB_RADIUS, linecolor=BOMB_TAIL)
 
+    # ADDITIONAL METHODS AS NEEDED
+    
     def update(self, dt, speed):
         """
-        moves this bomb toward the destination but never past it.
+        moves the bomb closer, but stops right at the destination.
 
-        the controller only calls this after the drop time. if the bomb already
-        arrived, it stays there until the controller removes it.
+        the controller calls this only after the drop time. if the bomb already
+        arrived, it just waits there for the controller to remove it.
 
         parameter dt: how many seconds to move this bomb.
         precondition: dt is a nonnegative number.
-        parameter speed: speed of the bomb this step, in pixels per second.
+        parameter speed: the speed of this step, in pixels per second.
         precondition: speed is a nonnegative number.
         """
         if self._arrived:
@@ -352,7 +406,7 @@ class Bomb(GEllipse):
 
     def draw(self, view):
         """
-        draws the see-through tail first, then the white circle of the bomb.
+        draws the see-through trail, then puts the white bomb dot on top.
 
         parameter view: where to draw this bomb.
         precondition: view is a GView.
@@ -362,7 +416,7 @@ class Bomb(GEllipse):
 
     def _distance_to_destination(self):
         """
-        returns the distance from the bomb to the destination, at least 0.
+        returns how far the bomb is from the destination, never below zero.
         """
         horizontal_difference = self._destination_x - self.x
         vertical_difference = self._destination_y - self.y
@@ -377,40 +431,47 @@ class Bomb(GEllipse):
 
 class Rocket(GEllipse):
     """
-    a rocket that flies to a fixed point and then grows into an explosion.
-
-    the destination is copied at launch, so moving the reticule later does
-    not move the rocket destination. the controller removes finished rockets
-    before updating the others, which gives each explosion one frame at full
-    size before it disappears.
+    A class representing a defensive rocket
+    
+    Unlike bombs, rockets are created by player input. The player presses a
+    key to fire at the target. The trajectory of the rocket should be from
+    the top center of the appropriate silo to current position of the Target
+    object. When the rocket reaches that position it explodes.
+    
+    Rocket explosions are not instantaneous. The rocket ellipse will grow
+    slowly until it reaches ROCKET_MAX_RADIUS, at which point it is removed.
+    Any Bomb object that comes in contact with that explosion is destroyed.
     """
-    # _starting_x: the horizontal coordinate where this rocket was fired.
+    # LIST ALL HIDDEN ATTRIBUTES HERE
+    # _starting_x: where the rocket took off horizontally.
     # invariant: _starting_x is a number and does not change.
-    # _starting_y: the vertical coordinate where this rocket was fired.
+    # _starting_y: where the rocket took off vertically.
     # invariant: _starting_y is a number and does not change.
-    # _destination_x: the horizontal coordinate of the aim point at launch.
+    # _destination_x: the horizontal aim position saved at launch.
     # invariant: _destination_x is a number and does not change.
-    # _destination_y: the vertical coordinate of the aim point at launch.
+    # _destination_y: the vertical aim position saved at launch.
     # invariant: _destination_y is a number and does not change.
-    # _exploding: whether this rocket has reached the destination.
+    # _exploding: whether the rocket got there and turned into a blast.
     # invariant: _exploding is a bool; True means (x, y) is the destination.
-    # _tail: the line from the silo to the current position of the rocket.
+    # _tail: a line from the silo to where the rocket is now.
     # invariant: _tail is a GPath, drawn only when _exploding is False.
     # invariant: width == height; the radius stays from ROCKET_MIN_RADIUS
     # through ROCKET_MAX_RADIUS, including both limits.
 
+    # GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)
+    
     def getExploding(self):
         """
-        returns True if the rocket has arrived and is now growing an explosion.
+        returns True once the rocket arrives and starts growing the blast.
         """
         return self._exploding
 
     def getFinished(self):
         """
-        returns True if the explosion has reached the maximum radius.
+        returns True once the blast reaches the maximum radius.
 
-        True tells the controller to remove this when the next update starts,
-        so the full-size explosion gets drawn once before disappearing.
+        so True means remove it at the start of the next update, because the
+        full-size blast still needs one frame on screen.
         """
         current_radius = self.width / 2
         if self._exploding:
@@ -418,17 +479,19 @@ class Rocket(GEllipse):
                 return True
         return False
 
+    # INITIALIZER TO SET THE ATTRIBUTES
+    
     def __init__(self, start_x, start_y, target_x, target_y):
         """
-        sets up a rocket that travels from the silo to a fixed aiming point.
+        makes a rocket going from the silo to an aiming point saved now.
 
-        parameter start_x: the horizontal starting coordinate at the silo.
+        parameter start_x: where the rocket starts horizontally, at the silo.
         precondition: start_x is a number (int or float).
-        parameter start_y: the vertical starting coordinate at the silo.
+        parameter start_y: where the rocket starts vertically, at the silo.
         precondition: start_y is a number (int or float).
-        parameter target_x: the horizontal aiming coordinate copied at launch.
+        parameter target_x: the horizontal aim position copied at launch.
         precondition: target_x is a number (int or float).
-        parameter target_y: the vertical aiming coordinate copied at launch.
+        parameter target_y: the vertical aim position copied at launch.
         precondition: target_y is a number (int or float).
         """
         rocket_diameter = 2 * ROCKET_MIN_RADIUS
@@ -444,15 +507,17 @@ class Rocket(GEllipse):
                            linewidth=ROCKET_MIN_RADIUS,
                            linecolor=ROCKET_TAIL)
 
+    # ADDITIONAL METHODS AS NEEDED
+    
     def update(self, dt):
         """
-        moves the rocket or grows the explosion for dt seconds.
+        moves the rocket or grows the blast for dt seconds.
 
-        if the rocket arrives during this step, the leftover time grows the
-        explosion. even a large dt cannot send it past the destination or make
-        the radius larger than ROCKET_MAX_RADIUS.
+        if it arrives partway through, the leftover time grows the blast. even
+        with a big dt, it stops at the destination and the radius stays at or
+        below ROCKET_MAX_RADIUS.
 
-        parameter dt: how many seconds to advance the rocket.
+        parameter dt: how many seconds to move or grow this rocket.
         precondition: dt is a nonnegative number.
         """
         if self._exploding:
@@ -462,7 +527,7 @@ class Rocket(GEllipse):
 
     def draw(self, view):
         """
-        draws the moving rocket and tail, or just the explosion after arrival.
+        draws the rocket with the trail, or just the blast once it arrives.
 
         parameter view: where to draw this rocket.
         precondition: view is a GView.
@@ -473,9 +538,9 @@ class Rocket(GEllipse):
 
     def _move_toward_destination(self, dt):
         """
-        moves toward the destination and starts the explosion when it arrives.
+        moves toward the saved spot, then starts the blast on arrival.
 
-        parameter dt: how many seconds are available for movement.
+        parameter dt: how many seconds this move gets.
         precondition: dt is a nonnegative number and this is not exploding.
         """
         horizontal_difference = self._destination_x - self.x
@@ -498,9 +563,9 @@ class Rocket(GEllipse):
 
     def _start_explosion(self, remaining_seconds):
         """
-        stops at the destination and starts a see-through explosion.
+        parks the rocket at the destination and starts a see-through blast.
 
-        parameter remaining_seconds: time left after arrival during this step.
+        parameter remaining_seconds: seconds left in this step after arrival.
         precondition: remaining_seconds is a nonnegative number.
         """
         # the little blue dot finally gets to be a big blue dot 😭
@@ -512,9 +577,9 @@ class Rocket(GEllipse):
 
     def _grow_explosion(self, dt):
         """
-        grows the radius by ROCKET_STEP_RADIUS per second, but stops at the max.
+        adds ROCKET_STEP_RADIUS to the radius per second, up to the max.
 
-        parameter dt: how many seconds are available for growth.
+        parameter dt: how many seconds this blast gets to grow.
         precondition: dt is a nonnegative number and this is exploding.
         """
         old_radius = self.width / 2
@@ -528,7 +593,7 @@ class Rocket(GEllipse):
 
     def _distance_to_destination(self):
         """
-        returns the distance from this rocket to the destination, at least 0.
+        returns how far the rocket is from the destination, never below zero.
         """
         horizontal_difference = self._destination_x - self.x
         vertical_difference = self._destination_y - self.y
@@ -543,30 +608,34 @@ class Rocket(GEllipse):
 
 class SoundEffects(object):
     """
-    keeps the short game cues ready without changing any gameplay rules.
+    a little bank of game sounds, kept separate from the game rules.
 
-    each cue has three voices, so quick launches can overlap. the next voice
-    stops before it replays because game2d cannot restart a playing Sound.
-    these wav files come from the approved assignment package. if an audio
-    device or file is unavailable, the game keeps going without that cue.
+    each cue gets three voices, so quick launches can overlap. stop a voice
+    before replaying it because game2d cannot restart a Sound already playing.
+    all these wav files come from the approved assignment package. if a file
+    or audio device fails, skip that cue so the game can still keep going.
     """
-    # _sounds: a dictionary from cue names to lists of three Sound objects.
-    # _next_voice: a dictionary with one index from 0 through 2 per cue.
-    # _enabled: a bool; False means every sound is stopped and play is quiet.
+    # _sounds: a dictionary mapping each cue to a list of three Sound objects.
+    # _next_voice: a dictionary picking the next index, 0 through 2 per cue.
+    # _enabled: a bool; False stops every sound and makes play stay quiet.
 
     def getEnabled(self):
-        """returns True when sound is enabled, or False when it is muted."""
+        """
+        returns True if sound is switched on, or False if it is muted.
+        """
         return self._enabled
 
     def getAvailable(self):
-        """returns True if at least one sound cue loaded successfully."""
+        """
+        returns True if at least one sound cue made it through loading.
+        """
         return len(self._sounds) > 0
 
     def setEnabled(self, enabled):
         """
-        changes the sound setting, stopping every cue when sound is muted.
+        switches sound on or off, and stops all cues when switching it off.
 
-        parameter enabled: whether future cues should play.
+        parameter enabled: whether later cues should make sound.
         precondition: enabled is a bool.
         """
         assert type(enabled) == bool
@@ -575,7 +644,9 @@ class SoundEffects(object):
             self.stop()
 
     def __init__(self):
-        """loads the approved wav cues once, but does not play anything yet."""
+        """
+        loads the approved wav cues once, but stays quiet for now.
+        """
         self._sounds = {}
         self._next_voice = {}
         self._enabled = True
@@ -589,10 +660,10 @@ class SoundEffects(object):
 
     def play(self, cue):
         """
-        plays the next voice of this cue when sound is enabled and available.
+        plays the next voice of a cue if sound is on and that cue is ready.
 
-        a failed audio request disables only that cue, so other sounds and
-        the wave can keep working. three requests for one cue can overlap.
+        up to three calls for one cue can overlap. if audio fails, just disable
+        that cue so the other sounds and the wave can keep going.
 
         parameter cue: the name of an event, like 'launch' or 'impact'.
         precondition: cue is a string; an unknown cue does nothing.
@@ -611,7 +682,9 @@ class SoundEffects(object):
         self._next_voice[cue] = (voice_number + 1) % len(voices)
 
     def stop(self):
-        """stops all active cues, for example when pausing or leaving a wave."""
+        """
+        stops every cue, like when pausing or heading back to the menu.
+        """
         cue_names = list(self._sounds)
         for cue in cue_names:
             try:
@@ -622,13 +695,13 @@ class SoundEffects(object):
 
     def _load_cue(self, cue, filename, volume):
         """
-        loads three quiet voices of a cue, or reports an audio problem.
+        loads three voices for this cue, or reports why audio failed.
 
-        parameter cue: the name used by play to find this sound.
+        parameter cue: the name that play uses to find this sound.
         precondition: cue is a nonempty string not already in _sounds.
-        parameter filename: the supplied wav file to load.
+        parameter filename: which supplied wav file to load.
         precondition: filename is a nonempty string naming a sound asset.
-        parameter volume: the playback volume of this cue.
+        parameter volume: how loud this cue should be.
         precondition: volume is a number from 0 through 1.
         """
         voices = []
@@ -645,11 +718,11 @@ class SoundEffects(object):
 
     def _disable_cue(self, cue, problem):
         """
-        removes an unavailable cue and reports why in the terminal.
+        drops the cue that failed and says why in the terminal.
 
         parameter cue: the sound event that failed.
         precondition: cue is a key in _sounds and _next_voice.
-        parameter problem: the failure reported by the audio provider.
+        parameter problem: the error that came back from the audio provider.
         precondition: problem is an Exception.
         """
         for current_sound in self._sounds[cue]:
@@ -663,11 +736,11 @@ class SoundEffects(object):
 
     def _report_audio_problem(self, cue, problem):
         """
-        explains a missing audio cue without interrupting the game.
+        prints why the cue failed, so the game can carry on without it.
 
         parameter cue: the sound event that could not be used.
         precondition: cue is a string.
-        parameter problem: the failure reported by the audio provider.
+        parameter problem: the error that came back from the audio provider.
         precondition: problem is an Exception.
         """
         print('sound unavailable: ' + cue + '. the game can still run.')

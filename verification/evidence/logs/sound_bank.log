@@ -1,0 +1,12 @@
+test_all_cues_preloaded_from_supplied_wavs_without_playing (__main__.SoundBankChecks.test_all_cues_preloaded_from_supplied_wavs_without_playing) ... ok
+test_failed_play_stops_other_voices_and_preserves_other_cues (__main__.SoundBankChecks.test_failed_play_stops_other_voices_and_preserves_other_cues) ... ok
+test_failed_stop_does_not_block_other_voices_or_other_cues (__main__.SoundBankChecks.test_failed_stop_does_not_block_other_voices_or_other_cues) ... ok
+test_missing_asset_disables_only_affected_cues (__main__.SoundBankChecks.test_missing_asset_disables_only_affected_cues) ... ok
+test_mute_stops_playback_blocks_new_cues_and_can_resume (__main__.SoundBankChecks.test_mute_stops_playback_blocks_new_cues_and_can_resume) ... ok
+test_three_launches_overlap_and_fourth_safely_reuses_first (__main__.SoundBankChecks.test_three_launches_overlap_and_fourth_safely_reuses_first) ... ok
+test_unknown_cue_is_harmless (__main__.SoundBankChecks.test_unknown_cue_is_harmless) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.001s
+
+OK

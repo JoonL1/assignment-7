@@ -1,0 +1,11 @@
+{
+  "checked_utc": "2026-11-21T03:58:38.599135+00:00",
+  "archive_filename": "shield.zip",
+  "archive_sha256": "11b87a0976bd1be280b3ac0f994ef111850d4bffede801783d478eb4ea4969c6",
+  "archive_bytes": 2746965,
+  "summary_sha256": "60a6e7613958eb00eb9b577f0873619ea8aa440344e25647dc71891dd62a0716",
+  "expected_files": 67,
+  "verified_files": 67,
+  "passed": true,
+  "issues": []
+}

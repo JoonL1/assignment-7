@@ -1,0 +1,2 @@
+pass: all 7 cues loaded and played through real Kivy; mute stopped all
+audio device is dummy, so this verifies requests rather than audibility

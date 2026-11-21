@@ -1,0 +1,808 @@
+{
+  "method_count": 154,
+  "protected_originals_checked": 17,
+  "original_assets_checked": 43,
+  "largest_method_body": 21,
+  "original_width_exemptions": [
+    {
+      "file": "app.py",
+      "original_line": 4,
+      "text": "This module contains the main controller class for the MissileShield application. ",
+      "characters": 82,
+      "maximum_occurrences": 1,
+      "current_line": 4,
+      "reason": "verbatim original template line"
+    },
+    {
+      "file": "app.py",
+      "original_line": 21,
+      "text": "# PRIMARY RULE: MissileShield can only access attributes in wave.py via getters/setters",
+      "characters": 87,
+      "maximum_occurrences": 1,
+      "current_line": 20,
+      "reason": "verbatim original template line"
+    },
+    {
+      "file": "wave.py",
+      "original_line": 24,
+      "text": "# are not permitted to access anything in their parent. To see why, take CS 3152)",
+      "characters": 81,
+      "maximum_occurrences": 1,
+      "current_line": 24,
+      "reason": "verbatim original template line"
+    }
+  ],
+  "methods": [
+    {
+      "body_lines": 19,
+      "file": "app.py",
+      "name": "start"
+    },
+    {
+      "body_lines": 14,
+      "file": "app.py",
+      "name": "update"
+    },
+    {
+      "body_lines": 13,
+      "file": "app.py",
+      "name": "draw"
+    },
+    {
+      "body_lines": 2,
+      "file": "app.py",
+      "name": "on_stop"
+    },
+    {
+      "body_lines": 5,
+      "file": "app.py",
+      "name": "_clear_messages"
+    },
+    {
+      "body_lines": 10,
+      "file": "app.py",
+      "name": "_open_menu"
+    },
+    {
+      "body_lines": 4,
+      "file": "app.py",
+      "name": "_update_menu"
+    },
+    {
+      "body_lines": 10,
+      "file": "app.py",
+      "name": "_begin_loading"
+    },
+    {
+      "body_lines": 16,
+      "file": "app.py",
+      "name": "_load_wave"
+    },
+    {
+      "body_lines": 8,
+      "file": "app.py",
+      "name": "_read_wave_file"
+    },
+    {
+      "body_lines": 8,
+      "file": "app.py",
+      "name": "_update_active"
+    },
+    {
+      "body_lines": 20,
+      "file": "app.py",
+      "name": "_pause_wave"
+    },
+    {
+      "body_lines": 4,
+      "file": "app.py",
+      "name": "_update_paused"
+    },
+    {
+      "body_lines": 2,
+      "file": "app.py",
+      "name": "_continue_wave"
+    },
+    {
+      "body_lines": 14,
+      "file": "app.py",
+      "name": "_finish_wave"
+    },
+    {
+      "body_lines": 4,
+      "file": "app.py",
+      "name": "_update_complete"
+    },
+    {
+      "body_lines": 19,
+      "file": "app.py",
+      "name": "_show_load_error"
+    },
+    {
+      "body_lines": 14,
+      "file": "app.py",
+      "name": "_add_error_details"
+    },
+    {
+      "body_lines": 8,
+      "file": "app.py",
+      "name": "_make_menu_decoration"
+    },
+    {
+      "body_lines": 18,
+      "file": "app.py",
+      "name": "_make_sky_map"
+    },
+    {
+      "body_lines": 13,
+      "file": "app.py",
+      "name": "_make_map_details"
+    },
+    {
+      "body_lines": 10,
+      "file": "app.py",
+      "name": "_make_menu_heading"
+    },
+    {
+      "body_lines": 8,
+      "file": "app.py",
+      "name": "_make_standard_card"
+    },
+    {
+      "body_lines": 9,
+      "file": "app.py",
+      "name": "_make_custom_card"
+    },
+    {
+      "body_lines": 6,
+      "file": "app.py",
+      "name": "_make_menu_controls"
+    },
+    {
+      "body_lines": 7,
+      "file": "app.py",
+      "name": "_make_custom_help"
+    },
+    {
+      "body_lines": 8,
+      "file": "app.py",
+      "name": "_make_standard_help"
+    },
+    {
+      "body_lines": 12,
+      "file": "app.py",
+      "name": "_make_win_message"
+    },
+    {
+      "body_lines": 8,
+      "file": "app.py",
+      "name": "_make_loss_message"
+    },
+    {
+      "body_lines": 6,
+      "file": "app.py",
+      "name": "_make_panel"
+    },
+    {
+      "body_lines": 11,
+      "file": "app.py",
+      "name": "_add_card"
+    },
+    {
+      "body_lines": 3,
+      "file": "app.py",
+      "name": "_add_rule"
+    },
+    {
+      "body_lines": 10,
+      "file": "app.py",
+      "name": "_add_keycap"
+    },
+    {
+      "body_lines": 7,
+      "file": "app.py",
+      "name": "_add_key_hint"
+    },
+    {
+      "body_lines": 6,
+      "file": "app.py",
+      "name": "_read_audio_toggle"
+    },
+    {
+      "body_lines": 2,
+      "file": "app.py",
+      "name": "_stop_wave_audio"
+    },
+    {
+      "body_lines": 6,
+      "file": "app.py",
+      "name": "_get_audio_words"
+    },
+    {
+      "body_lines": 3,
+      "file": "app.py",
+      "name": "_make_audio_label"
+    },
+    {
+      "body_lines": 3,
+      "file": "app.py",
+      "name": "_add_center_label"
+    },
+    {
+      "body_lines": 5,
+      "file": "app.py",
+      "name": "_add_left_label"
+    },
+    {
+      "body_lines": 12,
+      "file": "app.py",
+      "name": "_make_label"
+    },
+    {
+      "body_lines": 1,
+      "file": "wave.py",
+      "name": "getLost"
+    },
+    {
+      "body_lines": 1,
+      "file": "wave.py",
+      "name": "getWon"
+    },
+    {
+      "body_lines": 1,
+      "file": "wave.py",
+      "name": "getCustomEnabled"
+    },
+    {
+      "body_lines": 4,
+      "file": "wave.py",
+      "name": "getModeName"
+    },
+    {
+      "body_lines": 10,
+      "file": "wave.py",
+      "name": "getHelpRows"
+    },
+    {
+      "body_lines": 5,
+      "file": "wave.py",
+      "name": "getCitiesLeft"
+    },
+    {
+      "body_lines": 5,
+      "file": "wave.py",
+      "name": "getAmmoCounts"
+    },
+    {
+      "body_lines": 8,
+      "file": "wave.py",
+      "name": "getScore"
+    },
+    {
+      "body_lines": 1,
+      "file": "wave.py",
+      "name": "getSoundsEnabled"
+    },
+    {
+      "body_lines": 1,
+      "file": "wave.py",
+      "name": "getSoundsAvailable"
+    },
+    {
+      "body_lines": 2,
+      "file": "wave.py",
+      "name": "setSoundsEnabled"
+    },
+    {
+      "body_lines": 15,
+      "file": "wave.py",
+      "name": "__init__"
+    },
+    {
+      "body_lines": 12,
+      "file": "wave.py",
+      "name": "update"
+    },
+    {
+      "body_lines": 18,
+      "file": "wave.py",
+      "name": "draw"
+    },
+    {
+      "body_lines": 1,
+      "file": "wave.py",
+      "name": "startSounds"
+    },
+    {
+      "body_lines": 1,
+      "file": "wave.py",
+      "name": "stopSounds"
+    },
+    {
+      "body_lines": 5,
+      "file": "wave.py",
+      "name": "finishSounds"
+    },
+    {
+      "body_lines": 16,
+      "file": "wave.py",
+      "name": "_check_wave_data"
+    },
+    {
+      "body_lines": 7,
+      "file": "wave.py",
+      "name": "_is_finite_number"
+    },
+    {
+      "body_lines": 20,
+      "file": "wave.py",
+      "name": "_check_missile_data"
+    },
+    {
+      "body_lines": 11,
+      "file": "wave.py",
+      "name": "_check_feature_data"
+    },
+    {
+      "body_lines": 16,
+      "file": "wave.py",
+      "name": "_make_defenses"
+    },
+    {
+      "body_lines": 14,
+      "file": "wave.py",
+      "name": "_make_bombs"
+    },
+    {
+      "body_lines": 21,
+      "file": "wave.py",
+      "name": "_make_bonus_state"
+    },
+    {
+      "body_lines": 19,
+      "file": "wave.py",
+      "name": "_move_target"
+    },
+    {
+      "body_lines": 16,
+      "file": "wave.py",
+      "name": "_read_directions"
+    },
+    {
+      "body_lines": 8,
+      "file": "wave.py",
+      "name": "_keep_target_inside"
+    },
+    {
+      "body_lines": 6,
+      "file": "wave.py",
+      "name": "_read_launch_keys"
+    },
+    {
+      "body_lines": 16,
+      "file": "wave.py",
+      "name": "_launch_from_silo"
+    },
+    {
+      "body_lines": 7,
+      "file": "wave.py",
+      "name": "_remove_finished_rockets"
+    },
+    {
+      "body_lines": 12,
+      "file": "wave.py",
+      "name": "_advance_world"
+    },
+    {
+      "body_lines": 9,
+      "file": "wave.py",
+      "name": "_step_world"
+    },
+    {
+      "body_lines": 6,
+      "file": "wave.py",
+      "name": "_move_rockets"
+    },
+    {
+      "body_lines": 10,
+      "file": "wave.py",
+      "name": "_release_bombs"
+    },
+    {
+      "body_lines": 10,
+      "file": "wave.py",
+      "name": "_move_bombs"
+    },
+    {
+      "body_lines": 9,
+      "file": "wave.py",
+      "name": "_resolve_interceptions"
+    },
+    {
+      "body_lines": 6,
+      "file": "wave.py",
+      "name": "_is_inside_explosion"
+    },
+    {
+      "body_lines": 17,
+      "file": "wave.py",
+      "name": "_resolve_impacts"
+    },
+    {
+      "body_lines": 11,
+      "file": "wave.py",
+      "name": "_check_finished"
+    },
+    {
+      "body_lines": 10,
+      "file": "wave.py",
+      "name": "_finish_loss"
+    },
+    {
+      "body_lines": 20,
+      "file": "wave.py",
+      "name": "_read_bonus_keys"
+    },
+    {
+      "body_lines": 13,
+      "file": "wave.py",
+      "name": "_save_bookmark"
+    },
+    {
+      "body_lines": 14,
+      "file": "wave.py",
+      "name": "_recall_bookmark"
+    },
+    {
+      "body_lines": 14,
+      "file": "wave.py",
+      "name": "_update_bubble_charge"
+    },
+    {
+      "body_lines": 13,
+      "file": "wave.py",
+      "name": "_get_bomb_speed"
+    },
+    {
+      "body_lines": 12,
+      "file": "wave.py",
+      "name": "_record_interception"
+    },
+    {
+      "body_lines": 17,
+      "file": "wave.py",
+      "name": "_recycle_ammunition"
+    },
+    {
+      "body_lines": 2,
+      "file": "wave.py",
+      "name": "_show_notice"
+    },
+    {
+      "body_lines": 4,
+      "file": "wave.py",
+      "name": "_update_notice"
+    },
+    {
+      "body_lines": 18,
+      "file": "wave.py",
+      "name": "_make_hud"
+    },
+    {
+      "body_lines": 4,
+      "file": "wave.py",
+      "name": "_make_label"
+    },
+    {
+      "body_lines": 16,
+      "file": "wave.py",
+      "name": "_make_metric_labels"
+    },
+    {
+      "body_lines": 20,
+      "file": "wave.py",
+      "name": "_make_tool_cards"
+    },
+    {
+      "body_lines": 8,
+      "file": "wave.py",
+      "name": "_make_tool_card"
+    },
+    {
+      "body_lines": 9,
+      "file": "wave.py",
+      "name": "_make_notice_label"
+    },
+    {
+      "body_lines": 10,
+      "file": "wave.py",
+      "name": "_make_bubble_meter"
+    },
+    {
+      "body_lines": 16,
+      "file": "wave.py",
+      "name": "_make_slot_labels"
+    },
+    {
+      "body_lines": 5,
+      "file": "wave.py",
+      "name": "_make_bookmark_labels"
+    },
+    {
+      "body_lines": 10,
+      "file": "wave.py",
+      "name": "_update_hud"
+    },
+    {
+      "body_lines": 6,
+      "file": "wave.py",
+      "name": "_update_audio_label"
+    },
+    {
+      "body_lines": 17,
+      "file": "wave.py",
+      "name": "_update_bonus_hud"
+    },
+    {
+      "body_lines": 10,
+      "file": "wave.py",
+      "name": "_update_bubble_meter"
+    },
+    {
+      "body_lines": 5,
+      "file": "wave.py",
+      "name": "_update_recycling_meter"
+    },
+    {
+      "body_lines": 18,
+      "file": "wave.py",
+      "name": "_update_weather_reports"
+    },
+    {
+      "body_lines": 11,
+      "file": "wave.py",
+      "name": "_draw_bonus_guides"
+    },
+    {
+      "body_lines": 13,
+      "file": "wave.py",
+      "name": "_draw_forecasts"
+    },
+    {
+      "body_lines": 14,
+      "file": "wave.py",
+      "name": "_draw_bookmarks"
+    },
+    {
+      "body_lines": 11,
+      "file": "wave.py",
+      "name": "_draw_bubble"
+    },
+    {
+      "body_lines": 14,
+      "file": "wave.py",
+      "name": "_draw_constellations"
+    },
+    {
+      "body_lines": 6,
+      "file": "wave.py",
+      "name": "_draw_aim"
+    },
+    {
+      "body_lines": 16,
+      "file": "wave.py",
+      "name": "_draw_hud"
+    },
+    {
+      "body_lines": 5,
+      "file": "wave.py",
+      "name": "_draw_hud_surfaces"
+    },
+    {
+      "body_lines": 6,
+      "file": "wave.py",
+      "name": "_draw_tool_labels"
+    },
+    {
+      "body_lines": 2,
+      "file": "models.py",
+      "name": "getAmmo"
+    },
+    {
+      "body_lines": 5,
+      "file": "models.py",
+      "name": "setAmmo"
+    },
+    {
+      "body_lines": 5,
+      "file": "models.py",
+      "name": "__init__"
+    },
+    {
+      "body_lines": 2,
+      "file": "models.py",
+      "name": "draw"
+    },
+    {
+      "body_lines": 13,
+      "file": "models.py",
+      "name": "_make_ammo_display"
+    },
+    {
+      "body_lines": 15,
+      "file": "models.py",
+      "name": "_draw_ammo_display"
+    },
+    {
+      "body_lines": 1,
+      "file": "models.py",
+      "name": "getAlive"
+    },
+    {
+      "body_lines": 5,
+      "file": "models.py",
+      "name": "__init__"
+    },
+    {
+      "body_lines": 2,
+      "file": "models.py",
+      "name": "destroy"
+    },
+    {
+      "body_lines": 2,
+      "file": "models.py",
+      "name": "draw"
+    },
+    {
+      "body_lines": 1,
+      "file": "models.py",
+      "name": "getSpeed"
+    },
+    {
+      "body_lines": 4,
+      "file": "models.py",
+      "name": "setSpeed"
+    },
+    {
+      "body_lines": 3,
+      "file": "models.py",
+      "name": "__init__"
+    },
+    {
+      "body_lines": 1,
+      "file": "models.py",
+      "name": "getStartTime"
+    },
+    {
+      "body_lines": 1,
+      "file": "models.py",
+      "name": "getTargetSlot"
+    },
+    {
+      "body_lines": 1,
+      "file": "models.py",
+      "name": "getArrived"
+    },
+    {
+      "body_lines": 3,
+      "file": "models.py",
+      "name": "getRemainingTime"
+    },
+    {
+      "body_lines": 16,
+      "file": "models.py",
+      "name": "getFuturePosition"
+    },
+    {
+      "body_lines": 13,
+      "file": "models.py",
+      "name": "__init__"
+    },
+    {
+      "body_lines": 10,
+      "file": "models.py",
+      "name": "update"
+    },
+    {
+      "body_lines": 2,
+      "file": "models.py",
+      "name": "draw"
+    },
+    {
+      "body_lines": 9,
+      "file": "models.py",
+      "name": "_distance_to_destination"
+    },
+    {
+      "body_lines": 1,
+      "file": "models.py",
+      "name": "getExploding"
+    },
+    {
+      "body_lines": 5,
+      "file": "models.py",
+      "name": "getFinished"
+    },
+    {
+      "body_lines": 12,
+      "file": "models.py",
+      "name": "__init__"
+    },
+    {
+      "body_lines": 4,
+      "file": "models.py",
+      "name": "update"
+    },
+    {
+      "body_lines": 3,
+      "file": "models.py",
+      "name": "draw"
+    },
+    {
+      "body_lines": 17,
+      "file": "models.py",
+      "name": "_move_toward_destination"
+    },
+    {
+      "body_lines": 6,
+      "file": "models.py",
+      "name": "_start_explosion"
+    },
+    {
+      "body_lines": 8,
+      "file": "models.py",
+      "name": "_grow_explosion"
+    },
+    {
+      "body_lines": 9,
+      "file": "models.py",
+      "name": "_distance_to_destination"
+    },
+    {
+      "body_lines": 1,
+      "file": "models.py",
+      "name": "getEnabled"
+    },
+    {
+      "body_lines": 1,
+      "file": "models.py",
+      "name": "getAvailable"
+    },
+    {
+      "body_lines": 4,
+      "file": "models.py",
+      "name": "setEnabled"
+    },
+    {
+      "body_lines": 10,
+      "file": "models.py",
+      "name": "__init__"
+    },
+    {
+      "body_lines": 12,
+      "file": "models.py",
+      "name": "play"
+    },
+    {
+      "body_lines": 7,
+      "file": "models.py",
+      "name": "stop"
+    },
+    {
+      "body_lines": 11,
+      "file": "models.py",
+      "name": "_load_cue"
+    },
+    {
+      "body_lines": 8,
+      "file": "models.py",
+      "name": "_disable_cue"
+    },
+    {
+      "body_lines": 2,
+      "file": "models.py",
+      "name": "_report_audio_problem"
+    }
+  ],
+  "issues": []
+}

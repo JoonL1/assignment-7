@@ -1,0 +1,6847 @@
+{
+  "screens_checked": 32,
+  "help_combinations_checked": 16,
+  "cases": [
+    {
+      "name": "welcome",
+      "labels": [
+        {
+          "text": "night post",
+          "bounds": [
+            72.0,
+            799.0,
+            161.0,
+            823.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "missile shield / after hours",
+          "bounds": [
+            830.0,
+            802.5,
+            992.0,
+            819.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "a quieter kind of night shift",
+          "bounds": [
+            751.0,
+            409.5,
+            916.0,
+            426.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "civil defense / night shift",
+          "bounds": [
+            74.0,
+            737.0,
+            238.0,
+            755.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "keep the city lights on.",
+          "bounds": [
+            74.0,
+            490.5,
+            330.0,
+            521.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "one sky. six cities. every interception matters.",
+          "bounds": [
+            74.0,
+            456.0,
+            415.0,
+            476.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "s",
+          "bounds": [
+            100.5,
+            339.5,
+            107.5,
+            356.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "selected wave",
+          "bounds": [
+            134.0,
+            334.5,
+            279.0,
+            361.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "start the wave chosen for this session.",
+          "bounds": [
+            96.0,
+            297.0,
+            387.0,
+            317.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "selected / easy.json",
+          "bounds": [
+            96.0,
+            266.0,
+            230.0,
+            284.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "press s to start",
+          "bounds": [
+            96.0,
+            223.0,
+            212.0,
+            243.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "c",
+          "bounds": [
+            622.5,
+            339.5,
+            629.5,
+            356.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            656.0,
+            334.5,
+            761.0,
+            361.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "forecasts / saved aim / a slow field",
+          "bounds": [
+            618.0,
+            297.0,
+            883.0,
+            317.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "plus ammo rewards for interceptions.",
+          "bounds": [
+            618.0,
+            266.0,
+            868.0,
+            284.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "press c to enter night post",
+          "bounds": [
+            618.0,
+            223.0,
+            817.0,
+            243.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "arrows",
+          "bounds": [
+            278.0,
+            83.5,
+            320.0,
+            100.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "aim",
+          "bounds": [
+            340.0,
+            82.0,
+            368.0,
+            102.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1 / 2 / 3",
+          "bounds": [
+            484.0,
+            83.5,
+            530.0,
+            100.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "fire",
+          "bounds": [
+            558.5,
+            82.0,
+            582.5,
+            102.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "p",
+          "bounds": [
+            716.0,
+            83.5,
+            724.0,
+            100.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "pause + help",
+          "bounds": [
+            746.0,
+            82.0,
+            842.0,
+            102.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sound on   /   v to mute",
+          "bounds": [
+            506.5,
+            32.5,
+            645.5,
+            49.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "missile\nshield.",
+          "bounds": [
+            68.0,
+            526.0,
+            345.0,
+            728.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "choose a wave. make every shot count.",
+          "bounds": [
+            419.5,
+            125.0,
+            732.5,
+            147.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "welcome_muted",
+      "labels": [
+        {
+          "text": "night post",
+          "bounds": [
+            72.0,
+            799.0,
+            161.0,
+            823.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "missile shield / after hours",
+          "bounds": [
+            830.0,
+            802.5,
+            992.0,
+            819.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "a quieter kind of night shift",
+          "bounds": [
+            751.0,
+            409.5,
+            916.0,
+            426.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "civil defense / night shift",
+          "bounds": [
+            74.0,
+            737.0,
+            238.0,
+            755.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "keep the city lights on.",
+          "bounds": [
+            74.0,
+            490.5,
+            330.0,
+            521.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "one sky. six cities. every interception matters.",
+          "bounds": [
+            74.0,
+            456.0,
+            415.0,
+            476.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "s",
+          "bounds": [
+            100.5,
+            339.5,
+            107.5,
+            356.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "selected wave",
+          "bounds": [
+            134.0,
+            334.5,
+            279.0,
+            361.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "start the wave chosen for this session.",
+          "bounds": [
+            96.0,
+            297.0,
+            387.0,
+            317.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "selected / easy.json",
+          "bounds": [
+            96.0,
+            266.0,
+            230.0,
+            284.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "press s to start",
+          "bounds": [
+            96.0,
+            223.0,
+            212.0,
+            243.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "c",
+          "bounds": [
+            622.5,
+            339.5,
+            629.5,
+            356.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            656.0,
+            334.5,
+            761.0,
+            361.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "forecasts / saved aim / a slow field",
+          "bounds": [
+            618.0,
+            297.0,
+            883.0,
+            317.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "plus ammo rewards for interceptions.",
+          "bounds": [
+            618.0,
+            266.0,
+            868.0,
+            284.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "press c to enter night post",
+          "bounds": [
+            618.0,
+            223.0,
+            817.0,
+            243.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "arrows",
+          "bounds": [
+            278.0,
+            83.5,
+            320.0,
+            100.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "aim",
+          "bounds": [
+            340.0,
+            82.0,
+            368.0,
+            102.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1 / 2 / 3",
+          "bounds": [
+            484.0,
+            83.5,
+            530.0,
+            100.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "fire",
+          "bounds": [
+            558.5,
+            82.0,
+            582.5,
+            102.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "p",
+          "bounds": [
+            716.0,
+            83.5,
+            724.0,
+            100.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "pause + help",
+          "bounds": [
+            746.0,
+            82.0,
+            842.0,
+            102.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sound off   /   v to unmute",
+          "bounds": [
+            497.5,
+            32.5,
+            654.5,
+            49.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "missile\nshield.",
+          "bounds": [
+            68.0,
+            526.0,
+            345.0,
+            728.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "choose a wave. make every shot count.",
+          "bounds": [
+            419.5,
+            125.0,
+            732.5,
+            147.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "loading",
+      "labels": [
+        {
+          "text": "getting ready",
+          "bounds": [
+            535.5,
+            474.5,
+            616.5,
+            491.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "easy.json",
+          "bounds": [
+            543.0,
+            365.5,
+            609.0,
+            384.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "preparing the sky...",
+          "bounds": [
+            426.5,
+            405.5,
+            725.5,
+            448.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "standard_active",
+      "labels": [
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "standard defense",
+          "bounds": [
+            56.0,
+            807.0,
+            225.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "9",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "standard_paused",
+      "labels": [
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "standard defense",
+          "bounds": [
+            56.0,
+            807.0,
+            225.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "9",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "standard defense / paused",
+          "bounds": [
+            493.0,
+            670.5,
+            659.0,
+            687.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "the sky can wait.",
+          "bounds": [
+            509.5,
+            564.0,
+            642.5,
+            586.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "arrow keys to aim   /   1, 2, 3 to fire",
+          "bounds": [
+            430.0,
+            501.5,
+            722.0,
+            524.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "fire from the left, center, or right silo.",
+          "bounds": [
+            422.5,
+            443.5,
+            729.5,
+            466.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "rockets burst at the point where you aimed.",
+          "bounds": [
+            394.5,
+            402.5,
+            757.5,
+            425.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "catch falling bombs inside the growing blast.",
+          "bounds": [
+            386.0,
+            361.5,
+            766.0,
+            384.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "keep at least one city standing.",
+          "bounds": [
+            445.5,
+            296.5,
+            706.5,
+            319.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "r",
+          "bounds": [
+            391.5,
+            194.5,
+            396.5,
+            211.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "resume",
+          "bounds": [
+            420.0,
+            193.0,
+            476.0,
+            213.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "m",
+          "bounds": [
+            616.0,
+            194.5,
+            628.0,
+            211.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "back to menu",
+          "bounds": [
+            648.0,
+            193.0,
+            750.0,
+            213.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sound on   /   v to mute",
+          "bounds": [
+            506.5,
+            156.5,
+            645.5,
+            173.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "take a breath.",
+          "bounds": [
+            439.0,
+            596.0,
+            713.0,
+            648.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        }
+      ]
+    },
+    {
+      "name": "custom_active",
+      "labels": [
+        {
+          "text": "1",
+          "bounds": [
+            396.5,
+            517.0,
+            403.5,
+            533.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "9",
+          "bounds": [
+            55.0,
+            16.0,
+            73.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "29",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "42",
+          "bounds": [
+            987.0,
+            803.5,
+            1017.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "forecast on",
+          "bounds": [
+            118.0,
+            735.5,
+            197.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "f toggle  /  1.5s ahead",
+          "bounds": [
+            103.5,
+            714.5,
+            211.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "bookmarks 1 / 3",
+          "bounds": [
+            378.5,
+            735.5,
+            494.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "b save  /  tab recall  /  x clear",
+          "bounds": [
+            364.0,
+            714.5,
+            509.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "slow field 3.7s",
+          "bounds": [
+            665.0,
+            735.5,
+            766.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "space",
+          "bounds": [
+            633.5,
+            714.5,
+            663.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "recycle 0 / 3",
+          "bounds": [
+            952.0,
+            735.5,
+            1037.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "+0 ammo returned",
+          "bounds": [
+            949.0,
+            714.5,
+            1040.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "recalled sky bookmark 1.",
+          "bounds": [
+            500.0,
+            669.5,
+            652.0,
+            686.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~8s",
+          "bounds": [
+            180.5,
+            145.0,
+            203.5,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~11s",
+          "bounds": [
+            433.0,
+            145.0,
+            463.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~10s",
+          "bounds": [
+            945.0,
+            145.0,
+            975.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "custom_muted",
+      "labels": [
+        {
+          "text": "1",
+          "bounds": [
+            396.5,
+            517.0,
+            403.5,
+            533.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "9",
+          "bounds": [
+            55.0,
+            16.0,
+            73.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound off",
+          "bounds": [
+            427.0,
+            813.5,
+            485.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "29",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "42",
+          "bounds": [
+            987.0,
+            803.5,
+            1017.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "forecast on",
+          "bounds": [
+            118.0,
+            735.5,
+            197.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "f toggle  /  1.5s ahead",
+          "bounds": [
+            103.5,
+            714.5,
+            211.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "bookmarks 1 / 3",
+          "bounds": [
+            378.5,
+            735.5,
+            494.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "b save  /  tab recall  /  x clear",
+          "bounds": [
+            364.0,
+            714.5,
+            509.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "slow field 3.7s",
+          "bounds": [
+            665.0,
+            735.5,
+            766.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "space",
+          "bounds": [
+            633.5,
+            714.5,
+            663.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "recycle 0 / 3",
+          "bounds": [
+            952.0,
+            735.5,
+            1037.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "+0 ammo returned",
+          "bounds": [
+            949.0,
+            714.5,
+            1040.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "recalled sky bookmark 1.",
+          "bounds": [
+            500.0,
+            669.5,
+            652.0,
+            686.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~8s",
+          "bounds": [
+            180.5,
+            145.0,
+            203.5,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~11s",
+          "bounds": [
+            433.0,
+            145.0,
+            463.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~10s",
+          "bounds": [
+            945.0,
+            145.0,
+            975.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "custom_notice_clear",
+      "labels": [
+        {
+          "text": "9",
+          "bounds": [
+            55.0,
+            16.0,
+            73.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "29",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "42",
+          "bounds": [
+            987.0,
+            803.5,
+            1017.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "forecast on",
+          "bounds": [
+            118.0,
+            735.5,
+            197.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "f toggle  /  1.5s ahead",
+          "bounds": [
+            103.5,
+            714.5,
+            211.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "bookmarks 0 / 3",
+          "bounds": [
+            378.5,
+            735.5,
+            494.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "b save  /  tab recall  /  x clear",
+          "bounds": [
+            364.0,
+            714.5,
+            509.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "slow field 3.7s",
+          "bounds": [
+            665.0,
+            735.5,
+            766.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "space",
+          "bounds": [
+            633.5,
+            714.5,
+            663.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "recycle 0 / 3",
+          "bounds": [
+            952.0,
+            735.5,
+            1037.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "+0 ammo returned",
+          "bounds": [
+            949.0,
+            714.5,
+            1040.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sky bookmarks cleared.",
+          "bounds": [
+            503.5,
+            669.5,
+            648.5,
+            686.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~8s",
+          "bounds": [
+            180.5,
+            145.0,
+            203.5,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~11s",
+          "bounds": [
+            433.0,
+            145.0,
+            463.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~10s",
+          "bounds": [
+            945.0,
+            145.0,
+            975.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "custom_notice_empty_bookmarks",
+      "labels": [
+        {
+          "text": "9",
+          "bounds": [
+            55.0,
+            16.0,
+            73.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "29",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "42",
+          "bounds": [
+            987.0,
+            803.5,
+            1017.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "forecast on",
+          "bounds": [
+            118.0,
+            735.5,
+            197.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "f toggle  /  1.5s ahead",
+          "bounds": [
+            103.5,
+            714.5,
+            211.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "bookmarks 0 / 3",
+          "bounds": [
+            378.5,
+            735.5,
+            494.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "b save  /  tab recall  /  x clear",
+          "bounds": [
+            364.0,
+            714.5,
+            509.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "slow field 3.7s",
+          "bounds": [
+            665.0,
+            735.5,
+            766.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "space",
+          "bounds": [
+            633.5,
+            714.5,
+            663.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "recycle 0 / 3",
+          "bounds": [
+            952.0,
+            735.5,
+            1037.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "+0 ammo returned",
+          "bounds": [
+            949.0,
+            714.5,
+            1040.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "aim somewhere useful, then press b to save it.",
+          "bounds": [
+            434.5,
+            669.5,
+            717.5,
+            686.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~8s",
+          "bounds": [
+            180.5,
+            145.0,
+            203.5,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~11s",
+          "bounds": [
+            433.0,
+            145.0,
+            463.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~10s",
+          "bounds": [
+            945.0,
+            145.0,
+            975.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "custom_notice_empty_silo",
+      "labels": [
+        {
+          "text": "0",
+          "bounds": [
+            55.0,
+            16.0,
+            73.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "20",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "42",
+          "bounds": [
+            987.0,
+            803.5,
+            1017.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "forecast on",
+          "bounds": [
+            118.0,
+            735.5,
+            197.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "f toggle  /  1.5s ahead",
+          "bounds": [
+            103.5,
+            714.5,
+            211.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "bookmarks 0 / 3",
+          "bounds": [
+            378.5,
+            735.5,
+            494.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "b save  /  tab recall  /  x clear",
+          "bounds": [
+            364.0,
+            714.5,
+            509.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "slow field 3.7s",
+          "bounds": [
+            665.0,
+            735.5,
+            766.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "space",
+          "bounds": [
+            633.5,
+            714.5,
+            663.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "recycle 0 / 3",
+          "bounds": [
+            952.0,
+            735.5,
+            1037.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "+0 ammo returned",
+          "bounds": [
+            949.0,
+            714.5,
+            1040.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "silo 1 is empty. try another.",
+          "bounds": [
+            493.5,
+            669.5,
+            658.5,
+            686.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~8s",
+          "bounds": [
+            180.5,
+            145.0,
+            203.5,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~11s",
+          "bounds": [
+            433.0,
+            145.0,
+            463.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~10s",
+          "bounds": [
+            945.0,
+            145.0,
+            975.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "custom_paused",
+      "labels": [
+        {
+          "text": "0",
+          "bounds": [
+            55.0,
+            16.0,
+            73.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "20",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "42",
+          "bounds": [
+            987.0,
+            803.5,
+            1017.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "forecast on",
+          "bounds": [
+            118.0,
+            735.5,
+            197.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "f toggle  /  1.5s ahead",
+          "bounds": [
+            103.5,
+            714.5,
+            211.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "bookmarks 0 / 3",
+          "bounds": [
+            378.5,
+            735.5,
+            494.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "b save  /  tab recall  /  x clear",
+          "bounds": [
+            364.0,
+            714.5,
+            509.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "slow field 3.7s",
+          "bounds": [
+            665.0,
+            735.5,
+            766.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "space",
+          "bounds": [
+            633.5,
+            714.5,
+            663.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "recycle 0 / 3",
+          "bounds": [
+            952.0,
+            735.5,
+            1037.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "+0 ammo returned",
+          "bounds": [
+            949.0,
+            714.5,
+            1040.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "silo 1 is empty. try another.",
+          "bounds": [
+            493.5,
+            669.5,
+            658.5,
+            686.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~8s",
+          "bounds": [
+            180.5,
+            145.0,
+            203.5,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~11s",
+          "bounds": [
+            433.0,
+            145.0,
+            463.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~10s",
+          "bounds": [
+            945.0,
+            145.0,
+            975.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "night post / paused",
+          "bounds": [
+            515.5,
+            670.5,
+            636.5,
+            687.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "the sky can wait.",
+          "bounds": [
+            509.5,
+            564.0,
+            642.5,
+            586.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "arrow keys to aim   /   1, 2, 3 to fire",
+          "bounds": [
+            430.5,
+            501.5,
+            721.5,
+            524.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "f / preview bomb positions 1.5 seconds ahead",
+          "bounds": [
+            401.0,
+            455.0,
+            751.0,
+            475.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "b / save aim    tab / recall    x / clear",
+          "bounds": [
+            444.0,
+            413.0,
+            708.0,
+            433.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "space / hold to slow, release to recharge",
+          "bounds": [
+            423.5,
+            371.0,
+            728.5,
+            391.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "every 3 interceptions / 1 round returned",
+          "bounds": [
+            427.0,
+            329.0,
+            725.0,
+            349.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "keep at least one city standing.",
+          "bounds": [
+            472.5,
+            275.0,
+            679.5,
+            293.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "r",
+          "bounds": [
+            391.5,
+            194.5,
+            396.5,
+            211.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "resume",
+          "bounds": [
+            420.0,
+            193.0,
+            476.0,
+            213.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "m",
+          "bounds": [
+            616.0,
+            194.5,
+            628.0,
+            211.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "back to menu",
+          "bounds": [
+            648.0,
+            193.0,
+            750.0,
+            213.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sound on   /   v to mute",
+          "bounds": [
+            506.5,
+            156.5,
+            645.5,
+            173.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "take a breath.",
+          "bounds": [
+            439.0,
+            596.0,
+            713.0,
+            648.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        }
+      ]
+    },
+    {
+      "name": "features_0000",
+      "labels": [
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "standard defense",
+          "bounds": [
+            56.0,
+            807.0,
+            225.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "features_0001",
+      "labels": [
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "recycle 0 / 3",
+          "bounds": [
+            533.5,
+            735.5,
+            618.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "+0 ammo returned",
+          "bounds": [
+            530.5,
+            714.5,
+            621.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "features_0010",
+      "labels": [
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "slow field 2.0s",
+          "bounds": [
+            525.5,
+            735.5,
+            626.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "space",
+          "bounds": [
+            494.0,
+            714.5,
+            524.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "features_0011",
+      "labels": [
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "slow field 2.0s",
+          "bounds": [
+            246.5,
+            735.5,
+            347.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "space",
+          "bounds": [
+            215.0,
+            714.5,
+            245.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "recycle 0 / 3",
+          "bounds": [
+            812.5,
+            735.5,
+            897.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "+0 ammo returned",
+          "bounds": [
+            809.5,
+            714.5,
+            900.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "features_0100",
+      "labels": [
+        {
+          "text": "1",
+          "bounds": [
+            572.5,
+            449.0,
+            579.5,
+            465.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "bookmarks 1 / 3",
+          "bounds": [
+            518.0,
+            735.5,
+            634.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "b save  /  tab recall  /  x clear",
+          "bounds": [
+            503.5,
+            714.5,
+            648.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sky bookmark 1 saved. tab recalls saved positions.",
+          "bounds": [
+            420.0,
+            669.5,
+            732.0,
+            686.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "features_0101",
+      "labels": [
+        {
+          "text": "1",
+          "bounds": [
+            572.5,
+            449.0,
+            579.5,
+            465.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "bookmarks 1 / 3",
+          "bounds": [
+            239.0,
+            735.5,
+            355.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "b save  /  tab recall  /  x clear",
+          "bounds": [
+            224.5,
+            714.5,
+            369.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "recycle 0 / 3",
+          "bounds": [
+            812.5,
+            735.5,
+            897.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "+0 ammo returned",
+          "bounds": [
+            809.5,
+            714.5,
+            900.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sky bookmark 1 saved. tab recalls saved positions.",
+          "bounds": [
+            420.0,
+            669.5,
+            732.0,
+            686.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "features_0110",
+      "labels": [
+        {
+          "text": "1",
+          "bounds": [
+            572.5,
+            449.0,
+            579.5,
+            465.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "bookmarks 1 / 3",
+          "bounds": [
+            239.0,
+            735.5,
+            355.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "b save  /  tab recall  /  x clear",
+          "bounds": [
+            224.5,
+            714.5,
+            369.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "slow field 2.0s",
+          "bounds": [
+            804.5,
+            735.5,
+            905.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "space",
+          "bounds": [
+            773.0,
+            714.5,
+            803.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sky bookmark 1 saved. tab recalls saved positions.",
+          "bounds": [
+            420.0,
+            669.5,
+            732.0,
+            686.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "features_0111",
+      "labels": [
+        {
+          "text": "1",
+          "bounds": [
+            572.5,
+            449.0,
+            579.5,
+            465.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "bookmarks 1 / 3",
+          "bounds": [
+            146.0,
+            735.5,
+            262.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "b save  /  tab recall  /  x clear",
+          "bounds": [
+            131.5,
+            714.5,
+            276.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "slow field 2.0s",
+          "bounds": [
+            525.5,
+            735.5,
+            626.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "space",
+          "bounds": [
+            494.0,
+            714.5,
+            524.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "recycle 0 / 3",
+          "bounds": [
+            905.5,
+            735.5,
+            990.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "+0 ammo returned",
+          "bounds": [
+            902.5,
+            714.5,
+            993.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sky bookmark 1 saved. tab recalls saved positions.",
+          "bounds": [
+            420.0,
+            669.5,
+            732.0,
+            686.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "features_1000",
+      "labels": [
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "forecast on",
+          "bounds": [
+            536.5,
+            735.5,
+            615.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "f toggle  /  1.5s ahead",
+          "bounds": [
+            522.0,
+            714.5,
+            630.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~17s",
+          "bounds": [
+            177.0,
+            145.0,
+            207.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "features_1001",
+      "labels": [
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "forecast on",
+          "bounds": [
+            257.5,
+            735.5,
+            336.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "f toggle  /  1.5s ahead",
+          "bounds": [
+            243.0,
+            714.5,
+            351.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "recycle 0 / 3",
+          "bounds": [
+            812.5,
+            735.5,
+            897.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "+0 ammo returned",
+          "bounds": [
+            809.5,
+            714.5,
+            900.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~17s",
+          "bounds": [
+            177.0,
+            145.0,
+            207.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "features_1010",
+      "labels": [
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "forecast on",
+          "bounds": [
+            257.5,
+            735.5,
+            336.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "f toggle  /  1.5s ahead",
+          "bounds": [
+            243.0,
+            714.5,
+            351.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "slow field 2.0s",
+          "bounds": [
+            804.5,
+            735.5,
+            905.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "space",
+          "bounds": [
+            773.0,
+            714.5,
+            803.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~17s",
+          "bounds": [
+            177.0,
+            145.0,
+            207.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "features_1011",
+      "labels": [
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "forecast on",
+          "bounds": [
+            164.5,
+            735.5,
+            243.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "f toggle  /  1.5s ahead",
+          "bounds": [
+            150.0,
+            714.5,
+            258.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "slow field 2.0s",
+          "bounds": [
+            525.5,
+            735.5,
+            626.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "space",
+          "bounds": [
+            494.0,
+            714.5,
+            524.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "recycle 0 / 3",
+          "bounds": [
+            905.5,
+            735.5,
+            990.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "+0 ammo returned",
+          "bounds": [
+            902.5,
+            714.5,
+            993.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~17s",
+          "bounds": [
+            177.0,
+            145.0,
+            207.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "features_1100",
+      "labels": [
+        {
+          "text": "1",
+          "bounds": [
+            572.5,
+            449.0,
+            579.5,
+            465.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "forecast on",
+          "bounds": [
+            257.5,
+            735.5,
+            336.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "f toggle  /  1.5s ahead",
+          "bounds": [
+            243.0,
+            714.5,
+            351.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "bookmarks 1 / 3",
+          "bounds": [
+            797.0,
+            735.5,
+            913.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "b save  /  tab recall  /  x clear",
+          "bounds": [
+            782.5,
+            714.5,
+            927.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sky bookmark 1 saved. tab recalls saved positions.",
+          "bounds": [
+            420.0,
+            669.5,
+            732.0,
+            686.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~17s",
+          "bounds": [
+            177.0,
+            145.0,
+            207.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "features_1101",
+      "labels": [
+        {
+          "text": "1",
+          "bounds": [
+            572.5,
+            449.0,
+            579.5,
+            465.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "forecast on",
+          "bounds": [
+            164.5,
+            735.5,
+            243.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "f toggle  /  1.5s ahead",
+          "bounds": [
+            150.0,
+            714.5,
+            258.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "bookmarks 1 / 3",
+          "bounds": [
+            518.0,
+            735.5,
+            634.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "b save  /  tab recall  /  x clear",
+          "bounds": [
+            503.5,
+            714.5,
+            648.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "recycle 0 / 3",
+          "bounds": [
+            905.5,
+            735.5,
+            990.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "+0 ammo returned",
+          "bounds": [
+            902.5,
+            714.5,
+            993.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sky bookmark 1 saved. tab recalls saved positions.",
+          "bounds": [
+            420.0,
+            669.5,
+            732.0,
+            686.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~17s",
+          "bounds": [
+            177.0,
+            145.0,
+            207.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "features_1110",
+      "labels": [
+        {
+          "text": "1",
+          "bounds": [
+            572.5,
+            449.0,
+            579.5,
+            465.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "forecast on",
+          "bounds": [
+            164.5,
+            735.5,
+            243.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "f toggle  /  1.5s ahead",
+          "bounds": [
+            150.0,
+            714.5,
+            258.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "bookmarks 1 / 3",
+          "bounds": [
+            518.0,
+            735.5,
+            634.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "b save  /  tab recall  /  x clear",
+          "bounds": [
+            503.5,
+            714.5,
+            648.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "slow field 2.0s",
+          "bounds": [
+            897.5,
+            735.5,
+            998.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "space",
+          "bounds": [
+            866.0,
+            714.5,
+            896.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sky bookmark 1 saved. tab recalls saved positions.",
+          "bounds": [
+            420.0,
+            669.5,
+            732.0,
+            686.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~17s",
+          "bounds": [
+            177.0,
+            145.0,
+            207.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "features_1111",
+      "labels": [
+        {
+          "text": "1",
+          "bounds": [
+            572.5,
+            449.0,
+            579.5,
+            465.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "night post",
+          "bounds": [
+            56.0,
+            807.0,
+            154.0,
+            833.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "arrows aim   1 / 2 / 3 fire   p pause",
+          "bounds": [
+            56.0,
+            781.5,
+            240.0,
+            796.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "v  sound on",
+          "bounds": [
+            428.0,
+            813.5,
+            484.0,
+            826.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 / 6",
+          "bounds": [
+            632.0,
+            803.5,
+            684.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "30",
+          "bounds": [
+            815.0,
+            803.5,
+            845.0,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            994.5,
+            803.5,
+            1009.5,
+            834.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "cities",
+          "bounds": [
+            644.0,
+            782.5,
+            672.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "ammo",
+          "bounds": [
+            814.0,
+            782.5,
+            846.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "incoming",
+          "bounds": [
+            979.0,
+            782.5,
+            1025.0,
+            795.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "forecast on",
+          "bounds": [
+            118.0,
+            735.5,
+            197.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "f toggle  /  1.5s ahead",
+          "bounds": [
+            103.5,
+            714.5,
+            211.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "bookmarks 1 / 3",
+          "bounds": [
+            378.5,
+            735.5,
+            494.5,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "b save  /  tab recall  /  x clear",
+          "bounds": [
+            364.0,
+            714.5,
+            509.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "slow field 2.0s",
+          "bounds": [
+            665.0,
+            735.5,
+            766.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "space",
+          "bounds": [
+            633.5,
+            714.5,
+            663.5,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "recycle 0 / 3",
+          "bounds": [
+            952.0,
+            735.5,
+            1037.0,
+            754.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "+0 ammo returned",
+          "bounds": [
+            949.0,
+            714.5,
+            1040.0,
+            727.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "1",
+          "bounds": [
+            60.5,
+            135.5,
+            67.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "2",
+          "bounds": [
+            572.5,
+            135.5,
+            579.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "3",
+          "bounds": [
+            1084.5,
+            135.5,
+            1091.5,
+            150.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sky bookmark 1 saved. tab recalls saved positions.",
+          "bounds": [
+            420.0,
+            669.5,
+            732.0,
+            686.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "~17s",
+          "bounds": [
+            177.0,
+            145.0,
+            207.0,
+            161.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "win",
+      "labels": [
+        {
+          "text": "10",
+          "bounds": [
+            46.0,
+            16.0,
+            82.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            558.0,
+            16.0,
+            594.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "10",
+          "bounds": [
+            1070.0,
+            16.0,
+            1106.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "standard defense / complete",
+          "bounds": [
+            487.5,
+            642.5,
+            664.5,
+            659.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "city lights: on.",
+          "bounds": [
+            443.0,
+            570.0,
+            709.0,
+            620.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "total score",
+          "bounds": [
+            540.0,
+            529.0,
+            612.0,
+            547.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "6 cities saved   /   30 rounds left",
+          "bounds": [
+            440.0,
+            384.5,
+            712.0,
+            407.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "r",
+          "bounds": [
+            371.5,
+            292.5,
+            376.5,
+            309.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "play again",
+          "bounds": [
+            400.0,
+            291.0,
+            475.0,
+            311.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "m",
+          "bounds": [
+            616.0,
+            292.5,
+            628.0,
+            309.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "back to menu",
+          "bounds": [
+            648.0,
+            291.0,
+            750.0,
+            311.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sound on   /   v to mute",
+          "bounds": [
+            506.5,
+            217.5,
+            645.5,
+            234.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "750",
+          "bounds": [
+            505.5,
+            427.5,
+            646.5,
+            524.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        }
+      ]
+    },
+    {
+      "name": "loss",
+      "labels": [
+        {
+          "text": "0",
+          "bounds": [
+            55.0,
+            16.0,
+            73.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "0",
+          "bounds": [
+            567.0,
+            16.0,
+            585.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "0",
+          "bounds": [
+            1079.0,
+            16.0,
+            1097.0,
+            54.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "standard defense / complete",
+          "bounds": [
+            487.5,
+            642.5,
+            664.5,
+            659.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "lights out.",
+          "bounds": [
+            475.5,
+            561.0,
+            676.5,
+            613.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "the night shift ends here.",
+          "bounds": [
+            465.5,
+            445.0,
+            686.5,
+            469.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "there is another sky to save.",
+          "bounds": [
+            465.0,
+            401.0,
+            687.0,
+            423.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "r",
+          "bounds": [
+            371.5,
+            292.5,
+            376.5,
+            309.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "play again",
+          "bounds": [
+            400.0,
+            291.0,
+            475.0,
+            311.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "m",
+          "bounds": [
+            616.0,
+            292.5,
+            628.0,
+            309.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "back to menu",
+          "bounds": [
+            648.0,
+            291.0,
+            750.0,
+            311.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sound on   /   v to mute",
+          "bounds": [
+            506.5,
+            217.5,
+            645.5,
+            234.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "all six cities were lost.",
+          "bounds": [
+            444.0,
+            499.0,
+            708.0,
+            531.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "missing_file",
+      "labels": [
+        {
+          "text": "a small interruption",
+          "bounds": [
+            516.0,
+            668.5,
+            636.0,
+            685.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "could not open this sky.",
+          "bounds": [
+            379.0,
+            601.0,
+            773.0,
+            645.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "missing_ui_test.json",
+          "bounds": [
+            495.5,
+            519.0,
+            656.5,
+            541.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "filenotfounderror: missing file:",
+          "bounds": [
+            458.5,
+            457.0,
+            693.5,
+            479.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "data/missing_ui_test.json",
+          "bounds": [
+            474.0,
+            429.0,
+            678.0,
+            451.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "check the selected file inside the data folder.",
+          "bounds": [
+            409.0,
+            338.0,
+            743.0,
+            358.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "the terminal has the full error and path.",
+          "bounds": [
+            447.0,
+            310.0,
+            705.0,
+            328.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "r",
+          "bounds": [
+            399.5,
+            211.5,
+            404.5,
+            228.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "retry",
+          "bounds": [
+            428.0,
+            210.0,
+            463.0,
+            230.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "m",
+          "bounds": [
+            616.0,
+            211.5,
+            628.0,
+            228.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "back to menu",
+          "bounds": [
+            648.0,
+            210.0,
+            750.0,
+            230.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sound on   /   v to mute",
+          "bounds": [
+            506.5,
+            156.5,
+            645.5,
+            173.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "could not read the wave file.",
+          "bounds": [
+            446.0,
+            562.5,
+            706.0,
+            587.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "malformed_file",
+      "labels": [
+        {
+          "text": "a small interruption",
+          "bounds": [
+            516.0,
+            668.5,
+            636.0,
+            685.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "could not open this sky.",
+          "bounds": [
+            379.0,
+            601.0,
+            773.0,
+            645.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "malformed.json",
+          "bounds": [
+            513.0,
+            519.0,
+            639.0,
+            541.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "valueerror: could not read json:",
+          "bounds": [
+            455.0,
+            457.0,
+            697.0,
+            479.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "data/malformed.json",
+          "bounds": [
+            491.5,
+            429.0,
+            660.5,
+            451.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "check the selected file inside the data folder.",
+          "bounds": [
+            409.0,
+            338.0,
+            743.0,
+            358.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "the terminal has the full error and path.",
+          "bounds": [
+            447.0,
+            310.0,
+            705.0,
+            328.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "r",
+          "bounds": [
+            399.5,
+            211.5,
+            404.5,
+            228.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "retry",
+          "bounds": [
+            428.0,
+            210.0,
+            463.0,
+            230.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "m",
+          "bounds": [
+            616.0,
+            211.5,
+            628.0,
+            228.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "back to menu",
+          "bounds": [
+            648.0,
+            210.0,
+            750.0,
+            230.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sound on   /   v to mute",
+          "bounds": [
+            506.5,
+            156.5,
+            645.5,
+            173.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "could not read the wave file.",
+          "bounds": [
+            446.0,
+            562.5,
+            706.0,
+            587.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "name": "long_error",
+      "labels": [
+        {
+          "text": "a small interruption",
+          "bounds": [
+            516.0,
+            668.5,
+            636.0,
+            685.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "could not open this sky.",
+          "bounds": [
+            379.0,
+            601.0,
+            773.0,
+            645.0
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "nightpost.json",
+          "bounds": [
+            519.5,
+            519.0,
+            632.5,
+            541.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "runtimeerror: widewords widewords widewords",
+          "bounds": [
+            388.0,
+            457.0,
+            764.0,
+            479.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "widewords widewords widewords widewords",
+          "bounds": [
+            396.5,
+            429.0,
+            755.5,
+            451.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "widewords widewords widewords widewords...",
+          "bounds": [
+            389.0,
+            401.0,
+            763.0,
+            423.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "check the wave values and use one complete shield folder.",
+          "bounds": [
+            356.5,
+            338.0,
+            795.5,
+            358.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "the terminal has the full error and path.",
+          "bounds": [
+            447.0,
+            310.0,
+            705.0,
+            328.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "r",
+          "bounds": [
+            399.5,
+            211.5,
+            404.5,
+            228.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "retry",
+          "bounds": [
+            428.0,
+            210.0,
+            463.0,
+            230.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "m",
+          "bounds": [
+            616.0,
+            211.5,
+            628.0,
+            228.5
+          ],
+          "font": "Roboto-Bold.ttf"
+        },
+        {
+          "text": "back to menu",
+          "bounds": [
+            648.0,
+            210.0,
+            750.0,
+            230.0
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "sound on   /   v to mute",
+          "bounds": [
+            506.5,
+            156.5,
+            645.5,
+            173.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        },
+        {
+          "text": "could not create the wave.",
+          "bounds": [
+            454.0,
+            562.5,
+            698.0,
+            587.5
+          ],
+          "font": "Roboto-Regular.ttf"
+        }
+      ]
+    }
+  ],
+  "issues": []
+}

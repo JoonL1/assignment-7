@@ -1,0 +1,636 @@
+{
+  "source_archive": "shield (2).zip",
+  "source_archive_sha256": "92db8c51e3ef3e13df3611c7fcca9d6be06ec43a22e2d159fe24728411f2ad12",
+  "template_documentation_blocks": 15,
+  "template_comment_tokens": 91,
+  "added_method_blocks_unchanged": 151,
+  "allowed_changes": "only the two module-header placeholders use existing metadata",
+  "new_template_resources_match_previous_starter": {
+    "protected_files": {
+      "checked": 17,
+      "all_identical": true
+    },
+    "asset_files": {
+      "checked": 43,
+      "all_identical": true
+    }
+  },
+  "files": [
+    {
+      "file": "app.py",
+      "sha256": "14b514cbcc54d359fcc1210d9cd3cb8bede3dc9ef26c02b297dacd401af7ce94",
+      "template_documentation_blocks": 5,
+      "template_comment_tokens": 25,
+      "added_method_blocks_unchanged": 38,
+      "executable_signatures": {
+        "ast_sha256": "a4c2d6adceebf7140b3c08e1e87788113855257cec4965b1620d6684f74bb0e1",
+        "token_sha256": "330968aee7d13cfc942fd2ede0ed48b0539556c4261fd291a30f5fa9af15eec5"
+      },
+      "preserved_comments": [
+        {
+          "text": "# PRIMARY RULE: MissileShield can only access attributes in wave.py via getters/setters",
+          "scope": "<module>",
+          "original_line": 21,
+          "current_line": 20
+        },
+        {
+          "text": "# MissileShield is NOT allowed to access anything in wave.py or models.py.",
+          "scope": "<module>",
+          "original_line": 22,
+          "current_line": 21
+        },
+        {
+          "text": "# HIDDEN ATTRIBUTES",
+          "scope": "MissileShield",
+          "original_line": 57,
+          "current_line": 56
+        },
+        {
+          "text": "# Attribute _state: The current state of the game (taken from const.py)",
+          "scope": "MissileShield",
+          "original_line": 58,
+          "current_line": 57
+        },
+        {
+          "text": "# Invariant: _state is one of STATE_INACTIVE, STATE_LOADING, STATE_ACTIVE, ",
+          "scope": "MissileShield",
+          "original_line": 59,
+          "current_line": 58
+        },
+        {
+          "text": "#            STATE_PAUSED, STATE_CONTINUE, STATE_COMPLETE",
+          "scope": "MissileShield",
+          "original_line": 60,
+          "current_line": 59
+        },
+        {
+          "text": "#",
+          "scope": "MissileShield",
+          "original_line": 61,
+          "current_line": 60
+        },
+        {
+          "text": "# Attribute _wave: The subcontroller for a wave, managing the game",
+          "scope": "MissileShield",
+          "original_line": 62,
+          "current_line": 61
+        },
+        {
+          "text": "# Invariant: _wave is a Wave object or None if no wave is currently active",
+          "scope": "MissileShield",
+          "original_line": 63,
+          "current_line": 62
+        },
+        {
+          "text": "#",
+          "scope": "MissileShield",
+          "original_line": 64,
+          "current_line": 63
+        },
+        {
+          "text": "# Attribute _background: The background image",
+          "scope": "MissileShield",
+          "original_line": 65,
+          "current_line": 64
+        },
+        {
+          "text": "# Invariant: _background is a GImage",
+          "scope": "MissileShield",
+          "original_line": 66,
+          "current_line": 65
+        },
+        {
+          "text": "#",
+          "scope": "MissileShield",
+          "original_line": 67,
+          "current_line": 66
+        },
+        {
+          "text": "# Attribute _title: The title of the game",
+          "scope": "MissileShield",
+          "original_line": 68,
+          "current_line": 67
+        },
+        {
+          "text": "# Invariant: _title is a GLabel, or None if there is no title to display",
+          "scope": "MissileShield",
+          "original_line": 69,
+          "current_line": 68
+        },
+        {
+          "text": "#",
+          "scope": "MissileShield",
+          "original_line": 70,
+          "current_line": 69
+        },
+        {
+          "text": "# Attribute _text: A message to display to the player",
+          "scope": "MissileShield",
+          "original_line": 71,
+          "current_line": 70
+        },
+        {
+          "text": "# Invariant: _text is a GLabel, or None if there is no message to display",
+          "scope": "MissileShield",
+          "original_line": 72,
+          "current_line": 71
+        },
+        {
+          "text": "# LIST MORE ATTRIBUTES (AND THEIR INVARIANTS) HERE IF NECESSARY",
+          "scope": "MissileShield",
+          "original_line": 74,
+          "current_line": 73
+        },
+        {
+          "text": "# DO NOT MAKE A NEW INITIALIZER!",
+          "scope": "MissileShield",
+          "original_line": 76,
+          "current_line": 81
+        },
+        {
+          "text": "# THREE MAIN GAMEAPP METHODS",
+          "scope": "MissileShield",
+          "original_line": 78,
+          "current_line": 83
+        },
+        {
+          "text": "# IMPLEMENT ME",
+          "scope": "MissileShield.start",
+          "original_line": 93,
+          "current_line": 98
+        },
+        {
+          "text": "# IMPLEMENT ME",
+          "scope": "MissileShield.update",
+          "original_line": 143,
+          "current_line": 166
+        },
+        {
+          "text": "# IMPLEMENT ME",
+          "scope": "MissileShield.draw",
+          "original_line": 158,
+          "current_line": 194
+        },
+        {
+          "text": "# HELPER METHODS FOR THE STATES GO HERE",
+          "scope": "MissileShield",
+          "original_line": 160,
+          "current_line": 208
+        }
+      ],
+      "metadata_replacements": {
+        "# YOUR NAME(S) AND NETID(S) HERE": "authors: joon lee (jl4875) + richard li (rl998)",
+        "# DATE COMPLETED HERE": "date: december 6, 2026"
+      }
+    },
+    {
+      "file": "wave.py",
+      "sha256": "e544f448232b30afbbc2c698495160d3224b42df9161ea6914695e076c7b937a",
+      "template_documentation_blocks": 2,
+      "template_comment_tokens": 9,
+      "added_method_blocks_unchanged": 73,
+      "executable_signatures": {
+        "ast_sha256": "3eaf91c1e3404f2d055f95096f0fa3fac8fb6057551bed7d2ba6f4eb77a77bce",
+        "token_sha256": "f1c7ae7d89d96060f310e0276c4d07bf60bfc0c7eb4add46217b2ffe9dde850d"
+      },
+      "preserved_comments": [
+        {
+          "text": "# PRIMARY RULE: Wave can only access attributes in models.py using getters",
+          "scope": "<module>",
+          "original_line": 22,
+          "current_line": 22
+        },
+        {
+          "text": "# and setters. Wave is NOT allowed to access anything in app.py (Subcontrollers ",
+          "scope": "<module>",
+          "original_line": 23,
+          "current_line": 23
+        },
+        {
+          "text": "# are not permitted to access anything in their parent. To see why, take CS 3152)",
+          "scope": "<module>",
+          "original_line": 24,
+          "current_line": 24
+        },
+        {
+          "text": "# LIST ALL HIDDEN ATTRIBUTES HERE",
+          "scope": "Wave",
+          "original_line": 46,
+          "current_line": 45
+        },
+        {
+          "text": "# GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)",
+          "scope": "Wave",
+          "original_line": 48,
+          "current_line": 92
+        },
+        {
+          "text": "# INITIALIZER (standard form) TO LAYOUT THE MODELS",
+          "scope": "Wave",
+          "original_line": 50,
+          "current_line": 181
+        },
+        {
+          "text": "# UPDATE METHOD TO MOVE THE TARGETS, BOMBS, AND ROCKETS",
+          "scope": "Wave",
+          "original_line": 52,
+          "current_line": 208
+        },
+        {
+          "text": "# DRAW METHOD TO DRAW THE GAME OBJECTS",
+          "scope": "Wave",
+          "original_line": 54,
+          "current_line": 237
+        },
+        {
+          "text": "# ANY NECESSARY HELPERS (SHOULD BE HIDDEN)",
+          "scope": "Wave",
+          "original_line": 56,
+          "current_line": 287
+        }
+      ],
+      "metadata_replacements": {
+        "# YOUR NAME(S) AND NETID(S) HERE": "authors: joon lee (jl4875) + richard li (rl998)",
+        "# DATE COMPLETED HERE": "date: december 6, 2026"
+      }
+    },
+    {
+      "file": "models.py",
+      "sha256": "6662084d41833f3bca1b08c4260d85b5e6787c4c8f0993239a63b7e01904f585",
+      "template_documentation_blocks": 6,
+      "template_comment_tokens": 23,
+      "added_method_blocks_unchanged": 40,
+      "executable_signatures": {
+        "ast_sha256": "0ea73e6f0eb23420a4494d36f9cd15b2feb6ebcff4374215bba603089e0de90d",
+        "token_sha256": "25f99ea90099c29a853a19fb5464b72fdf1be41114f662496f32437898e56497"
+      },
+      "preserved_comments": [
+        {
+          "text": "# PRIMARY RULE: Models are not allowed to access anything in any module other ",
+          "scope": "<module>",
+          "original_line": 22,
+          "current_line": 22
+        },
+        {
+          "text": "# than consts.py. If you need extra information from a wave object, then it ",
+          "scope": "<module>",
+          "original_line": 23,
+          "current_line": 23
+        },
+        {
+          "text": "# should be a parameter in your method.",
+          "scope": "<module>",
+          "original_line": 24,
+          "current_line": 24
+        },
+        {
+          "text": "# LIST ALL HIDDEN ATTRIBUTES HERE",
+          "scope": "Silo",
+          "original_line": 44,
+          "current_line": 43
+        },
+        {
+          "text": "# GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)",
+          "scope": "Silo",
+          "original_line": 46,
+          "current_line": 52
+        },
+        {
+          "text": "# INITIALIZER TO SET THE ATTRIBUTES",
+          "scope": "Silo",
+          "original_line": 48,
+          "current_line": 74
+        },
+        {
+          "text": "# ADDITIONAL METHODS AS NEEDED",
+          "scope": "Silo",
+          "original_line": 50,
+          "current_line": 89
+        },
+        {
+          "text": "# LIST ALL HIDDEN ATTRIBUTES HERE",
+          "scope": "City",
+          "original_line": 69,
+          "current_line": 161
+        },
+        {
+          "text": "# GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)",
+          "scope": "City",
+          "original_line": 71,
+          "current_line": 165
+        },
+        {
+          "text": "# INITIALIZER TO SET THE ATTRIBUTES",
+          "scope": "City",
+          "original_line": 73,
+          "current_line": 173
+        },
+        {
+          "text": "# ADDITIONAL METHODS AS NEEDED",
+          "scope": "City",
+          "original_line": 75,
+          "current_line": 188
+        },
+        {
+          "text": "# LIST ALL HIDDEN ATTRIBUTES HERE",
+          "scope": "Target",
+          "original_line": 88,
+          "current_line": 217
+        },
+        {
+          "text": "# GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)",
+          "scope": "Target",
+          "original_line": 90,
+          "current_line": 221
+        },
+        {
+          "text": "# INITIALIZER TO SET THE ATTRIBUTES",
+          "scope": "Target",
+          "original_line": 92,
+          "current_line": 241
+        },
+        {
+          "text": "# ADDITIONAL METHODS AS NEEDED",
+          "scope": "Target",
+          "original_line": 94,
+          "current_line": 257
+        },
+        {
+          "text": "# LIST ALL HIDDEN ATTRIBUTES HERE",
+          "scope": "Bomb",
+          "original_line": 107,
+          "current_line": 269
+        },
+        {
+          "text": "# GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)",
+          "scope": "Bomb",
+          "original_line": 109,
+          "current_line": 287
+        },
+        {
+          "text": "# INITIALIZER TO SET THE ATTRIBUTES",
+          "scope": "Bomb",
+          "original_line": 111,
+          "current_line": 350
+        },
+        {
+          "text": "# ADDITIONAL METHODS AS NEEDED",
+          "scope": "Bomb",
+          "original_line": 113,
+          "current_line": 384
+        },
+        {
+          "text": "# LIST ALL HIDDEN ATTRIBUTES HERE",
+          "scope": "Rocket",
+          "original_line": 129,
+          "current_line": 447
+        },
+        {
+          "text": "# GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)",
+          "scope": "Rocket",
+          "original_line": 131,
+          "current_line": 463
+        },
+        {
+          "text": "# INITIALIZER TO SET THE ATTRIBUTES",
+          "scope": "Rocket",
+          "original_line": 133,
+          "current_line": 484
+        },
+        {
+          "text": "# ADDITIONAL METHODS AS NEEDED",
+          "scope": "Rocket",
+          "original_line": 135,
+          "current_line": 512
+        }
+      ],
+      "metadata_replacements": {
+        "# YOUR NAME(S) AND NETID(S) HERE": "authors: joon lee (jl4875) + richard li (rl998)",
+        "# DATE COMPLETED HERE": "date: december 6, 2026."
+      }
+    },
+    {
+      "file": "consts.py",
+      "sha256": "3ec29a4c2b90c55eb050af0fd0de22f088918400a181f8a7d78ee13121a01dea",
+      "template_documentation_blocks": 2,
+      "template_comment_tokens": 34,
+      "added_method_blocks_unchanged": 0,
+      "executable_signatures": {
+        "ast_sha256": "e19015e320281360fd052a94a9004afe82a24a92abc9b530ac21903376733431",
+        "token_sha256": "de854655f6691b84eddd01f08ec46ad33f4a3411db55c5f362399d06fe6f0d0e"
+      },
+      "preserved_comments": [
+        {
+          "text": "### WINDOW CONSTANTS (all coordinates are in pixels) ###",
+          "scope": "<module>",
+          "original_line": 15,
+          "current_line": 15
+        },
+        {
+          "text": "# the width of the game display",
+          "scope": "<module>",
+          "original_line": 17,
+          "current_line": 17
+        },
+        {
+          "text": "# the height of the game display",
+          "scope": "<module>",
+          "original_line": 19,
+          "current_line": 19
+        },
+        {
+          "text": "### GAME CONSTANTS ###",
+          "scope": "<module>",
+          "original_line": 23,
+          "current_line": 23
+        },
+        {
+          "text": "# state before the game has started",
+          "scope": "<module>",
+          "original_line": 25,
+          "current_line": 25
+        },
+        {
+          "text": "# state when we are loading in a new level",
+          "scope": "<module>",
+          "original_line": 27,
+          "current_line": 27
+        },
+        {
+          "text": "# state when the level is activated and in play",
+          "scope": "<module>",
+          "original_line": 29,
+          "current_line": 29
+        },
+        {
+          "text": "# state when we pause the game",
+          "scope": "<module>",
+          "original_line": 31,
+          "current_line": 31
+        },
+        {
+          "text": "# state when we continue a paused game",
+          "scope": "<module>",
+          "original_line": 33,
+          "current_line": 33
+        },
+        {
+          "text": "#: state when the game is complete (won or lost)",
+          "scope": "<module>",
+          "original_line": 35,
+          "current_line": 35
+        },
+        {
+          "text": "### GAME ASSETS ###",
+          "scope": "<module>",
+          "original_line": 39,
+          "current_line": 39
+        },
+        {
+          "text": "# The background image",
+          "scope": "<module>",
+          "original_line": 41,
+          "current_line": 41
+        },
+        {
+          "text": "# The constants for the aim target",
+          "scope": "<module>",
+          "original_line": 44,
+          "current_line": 44
+        },
+        {
+          "text": "# The constants for a silo",
+          "scope": "<module>",
+          "original_line": 51,
+          "current_line": 51
+        },
+        {
+          "text": "# The constants for a city",
+          "scope": "<module>",
+          "original_line": 56,
+          "current_line": 56
+        },
+        {
+          "text": "# The distance from the screen bottom",
+          "scope": "<module>",
+          "original_line": 60,
+          "current_line": 60
+        },
+        {
+          "text": "### ROCKET CONSTANTS ###",
+          "scope": "<module>",
+          "original_line": 63,
+          "current_line": 63
+        },
+        {
+          "text": "# The colors",
+          "scope": "<module>",
+          "original_line": 65,
+          "current_line": 65
+        },
+        {
+          "text": "# The explosion parameters",
+          "scope": "<module>",
+          "original_line": 69,
+          "current_line": 69
+        },
+        {
+          "text": "# The ammo count of each silo",
+          "scope": "<module>",
+          "original_line": 75,
+          "current_line": 75
+        },
+        {
+          "text": "### BOMB CONSTANTS ###",
+          "scope": "<module>",
+          "original_line": 79,
+          "current_line": 79
+        },
+        {
+          "text": "# The colors",
+          "scope": "<module>",
+          "original_line": 81,
+          "current_line": 81
+        },
+        {
+          "text": "### WAVE CONSTANTS ###",
+          "scope": "<module>",
+          "original_line": 88,
+          "current_line": 88
+        },
+        {
+          "text": "# The default wave file",
+          "scope": "<module>",
+          "original_line": 90,
+          "current_line": 90
+        },
+        {
+          "text": "# The score values ",
+          "scope": "<module>",
+          "original_line": 93,
+          "current_line": 93
+        },
+        {
+          "text": "### FONT CHOICES ###",
+          "scope": "<module>",
+          "original_line": 98,
+          "current_line": 98
+        },
+        {
+          "text": "# The font choice for titles",
+          "scope": "<module>",
+          "original_line": 100,
+          "current_line": 100
+        },
+        {
+          "text": "# The font choice for messages",
+          "scope": "<module>",
+          "original_line": 102,
+          "current_line": 102
+        },
+        {
+          "text": "# A large message or label",
+          "scope": "<module>",
+          "original_line": 104,
+          "current_line": 104
+        },
+        {
+          "text": "# A medium message or label",
+          "scope": "<module>",
+          "original_line": 106,
+          "current_line": 106
+        },
+        {
+          "text": "# A small message or label",
+          "scope": "<module>",
+          "original_line": 108,
+          "current_line": 108
+        },
+        {
+          "text": "### USE COMMAND LINE ARGUMENTS TO CHANGE DEFAULT LEVEL FILE",
+          "scope": "<module>",
+          "original_line": 112,
+          "current_line": 112
+        },
+        {
+          "text": "# Use original value",
+          "scope": "<module>",
+          "original_line": 130,
+          "current_line": 130
+        },
+        {
+          "text": "### ADD MORE CONSTANTS (PROPERLY COMMENTED) AS NECESSARY ###",
+          "scope": "<module>",
+          "original_line": 132,
+          "current_line": 132
+        }
+      ],
+      "metadata_replacements": {
+        "# YOUR NAME(S) AND NETID(S) HERE": "authors: joon lee (jl4875) + richard li (rl998)",
+        "# DATE COMPLETED HERE": "date: december 6, 2026"
+      }
+    }
+  ],
+  "issues": [],
+  "passed": true
+}

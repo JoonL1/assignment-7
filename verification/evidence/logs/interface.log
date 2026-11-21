@@ -1,0 +1,35 @@
+checked welcome: 25 drawn labels
+checked welcome_muted: 25 drawn labels
+checked loading: 3 drawn labels
+checked standard_active: 15 drawn labels
+checked standard_paused: 28 drawn labels
+checked custom_active: 28 drawn labels
+checked custom_muted: 28 drawn labels
+checked custom_notice_clear: 27 drawn labels
+checked custom_notice_empty_bookmarks: 27 drawn labels
+checked custom_notice_empty_silo: 27 drawn labels
+checked custom_paused: 41 drawn labels
+checked features_0000: 15 drawn labels
+checked features_0001: 17 drawn labels
+checked features_0010: 17 drawn labels
+checked features_0011: 19 drawn labels
+checked features_0100: 19 drawn labels
+checked features_0101: 21 drawn labels
+checked features_0110: 21 drawn labels
+checked features_0111: 23 drawn labels
+checked features_1000: 18 drawn labels
+checked features_1001: 20 drawn labels
+checked features_1010: 20 drawn labels
+checked features_1011: 22 drawn labels
+checked features_1100: 22 drawn labels
+checked features_1101: 24 drawn labels
+checked features_1110: 24 drawn labels
+checked features_1111: 26 drawn labels
+checked win: 13 drawn labels
+checked loss: 13 drawn labels
+checked missing_file: 13 drawn labels
+checked malformed_file: 13 drawn labels
+checked long_error: 14 drawn labels
+
+checked 32 screen states, including all 16 feature sets
+PASS: lowercase visible text, actual glyph bounds, no major text overlap

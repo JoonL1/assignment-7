@@ -1,0 +1,71 @@
+{
+  "mode": "scripted aim with graphics stubs",
+  "waves": [
+    {
+      "file": "easy.json",
+      "won": true,
+      "cities_left": 6,
+      "score": 705,
+      "elapsed_seconds": 12.77,
+      "ammo_refunds": 0
+    },
+    {
+      "file": "medium.json",
+      "won": true,
+      "cities_left": 6,
+      "score": 645,
+      "elapsed_seconds": 31.67,
+      "ammo_refunds": 0
+    },
+    {
+      "file": "hard.json",
+      "won": true,
+      "cities_left": 6,
+      "score": 600,
+      "elapsed_seconds": 37.81,
+      "ammo_refunds": 0
+    },
+    {
+      "file": "immediate.json",
+      "won": true,
+      "cities_left": 6,
+      "score": 705,
+      "elapsed_seconds": 8.14,
+      "ammo_refunds": 0
+    },
+    {
+      "file": "staggered.json",
+      "won": true,
+      "cities_left": 6,
+      "score": 705,
+      "elapsed_seconds": 26.17,
+      "ammo_refunds": 0
+    },
+    {
+      "file": "doubletap.json",
+      "won": true,
+      "cities_left": 6,
+      "score": 665,
+      "elapsed_seconds": 12.89,
+      "ammo_refunds": 0
+    },
+    {
+      "file": "nightpost.json",
+      "won": true,
+      "cities_left": 6,
+      "score": 610,
+      "elapsed_seconds": 56.96,
+      "ammo_refunds": 14
+    },
+    {
+      "file": "nightpost_calm.json",
+      "won": true,
+      "cities_left": 6,
+      "score": 695,
+      "elapsed_seconds": 49.22,
+      "ammo_refunds": 6
+    }
+  ],
+  "wave_count": 8,
+  "all_won": true
+}

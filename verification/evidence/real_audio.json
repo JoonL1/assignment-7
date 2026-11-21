@@ -1,0 +1,51 @@
+{
+  "cues": [
+    {
+      "cue": "start",
+      "source": "air-raid.wav",
+      "voices_loaded": 3,
+      "playing_state_observed": true
+    },
+    {
+      "cue": "launch",
+      "source": "blast3.wav",
+      "voices_loaded": 3,
+      "playing_state_observed": true
+    },
+    {
+      "cue": "explode",
+      "source": "blast1.wav",
+      "voices_loaded": 3,
+      "playing_state_observed": true
+    },
+    {
+      "cue": "intercept",
+      "source": "ping.wav",
+      "voices_loaded": 3,
+      "playing_state_observed": true
+    },
+    {
+      "cue": "impact",
+      "source": "blast2.wav",
+      "voices_loaded": 3,
+      "playing_state_observed": true
+    },
+    {
+      "cue": "empty",
+      "source": "sizzle.wav",
+      "voices_loaded": 3,
+      "playing_state_observed": true
+    },
+    {
+      "cue": "reward",
+      "source": "ping.wav",
+      "voices_loaded": 3,
+      "playing_state_observed": true
+    }
+  ],
+  "cue_count": 7,
+  "mute_stopped_all_voices": true,
+  "next_voice_played_after_unmute": true,
+  "audio_driver": "dummy",
+  "audible_audio_verified": false
+}

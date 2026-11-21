@@ -1,18 +1,18 @@
 """
-the shared settings for missile shield and the optional night post waves.
+Constants for Froggit
 
-these settings live together because the models, view, and controller all
-need them. keeping the values in one file means a change here reaches all
-three parts of the game.
+This module global constants for the game Froggit. These constants need to be 
+used in the model, the view, and the controller. As these are spread across 
+multiple modules, we separate the constants into their own module. This allows 
+all modules to access them.
 
 authors: joon lee (jl4875) + richard li (rl998)
 date: december 6, 2026
-original constants and assets: the supplied cs 1110 assignment package.
 """
 import introcs
 import sys
 
-### window settings (all coordinates are in pixels) ###
+### WINDOW CONSTANTS (all coordinates are in pixels) ###
 
 # the width of the game display
 GAME_WIDTH  = 1152
@@ -20,7 +20,7 @@ GAME_WIDTH  = 1152
 GAME_HEIGHT = 864
 
 
-### the six game states ###
+### GAME CONSTANTS ###
 
 # state before the game has started
 STATE_INACTIVE = 0
@@ -36,89 +36,89 @@ STATE_CONTINUE = 4
 STATE_COMPLETE = 5
 
 
-### pictures and sizes ###
+### GAME ASSETS ###
 
-# the background picture
+# The background image
 BACKGROUND = 'sunset@2x.png'
 
-# the picture, size, and speed limits of the aiming reticule
+# The constants for the aim target
 AIM_IMAGE  = 'target@2x.png'
 AIM_WIDTH  = 16
 AIM_HEIGHT = 16
 AIM_SPEED_LIMIT = 10
 AIM_SPEED_STEP  = 0.2
 
-# the picture and size of each silo
+# The constants for a silo
 SILO_IMAGE = 'mountain@2x.png'
 SILO_WIDTH  = 128
 SILO_HEIGHT = 128
 
-# the picture, size, and bottom offset of each city
+# The constants for a city
 CITY_IMAGE = 'city@2x.png'
 CITY_WIDTH  = 98
 CITY_HEIGHT = 98
-CITY_OFFSET = 20 # distance above the bottom of the screen
+CITY_OFFSET = 20 # The distance from the screen bottom
 
 
-### rocket settings ###
+### ROCKET CONSTANTS ###
 
-# colors for the circle and the see-through tail
+# The colors
 ROCKET_COLOR = introcs.RGB(109, 179, 255)
 ROCKET_TAIL  = introcs.RGB(109, 179, 255, 72)
 
-# flight speed, starting radius, maximum radius, and growth per second
+# The explosion parameters
 ROCKET_SPEED = 500
 ROCKET_MIN_RADIUS = 3
 ROCKET_MAX_RADIUS = 100
 ROCKET_STEP_RADIUS = 20
 
-# each silo starts with this many rockets
+# The ammo count of each silo
 AMMO_COUNT = 10
 
 
-### bomb settings ###
+### BOMB CONSTANTS ###
 
-# colors for the circle and the see-through tail
+# The colors
 BOMB_COLOR = 'white'
 BOMB_TAIL  = introcs.RGB(255,255,255,92)
 
 BOMB_RADIUS = 3
 
 
-### wave and scoring settings ###
+### WAVE CONSTANTS ###
 
-# the wave file used unless the command line asks for another one
+# The default wave file
 DEFAULT_WAVE  = 'easy.json'
 
-# points for each leftover rocket and each city still standing
+# The score values 
 SCORE_AMMO = 5
 SCORE_CITY = 100
 
 
-### fonts and text sizes ###
+### FONT CHOICES ###
 
-# the font used for titles
+# The font choice for titles
 THEME_FONT = 'Roboto-Bold.ttf'
-# the font used for messages
+# The font choice for messages
 BASIC_FONT = 'Roboto-Regular.ttf'
-# size of a large message or label
+# A large message or label
 THEME_LARGE  = 112
-# size of a medium message or label
+# A medium message or label
 THEME_MEDIUM = 60
-# size of a small message or label
+# A small message or label
 THEME_SMALL  = 48
 
 
-### picking a different default wave from the command line ###
+### USE COMMAND LINE ARGUMENTS TO CHANGE DEFAULT LEVEL FILE
 """
-sys.argv keeps the arguments after the word python, so running
+sys.argv is a list of the command line arguments when you run python. These 
+arguments are everything after the word python. So if you start the game typing
 
-    python3 shield default.json
+    python shield default.json
 
-puts ['shield', 'default.json'] in that list. the code below reads the second
-item and uses it for DEFAULT_WAVE, which chooses the file loaded when the
-player starts the selected wave. for example, medium and medium.json both
-select medium.json because the code adds the extension if it is missing.
+Python puts ['shield', 'default.json'] into sys.argv. Below, we take advantage 
+of this fact to change the constant DEFAULT_WAVE. This is the wave file to be 
+used when you start the game.  
 """
 try:
     file = sys.argv[1]
@@ -127,40 +127,45 @@ try:
     else:
         DEFAULT_WAVE = file+'.json'
 except:
-    pass # keep the original value if no argument is available
+    pass # Use original value
 
-### extra timing settings ###
+### ADD MORE CONSTANTS (PROPERLY COMMENTED) AS NECESSARY ###
 
-# the small aim speeds assume a game running at 60 frames per second.
-# so this converts movement to seconds but keeps the same speed limits.
+### a couple of timing helpers ###
+
+# those small aim speeds assume 60 frames per second, so keep that feel.
+# this turns movement into seconds without changing the speed limits.
+# so 60 old frames take the same amount of time as one second.
 AIM_FRAME_SCALE = 60
 
-# small steps help explosions catch bombs even when a frame takes longer.
+# tiny steps help a blast catch a bomb even if one frame takes a while.
 PHYSICS_STEP = 1 / 120
 
-### night post settings (enabled only by feature flags in the wave) ###
+### night post extras; the wave flags have to turn these on ###
 
-# a forecast ring looks this far ahead using the current speed of the bomb.
+# forecast rings look this far ahead using the current speed of each bomb.
 FORECAST_SECONDS = 1.5
 
-# holding space uses up this many seconds of stored bubble charge.
+# a full bubble has this many seconds of charge; holding space uses it.
 BUBBLE_CAPACITY = 4.0
-# radius of the bubble around the reticule, in pixels
+# how far the bubble reaches from the reticule, in pixels
 BUBBLE_RADIUS = 125
-# bombs inside a powered bubble move at this fraction of normal speed.
+# bombs inside a charged bubble move at this fraction of the usual speed.
 BUBBLE_SPEED_FACTOR = 0.22
-# seconds of charge recovered per real second while space is released
+# seconds of charge gained per real second while space is not held
+# letting go fills it back up; holding it empty does nothing.
 BUBBLE_RECHARGE = 0.4
 
-# every three intercepted bombs give one rocket to the silo with least ammo.
+# every three catches give one rocket to the silo with the least ammo.
 RECYCLE_GROUP_SIZE = 3
 
-# rgba colors for the extra guides and the regular controls
+# rgba colors for the extra guides and the usual controls
 HUD_MINT = (0.57, 0.91, 0.84, 1)
 HUD_AMBER = (0.92, 0.76, 0.54, 1)
 HUD_PAPER = (0.93, 0.96, 0.95, 1)
 
-# the same few colors keep the menu, controls, and messages together.
+# same few colors everywhere, so the menu and controls look related.
+# the fourth number in introcs.RGB says how see-through it is (0-255).
 UI_BG = introcs.RGB(9, 17, 26)
 UI_SURFACE = introcs.RGB(16, 29, 42, 244)
 UI_SURFACE_SOFT = introcs.RGB(21, 38, 51, 225)
@@ -171,5 +176,5 @@ UI_ACCENT = introcs.RGB(145, 231, 215)
 UI_AMBER = introcs.RGB(235, 194, 137)
 UI_DANGER = introcs.RGB(236, 158, 150)
 
-# ugh im so tired but at least the colors match now 😭
+# ok the colors finally match across the screens 😭
 # omg this took so long 😭

@@ -1,0 +1,14 @@
+test_close_before_bootstrap_is_harmless (__main__.AppAudioChecks.test_close_before_bootstrap_is_harmless) ... ok
+test_close_stops_all_audio (__main__.AppAudioChecks.test_close_stops_all_audio) ... ok
+test_loss_cue_once_and_menu_stops_it (__main__.AppAudioChecks.test_loss_cue_once_and_menu_stops_it) ... ok
+test_menu_mute_persists_into_custom_wave_and_unmute_is_silent (__main__.AppAudioChecks.test_menu_mute_persists_into_custom_wave_and_unmute_is_silent) ... ok
+test_muted_menu_to_standard_and_new_unmuted_load (__main__.AppAudioChecks.test_muted_menu_to_standard_and_new_unmuted_load) ... ok
+test_pause_stops_audio_and_muted_resume_keeps_the_same_wave (__main__.AppAudioChecks.test_pause_stops_audio_and_muted_resume_keeps_the_same_wave) ... ok
+test_start_cue_once_and_v_held_does_not_toggle_again (__main__.AppAudioChecks.test_start_cue_once_and_v_held_does_not_toggle_again) ... ok
+test_win_cue_once_and_retry_preserves_mute (__main__.AppAudioChecks.test_win_cue_once_and_retry_preserves_mute) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.701s
+
+OK
+app audio lifecycle checks: 8 passed: True

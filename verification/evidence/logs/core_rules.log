@@ -1,0 +1,30 @@
+test_bomb_known_three_four_five_path (__main__.ModelsBehavior.test_bomb_known_three_four_five_path) ... ok
+test_bomb_zero_distance_does_not_divide (__main__.ModelsBehavior.test_bomb_zero_distance_does_not_divide) ... ok
+test_explosion_caps_at_maximum (__main__.ModelsBehavior.test_explosion_caps_at_maximum) ... ok
+test_rocket_speed_and_stationary_explosion (__main__.ModelsBehavior.test_rocket_speed_and_stationary_explosion) ... ok
+test_silo_ammunition_and_city_lifecycle (__main__.ModelsBehavior.test_silo_ammunition_and_city_lifecycle) ... ok
+test_bomb_at_exact_drop_time_has_not_moved (__main__.WaveBehavior.test_bomb_at_exact_drop_time_has_not_moved) ... ok
+test_bomb_center_not_radius_or_tail_decides_collision (__main__.WaveBehavior.test_bomb_center_not_radius_or_tail_decides_collision) ... ok
+test_empty_ammunition_does_not_lose (__main__.WaveBehavior.test_empty_ammunition_does_not_lose) ... ok
+test_firing_edges_and_no_ammunition (__main__.WaveBehavior.test_firing_edges_and_no_ammunition) ... ok
+test_flying_rocket_has_no_blast (__main__.WaveBehavior.test_flying_rocket_has_no_blast) ... ok
+test_last_city_loss_precedes_pending_or_rocket_completion (__main__.WaveBehavior.test_last_city_loss_precedes_pending_or_rocket_completion) ... ok
+test_layout_and_initial_score (__main__.WaveBehavior.test_layout_and_initial_score) ... ok
+test_max_radius_is_drawn_before_next_frame_removal (__main__.WaveBehavior.test_max_radius_is_drawn_before_next_frame_removal) ... ok
+test_overlapping_blasts_delete_every_contained_bomb (__main__.WaveBehavior.test_overlapping_blasts_delete_every_contained_bomb) ... ok
+test_partial_frame_launch_timing (__main__.WaveBehavior.test_partial_frame_launch_timing) ... ok
+test_pending_bombs_are_not_drawn (__main__.WaveBehavior.test_pending_bombs_are_not_drawn) ... ok
+test_repeated_hits_same_city_safe (__main__.WaveBehavior.test_repeated_hits_same_city_safe) ... ok
+test_rocket_aim_is_frozen (__main__.WaveBehavior.test_rocket_aim_is_frozen) ... ok
+test_short_rocket_finishes_before_older_long_rocket (__main__.WaveBehavior.test_short_rocket_finishes_before_older_long_rocket) ... ok
+test_simultaneous_silo_presses_are_all_handled (__main__.WaveBehavior.test_simultaneous_silo_presses_are_all_handled) ... ok
+test_supplied_immediate_and_doubletap_lose (__main__.WaveBehavior.test_supplied_immediate_and_doubletap_lose) ... ok
+test_target_clips_all_edges (__main__.WaveBehavior.test_target_clips_all_edges) ... ok
+test_target_release_resets_speed (__main__.WaveBehavior.test_target_release_resets_speed) ... ok
+test_unsorted_pending_bombs (__main__.WaveBehavior.test_unsorted_pending_bombs) ... ok
+test_win_waits_for_all_three_collections (__main__.WaveBehavior.test_win_waits_for_all_three_collections) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.155s
+
+OK

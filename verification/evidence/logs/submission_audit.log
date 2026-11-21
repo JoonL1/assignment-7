@@ -1,0 +1,15 @@
+Audited 154 methods and 17 protected originals.
+Also checked 43 original font/image/sound assets.
+Original width exemption: app.py:4 (82 chars; template line 4)
+Original width exemption: app.py:20 (87 chars; template line 21)
+Original width exemption: wave.py:24 (81 chars; template line 24)
+Largest methods:
+  21: wave.py:_make_bonus_state
+  20: wave.py:_read_bonus_keys
+  20: wave.py:_make_tool_cards
+  20: wave.py:_check_missile_data
+  20: app.py:_pause_wave
+  19: wave.py:_move_target
+  19: app.py:start
+  19: app.py:_show_load_error
+PASS: method lengths, line lengths, docstrings, tabs, protected originals

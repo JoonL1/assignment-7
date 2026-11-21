@@ -1,0 +1,20 @@
+test_all_partial_flag_combinations_safe (__main__.ExtrasBehavior.test_all_partial_flag_combinations_safe) ... ok
+test_bomb_spawning_after_charge_runs_out_is_not_slowed (__main__.ExtrasBehavior.test_bomb_spawning_after_charge_runs_out_is_not_slowed) ... ok
+test_bookmark_empty_recall_and_clear_are_safe (__main__.ExtrasBehavior.test_bookmark_empty_recall_and_clear_are_safe) ... ok
+test_bookmark_replacement_and_cyclic_recall (__main__.ExtrasBehavior.test_bookmark_replacement_and_cyclic_recall) ... ok
+test_bookmarks_respect_limits_and_do_not_redirect_rockets (__main__.ExtrasBehavior.test_bookmarks_respect_limits_and_do_not_redirect_rockets) ... ok
+test_bubble_radius_boundary (__main__.ExtrasBehavior.test_bubble_radius_boundary) ... ok
+test_bubble_slows_only_inside_and_does_not_slow_clock_or_rocket (__main__.ExtrasBehavior.test_bubble_slows_only_inside_and_does_not_slow_clock_or_rocket) ... ok
+test_charge_depletion_partial_step_and_recharge (__main__.ExtrasBehavior.test_charge_depletion_partial_step_and_recharge) ... ok
+test_constellation_caps_at_eighteen_latest (__main__.ExtrasBehavior.test_constellation_caps_at_eighteen_latest) ... ok
+test_forecast_clamps_before_impact_without_moving (__main__.ExtrasBehavior.test_forecast_clamps_before_impact_without_moving) ... ok
+test_forecast_toggle_and_draw_do_not_mutate_gameplay (__main__.ExtrasBehavior.test_forecast_toggle_and_draw_do_not_mutate_gameplay) ... ok
+test_original_wave_ignores_all_bonus_keys (__main__.ExtrasBehavior.test_original_wave_ignores_all_bonus_keys) ... ok
+test_refund_cap_and_stable_tie_break (__main__.ExtrasBehavior.test_refund_cap_and_stable_tie_break) ... ok
+test_refund_lowest_ammo_and_no_duplicate_for_overlap (__main__.ExtrasBehavior.test_refund_lowest_ammo_and_no_duplicate_for_overlap) ... ok
+test_wave_accesses_only_own_hidden_fields (__main__.ExtrasBehavior.test_wave_accesses_only_own_hidden_fields) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.028s
+
+OK

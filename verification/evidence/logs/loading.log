@@ -1,0 +1,16 @@
+test_01_standard_load (__main__.LoadingChecks.test_01_standard_load) ... ok
+test_02_custom_load_from_real_c_press (__main__.LoadingChecks.test_02_custom_load_from_real_c_press) ... ok
+test_03_calm_load (__main__.LoadingChecks.test_03_calm_load) ... ok
+test_04_missing_file_and_layout (__main__.LoadingChecks.test_04_missing_file_and_layout) ... ok
+test_05_malformed_json_and_layout (__main__.LoadingChecks.test_05_malformed_json_and_layout) ... ok
+test_06_bad_schema_and_layout (__main__.LoadingChecks.test_06_bad_schema_and_layout) ... ok
+test_07_unexpected_constructor_error (__main__.LoadingChecks.test_07_unexpected_constructor_error) ... ok
+test_08_long_multiline_error_and_layout (__main__.LoadingChecks.test_08_long_multiline_error_and_layout) ... ok
+test_09_retry_after_missing_file_is_fixed (__main__.LoadingChecks.test_09_retry_after_missing_file_is_fixed) ... ok
+test_10_menu_after_error (__main__.LoadingChecks.test_10_menu_after_error) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 1.477s
+
+OK
+render directory: /workspace/scratch/fbf421f3fb20/output/verification/evidence/loading

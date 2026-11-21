@@ -1,0 +1,268 @@
+{
+  "source_archive": "shield(1).zip",
+  "source_archive_sha256": "92db8c51e3ef3e13df3611c7fcca9d6be06ec43a22e2d159fe24728411f2ad12",
+  "protected_files": {
+    "game2d/gview.py": {
+      "sha256": "182c1b7c6cf062342dad93a4a1917b35a67cbc5a6dedcfe51a9239587dd1749f",
+      "bytes": 17357
+    },
+    "game2d/sound.py": {
+      "sha256": "a8929c885bd152d7f5e1ab03fd83edc6c515421266f8a2ee928bc0ed83e7fedb",
+      "bytes": 5568
+    },
+    "game2d/gsprite.py": {
+      "sha256": "ceae86103e249ec278a0314837939d63c4d1cb0c97e0b7498fead25f33f96ba6",
+      "bytes": 7268
+    },
+    "game2d/__init__.py": {
+      "sha256": "2c9c69c1142bdf15a18a30d26edc658f11b098ae432c47802c679635ff4d0c14",
+      "bytes": 541
+    },
+    "game2d/gpath.py": {
+      "sha256": "afcc51034260ca693261a551757485445f891454cb05959135d8ffcdfe6c56d0",
+      "bytes": 21532
+    },
+    "game2d/gtile.py": {
+      "sha256": "97d46b6b14e8112a5a94b282343d137c8dc9235411fa15cadc759e665cf5f283",
+      "bytes": 5056
+    },
+    "game2d/app.py": {
+      "sha256": "9366f8cadcfbe757ce24fe1f7aea485c3a2908ff5ea9f941b483f6bcde152599",
+      "bytes": 17048
+    },
+    "game2d/grectangle.py": {
+      "sha256": "72b4987c4591481ede0bf79f7419324598902921a4f7559b492c7c4cc69a050e",
+      "bytes": 26414
+    },
+    "game2d/gobject.py": {
+      "sha256": "ca6cb2c27da2759e875038e356724923e9138ea2d609a242985a0306504e7003",
+      "bytes": 29234
+    },
+    "Data/immediate.json": {
+      "sha256": "7f3556def70ebf5cb8d6276690d71ccab604e91b00e7ee7453c05969e2825b6e",
+      "bytes": 629
+    },
+    "Data/doubletap.json": {
+      "sha256": "4663e560622063991c1fea6e70076cf5fbf36f5fc78583f381dff80b3aa923a8",
+      "bytes": 1214
+    },
+    "Data/medium.json": {
+      "sha256": "afa93d8ed32e6746959a8c05cb6572cc043b44cd085ed11d53a99658a71d976e",
+      "bytes": 1423
+    },
+    "Data/malformed.json": {
+      "sha256": "9e3117dd716c816d2bbc4fa8d132f677691b480da81bf0ad06f521a1433156ec",
+      "bytes": 626
+    },
+    "Data/easy.json": {
+      "sha256": "0e21ea859b3b50a5652b8add7016376ba0dbac4c76a4c2b1a998dd48b0992b5f",
+      "bytes": 629
+    },
+    "Data/staggered.json": {
+      "sha256": "dc2856c37fbbe63f242ebf6c6c0c977f89d35c1ffcb284ef38e0aa5d00abedb8",
+      "bytes": 634
+    },
+    "Data/hard.json": {
+      "sha256": "692fc5b9ebcaa7afb6be84c007a74b4dc0444c9f09bb22d1665282888b90e668",
+      "bytes": 1649
+    },
+    "__main__.py": {
+      "sha256": "050cbf7d1f90be99d94be67f1c4f9119f9db96abd58379228f33a656b89a31d7",
+      "bytes": 888
+    }
+  },
+  "asset_files": {
+    "Images/missile@2x.png": {
+      "sha256": "93816e127d72086b8c8ed2bcf708a5096ee98219ebe58994c0297e5d054bbdf3",
+      "bytes": 6597
+    },
+    "Images/plane@2x.png": {
+      "sha256": "9de94cfc3cb2af4830bfa676da37aee9f1b35166e44b927c10c8866a7944c291",
+      "bytes": 1081
+    },
+    "Images/satellite.png": {
+      "sha256": "d1278887b622c5417160c62f9c249645b915691ca4217af5b1ff0332d0fe5882",
+      "bytes": 7225
+    },
+    "Images/missile.png": {
+      "sha256": "34c3aac5e2d13a7e0d1fbb282378103d6efd1061ddb42ddcbade4ab8b2e76fba",
+      "bytes": 6408
+    },
+    "Images/plane.png": {
+      "sha256": "c73b8de2a35f26bb8d1b52ba8d7fcd5aacae045e815810193d047ef39f33bd42",
+      "bytes": 938
+    },
+    "Images/city.png": {
+      "sha256": "a45808dce265e6b2ad115cd464b828b0b6b826ebc32ae67708fd0e53a37826ad",
+      "bytes": 9004
+    },
+    "Images/missile-small@2x.png": {
+      "sha256": "9d4c7115644dc4f850c574fc4e042a08b1dd4f137c2885a81d25cdcf37d62fd4",
+      "bytes": 5996
+    },
+    "Images/mountain@2x.png": {
+      "sha256": "384088ebc75f2e63479ea69088607a78036ce575d3bc1cfdc3177855721de95b",
+      "bytes": 10757
+    },
+    "Images/target.png": {
+      "sha256": "69271537c477ea25fba71d53da51f5db7ea524cd65ccb3e3a5dc7eb04d2b100c",
+      "bytes": 137
+    },
+    "Images/drone@2x.png": {
+      "sha256": "0a51011bddf722ce82dda169fed24430c7c844d77997e0035b8ba29ea01c961a",
+      "bytes": 6838
+    },
+    "Images/mountain.png": {
+      "sha256": "a8652bcac84d7aa3dce3f82f2687617a333a1e7a412ed97d3cd78c59825522cf",
+      "bytes": 9573
+    },
+    "Images/target@2x.png": {
+      "sha256": "252ac0190b146ee767565a80c59a11d2b3226e80b2184a51a50417c70dd73ecc",
+      "bytes": 138
+    },
+    "Images/sunset@2x.png": {
+      "sha256": "3fba21780412afc79eaaa962c991eebefc54034c033d764e380233056f64c8d1",
+      "bytes": 279242
+    },
+    "Images/drone.png": {
+      "sha256": "f5044b88d4a6853bf5100ea01066175e2c389cfc58ea54ebc21ffb396739d84c",
+      "bytes": 6630
+    },
+    "Images/city-base.png": {
+      "sha256": "4a707eff7a2c9ae0bc8d5a49a0586f36980c7fb644d8b25c9a42c4c8541105e1",
+      "bytes": 642
+    },
+    "Images/city@2x.png": {
+      "sha256": "804fe649b0a6ff4829bfd460035b091d642b9872ac8f5f2b64647fc2bbfc737a",
+      "bytes": 9859
+    },
+    "Images/satellite@2x.png": {
+      "sha256": "fd6b3f466698f806d9f2da631c043175720c584c75083a683603ef8d2b04591d",
+      "bytes": 7552
+    },
+    "Images/missile-small.png": {
+      "sha256": "bac77f2c406400d71b2217eec1d029b7ac5261f11aed961a98c5bea54822d824",
+      "bytes": 5964
+    },
+    "Images/city-base@2x.png": {
+      "sha256": "38653f56afef215024b73edc886b4b55287551ab4015d8b8ffc67cbc45316e85",
+      "bytes": 1553
+    },
+    "Images/sunset.png": {
+      "sha256": "969d6a1e5405a93954581054f5ae53e8c0d26485bf2f2ff2ff1b6e991c2553da",
+      "bytes": 208339
+    },
+    "Sounds/air-raid.wav": {
+      "sha256": "9651ee13577e028e7af4a5a12d6da536750b645b009087310b8a10460c208da8",
+      "bytes": 241788
+    },
+    "Sounds/satellite.wav": {
+      "sha256": "c6fed7b9d7b1e9cc17cd536e6e5ff74b6cda738293b26a4d4f2fde1ee638dc6b",
+      "bytes": 350828
+    },
+    "Sounds/blast3.wav": {
+      "sha256": "fd5c308a1462ba2d9e1241da24d41f8f0deb5fc30dd76fd45ec1c181d66c683c",
+      "bytes": 174590
+    },
+    "Sounds/afterburner.wav": {
+      "sha256": "b6cfc592719257040093cf454db8a4299c1abc0ea0e6d79a29cf0598e75cb6ec",
+      "bytes": 869864
+    },
+    "Sounds/blast2.wav": {
+      "sha256": "75f302d3443110ca5e71bfe4de818cac563b5b8a191cb21981535926f9c168ce",
+      "bytes": 190588
+    },
+    "Sounds/sizzle.wav": {
+      "sha256": "2358d6b8589436ea23d7162bfdf0029a9f214782b3f5ed56629794c6ab81713b",
+      "bytes": 237700
+    },
+    "Sounds/blast1.wav": {
+      "sha256": "f91ff0bcb2e4f9334bdcf518002b4642e2c3cb6b2d6ebcf1bb3187e11616efa5",
+      "bytes": 207020
+    },
+    "Sounds/drone.wav": {
+      "sha256": "59301f371254a886b1939ca9ed877bd84c0accd36da6c8dd8c62c49fc0adaef0",
+      "bytes": 88244
+    },
+    "Sounds/ping.wav": {
+      "sha256": "d7b101eec28ec57e9eb98c26b16cfadd2f5b077ebf0af70844f3ebd0ea9a1293",
+      "bytes": 34878
+    },
+    "Fonts/Neonix.ttf": {
+      "sha256": "e1f47abfd4bf1369e162832d72ec4ba28b56b6dce69be3bc97b41a802906b19a",
+      "bytes": 43360
+    },
+    "Fonts/Moonhouse.ttf": {
+      "sha256": "a014f2f1f265653340d02f24af3f219023f993bed5801c99710dafbee220e827",
+      "bytes": 45572
+    },
+    "Fonts/Roboto-Regular.ttf": {
+      "sha256": "16466ef65064e6f3885a6d2806b8949ac1ac38b524dd0cf8fc96565eb4cc28e8",
+      "bytes": 158604
+    },
+    "Fonts/ElectromagneticLungs.otf": {
+      "sha256": "f011a2b5e5a3a21438b16328513b9486b66351d899c3e3d4643ed6fc2ce51215",
+      "bytes": 17008
+    },
+    "Fonts/Android-Italic.ttf": {
+      "sha256": "6d02e970d9894534f12e29f7408e1353e9c6f005381d4adefe76b84353553e10",
+      "bytes": 9884
+    },
+    "Fonts/electromagnetic_lungs.zip": {
+      "sha256": "a0323c816562781ef55ef8f0946aa48e7df416fe3b2a25e1e96a6b36b97a2c19",
+      "bytes": 7888
+    },
+    "Fonts/Magnetar.ttf": {
+      "sha256": "b0b5cde3a3ba108c169d44f3c485825a583dcea18c1fbe9fb6030926b9e578d9",
+      "bytes": 19772
+    },
+    "Fonts/Roboto-BoldItalic.ttf": {
+      "sha256": "165a6d02fd8973703787feeef5319b7fd8cb3f665a3c1e702ef0ca49701547c9",
+      "bytes": 165864
+    },
+    "Fonts/Nasalization.otf": {
+      "sha256": "aefedadd5c49e84537ba3add3c487e1e8c2d1e27b4dbf4fefecd19000374a9d1",
+      "bytes": 67384
+    },
+    "Fonts/Android.ttf": {
+      "sha256": "82125d31e594e0b106da279ba91fbfe5dc8787e3f60d213b0a5a616d530c98e9",
+      "bytes": 9444
+    },
+    "Fonts/Conthrax-SemiBold.otf": {
+      "sha256": "625c8da7e5e1937a99299706fafa793f9be19fc3bfed2006bc4cc50fb80a8bd1",
+      "bytes": 77528
+    },
+    "Fonts/Roboto-Italic.ttf": {
+      "sha256": "470123c6fb5d6c0005431c0f5390742497c55087361a7636b7e82eb35635ded7",
+      "bytes": 160736
+    },
+    "Fonts/Android-Hollow.ttf": {
+      "sha256": "47e0b86287f75c09c4cd866b938709525484a0e23a5071e8aa87f5a0cf222bb9",
+      "bytes": 13616
+    },
+    "Fonts/Roboto-Bold.ttf": {
+      "sha256": "24571503140760240924dcd1238f77e7cd0454c0d8b0793990cefa2fad71471f",
+      "bytes": 163448
+    }
+  },
+  "color_source_evidence": {
+    "is_color": {
+      "file": "game2d/gobject.py",
+      "first_line": 17,
+      "last_line": 39,
+      "text": "def is_color(c):\n    \"\"\"\n    Checks whether a value represents a color.\n\n    As with Turtles, colors may be colormodel objects or strings.  They may also \n    be sequences of 3 or 4 elements.  In the case of the latter, the elements of \n    the sequence must all be in the range 0..1.\n\n    :return: True if c represents a color\n    :rtype:  ``bool``\n\n    :param c: The value to test\n    :type c:  any\n    \"\"\"\n    import introcs\n    if type(c) in [introcs.RGB, introcs.HSV]:\n        return True\n\n    if type(c) in [tuple, list] and 3 <= len(c) <= 4:\n        from functools import reduce\n        return reduce(lambda x, y: x and y, map(lambda z: type(z) in [int, float] and 0 <= z <= 1, c))\n\n    return type(c) == str and (introcs.is_tkcolor(c) or introcs.is_webcolor(c))"
+    },
+    "linecolor_setter": {
+      "file": "game2d/gobject.py",
+      "first_line": 238,
+      "last_line": 253,
+      "text": "\n    @linecolor.setter\n    def linecolor(self,value):\n        import introcs\n        assert value is None or is_color(value), '%s is not a valid color' % repr(value)\n        if type(value) in [tuple, list] and len(value) == 3:\n            value = list(value)+[1.0]\n        elif type(value) in [introcs.RGB, introcs.HSV]:\n            value = value.glColor()\n        elif type(value) == str:\n            if value[0] == '#':\n                value = introcs.RGB.CreateWebColor(value).glColor()\n            else:\n                value = introcs.RGB.CreateName(value).glColor()\n\n        self._linecolor = None if value is None else Color(value[0],value[1],value[2],value[3])"
+    },
+    "fillcolor_setter": {
+      "file": "game2d/gobject.py",
+      "first_line": 277,
+      "last_line": 292,
+      "text": "    #::Fhopynffrf bs TBowrpg fubhyq hfr pbagnvafCbvag vafgrnq bs pbagnvaf sbe cbvag pbagnvazrag\n    @fillcolor.setter\n    def fillcolor(self,value):\n        import introcs\n        assert value is None or is_color(value), '%s is not a valid color' % repr(value)\n        if type(value) in [tuple, list] and len(value) == 3:\n            value = list(value)+[1.0]\n        elif type(value) in [introcs.RGB, introcs.HSV]:\n            value = value.glColor()\n        elif type(value) == str:\n            if value[0] == '#':\n                value = introcs.RGB.CreateWebColor(value).glColor()\n            else:\n                value = introcs.RGB.CreateName(value).glColor()\n\n        self._fillcolor = None if value is None else Color(value[0],value[1],value[2],value[3])"
+    }
+  }
+}

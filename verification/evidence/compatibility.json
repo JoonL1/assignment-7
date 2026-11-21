@@ -1,0 +1,286 @@
+{
+  "json_sources": [
+    {
+      "path": "Data/immediate.json",
+      "keys": [
+        "missiles",
+        "speed"
+      ],
+      "missile_count": 9
+    },
+    {
+      "path": "Data/doubletap.json",
+      "keys": [
+        "missiles",
+        "speed"
+      ],
+      "missile_count": 18
+    },
+    {
+      "path": "Data/medium.json",
+      "keys": [
+        "missiles",
+        "speed"
+      ],
+      "missile_count": 21
+    },
+    {
+      "path": "Data/malformed.json",
+      "expected_invalid_json": true,
+      "error_line": 23,
+      "error_column": 3
+    },
+    {
+      "path": "Data/easy.json",
+      "keys": [
+        "missiles",
+        "speed"
+      ],
+      "missile_count": 9
+    },
+    {
+      "path": "Data/staggered.json",
+      "keys": [
+        "missiles",
+        "speed"
+      ],
+      "missile_count": 9
+    },
+    {
+      "path": "Data/hard.json",
+      "keys": [
+        "missiles",
+        "speed"
+      ],
+      "missile_count": 30
+    }
+  ],
+  "color_cases": [
+    {
+      "shape": "GRectangle",
+      "container": "tuple",
+      "channels": 3,
+      "linecolor": [
+        0.22,
+        0.67,
+        0.86,
+        1.0
+      ],
+      "fillcolor": [
+        0.22,
+        0.67,
+        0.86,
+        1.0
+      ]
+    },
+    {
+      "shape": "GEllipse",
+      "container": "tuple",
+      "channels": 3,
+      "linecolor": [
+        0.22,
+        0.67,
+        0.86,
+        1.0
+      ],
+      "fillcolor": [
+        0.22,
+        0.67,
+        0.86,
+        1.0
+      ]
+    },
+    {
+      "shape": "GPath",
+      "container": "tuple",
+      "channels": 3,
+      "linecolor": [
+        0.22,
+        0.67,
+        0.86,
+        1.0
+      ],
+      "fillcolor": [
+        0.22,
+        0.67,
+        0.86,
+        1.0
+      ]
+    },
+    {
+      "shape": "GRectangle",
+      "container": "tuple",
+      "channels": 4,
+      "linecolor": [
+        0.22,
+        0.67,
+        0.86,
+        0.55
+      ],
+      "fillcolor": [
+        0.22,
+        0.67,
+        0.86,
+        0.55
+      ]
+    },
+    {
+      "shape": "GEllipse",
+      "container": "tuple",
+      "channels": 4,
+      "linecolor": [
+        0.22,
+        0.67,
+        0.86,
+        0.55
+      ],
+      "fillcolor": [
+        0.22,
+        0.67,
+        0.86,
+        0.55
+      ]
+    },
+    {
+      "shape": "GPath",
+      "container": "tuple",
+      "channels": 4,
+      "linecolor": [
+        0.22,
+        0.67,
+        0.86,
+        0.55
+      ],
+      "fillcolor": [
+        0.22,
+        0.67,
+        0.86,
+        0.55
+      ]
+    },
+    {
+      "shape": "GRectangle",
+      "container": "list",
+      "channels": 3,
+      "linecolor": [
+        0.22,
+        0.67,
+        0.86,
+        1.0
+      ],
+      "fillcolor": [
+        0.22,
+        0.67,
+        0.86,
+        1.0
+      ]
+    },
+    {
+      "shape": "GEllipse",
+      "container": "list",
+      "channels": 3,
+      "linecolor": [
+        0.22,
+        0.67,
+        0.86,
+        1.0
+      ],
+      "fillcolor": [
+        0.22,
+        0.67,
+        0.86,
+        1.0
+      ]
+    },
+    {
+      "shape": "GPath",
+      "container": "list",
+      "channels": 3,
+      "linecolor": [
+        0.22,
+        0.67,
+        0.86,
+        1.0
+      ],
+      "fillcolor": [
+        0.22,
+        0.67,
+        0.86,
+        1.0
+      ]
+    },
+    {
+      "shape": "GRectangle",
+      "container": "list",
+      "channels": 4,
+      "linecolor": [
+        0.22,
+        0.67,
+        0.86,
+        0.55
+      ],
+      "fillcolor": [
+        0.22,
+        0.67,
+        0.86,
+        0.55
+      ]
+    },
+    {
+      "shape": "GEllipse",
+      "container": "list",
+      "channels": 4,
+      "linecolor": [
+        0.22,
+        0.67,
+        0.86,
+        0.55
+      ],
+      "fillcolor": [
+        0.22,
+        0.67,
+        0.86,
+        0.55
+      ]
+    },
+    {
+      "shape": "GPath",
+      "container": "list",
+      "channels": 4,
+      "linecolor": [
+        0.22,
+        0.67,
+        0.86,
+        0.55
+      ],
+      "fillcolor": [
+        0.22,
+        0.67,
+        0.86,
+        0.55
+      ]
+    }
+  ],
+  "color_case_count": 12,
+  "real_kivy_rendered": true,
+  "source_evidence": {
+    "is_color": {
+      "file": "game2d/gobject.py",
+      "first_line": 17,
+      "last_line": 39,
+      "text": "def is_color(c):\n    \"\"\"\n    Checks whether a value represents a color.\n\n    As with Turtles, colors may be colormodel objects or strings.  They may also \n    be sequences of 3 or 4 elements.  In the case of the latter, the elements of \n    the sequence must all be in the range 0..1.\n\n    :return: True if c represents a color\n    :rtype:  ``bool``\n\n    :param c: The value to test\n    :type c:  any\n    \"\"\"\n    import introcs\n    if type(c) in [introcs.RGB, introcs.HSV]:\n        return True\n\n    if type(c) in [tuple, list] and 3 <= len(c) <= 4:\n        from functools import reduce\n        return reduce(lambda x, y: x and y, map(lambda z: type(z) in [int, float] and 0 <= z <= 1, c))\n\n    return type(c) == str and (introcs.is_tkcolor(c) or introcs.is_webcolor(c))"
+    },
+    "linecolor_setter": {
+      "file": "game2d/gobject.py",
+      "first_line": 238,
+      "last_line": 253,
+      "text": "\n    @linecolor.setter\n    def linecolor(self,value):\n        import introcs\n        assert value is None or is_color(value), '%s is not a valid color' % repr(value)\n        if type(value) in [tuple, list] and len(value) == 3:\n            value = list(value)+[1.0]\n        elif type(value) in [introcs.RGB, introcs.HSV]:\n            value = value.glColor()\n        elif type(value) == str:\n            if value[0] == '#':\n                value = introcs.RGB.CreateWebColor(value).glColor()\n            else:\n                value = introcs.RGB.CreateName(value).glColor()\n\n        self._linecolor = None if value is None else Color(value[0],value[1],value[2],value[3])"
+    },
+    "fillcolor_setter": {
+      "file": "game2d/gobject.py",
+      "first_line": 277,
+      "last_line": 292,
+      "text": "    #::Fhopynffrf bs TBowrpg fubhyq hfr pbagnvafCbvag vafgrnq bs pbagnvaf sbe cbvag pbagnvazrag\n    @fillcolor.setter\n    def fillcolor(self,value):\n        import introcs\n        assert value is None or is_color(value), '%s is not a valid color' % repr(value)\n        if type(value) in [tuple, list] and len(value) == 3:\n            value = list(value)+[1.0]\n        elif type(value) in [introcs.RGB, introcs.HSV]:\n            value = value.glColor()\n        elif type(value) == str:\n            if value[0] == '#':\n                value = introcs.RGB.CreateWebColor(value).glColor()\n            else:\n                value = introcs.RGB.CreateName(value).glColor()\n\n        self._fillcolor = None if value is None else Color(value[0],value[1],value[2],value[3])"
+    }
+  }
+}

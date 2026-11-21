@@ -1,0 +1,40 @@
+recorded results
+================
+
+the full run below used a fresh extraction of the exact final shield.zip.
+all suites passed and the tested game files stayed unchanged during the run.
+
+finished: 2026-11-21T03:57:41.199433+00:00
+python: 3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]
+platform: Linux-6.18.57-x86_64-with-glibc2.41
+kivy: 2.3.2
+introcs: 1.4.2
+video: sdl2 / offscreen
+audio: sdl dummy device; audible playback was not checked
+
+unit tests: 74 passed
+real interface screens: 32 checked; 0 reported issues
+feature combinations: all 16 checked
+real color compatibility cases: 12 passed
+real sound cues: 7 loaded/played; mute stopped all voices
+scripted playthroughs: 8 wins, each with all 6 cities
+source audit: 154 methods; largest body 21 nonblank lines
+starter files: 17 protected files + 43 resource assets unchanged
+original template: 15 exact documentation blocks; 91 exact comment tokens
+added methods: 151 complete raw blocks unchanged
+filled executable code: all four modules retain the same ast and tokens
+metadata: only the original name/date placeholders use existing values
+width exemptions: only the three exact inherited template lines below
+    app.py original line 4: 82 characters
+    app.py original line 21: 87 characters
+    wave.py original line 24: 81 characters
+
+complete game archive: shield.zip
+game files verified against the runtime run: 67
+game zip sha256: 11b87a0976bd1be280b3ac0f994ef111850d4bffede801783d478eb4ea4969c6
+game zip bytes: 2746965
+
+see evidence/summary.json for hashes and suite results,
+evidence/archive_verification.json for the zip comparison,
+evidence/template_preservation.json for the original-text restoration,
+and evidence/logs/ for the unabridged test output.
