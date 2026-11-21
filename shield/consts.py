@@ -135,28 +135,28 @@ except:
 STATE_SCORING = 6
 
 ### extra time settings ###
-# aim still uses the given limits (this just handles seconds)
+# converts the original aim speed from frames into seconds
 AIM_FRAME_SCALE = 60
 PHYSICS_STEP = 1 / 120
 
 ### extra tools only enabled by custom json ###
 FORECAST_SECONDS = 1.5
 
-# extra guides may be shown only if their json feature flag is true
+# extra guides appear if their JSON feature flags are true
 # forecasts show a possible position but never destroy a bomb
-# saved aiming spots do not redirect rockets already in the air
-# the field can slow bombs but cannot stop or damage them
+# aiming spots do not redirect rockets that are already in the air
+# the slow field changes bomb speed but doesn't destroy bombs
 # charge is measured in seconds and never goes below zero
 # rocket refunds never put more than AMMO_COUNT in a silo
-# the three small counters are only graphics (not game rules)
-# a satellite or drone is allowed only if custom json lists it
+# the HUD counters show game data without changing the rules
+# aircraft appear if they are listed in a custom wave JSON
 # the slow field has four seconds of charge
 BUBBLE_CAPACITY = 4.0
 BUBBLE_RADIUS = 125
 BUBBLE_SPEED_FACTOR = 0.22
 BUBBLE_RECHARGE = 0.4
 
-# three stopped bombs return one rocket if there is room
+# every three intercepted bombs return one rocket if a silo has room
 RECYCLE_GROUP_SIZE = 3
 
 ### the colors for the custom ui ###

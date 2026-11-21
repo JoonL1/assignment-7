@@ -44,27 +44,27 @@ class Wave(object):
     the attribute for the target reticule, so there is no need for a getter.
     """
     # LIST ALL HIDDEN ATTRIBUTES HERE
-    # _data: the wave dict after checks + with speed and missiles in it
-    # _bomb_speed: how fast bombs fall + in pixels/sec and finite and > 0
-    # _silos: three Silo objects + lined up left to right
+    # _data: validated wave dictionary with speed and missiles keys
+    # _bomb_speed: finite positive bomb speed in pixels per second
+    # _silos: three Silo objects in left-to-right order
     # _cities: six City objects and destroyed ones still stay in this list
     # _targets: all nine starting City/Silo objects and slot order stays put
-    # _target: a Target + all of it onscreen and above the silos
+    # _target: Target object that stays onscreen and above silo tops
     # _pending_bombs: Bomb objects waiting for the scheduled launch times
     # _falling_bombs: Bomb objects that launched and are still around
     # _rockets: Rocket objects still flying or showing a blast
     # _elapsed_time: active game seconds so far and always >= 0
-    # _lost: bool + True once we lose the last city
-    # _won: bool + True once all bombs/rockets end and a city is still here
-    # _features: a dict with four bools + one on/off switch per extra
-    # _custom_enabled: bool + True if we switched on at least one extra
-    # _forecast_visible: bool + True means show the optional forecasts
+    # _lost: bool that becomes True when the last city is destroyed
+    # _won: bool set when all threats and rockets end with a city alive
+    # _features: dictionary with a bool for each of four bonus tools
+    # _custom_enabled: bool that is True if any bonus tool is enabled
+    # _forecast_visible: bool that controls whether forecast rings show
     # _bookmarks: at most three saved aim positions inside the bounds
     # _next_bookmark: next slot to recall (from 0 to len(_bookmarks))
-    # _replacement_bookmark: saved slot we replace next + from 0 to 2
-    # _bubble_seconds: charge we still have + from 0 to BUBBLE_CAPACITY
-    # _bubble_requested: bool + True if the bubble key is held
-    # _bubble_fraction: how much of the latest step had charge + as a fraction
+    # _replacement_bookmark: index (0 to 2) of the next bookmark to replace
+    # _bubble_seconds: charge in seconds from 0 to BUBBLE_CAPACITY
+    # _bubble_requested: bool that is True while Space is held down
+    # _bubble_fraction: fraction of the current step with charge (0 to 1)
     # _intercepted_count: bombs stopped so far and always >= 0
     # _recycled_count: rounds actually given back so far and always >= 0
     # _constellation_points: at most 18 positions of intercepted bombs
@@ -74,12 +74,12 @@ class Wave(object):
     # _hud_panel: the GRectangle behind the main top bar
     # _hud_rules: three skinny GRectangles between the main counters
     # _mode_label: lowercase GLabel for the rule name of this wave
-    # _metric_labels: three GLabels with city + ammo + threat counts
+    # _metric_labels: three GLabels for cities, ammunition, and threats
     # _metric_titles: three GLabels naming those counts in that same order
     # _controls_label: a GLabel with the aim/fire keys shared by both modes
     # _audio_label: a GLabel with the sound setting or unavailable message
     # _tool_centers: maps the enabled feature names to horizontal centers
-    # _tool_panels: one GRectangle per extra turned on + in menu order
+    # _tool_panels: rounded-card shapes for the enabled bonus tools
     # _tool_labels: maps enabled feature names to lowercase value GLabels
     # _tool_hint_labels: maps enabled feature names to key reminder GLabels
     # _notice_parts: six shapes that make a rounded notice card
@@ -91,7 +91,7 @@ class Wave(object):
     # _bookmark_labels: three GLabels reused as numbers for saved aim spots
     # _weather_labels: nine GLabels for the optional time to hit estimates
     # _surviving_slots: None at first (city slot number list in later rounds)
-    # _split_flash: list of triples (x position + y position + seconds left)
+    # _split_flash: list of [x, y, seconds left] for each split effect
     # _signal_echoes: up to 12 fading paths from a hit to a living city
     # _flyers: custom only aircraft objects that drop bombs during a wave
     # _hud_parts: rounded pieces making one dark top status card
@@ -134,10 +134,10 @@ class Wave(object):
 
     def getHelpRows(self):
         """
-        returns a new list containing the key instructions for enabled custom
+        returns a new list of key instructions for enabled bonus
         tools
-        this is how the pause screen gets the controls (so the app can ask
-        here instead of poking around in the hidden feature dictionary)
+        the pause screen asks Wave for these instructions instead of
+        reading the private feature dictionary in the controller
         """
         help_rows = []
         if self._features['forecast']:
@@ -288,7 +288,7 @@ class Wave(object):
         onscreen))
         parameter player_input: keyboard information passed in by the app
         precondition: player_input supports the key query methods of GInput
-        parameter dt: seconds since the last frame
+        parameter dt: seconds since the previous update (at least zero)
         precondition: dt is a finite nonnegative int or float
         """
         if self._lost:
@@ -365,10 +365,10 @@ class Wave(object):
     # ANY NECESSARY HELPERS (SHOULD BE HIDDEN)
     def _check_wave_data(self):
         """
-        raises ValueError for invalid speed or missiles or extra feature
+        raises ValueError for invalid speed, missiles, or extra feature
         settings
-        bad data raises ValueError (so nothing tries to build a half loaded
-        wave)
+        the supplied JSON calls its bomb list "missiles", not "bombs"
+        so a missing missiles key is a loading error
         """
         if type(self._data) != dict:
             raise ValueError('The wave must contain a JSON object.')
@@ -405,9 +405,9 @@ class Wave(object):
 
     def _check_missile_data(self, information):
         """
-        checks the start x and target slot and launch time of one bomb
+        checks the start x, target slot, and drop time of one missile
         dictionary
-        parameter information: one entry from the missiles list
+        parameter information: one bomb dictionary from the missiles list
         precondition: information can be any value read from the json file
         """
         if type(information) != dict:
@@ -435,7 +435,7 @@ class Wave(object):
     def _check_feature_data(self):
         """
         checks that every optional feature key is known and every flag is bool
-        raises ValueError for bad feature data + like an unknown name or a
+        raises ValueError if a feature name is unknown or a flag has a
         value that is not a bool
         """
         if 'features' not in self._data:
@@ -638,8 +638,8 @@ class Wave(object):
         moves the aim marker with held arrows and clamps it inside the safe
         area
         the starter speeds 0.2 and 10 are for a nominal frame (so
-        AIM_FRAME_SCALE turns them into movement over time using a nominal 60
-        fps)
+        AIM_FRAME_SCALE uses 60 nominal frames per second to calculate
+        how far to move during dt seconds
         parameter player_input: current keyboard information
         precondition: player_input supports is_key_down
         parameter dt: seconds of active gameplay that have passed
@@ -812,7 +812,7 @@ class Wave(object):
 
     def _release_bombs(self):
         """
-        moves every pending bomb whose scheduled drop time has arrived into
+        moves all bombs with drop times at or before the current wave time into
         flight
         """
         pending_position = 0
@@ -845,7 +845,7 @@ class Wave(object):
 
     def _resolve_interceptions(self):
         """
-        removes every bomb whose center is inside a growing rocket explosion
+        removes each bomb with its center inside a rocket explosion
         """
         # ugh why do these bombs keep coming back 😭
         bomb_position = 0
@@ -984,7 +984,7 @@ class Wave(object):
         """
         moves the aim marker to the next saved location (not any flying
         rockets)
-        basically + only the aim jumps back and launched rockets keep the
+        only the reticule moves; rockets in flight keep their original
         saved destinations
         """
         
@@ -1049,7 +1049,7 @@ class Wave(object):
     def _record_interception(self, current_bomb):
         """
         counts an intercepted bomb and optionally stores a star and awards ammo
-        parameter current_bomb: the stopped bomb + before it is removed
+        parameter current_bomb: the Bomb intercepted by a rocket blast
         precondition: current_bomb is a Bomb
         """
         self._sounds.play('intercept')
@@ -1069,7 +1069,7 @@ class Wave(object):
 
     def _recycle_ammunition(self):
         """
-        adds one rocket to the least stocked silo if it is below the starting
+        adds one rocket to the silo with the lowest ammo, if below the
         limit
         """
         chosen_silo_number = 0

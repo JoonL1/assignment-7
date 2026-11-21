@@ -114,7 +114,7 @@ class MissileShield(GameApp):
     # invariant: _score_hold is nonnegative seconds
     # _score_was_loss: True if the current tally follows the loss of all cities
     # invariant: _score_was_loss is a bool
-    # _final_shown: number currently displayed on the final score (int >= 0)
+    # _final_shown: number that is currently displayed on the final score (int >= 0)
     # invariant: _final_shown is an int from zero to _total_score
     # _final_counting: bool (False on menus and loading errors)
     # invariant: _final_counting is a bool
@@ -122,7 +122,7 @@ class MissileShield(GameApp):
     # invariant: _high_score is a nonnegative int
     # _menu_glow: a decorative ring that changes size on the menu
     # invariant: _menu_glow is a GEllipse or None
-    # _menu_time: seconds spent showing the welcome menu
+    # _menu_time: seconds spent on the welcome menu
     # invariant: _menu_time is nonnegative seconds
     
     # DO NOT MAKE A NEW INITIALIZER!
@@ -281,7 +281,7 @@ class MissileShield(GameApp):
 
     def _open_menu(self):
         """
-        drops the old wave and shows the two start choices (resetting the
+        drops the old wave and shows the two start choices (resets the
         campaign score)
         """
         self._stop_wave_audio()
@@ -319,9 +319,8 @@ class MissileShield(GameApp):
 
     def _begin_loading(self, filename):
         """
-        saves the requested filename and opens a loading screen for the next
-        update
-        parameter filename: the exact file to start or retry
+        saves the filename and opens a loading screen for the next update
+        parameter filename: the file to start or retry
         precondition: filename is a nonempty string
         """
         self._stop_wave_audio()
@@ -344,7 +343,7 @@ class MissileShield(GameApp):
 
     def _load_wave(self):
         """
-        reads the chosen json and creates a playable wave (or displays its
+        reads the json and creates a playable wave (or displays its
         loading error)
         """
         loading_step = 'could not read the wave file.'
@@ -371,14 +370,16 @@ class MissileShield(GameApp):
 
     def _read_wave_file(self):
         """
-        returns the json dictionary from Data (or raises an error if the file
-        fails)
-        is_json checks the Data folder of this app. no matching file means
-        FileNotFoundError and a failed parse or json null means ValueError
-        other errors show their original exception names in the terminal read
-        errors reach the loading error screen. parsed data still goes through
-        the structure checks in Wave. keep filenames as given because
-        changing the case can make a real file look missing
+        returns the data from the json file in Data
+        uses _selected_wave_file as the filename to look up
+        does not change the file or the data it reads
+        raises FileNotFoundError if the file doesn't exist
+        is_json first checks whether the file is in the Data folder
+        load_json then reads the file and converts it to python data
+        if load_json returns None, this method raises ValueError
+        other errors pass to the caller, which displays an error screen
+        Wave checks the data's structure after this method returns
+        the filename keeps its original case to match the actual file
         """
         if not self.is_json(self._selected_wave_file):
             missing_file = 'Missing file: Data/' + self._selected_wave_file
@@ -409,8 +410,7 @@ class MissileShield(GameApp):
 
     def _pause_wave(self):
         """
-        stops current audio and shows the paused controls without moving the
-        wave
+        stops current audio and shows the pause controls without moving the wave
         """
         self._stop_wave_audio()
         self._clear_messages()
@@ -478,7 +478,7 @@ class MissileShield(GameApp):
         self._text.text = '0'
 
     def _update_complete(self, dt):
-        """checks restart keys and counts the final score toward its real total
+        """checks restart keys and counts the final score toward its total
 
         parameter dt: seconds since the last animation frame (at least zero)
         """
@@ -509,7 +509,7 @@ class MissileShield(GameApp):
         """
         shows the failing filename and exception with retry and menu controls
         parameter loading_step: the short description of the failed step
-        parameter error_details: the exception type and its message
+        parameter error_details: the type of exception and its message
         parameter next_step: the suggestion for fixing the problem
         precondition: all three parameters are nonempty strings
         """
@@ -542,7 +542,7 @@ class MissileShield(GameApp):
         more words are left is more. words stay together when possible. the
         full text stays in the log (so a huge path does not push the retry
         controls off the screen)
-        parameter error_details: the exception type and its message
+        parameter error_details: the type of exception and its message
         precondition: error_details is a nonempty string
         """
         remaining_text = error_details.replace('\n', ' ').strip().lower()
@@ -621,8 +621,7 @@ class MissileShield(GameApp):
 
     def _make_standard_card(self):
         """
-        labels the normal mode and explains that it plays the selected json
-        wave
+        labels the normal mode and explains that it plays the json wave
         """
         self._add_keycap('s', 104, 348, False)
         self._add_left_label('classic', 134, 348, 23,
@@ -726,8 +725,7 @@ class MissileShield(GameApp):
 
     def _add_card(self, center_x, center_y, width, height, highlighted):
         """
-        adds a borderless dark card using simple rectangles and round corner
-        circles
+        adds a borderless dark card using rectangles and rounded circles
 
         parameter center_x: horizontal center and must be a number
         parameter center_y: vertical center and must be a number
@@ -786,7 +784,7 @@ class MissileShield(GameApp):
 
     def _add_key_hint(self, key, words, x, y, highlighted=False):
         """
-        puts one action label next to its keyboard key badge
+        puts one action label next to its keyboard/key badge
 
         parameter key: key name and must be a nonempty string
         parameter words: action description and must be a string
@@ -805,8 +803,7 @@ class MissileShield(GameApp):
 
     def _read_audio_toggle(self):
         """
-        switches sound once each time v is newly pressed (not every held
-        frame)
+        switches sound once each time v is newly pressed (not every frame)
         """
         if self.input.is_key_pressed('v'):
             self._sounds_enabled = not self._sounds_enabled
@@ -997,13 +994,13 @@ class MissileShield(GameApp):
 
     def _start_round(self):
         """
-        creates the next Wave with saved cities (reusing the last json at
+        creates the next Wave with saved cities (reuses the last json at
         higher speed)
 
         the first round creates all six cities and later rounds keep only
         survivors
-        campaigns with endless enabled repeat the final designed round at
-        higher speed
+        campaigns with endless enabled repeat the final designed round with
+        a higher speed
         """
         number_in_file = self._round_number
         if number_in_file >= len(self._campaign_rounds):
@@ -1023,7 +1020,7 @@ class MissileShield(GameApp):
 
     def _begin_scoring(self):
         """
-        saves the ammo and city counts before the score starts its animation
+        saves the ammo and city counts before the score starts the animation
 
         loss already ended the wave so its final points can still count here
         """
@@ -1096,7 +1093,7 @@ class MissileShield(GameApp):
         self._score_city_text.text = cities + ' cities  (+100 each)'
 
     def _shrink_score_icons(self, dt):
-        """gently shrinks the picture after each score beat
+        """shrinks the picture after each score beat
 
         parameter dt: seconds since the last frame (a nonnegative number)
         """
@@ -1173,8 +1170,7 @@ class MissileShield(GameApp):
 
     def _finish_score_count(self):
         """
-        adds all uncounted score items at once when the player skips the
-        animation
+        adds all score items at once when the player skips the animation
         """
         missing_ammo = self._round_ammo - self._counted_ammo
         missing_cities = self._round_cities - self._counted_cities
@@ -1188,7 +1184,7 @@ class MissileShield(GameApp):
 
     def _has_next_round(self):
         """
-        returns True only if this was a win and another campaign round exists
+        returns True if this was a win and another campaign round exists
 
         endless campaigns reuse the last wave after the designed rounds
         loss never allows another round because no cities remain

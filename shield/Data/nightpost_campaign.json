@@ -26,12 +26,7 @@
         {
           "x": 320,
           "target": 3,
-<<<<<<< HEAD
-          "time": 9,
-          "speed_scale": 0.88
-=======
           "time": 9
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 820,
@@ -51,12 +46,7 @@
         {
           "x": 160,
           "target": 2,
-<<<<<<< HEAD
-          "time": 23,
-          "speed_scale": 0.88
-=======
           "time": 23
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 310,
@@ -76,12 +66,7 @@
         {
           "x": 470,
           "target": 4,
-<<<<<<< HEAD
-          "time": 30,
-          "speed_scale": 0.88
-=======
           "time": 30
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 680,
@@ -101,20 +86,13 @@
         {
           "x": 760,
           "target": 2,
-<<<<<<< HEAD
-          "time": 37,
-          "speed_scale": 0.88
-=======
           "time": 37
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 950,
           "target": 6,
           "time": 38
         }
-<<<<<<< HEAD
-=======
       ],
       "flyers": [
         {
@@ -172,7 +150,6 @@
             }
           ]
         }
->>>>>>> eea581d (Update Missile Shield)
       ]
     },
     {
@@ -189,12 +166,7 @@
         {
           "x": 155,
           "target": 1,
-<<<<<<< HEAD
-          "time": 2,
-          "speed_scale": 1.12
-=======
           "time": 2
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 960,
@@ -204,12 +176,7 @@
         {
           "x": 310,
           "target": 3,
-<<<<<<< HEAD
-          "time": 5,
-          "acceleration": -0.6
-=======
           "time": 5
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 800,
@@ -219,12 +186,7 @@
         {
           "x": 520,
           "target": 2,
-<<<<<<< HEAD
-          "time": 8,
-          "speed_scale": 1.12
-=======
           "time": 8
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 620,
@@ -239,22 +201,12 @@
         {
           "x": 1040,
           "target": 2,
-<<<<<<< HEAD
-          "time": 13.8,
-          "acceleration": -0.6
-=======
           "time": 13.8
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 420,
           "target": 5,
-<<<<<<< HEAD
-          "time": 14.6,
-          "speed_scale": 1.12
-=======
           "time": 14.6
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 720,
@@ -274,13 +226,7 @@
         {
           "x": 180,
           "target": 1,
-<<<<<<< HEAD
-          "time": 21,
-          "speed_scale": 1.12,
-          "acceleration": -0.6
-=======
           "time": 21
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 310,
@@ -300,22 +246,12 @@
         {
           "x": 830,
           "target": 6,
-<<<<<<< HEAD
-          "time": 23,
-          "speed_scale": 1.12
-=======
           "time": 23
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 970,
           "target": 7,
-<<<<<<< HEAD
-          "time": 23.5,
-          "acceleration": -0.6
-=======
           "time": 23.5
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 360,
@@ -330,12 +266,7 @@
         {
           "x": 360,
           "target": 6,
-<<<<<<< HEAD
-          "time": 28.6,
-          "speed_scale": 1.12
-=======
           "time": 28.6
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 790,
@@ -345,12 +276,7 @@
         {
           "x": 790,
           "target": 5,
-<<<<<<< HEAD
-          "time": 30.2,
-          "acceleration": -0.6
-=======
           "time": 30.2
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 550,
@@ -371,12 +297,7 @@
             5,
             6,
             7
-<<<<<<< HEAD
-          ],
-          "speed_scale": 1.12
-=======
           ]
->>>>>>> eea581d (Update Missile Shield)
         }
       ],
       "flyers": [
@@ -413,8 +334,6 @@
               "target": 5
             }
           ]
-<<<<<<< HEAD
-=======
         },
         {
           "kind": "satellite",
@@ -470,7 +389,6 @@
               "target": 6
             }
           ]
->>>>>>> eea581d (Update Missile Shield)
         }
       ]
     },
@@ -488,22 +406,12 @@
         {
           "x": 155,
           "target": 1,
-<<<<<<< HEAD
-          "time": 2,
-          "speed_scale": 1.16
-=======
           "time": 2
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 960,
           "target": 7,
-<<<<<<< HEAD
-          "time": 3.5,
-          "acceleration": 1.6
-=======
           "time": 3.5
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 310,
@@ -513,12 +421,7 @@
         {
           "x": 800,
           "target": 5,
-<<<<<<< HEAD
-          "time": 6.5,
-          "speed_scale": 1.16
-=======
           "time": 6.5
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 520,
@@ -528,22 +431,12 @@
         {
           "x": 620,
           "target": 6,
-<<<<<<< HEAD
-          "time": 9.5,
-          "acceleration": 1.6
-=======
           "time": 9.5
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 95,
           "target": 6,
-<<<<<<< HEAD
-          "time": 13,
-          "speed_scale": 1.16
-=======
           "time": 13
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 1040,
@@ -558,13 +451,7 @@
         {
           "x": 720,
           "target": 3,
-<<<<<<< HEAD
-          "time": 15.4,
-          "speed_scale": 1.16,
-          "acceleration": 1.6
-=======
           "time": 15.4
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 20,
@@ -579,22 +466,12 @@
         {
           "x": 180,
           "target": 1,
-<<<<<<< HEAD
-          "time": 21,
-          "speed_scale": 1.16
-=======
           "time": 21
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 310,
           "target": 2,
-<<<<<<< HEAD
-          "time": 21.5,
-          "acceleration": 1.6
-=======
           "time": 21.5
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 440,
@@ -604,12 +481,7 @@
         {
           "x": 705,
           "target": 5,
-<<<<<<< HEAD
-          "time": 22.5,
-          "speed_scale": 1.16
-=======
           "time": 22.5
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 830,
@@ -619,22 +491,12 @@
         {
           "x": 970,
           "target": 7,
-<<<<<<< HEAD
-          "time": 23.5,
-          "acceleration": 1.6
-=======
           "time": 23.5
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 360,
           "target": 0,
-<<<<<<< HEAD
-          "time": 27,
-          "speed_scale": 1.16
-=======
           "time": 27
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 360,
@@ -649,13 +511,7 @@
         {
           "x": 790,
           "target": 2,
-<<<<<<< HEAD
-          "time": 29.4,
-          "speed_scale": 1.16,
-          "acceleration": 1.6
-=======
           "time": 29.4
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 790,
@@ -670,22 +526,12 @@
         {
           "x": 110,
           "target": 7,
-<<<<<<< HEAD
-          "time": 35,
-          "speed_scale": 1.16
-=======
           "time": 35
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 1045,
           "target": 1,
-<<<<<<< HEAD
-          "time": 35.4,
-          "acceleration": 1.6
-=======
           "time": 35.4
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 540,
@@ -695,12 +541,7 @@
         {
           "x": 610,
           "target": 4,
-<<<<<<< HEAD
-          "time": 36.2,
-          "speed_scale": 1.16
-=======
           "time": 36.2
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 280,
@@ -710,12 +551,7 @@
         {
           "x": 870,
           "target": 3,
-<<<<<<< HEAD
-          "time": 37,
-          "acceleration": 1.6
-=======
           "time": 37
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 150,
@@ -726,12 +562,7 @@
             1,
             2,
             3
-<<<<<<< HEAD
-          ],
-          "speed_scale": 1.16
-=======
           ]
->>>>>>> eea581d (Update Missile Shield)
         },
         {
           "x": 980,
@@ -810,8 +641,6 @@
               "target": 5
             }
           ]
-<<<<<<< HEAD
-=======
         },
         {
           "kind": "drone",
@@ -867,7 +696,6 @@
               "target": 7
             }
           ]
->>>>>>> eea581d (Update Missile Shield)
         }
       ]
     }

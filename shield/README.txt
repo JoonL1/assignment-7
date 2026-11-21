@@ -1,101 +1,111 @@
 missile shield / extensions
+===========================
+authors: joon lee (jl4875) + richard li (rl998)
 
-run this from the folder containing shield
+how to play
+-----------
+open a terminal in the folder that contains shield, then run:
 
     python3 shield
 
-press s for the chosen regular wave (easy.json by default)
-press c for the custom endless night post campaign
+press s for classic mode (easy.json by default).
+press c for the endless night post campaign.
 
-custom waves to try
+other wave files
+----------------
+run any of these commands from the same folder:
 
     python3 shield nightpost_calm.json
     python3 shield nightpost.json
     python3 shield nightpost_campaign.json
 
-press s after choosing a wave from the command line
-nightpost_calm.json is the easier custom wave
-nightpost.json is a single harder custom wave
-nightpost_campaign.json is the full endless campaign with special enemies
+then press s at the menu to play the wave you chose.
+pressing c always opens the endless campaign instead.
 
-extensions
-
-1. sound effects
-launches and hits and explosions use the supplied wav files
-<<<<<<< HEAD
-score counting has a quiet tick sound and v toggles sound at any time
-
-2. animated score counting
-at the end of a successful wave each leftover rocket is worth 5 points
-and each living city is worth 100 points
-small rocket and city pictures appear one at a time as points are added
-=======
-rockets and cities get different score sounds and v toggles sound
-planes use afterburner.wav (drones and satellites use their own wav files)
-
-2. animated score counting
-after a win or a loss each leftover rocket is worth 5 points
-and each living city is worth 100 points
-the rocket and city pictures pulse on each point beat
-visible counts rise with the score so each item is easy to recognize
-the final results number counts from zero to the actual score too
->>>>>>> eea581d (Update Missile Shield)
-in campaign mode press n or r to finish the tally and start the next round
-
-3. multiple waves + personal best
-press c for the campaign (three designed rounds followed by harder repeats)
-destroyed cities remain gone between rounds
-surviving cities and total score carry forward
-personal best is saved in Data/highscore.txt when possible
-it appears on the main menu even after restarting the app
-
-4. extra threats only in custom campaign waves
-a few orange bombs split into 2 or 3 smaller bombs during the fall
-<<<<<<< HEAD
-rounds 2 and 3 also have planes and bouncing drones and a satellite
-these enemies drop bombs at times and target slots set in the campaign json
-shooting the moving enemy with a normal rocket blast stops future drops
-custom missiles can have different speeds and accelerate or slow down
-regular supplied waves never include these new threats or speed changes
-=======
-all three aircraft appear in round one (with more in later rounds)
-satellites hover and launch at least 3 bombs from their scheduled orders
-planes face the direction of flight using a flipped supplied sprite
-drones dive then change direction abruptly (with short zigzag moves)
-all enemy bombs come from times and targets listed in the custom json
-shooting the moving enemy with a normal rocket blast stops future drops
-the supplied missile image turns toward the target during flight
-all bombs in each wave use its json speed (later rounds are faster)
-regular supplied waves never include these new threats
->>>>>>> eea581d (Update Missile Shield)
-
-5. extra animations and night post tools
-intercepting a bomb can make a fading gold signal toward a saved city
-splitting bombs also create a fading circle
-f toggles predicted bomb positions about 1.5 seconds ahead
-b saves one aiming position (up to 3) and tab recalls the next one
-x clears the saved positions
-hold space to slow nearby bombs and release to refill the meter
-every 3 intercepted bombs can return 1 rocket to the least full silo
-these tools are enabled only by custom json feature flags
+nightpost_calm.json: a slower custom wave with the extra tools.
+nightpost.json: a harder custom wave with the extra tools.
+nightpost_campaign.json: three rounds followed by harder repeats.
 
 controls
+--------
+arrow keys    move the aiming target
+1 / 2 / 3     fire from the left, middle, or right silo
+p             pause
+r             resume after pausing or restart after final results
+n or r        finish the score tally and go to the next campaign round
+m             return to the main menu from pause or results
+v             turn sound on or off
 
-arrows move the aiming target
-1 / 2 / 3 fire from the corresponding silo
-p pauses and r resumes
-<<<<<<< HEAD
-r restarts after a final result
-=======
-r restarts after final results (the last score animates first)
->>>>>>> eea581d (Update Missile Shield)
-n or r starts the next campaign round after score counting
-m returns to the main menu from paused or completed screens
-v turns the supplied game sounds on or off
+night post also has these controls:
 
-original gameplay is unchanged for supplied waves
-one city must survive to win and the wave must have no bombs left
-the wave also waits for all remaining rockets and explosions to end
-losing every city ends the game immediately
+f             show or hide the bomb forecasts
+b             save the current aim position (up to 3 positions)
+tab           jump to the next saved aim position
+x             clear the saved aim positions
+space         hold to slow nearby bombs; release to recharge
 
-all graphics and audio come from the supplied assignment package
+extensions
+----------
+1. sound effects
+   rocket launches, explosions, bomb hits, and aircraft have sound effects.
+   the sounds come from the supplied wav files. rockets and cities have
+   different sounds and pressing v mutes/unmutes sound effects.
+
+2. animated score
+   after a wave, the game counts the number of leftover rockets and cities.
+   each rocket is worth 5 points and each surviving city is worth 100 points.
+   the rocket and city pictures pulse as their counts go up. the final
+   results number also counts up to the player's total score.
+   if every city is lost, the tally still counts any leftover rockets.
+
+3. multiple waves and personal best
+   the campaign has three rounds followed by harder repeats.
+   cities that are destroyed in one round stay destroyed in later rounds.
+   the surviving cities and total score carry over to the next round.
+   the game saves the personal best in Data/highscore.txt when possible.
+
+4. extra enemies (campaign only)
+   planes fly across the screen and drop bombs at scheduled times.
+   the plane picture faces the direction that the plane travels.
+   drones dive, climb, and change direction during their flight.
+   satellites hover and can drop at least three bombs each.
+   some orange enemy bombs split into two or three smaller bombs.
+   a rocket explosion can destroy an aircraft and stop its future drops.
+   the aircraft and their bomb orders are set in the custom campaign json.
+   none of these extra enemies appear in the supplied classic waves.
+
+5. night post tools (custom waves only)
+   forecasts: press f to see predicted bomb positions about 1.5 seconds
+   ahead. these guides aren't real bombs and can't damage anything.
+
+   bookmarks: press b to remember an aim position, tab to recall one,
+   or x to clear all saved positions. the limit is three bookmarks.
+
+   slow field: hold space to slow nearby enemy bombs. the field uses
+   charge while active and refills after space is released.
+
+   ammo recycling: every three bomb interceptions can return one
+   rocket to the silo with the least ammunition.
+
+6. visual effects
+   rockets use the missile picture and point toward in their vector direction.
+   rocket blasts expand over time, and some interceptions draw a fading
+   gold signal toward a surviving city. split bombs also leave a brief
+   circle. the menus, status cards, and score screens use simple animations.
+
+gameplay rules
+-----------------------
+all classic waves keep the original gameplay rules and speeds.
+bombs travel toward cities or silos. the player fires rockets with 1, 2,
+or 3; the silos don't fire on their own. rockets explode at the saved aim
+point, and a bomb is removed if its center enters the growing blast.
+
+the player loses as soon as all six cities are destroyed. the player wins
+when at least one city remains and all enemy bombs are gone. a win also
+waits for any rockets and explosions still on the screen to finish.
+
+credits and files
+-----------------
+the original game framework, sprites, fonts, and wav sounds come from the
+cs 1110 missile shield package/assignment. the right-facing plane image
+is a flipped copy of the supplied plane picture.
