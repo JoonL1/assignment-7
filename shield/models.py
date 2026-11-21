@@ -1,307 +1,501 @@
 """
-Models for Missile Shield.
-
-The models remember where each object is and what it can do. The Wave
-controller decides when to call their methods.
+The visible objects in Missile Shield.
 
 Authors: Joon Lee (jl4875) + Richard Li (rl998)
 Date: December 6, 2026
+
+The provided game2d framework and assignment starter are by Walker M. White.
+The images and fonts used here are the assets provided with the assignment.
+Each object keeps its own information. It does not look inside a Wave or app.
 """
 from consts import *
 from game2d import *
-import introcs
-import math
-
-
-# This is a shared helper for the two kinds of moving projectiles.
-def _move_toward_destination(shape, destination_x, destination_y, speed, dt):
-    """Moves shape toward a fixed destination. Returns True upon arrival.
-
-    It never travels past the destination, even if dt is unusually large.
-    The object must have public x and y attributes, like a GEllipse.
-    """
-    horizontal_distance = destination_x - shape.x
-    vertical_distance = destination_y - shape.y
-    remaining_distance_squared = horizontal_distance**2 + vertical_distance**2
-    remaining_distance = math.sqrt(remaining_distance_squared)
-    distance_this_frame = speed * dt
-    if remaining_distance <= distance_this_frame or remaining_distance == 0:
-        shape.x = destination_x
-        shape.y = destination_y
-        return True
-    horizontal_fraction = horizontal_distance / remaining_distance
-    vertical_fraction = vertical_distance / remaining_distance
-    horizontal_movement = horizontal_fraction * distance_this_frame
-    vertical_movement = vertical_fraction * distance_this_frame
-    shape.x = shape.x + horizontal_movement
-    shape.y = shape.y + vertical_movement
-    return False
 
 
 class Silo(GImage):
-    """A mountain holding the rockets the player may launch.
-
-    Attribute _ammo: Number of defensive missiles remaining, int >= 0.
-    Attribute _ammo_label: GLabel placed over this silo's drawing.
     """
-    # HIDDEN ATTRIBUTES (documented for the graders)
-    # Attribute _ammo: Number of defensive missiles remaining, int >= 0.
-    # Attribute _ammo_label: GLabel placed over this silo's drawing.
-    # end of invariant notes
+    A missile silo with a visible count of its remaining ammunition.
 
+    A silo stays on screen after a bomb hits it. The controller responds to
+    that hit by setting its ammunition to zero. The inherited x and y are
+    the center of the picture, while bottom is the bottom of the picture.
+    """
+    # Attribute _ammunition: The number of rockets left in this silo.
+    # Invariant: _ammunition is an int greater than or equal to zero.
+    # Attribute _ammunition_label: The number drawn over the silo picture.
+    # Invariant: _ammunition_label is a GLabel with text str(_ammunition).
 
     def getAmmo(self):
-        """Returns the number of rockets left in this silo."""
-        return self._ammo
+        """
+        Returns the number of rockets left in this silo, as an int.
+        """
+        remaining_ammunition = self._ammunition
+        return remaining_ammunition
 
     def setAmmo(self, amount):
-        """Sets the remaining number of rockets, updating the visible label."""
-        assert type(amount) == int and amount >= 0
-        self._ammo = amount
-        self._ammo_label.text = str(amount)
+        """
+        Changes the ammunition count and the number shown on the silo.
+
+        Parameter amount: The new number of rockets in this silo.
+        Precondition: amount is an int greater than or equal to zero.
+        """
+        assert type(amount) == int
+        assert amount >= 0
+        self._ammunition = amount
+        number_to_display = str(amount)
+        self._ammunition_label.text = number_to_display
 
     def __init__(self, x):
-        """Creates a full silo at horizontal coordinate x."""
-        super().__init__(x=x, bottom=0, width=SILO_WIDTH,
+        """
+        Initializes a full silo centered horizontally at x, on the ground.
+
+        Parameter x: The horizontal coordinate of the silo's center.
+        Precondition: x is a number (int or float).
+        """
+        silo_center_height = SILO_HEIGHT / 2
+        super().__init__(x=x, y=silo_center_height, width=SILO_WIDTH,
                          height=SILO_HEIGHT, source=SILO_IMAGE)
-        self._ammo = AMMO_COUNT
-        self._ammo_label = GLabel(text=str(self._ammo), x=x, y=self.bottom+29,
-                                  font_size=THEME_SMALL, font_name=BASIC_FONT,
-                                  linecolor='white')
+        self._ammunition = AMMO_COUNT
+        # ugh im so tired 😴
+        label_center_height = SILO_HEIGHT / 4
+        starting_number = str(self._ammunition)
+        self._ammunition_label = GLabel(
+            x=x, y=label_center_height, text=starting_number,
+            font_name=BASIC_FONT, font_size=THEME_SMALL,
+            linecolor='white')
 
     def draw(self, view):
-        """Draws the silo image, then places its ammunition count above it."""
+        """
+        Draws the silo picture and then its ammunition number.
+
+        Parameter view: The view where this silo should be drawn.
+        Precondition: view is a GView.
+        """
         super().draw(view)
-        self._ammo_label.draw(view)
+        self._ammunition_label.x = self.x
+        self._ammunition_label.y = self.bottom + self.height / 4
+        self._ammunition_label.draw(view)
 
 
 class City(GImage):
-    """A city to protect. A destroyed city is removed by Wave."""
+    """
+    A city that is drawn until it is destroyed.
+
+    Keeping the object after its destruction preserves its original target
+    location. A later bomb can reach that same location without shifting
+    the positions of any of the other cities.
+    """
+    # Attribute _alive: Whether this city is still standing.
+    # Invariant: _alive is a bool; a destroyed city never becomes alive again.
+
+    def getAlive(self):
+        """
+        Returns True if this city is still standing; otherwise returns False.
+        """
+        return self._alive
 
     def __init__(self, x):
-        """Creates a city whose base is CITY_OFFSET above the bottom."""
-        super().__init__(x=x, bottom=CITY_OFFSET, width=CITY_WIDTH,
+        """
+        Initializes a living city with its bottom at CITY_OFFSET.
+
+        Parameter x: The horizontal coordinate of the city's center.
+        Precondition: x is a number (int or float).
+        """
+        half_city_height = CITY_HEIGHT / 2
+        city_center_height = CITY_OFFSET + half_city_height
+        super().__init__(x=x, y=city_center_height, width=CITY_WIDTH,
                          height=CITY_HEIGHT, source=CITY_IMAGE)
+        self._alive = True
 
-
-class Target(GImage):
-    """The aiming crosshair moved by the arrow keys.
-
-    Attribute _speed: Nonnegative movement speed in pixels per frame.
-    """
-    # HIDDEN ATTRIBUTES (documented for the graders)
-    # Attribute _speed: Nonnegative movement speed in pixels per frame.
-    # end of invariant notes
-
-
-    def getSpeed(self):
-        """Returns how far this target moves in the current frame."""
-        return self._speed
-
-    def setSpeed(self, new_speed):
-        """Changes speed without exceeding the course's speed limit."""
-        self._speed = max(0, min(AIM_SPEED_LIMIT, new_speed))
-
-    def __init__(self, x, y):
-        """Starts the aiming target at (x,y), with no momentum."""
-        super().__init__(x=x, y=y, width=AIM_WIDTH,
-                         height=AIM_HEIGHT, source=AIM_IMAGE)
-        self._speed = 0.0
-
-
-class Bomb(GEllipse):
-    """An incoming bomb with a fixed destination from the wave file.
-
-    Attribute _destination_x: Where the bomb will hit, a number.
-    Attribute _destination_y: The top of the target object, a number.
-    Attribute _destination_slot: Number 0..8 of the target in ground order.
-    Attribute _drop_time: Seconds after the start of the wave, number >= 0.
-    Attribute _active: True if the bomb has been released, a bool.
-    Attribute _arrived: True when it has reached the target, a bool.
-    Attribute _tail: A GPath from the initial position to current position.
-    """
-    # HIDDEN ATTRIBUTES (documented for the graders)
-    # Attribute _destination_x: Where the bomb will hit, a number.
-    # Attribute _destination_y: The top of the target object, a number.
-    # Attribute _destination_slot: Number 0..8 of the target in ground order.
-    # Attribute _drop_time: Seconds after the start of the wave, number >= 0.
-    # Attribute _active: True if the bomb has been released, a bool.
-    # Attribute _arrived: True when it has reached the target, a bool.
-    # Attribute _tail: A GPath from the initial position to current position.
-    # end of invariant notes
-
-
-    def getDropTime(self):
-        """Returns the scheduled time this bomb starts falling."""
-        return self._drop_time
-
-    def getTargetSlot(self):
-        """Returns the left-to-right target index from the JSON file."""
-        return self._destination_slot
-
-    def getDestination(self):
-        """Returns the point at which this incoming bomb will hit."""
-        return (self._destination_x, self._destination_y)
-
-    def isActive(self):
-        """Returns True when the bomb has been released."""
-        return self._active
-
-    def hasArrived(self):
-        """Returns True once the bomb reaches its original target."""
-        return self._arrived
-
-    def activate(self):
-        """Allows this bomb to be drawn and moved."""
-        self._active = True
-
-    def __init__(self, start_x, target, slot, drop_time):
-        """Creates a bomb at the sky's top aimed at a City or Silo."""
-        super().__init__(x=start_x, y=GAME_HEIGHT,
-                         width=2*BOMB_RADIUS, height=2*BOMB_RADIUS,
-                         fillcolor=BOMB_COLOR, linecolor=None)
-        self._destination_x = target.x
-        self._destination_y = target.top
-        self._destination_slot = slot
-        self._drop_time = drop_time
-        self._active = False
-        self._arrived = False
-        self._tail = GPath(points=[start_x,GAME_HEIGHT,start_x,GAME_HEIGHT],
-                           linecolor=BOMB_TAIL, linewidth=BOMB_RADIUS)
-
-    def advance(self, dt, speed):
-        """Moves a dropped bomb one frame and extends its trailing line."""
-        if self._active and not self._arrived:
-            self._arrived = _move_toward_destination(
-                self, self._destination_x, self._destination_y, speed, dt)
-            original_points = self._tail.points
-            original_x = original_points[0]
-            original_y = original_points[1]
-            self._tail.points = [original_x, original_y, self.x, self.y]
+    def destroy(self):
+        """
+        Marks this city as destroyed, including if it was already destroyed.
+        """
+        # a second bomb cannot make an already gone city extra gone 😭
+        self._alive = False
 
     def draw(self, view):
-        """Draws the transparent tail first and the white bomb second."""
-        if self._active:
-            self._tail.draw(view)
+        """
+        Draws this city only if it has not been destroyed.
+
+        Parameter view: The view where this city should be drawn.
+        Precondition: view is a GView.
+        """
+        if self._alive:
             super().draw(view)
 
 
-class Rocket(GEllipse):
-    """A defensive rocket which becomes a circular blast at its target.
-
-    Attribute _destination_x: The x coordinate selected at launch.
-    Attribute _destination_y: The y coordinate selected at launch.
-    Attribute _tail: GPath showing the flight path, or None after detonation.
-    Attribute _exploding: Whether this rocket has reached its aim point.
-    Attribute _finished: Whether its finished blast may be removed.
+class Target(GImage):
     """
-    # HIDDEN ATTRIBUTES (documented for the graders)
-    # Attribute _destination_x: The x coordinate selected at launch.
-    # Attribute _destination_y: The y coordinate selected at launch.
-    # Attribute _tail: GPath showing the flight path, or None after detonation.
-    # Attribute _exploding: Whether this rocket has reached its aim point.
-    # Attribute _finished: Whether its finished blast may be removed.
-    # end of invariant notes
+    The aiming reticule and its current movement speed.
+
+    The controller checks the arrow keys and chooses the new position. The
+    inherited position and size properties remain public, as in GImage.
+    """
+    # Attribute _movement_speed: The current arrow-key movement speed.
+    # Invariant: _movement_speed is a number from 0 to AIM_SPEED_LIMIT.
+
+    def getSpeed(self):
+        """
+        Returns the reticule's current movement speed, as a number.
+        """
+        return self._movement_speed
+
+    def setSpeed(self, speed):
+        """
+        Changes the movement speed to speed.
+
+        Parameter speed: The new movement speed.
+        Precondition: speed is a number from 0 to AIM_SPEED_LIMIT, inclusive.
+        """
+        assert type(speed) == int or type(speed) == float
+        assert speed >= 0
+        assert speed <= AIM_SPEED_LIMIT
+        self._movement_speed = speed
+
+    def __init__(self, x, y):
+        """
+        Initializes a stationary aiming reticule centered at (x, y).
+
+        Parameter x: The horizontal coordinate of the reticule's center.
+        Precondition: x is a number (int or float).
+        Parameter y: The vertical coordinate of the reticule's center.
+        Precondition: y is a number (int or float).
+        """
+        super().__init__(x=x, y=y, width=AIM_WIDTH, height=AIM_HEIGHT,
+                         source=AIM_IMAGE)
+        self._movement_speed = 0
+        # ugh im so busy pls help 🫠
 
 
-    def isExploding(self):
-        """Returns True after the rocket has reached its destination."""
+class Bomb(GEllipse):
+    """
+    A bomb moving in a straight line toward a fixed city or silo location.
+
+    A bomb remembers when it should drop, but the controller decides when
+    to start updating and drawing it. Its tail begins at its original
+    location. Reaching the destination sets a flag for the controller.
+    """
+    # Attribute _starting_x: The horizontal coordinate of the tail's start.
+    # Invariant: _starting_x is a number and does not change.
+    # Attribute _starting_y: The vertical coordinate of the tail's start.
+    # Invariant: _starting_y is a number and does not change.
+    # Attribute _destination_x: The horizontal coordinate of the impact.
+    # Invariant: _destination_x is a number and does not change.
+    # Attribute _destination_y: The vertical coordinate of the impact.
+    # Invariant: _destination_y is a number and does not change.
+    # Attribute _drop_time: Seconds from the beginning of the wave to launch.
+    # Invariant: _drop_time is a nonnegative number and does not change.
+    # Attribute _target_slot: The original target's position among nine slots.
+    # Invariant: _target_slot is an int from 0 through 8 and does not change.
+    # Attribute _arrived: Whether this bomb has reached its impact location.
+    # Invariant: _arrived is a bool; True implies (x, y) is the destination.
+    # Attribute _tail: The line from the bomb's start to its current position.
+    # Invariant: _tail is a GPath with four coordinates and BOMB_TAIL color.
+
+    def getStartTime(self):
+        """
+        Returns the scheduled drop time, in seconds from the wave's start.
+        """
+        return self._drop_time
+
+    def getTargetSlot(self):
+        """
+        Returns the original target's slot number, as an int from 0 to 8.
+        """
+        return self._target_slot
+
+    def getArrived(self):
+        """
+        Returns True if this bomb has reached its destination; False otherwise.
+        """
+        return self._arrived
+
+    def getRemainingTime(self, speed):
+        """
+        Returns the seconds needed to reach the destination at speed.
+
+        This estimate assumes that the bomb keeps moving at the given speed.
+
+        Parameter speed: The speed to use for this estimate, in pixels/second.
+        Precondition: speed is a number greater than zero.
+        """
+        remaining_distance = self._distance_to_destination()
+        remaining_seconds = remaining_distance / speed
+        return remaining_seconds
+
+    def getFuturePosition(self, seconds, speed):
+        """
+        Returns the predicted (x, y) tuple after seconds, without moving.
+
+        A prediction past impact returns the destination. The result assumes
+        a constant speed, so a later change to the speed changes the estimate.
+
+        Parameter seconds: How far into the future to look, in seconds.
+        Precondition: seconds is a nonnegative number.
+        Parameter speed: The predicted movement speed, in pixels/second.
+        Precondition: speed is a nonnegative number.
+        """
+        horizontal_difference = self._destination_x - self.x
+        vertical_difference = self._destination_y - self.y
+        remaining_distance = self._distance_to_destination()
+        requested_distance = seconds * speed
+        if remaining_distance == 0:
+            return (self._destination_x, self._destination_y)
+        elif requested_distance >= remaining_distance:
+            return (self._destination_x, self._destination_y)
+        else:
+            horizontal_direction = horizontal_difference / remaining_distance
+            vertical_direction = vertical_difference / remaining_distance
+            horizontal_movement = horizontal_direction * requested_distance
+            vertical_movement = vertical_direction * requested_distance
+            future_x = self.x + horizontal_movement
+            future_y = self.y + vertical_movement
+            return (future_x, future_y)
+
+    def __init__(self, start_x, start_y, target_x, target_y,
+                 drop_time, target_slot):
+        """
+        Initializes a bomb from (start_x, start_y) to (target_x, target_y).
+
+        Parameter start_x: The horizontal starting coordinate.
+        Precondition: start_x is a number (int or float).
+        Parameter start_y: The vertical starting coordinate.
+        Precondition: start_y is a number (int or float).
+        Parameter target_x: The fixed horizontal destination coordinate.
+        Precondition: target_x is a number (int or float).
+        Parameter target_y: The fixed vertical destination coordinate.
+        Precondition: target_y is a number (int or float).
+        Parameter drop_time: Seconds from the wave's start until this drops.
+        Precondition: drop_time is a nonnegative number.
+        Parameter target_slot: The target's original position in the row.
+        Precondition: target_slot is an int from 0 through 8.
+        """
+        bomb_diameter = 2 * BOMB_RADIUS
+        super().__init__(x=start_x, y=start_y, width=bomb_diameter,
+                         height=bomb_diameter, fillcolor=BOMB_COLOR)
+        self._starting_x = start_x
+        self._starting_y = start_y
+        self._destination_x = target_x
+        self._destination_y = target_y
+        self._drop_time = drop_time
+        self._target_slot = target_slot
+        self._arrived = False
+        initial_tail_points = [start_x, start_y, start_x, start_y]
+        self._tail = GPath(points=initial_tail_points,
+                           linewidth=BOMB_RADIUS, linecolor=BOMB_TAIL)
+
+    def update(self, dt, speed):
+        """
+        Moves this bomb toward its destination without passing it.
+
+        The controller only calls this after the scheduled drop time. A bomb
+        already at its destination stays there until the controller removes it.
+
+        Parameter dt: The number of seconds to move this bomb.
+        Precondition: dt is a nonnegative number.
+        Parameter speed: This bomb's speed for this step, in pixels/second.
+        Precondition: speed is a nonnegative number.
+        """
+        if self._arrived:
+            return
+        next_position = self.getFuturePosition(dt, speed)
+        self.x = next_position[0]
+        self.y = next_position[1]
+        if self.x == self._destination_x:
+            if self.y == self._destination_y:
+                self._arrived = True
+        new_tail_points = [self._starting_x, self._starting_y, self.x, self.y]
+        self._tail.points = new_tail_points
+
+    def draw(self, view):
+        """
+        Draws the bomb's translucent tail and then its white circular head.
+
+        Parameter view: The view where this bomb should be drawn.
+        Precondition: view is a GView.
+        """
+        self._tail.draw(view)
+        super().draw(view)
+
+    def _distance_to_destination(self):
+        """
+        Returns the nonnegative distance from the bomb to its destination.
+        """
+        horizontal_difference = self._destination_x - self.x
+        vertical_difference = self._destination_y - self.y
+        horizontal_distance_squared = horizontal_difference ** 2
+        vertical_distance_squared = vertical_difference ** 2
+        total_distance_squared = horizontal_distance_squared
+        total_distance_squared = (total_distance_squared +
+                                  vertical_distance_squared)
+        remaining_distance = total_distance_squared ** 0.5
+        return remaining_distance
+
+
+class Rocket(GEllipse):
+    """
+    A rocket that travels to a fixed point and then slowly expands.
+
+    The destination is copied when the rocket is created. Moving the aiming
+    reticule later does not move that destination. The controller removes
+    finished rockets before updating the remaining ones so that an explosion
+    is drawn at its maximum radius for one frame before disappearing.
+    """
+    # Attribute _starting_x: The horizontal coordinate where this was fired.
+    # Invariant: _starting_x is a number and does not change.
+    # Attribute _starting_y: The vertical coordinate where this was fired.
+    # Invariant: _starting_y is a number and does not change.
+    # Attribute _destination_x: The horizontal coordinate chosen at launch.
+    # Invariant: _destination_x is a number and does not change.
+    # Attribute _destination_y: The vertical coordinate chosen at launch.
+    # Invariant: _destination_y is a number and does not change.
+    # Attribute _exploding: Whether this rocket has reached its destination.
+    # Invariant: _exploding is a bool; True implies (x, y) is the destination.
+    # Attribute _tail: The line from the silo to the current rocket position.
+    # Invariant: _tail is a GPath, drawn only when _exploding is False.
+    # Invariant: width == height, with radius from MIN to MAX rocket radius.
+
+    def getExploding(self):
+        """
+        Returns True if this rocket is expanding at its destination.
+        """
         return self._exploding
 
-    def isFinished(self):
-        """Returns True if its full-size explosion has finished displaying."""
-        return self._finished
+    def getFinished(self):
+        """
+        Returns True if this explosion has reached its maximum radius.
+
+        A True result means the controller should remove it at the start of
+        the next update, after it has been drawn at full size.
+        """
+        current_radius = self.width / 2
+        if self._exploding:
+            if current_radius >= ROCKET_MAX_RADIUS:
+                return True
+        return False
 
     def __init__(self, start_x, start_y, target_x, target_y):
-        """Starts a defensive rocket at a silo pointing at a fixed point."""
-        start_size = 2*ROCKET_MIN_RADIUS
-        super().__init__(x=start_x,y=start_y,width=start_size,
-                         height=start_size,fillcolor=ROCKET_COLOR,
-                         linecolor=None)
+        """
+        Initializes a rocket traveling from its silo to a fixed aim point.
+
+        Parameter start_x: The horizontal starting coordinate at the silo.
+        Precondition: start_x is a number (int or float).
+        Parameter start_y: The vertical starting coordinate at the silo.
+        Precondition: start_y is a number (int or float).
+        Parameter target_x: The horizontal aiming coordinate at launch.
+        Precondition: target_x is a number (int or float).
+        Parameter target_y: The vertical aiming coordinate at launch.
+        Precondition: target_y is a number (int or float).
+        """
+        rocket_diameter = 2 * ROCKET_MIN_RADIUS
+        super().__init__(x=start_x, y=start_y, width=rocket_diameter,
+                         height=rocket_diameter, fillcolor=ROCKET_COLOR)
+        self._starting_x = start_x
+        self._starting_y = start_y
         self._destination_x = target_x
         self._destination_y = target_y
         self._exploding = False
-        self._finished = False
-        self._tail = GPath(points=[start_x,start_y,start_x,start_y],
-                           linecolor=ROCKET_TAIL, linewidth=BOMB_RADIUS)
+        initial_tail_points = [start_x, start_y, start_x, start_y]
+        self._tail = GPath(points=initial_tail_points,
+                           linewidth=ROCKET_MIN_RADIUS,
+                           linecolor=ROCKET_TAIL)
 
-    def advance(self, dt):
-        """Moves toward the aim point or grows an already-triggered blast."""
+    def update(self, dt):
+        """
+        Moves the rocket or grows its explosion for dt seconds.
+
+        If it arrives during this update, the remaining part of dt is used
+        to grow the explosion. A large dt cannot move it past the destination
+        or make its explosion larger than ROCKET_MAX_RADIUS.
+
+        Parameter dt: The number of seconds to advance the rocket.
+        Precondition: dt is a nonnegative number.
+        """
         if self._exploding:
-            self._growExplosion(dt)
-        elif not self._finished:
-            has_reached_target = _move_toward_destination(
-                self, self._destination_x, self._destination_y,
-                ROCKET_SPEED, dt)
-            self._updateTail()
-            if has_reached_target:
-                self._beginExplosion()
+            self._grow_explosion(dt)
+        else:
+            self._move_toward_destination(dt)
 
     def draw(self, view):
-        """Draws the flight trail only before the explosion begins."""
-        if self._tail is not None:
+        """
+        Draws the traveling rocket and tail, or only its expanding explosion.
+
+        Parameter view: The view where this rocket should be drawn.
+        Precondition: view is a GView.
+        """
+        if not self._exploding:
             self._tail.draw(view)
         super().draw(view)
 
-    def _updateTail(self):
-        """Connects the rocket's launch location to its current position."""
-        original_points = self._tail.points
-        launch_x = original_points[0]
-        launch_y = original_points[1]
-        self._tail.points = [launch_x,launch_y,self.x,self.y]
+    def _move_toward_destination(self, dt):
+        """
+        Moves toward the destination and starts the explosion on arrival.
 
-    def _beginExplosion(self):
-        """Changes the travelling rocket to a translucent circular shield."""
-        self._exploding = True
-        self._tail = None
-        self.fillcolor = ROCKET_TAIL
-
-    def _growExplosion(self, dt):
-        """Expands the radius but shows its maximum size for one whole frame."""
-        current_radius = self.width / 2.0
-        if current_radius >= ROCKET_MAX_RADIUS:
-            self._finished = True
+        Parameter dt: The number of seconds available for movement.
+        Precondition: dt is a nonnegative number and this is not exploding.
+        """
+        horizontal_difference = self._destination_x - self.x
+        vertical_difference = self._destination_y - self.y
+        remaining_distance = self._distance_to_destination()
+        requested_distance = ROCKET_SPEED * dt
+        if requested_distance >= remaining_distance:
+            seconds_until_arrival = remaining_distance / ROCKET_SPEED
+            seconds_left_to_grow = dt - seconds_until_arrival
+            self._start_explosion(seconds_left_to_grow)
         else:
-            # ugh this circle takes forever to grow 😭
-            radius_change = ROCKET_STEP_RADIUS * dt
-            new_radius = min(ROCKET_MAX_RADIUS, current_radius+radius_change)
-            self.width = new_radius * 2
-            self.height = new_radius * 2
-            if new_radius >= ROCKET_MAX_RADIUS:
-                self._finished = True
+            horizontal_direction = horizontal_difference / remaining_distance
+            vertical_direction = vertical_difference / remaining_distance
+            horizontal_movement = horizontal_direction * requested_distance
+            vertical_movement = vertical_direction * requested_distance
+            self.x = self.x + horizontal_movement
+            self.y = self.y + vertical_movement
+            tail_points = [self._starting_x, self._starting_y, self.x, self.y]
+            self._tail.points = tail_points
 
+    def _start_explosion(self, remaining_seconds):
+        """
+        Stops at the destination and begins a translucent explosion.
 
+        Parameter remaining_seconds: The time left after arriving this step.
+        Precondition: remaining_seconds is a nonnegative number.
+        """
+        # the little blue dot finally gets to be a big blue dot 😭
+        self.x = self._destination_x
+        self.y = self._destination_y
+        self._exploding = True
+        self.fillcolor = ROCKET_TAIL
+        self._grow_explosion(remaining_seconds)
 
-class MemoryLantern(GEllipse):
-    """A harmless expanding outline marking a lost city.
+    def _grow_explosion(self, dt):
+        """
+        Increases the radius by ROCKET_STEP_RADIUS per second, up to the max.
 
-    This is only a visual effect. It never collides with bombs or rockets.
-    Attribute _remaining: Seconds until the effect disappears, number >= 0.
-    """
-    # HIDDEN ATTRIBUTES (documented for the graders)
-    # Attribute _remaining: Seconds until the effect disappears, number >= 0.
-    # end of invariant notes
-
-
-    def isFinished(self):
-        """Returns True once this temporary mark has faded away."""
-        return self._remaining <= 0
-
-    def __init__(self, x, y):
-        """Places a small violet ring where a city was lost."""
-        super().__init__(x=x,y=y,width=12,height=12,
-                         fillcolor=None,linecolor=introcs.RGB(173,139,255,175),
-                         linewidth=3)
-        self._remaining = 4.0
-
-    def advance(self, dt):
-        """Widens the circle while it fades from the sky."""
-        self._remaining = max(0.0,self._remaining-dt)
-        new_diameter = min(110,self.width+dt*26)
+        Parameter dt: The number of seconds available for growth.
+        Precondition: dt is a nonnegative number and this is exploding.
+        """
+        old_radius = self.width / 2
+        added_radius = ROCKET_STEP_RADIUS * dt
+        new_radius = old_radius + added_radius
+        if new_radius > ROCKET_MAX_RADIUS:
+            new_radius = ROCKET_MAX_RADIUS
+        new_diameter = new_radius * 2
         self.width = new_diameter
         self.height = new_diameter
-        alpha = int(175 * self._remaining/4.0)
-        self.linecolor = introcs.RGB(173,139,255,alpha)
+
+    def _distance_to_destination(self):
+        """
+        Returns the nonnegative distance from this rocket to its destination.
+        """
+        horizontal_difference = self._destination_x - self.x
+        vertical_difference = self._destination_y - self.y
+        horizontal_distance_squared = horizontal_difference ** 2
+        vertical_distance_squared = vertical_difference ** 2
+        total_distance_squared = horizontal_distance_squared
+        total_distance_squared = (total_distance_squared +
+                                  vertical_distance_squared)
+        remaining_distance = total_distance_squared ** 0.5
+        return remaining_distance
 
 
 # omg this took so long 😭

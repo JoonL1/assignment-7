@@ -1,13 +1,14 @@
 """
-Constants for Froggit
+Constants for Missile Shield and its optional Night Post waves.
 
-This module global constants for the game Froggit. These constants need to be 
+This module holds global constants for Missile Shield. They need to be
 used in the model, the view, and the controller. As these are spread across 
 multiple modules, we separate the constants into their own module. This allows 
 all modules to access them.
 
 Authors: Joon Lee (jl4875) + Richard Li (rl998)
-# Date: December 6, 2026
+Date: December 6, 2026
+Original constants and assets: the supplied CS 1110 assignment package.
 """
 import introcs
 import sys
@@ -131,9 +132,34 @@ except:
 
 ### ADD MORE CONSTANTS (PROPERLY COMMENTED) AS NECESSARY ###
 
-# Extra feature in custom waves: slow the falling sky for a few seconds.
-FOCUS_MAX = 4.0
-FOCUS_RECHARGE = 0.45
-FOCUS_SLOW_FACTOR = 0.30
+# The small supplied aim speeds describe a nominal 60-frame-per-second game.
+# This converts them to seconds without changing their getter/setter limits.
+AIM_FRAME_SCALE = 60
 
+# Small physics steps help ordinary explosions catch bombs during slow frames.
+PHYSICS_STEP = 1 / 120
+
+### NIGHT POST CONSTANTS (enabled only by a wave's feature flags) ###
+
+# A forecast ring shows this many seconds ahead at the bomb's current speed.
+FORECAST_SECONDS = 1.5
+
+# Holding Space spends this many seconds of stored slow-bubble charge.
+BUBBLE_CAPACITY = 4.0
+# Radius of the local bubble around the aiming reticule, in pixels.
+BUBBLE_RADIUS = 125
+# Bombs inside the powered bubble keep this fraction of their normal speed.
+BUBBLE_SPEED_FACTOR = 0.22
+# Seconds of charge recovered per real second when Space is released.
+BUBBLE_RECHARGE = 0.4
+
+# Every three intercepted bombs return one rocket to the least-stocked silo.
+RECYCLE_GROUP_SIZE = 3
+
+# Simple RGBA colors for the extra instruments and readable normal controls.
+HUD_MINT = (0.65, 0.94, 0.88, 1)
+HUD_AMBER = (1, 0.80, 0.49, 1)
+HUD_PAPER = (0.92, 0.95, 0.97, 1)
+
+# ugh im so tired but at least the colors match now 😭
 # omg this took so long 😭
