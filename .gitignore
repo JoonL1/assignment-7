@@ -16,3 +16,8 @@ __pycache__/
 *.pyc
 .DS_Store
 shield/Data/highscore.txt
+
+__pycache__/
+*.pyc
+.DS_Store
+shield/Data/highscore.txt
