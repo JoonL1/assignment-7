@@ -5,13 +5,13 @@ standard waves keep the original rules, but a features dictionary can turn on
 the four night post extras explained in README.txt. every bomb still comes
 from the wave file, so the usual win and loss checks apply to both modes.
 
-date: joon lee (jl4875) + richard li (rl998)
+authors: joon lee (jl4875) + richard li (rl998)
 date: december 6, 2026
 framework and original assets: the supplied cs 1110 assignment package.
 """
 from game2d import GRectangle, GEllipse, GPath, GLabel
 from consts import *
-from models import Silo, City, Target, Bomb, Rocket
+from models import Silo, City, Target, Bomb, Rocket, SoundEffects
 
 
 class Wave(object):
@@ -48,18 +48,25 @@ class Wave(object):
     # _constellation_points: up to 18 (x, y) pairs from stopped bombs.
     # _notice: a short feedback string, or an empty string.
     # _notice_seconds: seconds left for the feedback; never negative.
-    # _hud_panel: the GRectangle behind the controls during gameplay.
-    # _mode_label: the GLabel that names the wave mode.
-    # _numbers_label: the GLabel with city, ammo, and threat counts.
-    # _controls_label: the GLabel with the keys that work in this mode.
-    # _notice_label: the GLabel with short feedback above the field.
-    # _bubble_label: the GLabel with the amount of bubble charge left.
-    # _bubble_track: the GRectangle behind the bar of bubble charge.
-    # _bubble_fill: the GRectangle for the filled part of the charge bar.
-    # _slot_labels: three GLabels that show which keys fire each silo.
-    # _bookmark_labels: three reused GLabels that number saved aim points.
+    # _sounds: one SoundEffects object with the current audio preference.
+    # _hud_panel: the GRectangle behind the main status rail.
+    # _hud_rules: three thin GRectangles separating the main counters.
+    # _mode_label: the lowercase GLabel naming the rules of this wave.
+    # _metric_labels: three GLabels for city, ammo, and threat values.
+    # _metric_titles: three GLabels naming those values in the same order.
+    # _controls_label: a GLabel for the shared aiming and firing controls.
+    # _audio_label: a GLabel with the sound preference or unavailable status.
+    # _tool_centers: enabled feature names mapped to horizontal centers.
+    # _tool_panels: one GRectangle for each enabled feature, in menu order.
+    # _tool_labels: enabled feature names mapped to lowercase value GLabels.
+    # _tool_hint_labels: enabled feature names mapped to key hint GLabels.
+    # _notice_panel: the GRectangle shown only while a notice is present.
+    # _notice_label: the GLabel for short feedback below the status cards.
+    # _bubble_track: the GRectangle behind the slow field charge bar.
+    # _bubble_fill: a GRectangle that stays within the charge bar track.
+    # _slot_labels: three GLabels showing which key fires each silo.
+    # _bookmark_labels: three reused GLabels numbering saved aim points.
     # _weather_labels: nine GLabels for optional time-until-impact text.
-    # _recycling_label: the GLabel that tracks progress toward more ammo.
 
     def getLost(self):
         """returns True if every city is gone, or False otherwise."""
@@ -76,9 +83,27 @@ class Wave(object):
     def getModeName(self):
         """returns the short name shown for the rules of this wave."""
         if self._custom_enabled:
-            return 'NIGHT POST'
+            return 'night post'
         else:
-            return 'STANDARD DEFENSE'
+            return 'standard defense'
+
+    def getHelpRows(self):
+        """
+        returns lowercase help lines for just the enabled custom tools.
+
+        this gives the pause screen a public view of the available controls,
+        so the app never has to read the hidden feature dictionary.
+        """
+        help_rows = []
+        if self._features['forecast']:
+            help_rows.append('f / preview bomb positions 1.5 seconds ahead')
+        if self._features['bookmarks']:
+            help_rows.append('b / save aim    tab / recall    x / clear')
+        if self._features['time_bubble']:
+            help_rows.append('space / hold to slow, release to recharge')
+        if self._features['recycling']:
+            help_rows.append('every 3 interceptions / 1 round returned')
+        return help_rows
 
     def getCitiesLeft(self):
         """returns how many cities are still alive, as an int from 0 to 6."""
@@ -107,6 +132,24 @@ class Wave(object):
         total_score = ammunition_score + surviving_city_score
         return total_score
 
+    def getSoundsEnabled(self):
+        """returns True when sound is allowed, even if audio is unavailable."""
+        return self._sounds.getEnabled()
+
+    def getSoundsAvailable(self):
+        """returns True if at least one supplied sound loaded successfully."""
+        return self._sounds.getAvailable()
+
+    def setSoundsEnabled(self, enabled):
+        """
+        changes the sound preference and refreshes the visible sound status.
+
+        parameter enabled: whether future sounds may play
+        precondition: enabled is a bool
+        """
+        self._sounds.setEnabled(enabled)
+        self._update_audio_label()
+
     def __init__(self, data):
         """
         sets up the defenses and all bombs scheduled for this wave.
@@ -127,6 +170,7 @@ class Wave(object):
         self._make_defenses()
         self._make_bombs()
         self._rockets = []
+        self._sounds = SoundEffects()
         self._make_bonus_state()
         self._make_hud()
         self._update_hud()
@@ -169,6 +213,8 @@ class Wave(object):
             for current_silo in self._silos:
                 current_silo.draw(view)
             return
+        if not self._won:
+            self._draw_hud_surfaces(view)
         self._draw_bonus_guides(view)
         for current_city in self._cities:
             current_city.draw(view)
@@ -181,6 +227,27 @@ class Wave(object):
         if not self._won:
             self._draw_hud(view)
             self._draw_aim(view)
+
+    def startSounds(self):
+        """plays the quiet start cue once after the app loads this wave."""
+        self._sounds.play('start')
+
+    def stopSounds(self):
+        """stops all current cues when the app pauses or leaves this wave."""
+        self._sounds.stop()
+
+    def finishSounds(self, player_won):
+        """
+        stops old cues, then plays one sound for the finished wave.
+
+        parameter player_won: whether the player cleared the wave
+        precondition: player_won is a bool
+        """
+        self._sounds.stop()
+        if player_won:
+            self._sounds.play('reward')
+        else:
+            self._sounds.play('impact')
 
     def _check_wave_data(self):
         """checks the wave dictionary before making any game objects."""
@@ -416,7 +483,8 @@ class Wave(object):
         previous_ammunition = chosen_silo.getAmmo()
         if previous_ammunition == 0:
             silo_key = str(silo_number + 1)
-            self._show_notice('Silo ' + silo_key + ' is empty. Try another.')
+            self._show_notice('silo ' + silo_key + ' is empty. try another.')
+            self._sounds.play('empty')
             return
         starting_x = chosen_silo.x
         starting_y = chosen_silo.top
@@ -426,6 +494,7 @@ class Wave(object):
                             destination_x, destination_y)
         self._rockets.append(new_rocket)
         chosen_silo.setAmmo(previous_ammunition - 1)
+        self._sounds.play('launch')
 
     def _remove_finished_rockets(self):
         """removes rockets after the full explosion has been shown once."""
@@ -468,12 +537,25 @@ class Wave(object):
         self._update_bubble_charge(step_seconds)
         self._release_bombs()
         self._resolve_interceptions()
-        for current_rocket in self._rockets:
-            current_rocket.update(step_seconds)
+        self._move_rockets(step_seconds)
         self._move_bombs(step_seconds)
         self._resolve_interceptions()
         self._resolve_impacts()
         self._check_finished()
+
+    def _move_rockets(self, step_seconds):
+        """
+        moves rockets and plays one cue when each rocket starts exploding.
+
+        parameter step_seconds: seconds for this movement step
+        precondition: step_seconds is positive and at most PHYSICS_STEP
+        """
+        for current_rocket in self._rockets:
+            was_exploding = current_rocket.getExploding()
+            current_rocket.update(step_seconds)
+            if not was_exploding:
+                if current_rocket.getExploding():
+                    self._sounds.play('explode')
 
     def _release_bombs(self):
         """releases every bomb that is due, even if the list is out of order."""
@@ -546,6 +628,7 @@ class Wave(object):
                     target_object.setAmmo(0)
                 else:
                     target_object.destroy()
+                self._sounds.play('impact')
                 del self._falling_bombs[bomb_position]
                 if self.getCitiesLeft() == 0:
                     self._finish_loss()
@@ -696,6 +779,7 @@ class Wave(object):
         parameter current_bomb: the stopped bomb, before it is removed
         precondition: current_bomb is a Bomb
         """
+        self._sounds.play('intercept')
         self._intercepted_count = self._intercepted_count + 1
         if not self._features['recycling']:
             return
@@ -721,6 +805,7 @@ class Wave(object):
         if previous_ammunition < AMMO_COUNT:
             chosen_silo.setAmmo(previous_ammunition + 1)
             self._recycled_count = self._recycled_count + 1
+            self._sounds.play('reward')
             silo_name = str(chosen_silo_number + 1)
             self._show_notice('Comet compost: +1 rocket returned to silo '
                               + silo_name + '.')
@@ -734,7 +819,7 @@ class Wave(object):
         parameter message: the feedback to show
         precondition: message is a string that fits on one display line
         """
-        self._notice = message
+        self._notice = message.lower()
         self._notice_seconds = 2.8
 
     def _update_notice(self, dt):
@@ -750,65 +835,142 @@ class Wave(object):
             self._notice = ''
 
     def _make_hud(self):
-        """sets up the regular controls and the labels for optional tools."""
-        panel_color = (0.035, 0.055, 0.10, 0.94)
-        self._hud_panel = GRectangle(x=GAME_WIDTH / 2, y=GAME_HEIGHT - 37,
-                                    width=GAME_WIDTH, height=74,
-                                    fillcolor=panel_color, linewidth=0)
-        self._mode_label = self._make_label(self.getModeName(), 170,
-                                           GAME_HEIGHT - 24, 23, HUD_MINT)
-        self._numbers_label = self._make_label('', GAME_WIDTH - 240,
-                                              GAME_HEIGHT - 24, 18, HUD_PAPER)
-        self._controls_label = self._make_label('', GAME_WIDTH / 2,
-                                               GAME_HEIGHT - 55, 14, HUD_PAPER)
-        self._notice_label = self._make_label('', GAME_WIDTH / 2,
-                                             GAME_HEIGHT - 121, 17, HUD_AMBER)
+        """makes a quiet status rail, optional tool cards, and small notices."""
+        self._hud_panel = GRectangle(x=GAME_WIDTH / 2, y=807,
+                                    width=GAME_WIDTH - 48, height=70,
+                                    fillcolor=UI_SURFACE,
+                                    linecolor=UI_BORDER, linewidth=0.7)
+        self._mode_label = self._make_label(self.getModeName(), 56,
+                                           820, 22, UI_TEXT)
+        self._mode_label.font_name = THEME_FONT
+        self._mode_label.left = 56
+        controls = 'arrows aim   1 / 2 / 3 fire   p pause'
+        self._controls_label = self._make_label(controls, 56,
+                                               789, 12, UI_MUTED)
+        self._controls_label.left = 56
+        self._audio_label = self._make_label('', 456, 820, 11, UI_MUTED)
+        self._make_metric_labels()
+        self._make_tool_cards()
         self._make_bubble_meter()
+        self._make_notice_label()
         self._make_slot_labels()
-        self._recycling_label = self._make_label('', GAME_WIDTH - 216,
-                                                GAME_HEIGHT - 92, 14, HUD_MINT)
 
     def _make_label(self, text, x, y, size, color):
         """
-        returns a centered label using the readable font from the starter.
+        returns a lowercase label using the readable supplied font.
 
-        parameter text: the words to show
-        precondition: text is a string
-        parameter x: horizontal center
-        precondition: x is a number
-        parameter y: vertical center
-        precondition: y is a number
-        parameter size: font size
-        precondition: size is a positive number
-        parameter color: color of the text
-        precondition: color is a game2d color name or RGBA tuple
+        parameter text: the words to show; must be a string
+        parameter x: horizontal center; must be a number
+        parameter y: vertical center; must be a number
+        parameter size: font size; must be a positive number
+        parameter color: text color; must be a valid game2d color
         """
-        new_label = GLabel(text=text, x=x, y=y, font_name=BASIC_FONT,
-                           font_size=size, linecolor=color)
+        new_label = GLabel(text=text.lower(), x=x, y=y,
+                           font_name=BASIC_FONT, font_size=size,
+                           linecolor=color)
         return new_label
 
+    def _make_metric_labels(self):
+        """gives city, ammo, and threat counts separate spaces on the rail."""
+        self._metric_labels = []
+        self._metric_titles = []
+        self._hud_rules = []
+        metric_names = ['cities', 'ammo', 'incoming']
+        for metric_number in range(3):
+            metric_x = 658 + 172 * metric_number
+            value_label = self._make_label('', metric_x, 819, 26, UI_TEXT)
+            value_label.font_name = THEME_FONT
+            self._metric_labels.append(value_label)
+            metric_name = metric_names[metric_number]
+            title_label = self._make_label(metric_name, metric_x,
+                                           789, 11, UI_MUTED)
+            self._metric_titles.append(title_label)
+            rule = GRectangle(x=metric_x - 86, y=807, width=1, height=38,
+                              fillcolor=UI_BORDER)
+            self._hud_rules.append(rule)
+
+    def _make_tool_cards(self):
+        """lays out only the tool cards enabled by this wave file."""
+        self._tool_centers = {}
+        self._tool_panels = []
+        self._tool_labels = {}
+        self._tool_hint_labels = {}
+        tool_names = ['forecast', 'bookmarks', 'time_bubble', 'recycling']
+        enabled_count = 0
+        for tool_name in tool_names:
+            if self._features[tool_name]:
+                enabled_count = enabled_count + 1
+        if enabled_count == 0:
+            return
+        slot_width = (GAME_WIDTH - 36) / enabled_count
+        current_slot = 0
+        for tool_name in tool_names:
+            if self._features[tool_name]:
+                center_x = 24 + current_slot * slot_width
+                center_x = center_x + (slot_width - 12) / 2
+                self._tool_centers[tool_name] = center_x
+                self._make_tool_card(tool_name, center_x, slot_width - 12)
+                current_slot = current_slot + 1
+
+    def _make_tool_card(self, tool_name, center_x, width):
+        """
+        makes one small card with a value and a short keyboard hint.
+
+        parameter tool_name: the feature flag of this card
+        precondition: tool_name is an enabled key in _features
+        parameter center_x: the horizontal center; must be a number
+        parameter width: the card width; must be a positive number
+        """
+        panel = GRectangle(x=center_x, y=733, width=width, height=54,
+                           fillcolor=UI_SURFACE_SOFT,
+                           linecolor=UI_BORDER, linewidth=0.5)
+        self._tool_panels.append(panel)
+        label = self._make_label('', center_x, 745, 16, UI_ACCENT)
+        self._tool_labels[tool_name] = label
+        hint = self._make_label('', center_x, 721, 11, UI_MUTED)
+        self._tool_hint_labels[tool_name] = hint
+
+    def _make_notice_label(self):
+        """places short feedback below the status rail and optional cards."""
+        notice_y = 741
+        if self._custom_enabled:
+            notice_y = 678
+        self._notice_panel = GRectangle(x=GAME_WIDTH / 2, y=notice_y,
+                                        width=610, height=30,
+                                        fillcolor=UI_SURFACE,
+                                        linecolor=UI_BORDER, linewidth=0.5)
+        self._notice_label = self._make_label('', GAME_WIDTH / 2,
+                                             notice_y, 14, UI_AMBER)
+
     def _make_bubble_meter(self):
-        """makes the bubble charge bar, which stays hidden in standard waves."""
-        meter_y = GAME_HEIGHT - 92
-        self._bubble_label = self._make_label('', 130, meter_y, 14, HUD_MINT)
-        self._bubble_track = GRectangle(x=330, y=meter_y, width=175, height=5,
-                                       fillcolor=(0.75, 0.90, 0.92, 0.22))
-        self._bubble_fill = GRectangle(x=330, y=meter_y, width=175, height=5,
-                                      fillcolor=HUD_MINT)
+        """prepares a small charge bar, drawn only with the slow field card."""
+        center_x = GAME_WIDTH / 2
+        if self._features['time_bubble']:
+            center_x = self._tool_centers['time_bubble']
+            self._tool_hint_labels['time_bubble'].x = center_x - 67
+        self._bubble_track = GRectangle(x=center_x + 26, y=721,
+                                        width=96, height=3,
+                                        fillcolor=UI_BORDER)
+        self._bubble_fill = GRectangle(x=center_x + 26, y=721,
+                                       width=96, height=3,
+                                       fillcolor=UI_ACCENT)
 
     def _make_slot_labels(self):
-        """makes silo key labels and a forecast label for each fixed slot."""
+        """makes small silo key badges and impact estimates above targets."""
         self._slot_labels = []
         for silo_number in range(len(self._silos)):
             silo_x = self._silos[silo_number].x
-            key_text = '[' + str(silo_number + 1) + ']'
-            key_label = self._make_label(key_text, silo_x, 143, 16, HUD_PAPER)
+            key_text = str(silo_number + 1)
+            key_label = self._make_label(key_text, silo_x, 143, 12, UI_TEXT)
+            key_label.width = 26
+            key_label.height = 19
+            key_label.fillcolor = UI_SURFACE
             self._slot_labels.append(key_label)
         self._weather_labels = []
         for target_object in self._targets:
             label_height = target_object.top + 35
             weather_label = self._make_label('', target_object.x,
-                                             label_height, 13, HUD_AMBER)
+                                             label_height, 13, UI_AMBER)
             self._weather_labels.append(weather_label)
         self._make_bookmark_labels()
 
@@ -823,50 +985,67 @@ class Wave(object):
             self._bookmark_labels.append(bookmark_label)
 
     def _update_hud(self):
-        """updates the visible counts, but does not change any game rules."""
+        """updates the visible counts, without changing any game rules."""
         total_ammunition = 0
         for current_silo in self._silos:
             total_ammunition = total_ammunition + current_silo.getAmmo()
         remaining_threats = len(self._pending_bombs) + len(self._falling_bombs)
-        counter_text = 'CITIES ' + str(self.getCitiesLeft()) + '/6'
-        counter_text = counter_text + '    AMMO ' + str(total_ammunition)
-        counter_text = counter_text + '    THREATS ' + str(remaining_threats)
-        self._numbers_label.text = counter_text
-        self._controls_label.text = 'ARROWS aim     1 / 2 / 3 fire     P pause'
-        if self._custom_enabled:
-            self._controls_label.text = 'ARROWS aim   1 / 2 / 3 fire   P pause'
-            extra_controls = self._get_bonus_controls()
-            self._controls_label.text += extra_controls
-        self._notice_label.text = self._notice
+        self._metric_labels[0].text = str(self.getCitiesLeft()) + ' / 6'
+        self._metric_labels[1].text = str(total_ammunition)
+        self._metric_labels[2].text = str(remaining_threats)
+        self._notice_label.text = self._notice.lower()
+        self._update_audio_label()
         self._update_bonus_hud()
 
-    def _get_bonus_controls(self):
-        """returns controls for only the extras enabled in this wave."""
-        extra_controls = ''
-        if self._features['forecast']:
-            extra_controls = extra_controls + '   F forecast'
-        if self._features['bookmarks']:
-            extra_controls += '   B save / TAB recall / X clear'
-        if self._features['time_bubble']:
-            extra_controls = extra_controls + '   SPACE slow bubble'
-        return extra_controls
+    def _update_audio_label(self):
+        """shows the sound preference and whether audio could be loaded."""
+        if not self._sounds.getAvailable():
+            self._audio_label.text = 'audio unavailable'
+        elif self._sounds.getEnabled():
+            self._audio_label.text = 'v  sound on'
+        else:
+            self._audio_label.text = 'v  sound off'
 
     def _update_bonus_hud(self):
-        """updates the bubble charge, recycling count, and impact estimates."""
+        """updates only the tool cards allowed by the current wave file."""
+        if self._features['forecast']:
+            forecast_text = 'forecast off'
+            if self._forecast_visible:
+                forecast_text = 'forecast on'
+            self._tool_labels['forecast'].text = forecast_text
+            self._tool_hint_labels['forecast'].text = 'f toggle  /  1.5s ahead'
+        if self._features['bookmarks']:
+            bookmark_text = 'bookmarks ' + str(len(self._bookmarks)) + ' / 3'
+            self._tool_labels['bookmarks'].text = bookmark_text
+            bookmark_hint = 'b save  /  tab recall  /  x clear'
+            self._tool_hint_labels['bookmarks'].text = bookmark_hint
+        if self._features['time_bubble']:
+            self._update_bubble_meter()
+        if self._features['recycling']:
+            self._update_recycling_meter()
+        if self._forecast_visible:
+            self._update_weather_reports()
+
+    def _update_bubble_meter(self):
+        """shows the remaining charge and keeps the fill inside its track."""
         remaining_tenths = int(self._bubble_seconds * 10) / 10
-        self._bubble_label.text = 'BORROWED SKY  ' + str(remaining_tenths) + 's'
+        bubble_text = 'slow field ' + str(remaining_tenths) + 's'
+        self._tool_labels['time_bubble'].text = bubble_text
+        self._tool_hint_labels['time_bubble'].text = 'space'
         charge_fraction = self._bubble_seconds / BUBBLE_CAPACITY
-        filled_width = 175 * charge_fraction
+        filled_width = self._bubble_track.width * charge_fraction
         if filled_width < 0.1:
             filled_width = 0.1
         self._bubble_fill.width = filled_width
         self._bubble_fill.left = self._bubble_track.left
+
+    def _update_recycling_meter(self):
+        """shows progress toward the next refund and actual ammo returned."""
         group_progress = self._intercepted_count % RECYCLE_GROUP_SIZE
-        recycling_text = 'COMET COMPOST  ' + str(group_progress) + '/3'
-        recycling_text += '    RETURNED ' + str(self._recycled_count)
-        self._recycling_label.text = recycling_text
-        if self._forecast_visible:
-            self._update_weather_reports()
+        recycling_text = 'recycle ' + str(group_progress) + ' / 3'
+        self._tool_labels['recycling'].text = recycling_text
+        refund_text = '+' + str(self._recycled_count) + ' ammo returned'
+        self._tool_hint_labels['recycling'].text = refund_text
 
     def _update_weather_reports(self):
         """shows the soonest active impact estimate above each living target."""
@@ -1005,33 +1184,60 @@ class Wave(object):
         target_outline = GEllipse(x=self._target.x, y=self._target.y,
                                   width=AIM_WIDTH, height=AIM_HEIGHT,
                                   fillcolor=(0, 0, 0, 0), linewidth=0.8,
-                                  linecolor=(1, 1, 1, 0.62))
+                                  linecolor=UI_ACCENT)
         target_outline.draw(view)
         self._target.draw(view)
 
     def _draw_hud(self, view):
         """
-        draws the controls, counts, and any enabled extra tool displays.
+        draws labels above the game, so the status text stays readable.
 
         parameter view: the place to draw the displays
         precondition: view is a GView
         """
-        self._hud_panel.draw(view)
         self._mode_label.draw(view)
-        self._numbers_label.draw(view)
         self._controls_label.draw(view)
-        self._notice_label.draw(view)
+        self._audio_label.draw(view)
+        for current_label in self._metric_labels:
+            current_label.draw(view)
+        for current_label in self._metric_titles:
+            current_label.draw(view)
+        self._draw_tool_labels(view)
         for current_label in self._slot_labels:
             current_label.draw(view)
-        if self._features['time_bubble']:
-            self._bubble_label.draw(view)
-            self._bubble_track.draw(view)
-            self._bubble_fill.draw(view)
-        if self._features['recycling']:
-            self._recycling_label.draw(view)
+        if self._notice != '':
+            self._notice_panel.draw(view)
+            self._notice_label.draw(view)
         if self._forecast_visible:
             for weather_label in self._weather_labels:
                 weather_label.draw(view)
+
+    def _draw_hud_surfaces(self, view):
+        """
+        draws card backgrounds first, so they cannot cover falling bombs.
+
+        parameter view: the place to draw the surfaces
+        precondition: view is a GView
+        """
+        self._hud_panel.draw(view)
+        for current_rule in self._hud_rules:
+            current_rule.draw(view)
+        for current_panel in self._tool_panels:
+            current_panel.draw(view)
+
+    def _draw_tool_labels(self, view):
+        """
+        draws the enabled tool values, key hints, and optional charge bar.
+
+        parameter view: the place to draw the tools
+        precondition: view is a GView
+        """
+        for tool_name in self._tool_labels:
+            self._tool_labels[tool_name].draw(view)
+            self._tool_hint_labels[tool_name].draw(view)
+        if self._features['time_bubble']:
+            self._bubble_track.draw(view)
+            self._bubble_fill.draw(view)
 
 
 # omg this took so long 😭

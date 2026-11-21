@@ -1,279 +1,268 @@
-missile shield: night post
+missile shield / night post
 implementation draft for joon lee (jl4875)
 november 20, 2026
 
-loading update and quick setup
+quick setup
 
-when updating, extract the complete shield.zip into a fresh folder, then run
-python shield from the folder containing shield and press C at the menu.
-the full game needs shield/Data/nightpost.json and
-shield/Data/nightpost_calm.json; downloading the four Python files alone does
-not include those wave files or the other resources needed by the game.
+extract the complete shield.zip, then open a terminal in the folder that
+contains shield. use the course python environment with kivy and introcs:
 
-although the screenshot showed nightpost.json, the old generic error screen
-did not show the actual cause, so it does not prove that the json file was
-missing. the original complete archive loaded night post in a clean test
-using Kivy, and the cause of the failure in the screenshot is still unknown.
-the updated screen says whether reading the file or creating the wave failed
-and shows the exception type and message in up to three wrapped lines; the
-full traceback goes to the terminal log. press R to retry or M for the menu.
+    python3 shield
 
-what goes in the submission
+press s for the selected wave, or c for night post with all four extra tools.
+the default selected wave is easy.json. these commands choose another file:
 
-submit the complete shield.zip because it includes the shield folder, these
-four Python files, both custom waves, this README.txt, and all the original
-resources. the images, fonts, wave data, launcher, and game2d folder are also
-needed, so the edited Python files by themselves are not a complete game.
+    python3 shield medium.json
+    python3 shield hard.json
+    python3 shield immediate.json
+    python3 shield staggered.json
+    python3 shield doubletap.json
+    python3 shield malformed.json
+    python3 shield nightpost.json
+    python3 shield nightpost_calm.json
 
-changed files:
-    app.py
-    wave.py
-    models.py
-    consts.py
+after choosing a file on the command line, press s to start that exact file.
+c always selects nightpost.json. filenames without .json also work because
+the original launcher adds the ending. use python3 on a mac that does not
+have a command named python.
 
-added files:
-    Data/nightpost.json
-    Data/nightpost_calm.json
-    README.txt
+keep the whole shield folder together. the previous repository was missing
+Data/nightpost.json and Data/nightpost_calm.json, which caused the loading
+error. both files are included here. downloading only the python files does
+not include the wave data, fonts, images, sounds, or framework.
 
-the supplied __main__.py, game2d package, original wave files, and original
-Images, Fonts, and Sounds files are preserved. no new artwork, font, or sound
-downloads are needed. malformed.json is supposed to be invalid, so that
-supplied file stays unchanged and can be used to try the error screen.
+what changed in this update
 
-running the game
+all visible game text is lowercase, including the window title, menus,
+controls, counters, feedback, pause, results, and loading errors. the supplied
+roboto regular and bold fonts have real lowercase letters, unlike the old
+display font. actual filenames keep the original case when files are read,
+and terminal tracebacks keep the original exception names and paths.
 
-use the same Python environment with Kivy and introcs used for cs 1110.
-extract shield.zip, open a terminal in the folder containing shield, and run:
+the menu now uses a quiet navy sunset, a large two-line title, a simple sky
+map, and two clearly separated start cards. small keyboard badges show the
+controls. the pause and result panels use the same colors and spacing.
 
-    python shield
+the gameplay rail separates cities, ammo, and incoming threats. each enabled
+custom tool gets its own small card, so disabled features do not take up
+space. a slow-field charge bar, bookmark count, forecast status, and refund
+progress show what is ready. the silo ammo counts have compact badges and
+small bars. blue rocket trails and translucent blasts stand out against the
+darker sky, while incoming bombs stay white.
 
-press S to load easy.json with the original rules, or press C to load
-nightpost.json with all four extra features.
+the interface backgrounds draw below the actual missiles, so the top of the
+playfield is still visible. the original sprites, sizes, target positions,
+aim bounds, movement speeds, blast growth, scoring, and end conditions stay
+the same. the four extra gameplay tools still require custom json flags.
 
-for example, these commands pick a different wave:
-
-    python shield medium.json
-    python shield hard.json
-    python shield immediate.json
-    python shield staggered.json
-    python shield doubletap.json
-    python shield malformed.json
-    python shield nightpost.json
-    python shield nightpost_calm.json
-
-after choosing a file on the command line, press S to start that exact file,
-even if it is a custom wave. C always picks nightpost.json. like the original
-launcher, the command also accepts a filename without the .json ending.
-
-nightpost_calm.json is the slower introduction, with 18 bombs moving at
-38 pixels per second. nightpost.json has 42 bombs moving at 62 pixels per
-second, with staggered drops, crossing paths, and groups of bombs. every bomb
-is listed in the matching json file; the program adds no extra threats.
+sound effects are now connected to gameplay events in both modes. v toggles
+sound from any screen, and the preference stays the same across retries,
+pauses, and trips back to the menu.
 
 shared controls
 
-    S            start the selected file from the welcome screen.
-    C            start the night post demonstration from the welcome screen.
-    arrow keys   move the reticule; holding a key speeds up movement.
-    1            fire one rocket from the left silo.
-    2            fire one rocket from the center silo.
-    3            fire one rocket from the right silo.
-    P            pause and show the controls.
-    R            resume when paused, or restart after completion or failure.
-    M            open the menu from pause, completion, or a loading error.
+    s            start the selected wave from the menu.
+    c            start night post from the menu.
+    arrow keys   aim; holding a direction increases movement speed.
+    1            fire from the left silo.
+    2            fire from the center silo.
+    3            fire from the right silo.
+    p            pause and show help for the current mode.
+    r            resume, or restart after a result or loading failure.
+    m            return to the menu from pause, results, or an error.
+    v            mute or unmute sound on any screen.
 
 firing spends one round only when the chosen silo has ammo. holding a firing
 key does not keep firing, but different firing keys can be pressed together.
-a rocket keeps the aiming point copied at launch, so moving the reticule or
-recalling a bookmark later does not change that destination. trying to fire
-an empty silo shows a short message.
+a rocket keeps the aiming point copied at launch, so later aim movement does
+not redirect a rocket. an empty silo gives a short message and a sound cue.
 
-the four night post features
+the four night post tools
 
-the features dictionary in each custom file explicitly enables these extras.
-all four are disabled in the supplied waves, and combinations with only some
-features enabled work too.
+the features dictionary in each custom file explicitly enables the tools.
+all four are disabled in the supplied waves. combinations with only some
+features enabled work too, and both the dashboard and pause help adapt.
 
-1. postcards from tomorrow: forecasts and city weather
+1. postcards from tomorrow / forecasts
 
-press F to show or hide the forecast, which starts visible in the custom
-waves. each falling bomb gets a hollow amber ring showing the predicted
-position 1.5 seconds ahead, plus a thin line back to the current position.
-an amber estimate above each threatened living target shows the soonest
-expected impact of any active bomb aimed at that target.
+press f to show or hide the forecast, which starts visible in the custom
+waves. a hollow amber ring shows where each falling bomb would be 1.5 seconds
+later at its current speed. an amber estimate above each threatened target
+shows the earliest expected impact among the active bombs aimed there.
 
-the guides help with aiming ahead of moving bombs and deciding which city
-needs attention. a hollow ring is only a prediction, so it cannot act as an
-enemy or an explosion. collisions use the actual white head of each bomb.
+the guides help with aiming ahead of a bomb and choosing what needs attention.
+the rings are predictions, so they do not act as enemies or explosions. only
+the actual center of a bomb counts for an interception. predictions stop at
+the target instead of going underground, and the tilde means an estimate.
+moving the slow field or stopping a bomb can change what happens next.
 
-the estimates use the current effective speed of the bomb. however, moving
-the slow bubble, running out of charge, or intercepting a bomb can change
-what happens next. a prediction stops at the destination instead of going
-underground, and the tilde on an impact readout means the time is an estimate.
+2. sky bookmarks / save useful aim positions
 
-2. sky bookmarks: save useful places in the sky
+press b to save the reticule position as a numbered hollow marker. up to
+three positions are kept. tab cycles through them, and x clears them. after
+three saves, b replaces slot 1, then slots 2 and 3, before repeating.
 
-press B to save the current reticule position as a numbered hollow marker.
-up to three markers are kept. press Tab to cycle through the saved positions
-or X to clear them all. after three saves, another B replaces slot 1, then
-later saves replace slots 2 and 3 before repeating that cycle.
+this gives a keyboard player a quick way back to a useful defensive position.
+only the reticule moves, so rockets already flying keep their destinations.
+recalled positions obey every aim boundary, including the silo-top limit.
 
-this gives a keyboard player a quick way back to useful defensive positions
-without crossing the whole screen again. only the reticule moves, so rockets
-already in flight keep the original destinations. recalled positions still
-follow every reticule boundary, including the limit above the silos.
+3. borrowed sky / a local slow field
 
-3. borrowed sky: a bubble that slows nearby bombs
+hold space to put a mint field around the reticule. while charge is available,
+bombs within its 125-pixel radius move at 22% of normal speed. the field moves
+with the reticule, but it cannot destroy bombs by itself.
 
-hold Space to put a mint bubble around the current reticule. while charge is
-available, bombs within the radius of 125 pixels move at 22% of normal speed.
-the bubble moves with the reticule, including when a bookmark is recalled,
-but the bubble by itself does not destroy bombs.
+the meter starts with 4 seconds of charge. holding space spends one second
+of charge per real second, even with no bombs inside. releasing space restores
+0.4 seconds of charge per second, up to 4 seconds. holding an empty meter does
+not recharge it. pausing freezes charge with the rest of the wave.
 
-the meter starts with 4 seconds of charge. holding Space spends one second
-of charge per real second, even if there are no bombs inside. releasing Space
-recovers 0.4 seconds of charge per second, up to the full 4 seconds. holding
-Space with an empty meter does not recharge it.
+only nearby bombs slow down. rockets, blasts, outside bombs, and scheduled
+drop times keep the usual timing. for example, a field can hold a dangerous
+group for a moment while a rocket reaches the aiming point.
 
-only nearby bombs slow down. rockets, growing blue explosions, bombs outside
-the bubble, and the clock for scheduled drops keep the usual timing. for
-example, the bubble can hold a dangerous group briefly while a rocket reaches
-it. pausing freezes the meter along with the rest of the wave.
+4. comet compost / interceptions give ammo back
 
-4. comet compost: turn interceptions into a constellation and ammo
+each stopped bomb leaves a faint star, and consecutive points form a small
+constellation. only the newest 18 points stay visible. every three stopped
+bombs return one rocket to the silo with the least ammo. ties go from left
+to right, and no silo goes above AMMO_COUNT. if all silos are full, no round
+is added for that group.
 
-each intercepted bomb leaves a faint star, and consecutive interception
-points are connected into a constellation. only the newest 18 points stay
-visible. every three interceptions return one rocket to the silo with the
-least ammo; ties go from left to right. no silo goes above AMMO_COUNT, so if
-all three are full, that group of interceptions returns no extra round.
+the recycle card shows progress toward the next return and how many rounds
+were actually returned. a message names the silo receiving the round. a bomb
+that reaches the ground gives no credit, and a bomb inside two blasts still
+counts once. standard waves never get these refunds.
 
-the comet compost readout shows progress toward the next return and the
-number of rounds actually returned. a short message names the silo receiving
-the round. a bomb that reaches a city or silo gives no credit, and a bomb
-caught in two explosions still counts only once.
+the constellation is decoration, so it cannot damage anything or delay the
+end of a wave. it disappears with the other airborne visuals after a loss.
 
-recycling in this custom mode can refill a silo that a bomb emptied, but
-standard waves never get that benefit. the constellation is only decoration,
-so it cannot damage anything or delay the end of a finished wave. it clears
-with the other airborne visuals after a loss.
+custom waves
+
+nightpost.json has 42 bombs moving at 62 pixels per second, with staggered
+drops, crossing paths, and groups to intercept. nightpost_calm.json is the
+slower introduction, with 18 bombs moving at 38 pixels per second. both use
+version 2 and enable all four tools. every bomb is listed in its json file;
+the program does not add hidden threats.
+
+sound events
+
+all effects use the supplied wav files through the game2d Sound class:
+
+    wave starts              air-raid.wav, played quietly once.
+    successful launch        blast3.wav.
+    rocket begins a blast    blast1.wav.
+    bomb intercepted         ping.wav, at a low volume.
+    bomb hits a target       blast2.wav.
+    empty-silo launch        sizzle.wav.
+    actual ammo refund       ping.wav, at a higher volume.
+    wave won                 the reward cue.
+    wave lost                the impact cue.
+
+each cue has three preloaded voices so quick actions can overlap. a voice
+stops before replay, as required by the supplied sound api. explosion audio
+plays once when a rocket arrives, not on every frame while its blast grows.
+likewise, one interception or impact produces one event cue.
+
+pausing, returning to the menu, muting, and closing stop active sounds. resume
+keeps the same wave without replaying its start cue. a result stops earlier
+cues and plays one completion cue. unmuting does not replay old events.
+
+an unavailable audio device or sound file does not stop the game. the failed
+cue is reported in the terminal; other available cues can still play. the
+display says audio unavailable if none could load. sound requests still
+depend on the audio system, so exact speaker timing is not guaranteed.
 
 core rules and scoring
 
-the ground has nine equally spaced target slots. silos occupy slots 0, 4, and
-8, and six cities occupy the others. each silo starts with ten rounds. a city
-is destroyed when a bomb reaches it. a hit on a silo removes all ammo from
-that silo, but the picture stays visible. repeated hits on an already
-destroyed city are safe.
+there are nine equally spaced target slots. silos occupy slots 0, 4, and 8,
+with six cities in the others. each silo starts with ten rounds. a bomb hit
+destroys a city or empties a silo. the silo image stays visible. target slots
+stay fixed, so a later bomb aimed at a destroyed city still goes to the
+original destination.
 
-a rocket launches from the top center of a silo and moves at ROCKET_SPEED.
-on reaching the fixed destination, it becomes a see-through explosion. the
-radius grows by ROCKET_STEP_RADIUS each second, up to ROCKET_MAX_RADIUS, and
-the explosion is drawn at full size for one frame before removal. an
-interception happens only when the center of a bomb is inside an exploding
-rocket; the tail of a bomb does not count.
+rockets launch from the top center of a silo at ROCKET_SPEED. on reaching the
+fixed aim point, a rocket becomes translucent and grows by ROCKET_STEP_RADIUS
+per second up to ROCKET_MAX_RADIUS. width and height grow by twice the radius
+change. the full-size blast is drawn once before removal. only the center of
+a bomb inside an exploding rocket counts as an interception.
 
-the player loses as soon as the last city is destroyed. remaining bombs,
-rockets, the reticule, and custom guides disappear, but the silos stay. having
-no ammo does not end the wave if at least one city is still standing.
+loss happens as soon as the last city is destroyed. bombs, rockets, aiming,
+and extra guides disappear, but silos remain. running out of ammo alone does
+not end a wave. victory waits until a city remains and all pending bombs,
+falling bombs, flying rockets, and growing blasts are gone.
 
-the player wins only when at least one city is alive and there are no pending
-bombs, falling bombs, flying rockets, or exploding rockets. the final score
-is worked out once the wave finishes:
+the score is remaining ammo times SCORE_AMMO plus living cities times
+SCORE_CITY. the supplied values are 5 points per round and 100 per city.
+keeping all six cities and all thirty rounds gives 750 points. custom ammo
+recycling affects how much ammo remains, but does not change this formula.
 
-    remaining silo ammunition * SCORE_AMMO
-    + surviving cities * SCORE_CITY
+loading errors
 
-the supplied values give 5 points per round and 100 per city. keeping all six
-cities and all thirty rounds gives 750 points. custom recycling changes how
-much ammo remains, but the score formula stays the same. R resumes or
-restarts in both modes, as required.
+missing or malformed json shows which step failed, the filename, and up to
+three wrapped lines of the exception. valid json with invalid wave contents
+is reported as a wave-creation error. r retries the same file after a repair,
+and m returns to the menu. filenames retain the exact case for loading, while
+the on-screen copy is lowercase. the terminal keeps the full original error.
 
-how the code is split up
+code and submission
 
-app.py handles menus, loading files, pausing, resuming, and completion
-messages. it only calls public methods of Wave and does not import the model
-classes.
+submit the complete shield.zip, which contains this shield folder. the files
+with changed implementation are app.py, wave.py, models.py, and consts.py.
+the added files are Data/nightpost.json, Data/nightpost_calm.json, and this
+README.txt. the original images, fonts, sounds, provided json files, launcher,
+and game2d package are all included. malformed.json intentionally stays bad.
 
-wave.py manages one wave, the fixed mapping of target slots, pending and
-active bombs, rockets, collisions, and optional tools. access to new model
-attributes goes through public methods. inherited graphics properties like
-x, y, and top are already public in game2d.
+app.py handles screens, states, file loading, and the shared sound preference.
+it uses only public methods of Wave. wave.py handles one wave, collisions,
+features, hud, and sound events. models.py contains the five game-object
+classes plus SoundEffects. models do not read a Wave or the app. consts.py
+keeps the timing, sizes, feature settings, and shared visual colors together.
 
-models.py contains Silo, City, Target, Bomb, and Rocket. these objects track
-the data needed for movement and drawing without reading a Wave or the app.
-destroyed cities stay in the fixed target mapping, so a later bomb aimed at
-the same city still reaches the correct place.
+the code uses ordinary classes, methods, explicit arithmetic, conditionals,
+lists, dictionaries, loops, assertions, and exceptions. all new attributes
+are hidden and documented. every method has a specification. blank lines
+and docstrings do not count toward the 25-line limit; comments and continued
+lines do count in the conservative audit used here.
 
-consts.py keeps the standard constants of the starter and adds colors,
-physics timing, and custom feature settings. extra gameplay features require
-explicit json flags, but both modes share the menu and status display style.
+the actual starter uses the json key missiles, and its aim constants start
+with AIM_. the window top is GAME_HEIGHT. the original aim values of 0.2 and
+10 are treated as frame-based values at 60 frames per second, then converted
+using elapsed time. bomb and rocket speeds keep pixels-per-second units.
+small physics steps prevent fast frames from skipping collisions, while key
+presses are still read only once per displayed frame.
 
-the code uses ordinary classes, getters and setters, explicit arithmetic,
-loops, dictionaries, lists, conditionals, assertions, and exceptions. the
-four edited files use no comprehensions, decorators, generators, lambdas, or
-extra runtime libraries. every added method has a specification. the method
-length check counts comments and continued lines, excluding only blank lines
-and docstrings, so the 25-line limit is checked conservatively.
+validation of this update
 
-places where the starter and written instructions differ
+the independent checks passed 25 core tests, 15 optional-feature tests,
+7 sound-bank tests, 9 sound-event tests, 8 app-audio lifecycle tests, and
+10 real-kivy loading/recovery tests. these include all 16 feature combinations,
+mute persistence, one cue per event, overlap, missing audio, pause/resume,
+retry, errors, movement, collision timing, scoring, and immediate loss.
 
-- the actual supplied json uses "missiles" and does not require "version".
-  both new files use "version": 2 and an explicit features dictionary.
-- the actual reticule constants are AIM_IMAGE, AIM_WIDTH, and AIM_HEIGHT.
-- the top of the window is GAME_HEIGHT, not GAME_WIDTH.
-- the radius grows by ROCKET_STEP_RADIUS per second, so width and height
-  each grow by twice that amount. the original maximum radius stays 100.
-- the supplied load_json logs malformed json and returns None. app.py handles
-  failed reads and invalid wave contents without crashing. the updated screen
-  identifies the stage of loading and shows the exception, with R to retry
-  and M to return to the menu.
-- the supplied aim values 0.2 and 10 are treated as movement values for a game
-  running at 60 frames per second. AIM_FRAME_SCALE converts those values to
-  movement based on elapsed time, while the stored speed stays from 0 to
-  AIM_SPEED_LIMIT. this avoids a reticule that needs almost two minutes to
-  cross the screen under a literal limit of 10 pixels per second. bomb and
-  rocket speeds still use the stated units of pixels per second.
-- physics advances in small time steps, but new key presses are checked once
-  per rendered frame, so a slow frame does not fire extra rockets. pending
-  bombs do not need to be sorted by drop time. a small numerical tolerance
-  handles roundoff at exact drop times without starting movement early.
-- the supplied waves have no window-size fields, so the original window of
-  1152 by 864 pixels and the layout of nine target slots stay in place.
+32 real-kivy screen checks verified lowercase text, actual text bounds, and
+no major label overlaps. the final screenshots were reviewed for the menu,
+both gameplay modes, pause, results, and short and long errors. the interface
+was checked after text textures finished updating, not just at construction.
 
-validation
+eight scripted playthroughs completed the six supplied playable waves and
+both custom waves with six cities alive, with the same scores as before this
+visual and sound update. automated aiming does not measure human difficulty.
+all seven sound cues loaded and entered playback through real kivy with a
+dummy audio device. that checks decoding and playback requests, not audible
+speaker output on another computer.
 
-the completed draft passed 25 independent checks of the core behavior and
-15 checks of the optional features, including all 16 combinations of feature
-flags. those checks cover timing, collisions, list removal, resource limits,
-scoring, completion, restart behavior, feature isolation, and the rule of at
-most 25 body lines per method.
-
-this update also passed 10 loading and recovery checks with the real Kivy
-framework. they cover all three starting waves, missing and malformed files,
-invalid wave values, an unexpected setup error, long error text, retry after
-repairing a file, and returning to the menu. the error text was also checked
-after rendering, because the font size alone does not tell us if it fits.
-all 119 methods have specifications, and the longest body has 21 lines.
-
-scripted playthroughs also completed all six supplied playable waves and both
-custom waves while keeping six cities. these runs use an automated aiming
-driver, so they do not measure difficulty for a human player. the actual Kivy
-framework also rendered the welcome screen, standard and custom gameplay,
-pause and help, victory, loss, and the malformed-file error.
-
-these are the checks that were run, although they cannot guarantee what an
-unknown external grader will check. the assignment materials did not include
-an official automated test suite. the independent test scripts and temporary
-graphics setup are not part of the submission.
+the source audit checked 154 methods, a maximum of 21 nonblank body lines,
+80-character source lines, and 17 protected original files. the independent
+test scripts stay outside the game package. no official automated test suite
+was included with the assignment, so these checks do not claim to predict
+every hidden grader case.
 
 credits
 
-the cs 1110 starter, game2d framework, and original launcher came with the
-assignment; the original launcher credits walker m. white. all images, fonts,
-and sounds came from the supplied shield.zip. this implementation adds code
-and simple geometric shapes for the interface, with no third-party code,
-art, or fonts found through web searches.
+the cs 1110 starter, framework, launcher, images, fonts, and sounds came with
+the assignment package. the original launcher credits walker m. white.
+the new interface uses those assets and ordinary geometric shapes. no outside
+artwork, fonts, sound downloads, or solution code were used.
 
 omg this took so long 😭

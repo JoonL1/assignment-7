@@ -63,8 +63,8 @@ CITY_OFFSET = 20 # distance above the bottom of the screen
 ### rocket settings ###
 
 # colors for the circle and the see-through tail
-ROCKET_COLOR = 'blue'
-ROCKET_TAIL  = introcs.RGB(0,0,255,92)
+ROCKET_COLOR = introcs.RGB(109, 179, 255)
+ROCKET_TAIL  = introcs.RGB(109, 179, 255, 72)
 
 # flight speed, starting radius, maximum radius, and growth per second
 ROCKET_SPEED = 500
@@ -98,7 +98,7 @@ SCORE_CITY = 100
 ### fonts and text sizes ###
 
 # the font used for titles
-THEME_FONT = 'Magnetar.ttf'
+THEME_FONT = 'Roboto-Bold.ttf'
 # the font used for messages
 BASIC_FONT = 'Roboto-Regular.ttf'
 # size of a large message or label
@@ -113,7 +113,7 @@ THEME_SMALL  = 48
 """
 sys.argv keeps the arguments after the word python, so running
 
-    python shield default.json
+    python3 shield default.json
 
 puts ['shield', 'default.json'] in that list. the code below reads the second
 item and uses it for DEFAULT_WAVE, which chooses the file loaded when the
@@ -156,9 +156,20 @@ BUBBLE_RECHARGE = 0.4
 RECYCLE_GROUP_SIZE = 3
 
 # rgba colors for the extra guides and the regular controls
-HUD_MINT = (0.65, 0.94, 0.88, 1)
-HUD_AMBER = (1, 0.80, 0.49, 1)
-HUD_PAPER = (0.92, 0.95, 0.97, 1)
+HUD_MINT = (0.57, 0.91, 0.84, 1)
+HUD_AMBER = (0.92, 0.76, 0.54, 1)
+HUD_PAPER = (0.93, 0.96, 0.95, 1)
+
+# the same few colors keep the menu, controls, and messages together.
+UI_BG = introcs.RGB(9, 17, 26)
+UI_SURFACE = introcs.RGB(16, 29, 42, 244)
+UI_SURFACE_SOFT = introcs.RGB(21, 38, 51, 225)
+UI_BORDER = introcs.RGB(56, 78, 87, 190)
+UI_TEXT = introcs.RGB(237, 245, 241)
+UI_MUTED = introcs.RGB(150, 173, 181)
+UI_ACCENT = introcs.RGB(145, 231, 215)
+UI_AMBER = introcs.RGB(235, 194, 137)
+UI_DANGER = introcs.RGB(236, 158, 150)
 
 # ugh im so tired but at least the colors match now 😭
 # omg this took so long 😭

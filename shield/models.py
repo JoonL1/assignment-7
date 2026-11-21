@@ -2,7 +2,7 @@
 the visible objects for missile shield.
 
 authors: joon lee (jl4875) + richard li (rl998)
-date: december 6, 2026
+date: december 6, 2026.
 
 the supplied game2d framework and starter are by walker m. white.
 the pictures and fonts also come from the assignment package.
@@ -25,6 +25,9 @@ class Silo(GImage):
     # invariant: _ammunition is an int greater than or equal to zero.
     # _ammunition_label: the number shown on top of the silo picture.
     # invariant: _ammunition_label is a GLabel with text str(_ammunition).
+    # _ammunition_badge: a dark GRectangle behind the ammo number.
+    # _ammunition_track: a GRectangle showing the full ammo bar length.
+    # _ammunition_fill: a GRectangle showing the fraction of ammo left.
 
     def getAmmo(self):
         """
@@ -57,25 +60,61 @@ class Silo(GImage):
         super().__init__(x=x, y=silo_center_height, width=SILO_WIDTH,
                          height=SILO_HEIGHT, source=SILO_IMAGE)
         self._ammunition = AMMO_COUNT
-        # ugh im so tired 😴
-        label_center_height = SILO_HEIGHT / 4
-        starting_number = str(self._ammunition)
-        self._ammunition_label = GLabel(
-            x=x, y=label_center_height, text=starting_number,
-            font_name=BASIC_FONT, font_size=THEME_SMALL,
-            linecolor='white')
+        self._make_ammo_display(x)
 
     def draw(self, view):
         """
-        draws the silo first, then puts the ammo number on top.
+        draws the silo first, then puts the ammo badge and bar on top.
 
         parameter view: where to draw this silo.
         precondition: view is a GView.
         """
         super().draw(view)
+        self._draw_ammo_display(view)
+
+    def _make_ammo_display(self, x):
+        """
+        makes a quiet badge and bar so the ammo stays easy to read.
+
+        parameter x: the horizontal center of this silo.
+        precondition: x is a number (int or float).
+        """
+        starting_number = str(self._ammunition)
+        self._ammunition_badge = GRectangle(
+            x=x, y=32, width=68, height=52, fillcolor=UI_SURFACE,
+            linecolor=UI_BORDER, linewidth=1)
+        self._ammunition_label = GLabel(
+            x=x, y=35, text=starting_number, font_name=THEME_FONT,
+            font_size=32, linecolor=UI_TEXT)
+        self._ammunition_track = GRectangle(
+            x=x, y=12, width=48, height=3, fillcolor=UI_BORDER,
+            linewidth=0)
+        self._ammunition_fill = GRectangle(
+            x=x, y=12, width=48, height=3, fillcolor=UI_ACCENT,
+            linewidth=0)
+
+    def _draw_ammo_display(self, view):
+        """
+        follows the silo position and shows the current ammo fraction.
+
+        parameter view: where to draw this ammo display.
+        precondition: view is a GView.
+        """
+        self._ammunition_badge.x = self.x
+        self._ammunition_badge.y = self.bottom + 32
+        self._ammunition_badge.draw(view)
         self._ammunition_label.x = self.x
-        self._ammunition_label.y = self.bottom + self.height / 4
+        self._ammunition_label.y = self.bottom + 35
         self._ammunition_label.draw(view)
+        self._ammunition_track.x = self.x
+        self._ammunition_track.y = self.bottom + 12
+        self._ammunition_track.draw(view)
+        if self._ammunition > 0:
+            ammo_fraction = min(self._ammunition / AMMO_COUNT, 1)
+            self._ammunition_fill.width = 48 * ammo_fraction
+            self._ammunition_fill.left = self.x - 24
+            self._ammunition_fill.y = self.bottom + 12
+            self._ammunition_fill.draw(view)
 
 
 class City(GImage):
@@ -500,6 +539,139 @@ class Rocket(GEllipse):
                                   vertical_distance_squared)
         remaining_distance = total_distance_squared ** 0.5
         return remaining_distance
+
+
+class SoundEffects(object):
+    """
+    keeps the short game cues ready without changing any gameplay rules.
+
+    each cue has three voices, so quick launches can overlap. the next voice
+    stops before it replays because game2d cannot restart a playing Sound.
+    these wav files come from the approved assignment package. if an audio
+    device or file is unavailable, the game keeps going without that cue.
+    """
+    # _sounds: a dictionary from cue names to lists of three Sound objects.
+    # _next_voice: a dictionary with one index from 0 through 2 per cue.
+    # _enabled: a bool; False means every sound is stopped and play is quiet.
+
+    def getEnabled(self):
+        """returns True when sound is enabled, or False when it is muted."""
+        return self._enabled
+
+    def getAvailable(self):
+        """returns True if at least one sound cue loaded successfully."""
+        return len(self._sounds) > 0
+
+    def setEnabled(self, enabled):
+        """
+        changes the sound setting, stopping every cue when sound is muted.
+
+        parameter enabled: whether future cues should play.
+        precondition: enabled is a bool.
+        """
+        assert type(enabled) == bool
+        self._enabled = enabled
+        if not enabled:
+            self.stop()
+
+    def __init__(self):
+        """loads the approved wav cues once, but does not play anything yet."""
+        self._sounds = {}
+        self._next_voice = {}
+        self._enabled = True
+        self._load_cue('start', 'air-raid.wav', 0.18)
+        self._load_cue('launch', 'blast3.wav', 0.20)
+        self._load_cue('explode', 'blast1.wav', 0.32)
+        self._load_cue('intercept', 'ping.wav', 0.15)
+        self._load_cue('impact', 'blast2.wav', 0.42)
+        self._load_cue('empty', 'sizzle.wav', 0.18)
+        self._load_cue('reward', 'ping.wav', 0.40)
+
+    def play(self, cue):
+        """
+        plays the next voice of this cue when sound is enabled and available.
+
+        a failed audio request disables only that cue, so other sounds and
+        the wave can keep working. three requests for one cue can overlap.
+
+        parameter cue: the name of an event, like 'launch' or 'impact'.
+        precondition: cue is a string; an unknown cue does nothing.
+        """
+        if not self._enabled or cue not in self._sounds:
+            return
+        voices = self._sounds[cue]
+        voice_number = self._next_voice[cue]
+        current_sound = voices[voice_number]
+        try:
+            current_sound.stop()
+            current_sound.play()
+        except Exception as problem:
+            self._disable_cue(cue, problem)
+            return
+        self._next_voice[cue] = (voice_number + 1) % len(voices)
+
+    def stop(self):
+        """stops all active cues, for example when pausing or leaving a wave."""
+        cue_names = list(self._sounds)
+        for cue in cue_names:
+            try:
+                for current_sound in self._sounds[cue]:
+                    current_sound.stop()
+            except Exception as problem:
+                self._disable_cue(cue, problem)
+
+    def _load_cue(self, cue, filename, volume):
+        """
+        loads three quiet voices of a cue, or reports an audio problem.
+
+        parameter cue: the name used by play to find this sound.
+        precondition: cue is a nonempty string not already in _sounds.
+        parameter filename: the supplied wav file to load.
+        precondition: filename is a nonempty string naming a sound asset.
+        parameter volume: the playback volume of this cue.
+        precondition: volume is a number from 0 through 1.
+        """
+        voices = []
+        try:
+            for voice_number in range(3):
+                current_sound = Sound(filename)
+                current_sound.volume = volume
+                voices.append(current_sound)
+        except Exception as problem:
+            self._report_audio_problem(cue, problem)
+            return
+        self._sounds[cue] = voices
+        self._next_voice[cue] = 0
+
+    def _disable_cue(self, cue, problem):
+        """
+        removes an unavailable cue and reports why in the terminal.
+
+        parameter cue: the sound event that failed.
+        precondition: cue is a key in _sounds and _next_voice.
+        parameter problem: the failure reported by the audio provider.
+        precondition: problem is an Exception.
+        """
+        for current_sound in self._sounds[cue]:
+            try:
+                current_sound.stop()
+            except Exception:
+                pass
+        del self._sounds[cue]
+        del self._next_voice[cue]
+        self._report_audio_problem(cue, problem)
+
+    def _report_audio_problem(self, cue, problem):
+        """
+        explains a missing audio cue without interrupting the game.
+
+        parameter cue: the sound event that could not be used.
+        precondition: cue is a string.
+        parameter problem: the failure reported by the audio provider.
+        precondition: problem is an Exception.
+        """
+        print('sound unavailable: ' + cue + '. the game can still run.')
+        print(str(problem))
 
 
 # omg this took so long 😭
