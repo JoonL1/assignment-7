@@ -14,7 +14,7 @@ class, it should go in the the models.py module.
 authors: joon lee (jl4875) + richard li (rl998)
 date: december 6, 2026
 """
-from game2d import GRectangle, GEllipse, GPath, GLabel
+from game2d import GRectangle, GEllipse, GPath, GLabel, GImage
 from consts import *
 from models import Silo, City, Target, Bomb, Rocket
 from models import SoundEffects, SplinterBomb, SkyCourier
@@ -82,7 +82,8 @@ class Wave(object):
     # _tool_panels: one GRectangle per extra turned on + in menu order
     # _tool_labels: maps enabled feature names to lowercase value GLabels
     # _tool_hint_labels: maps enabled feature names to key reminder GLabels
-    # _notice_panel: a GRectangle that only shows when we have a notice
+    # _notice_parts: six shapes that make a rounded notice card
+    # _notice_pulse: seconds left for the new-message text pulse (>= 0)
     # _notice_label: the GLabel for quick feedback below the status cards
     # _bubble_track: the GRectangle under the slow field charge bar
     # _bubble_fill: a GRectangle that stays inside the charge bar track
@@ -94,6 +95,9 @@ class Wave(object):
     # _signal_echoes: up to 12 fading paths from a hit to a living city
     # _flyers: custom only aircraft objects that drop bombs during a wave
     # _hud_parts: rounded pieces making one dark top status card
+    # _metric_previous: last displayed text for city ammo and threat counts
+    # _metric_pulses: seconds left in each count animation (three values >= 0)
+    # _metric_icons: three GImages beside the city ammo and threat counters
 
     # GETTERS AND SETTERS (ONLY ADD IF YOU NEED THEM)
     def getLost(self):
@@ -122,15 +126,16 @@ class Wave(object):
         """
         returns the lowercase mode name for the status bar
         """
-        round_number = self._data.get('round_number', 1)
-        words_on_the_hud = 'round ' + str(round_number)
-        return words_on_the_hud
+        if 'round_number' in self._data:
+            return 'round ' + str(self._data['round_number'])
+        if self._custom_enabled:
+            return 'night post'
+        return 'classic'
 
     def getHelpRows(self):
         """
         returns a new list containing the key instructions for enabled custom
         tools
-
         this is how the pause screen gets the controls (so the app can ask
         here instead of poking around in the hidden feature dictionary)
         """
@@ -197,7 +202,6 @@ class Wave(object):
     def setSoundsEnabled(self, enabled):
         """
         changes the wave mute preference and refreshes the audio label
-
         parameter enabled: whether future sounds may play
         precondition: enabled is a bool
         """
@@ -215,11 +219,30 @@ class Wave(object):
                 still_here.append(position)
         return still_here
 
-    def playScoreTick(self):
+    def playScoreTick(self, kind=0):
         """
-        plays the quiet score ping once after an icon receives points
+        plays the short scoring sound for the item counted just now
+        parameter kind: 0 means one rocket (5 points)
+        kind 1 means one city (100 points)
+        precondition: kind is 0 or 1
         """
-        self._sounds.play('intercept')
+        if kind == 0:
+            self._sounds.play('score_rocket')
+        else:
+            self._sounds.play('score_city')
+
+    def showRoundStart(self):
+        """shows the new round number for two seconds and pulses the counters
+
+        this only appears for rounds that have a round_number in the custom
+        json data. it never changes the bombs or the rocket counts
+        """
+        if 'round_number' not in self._data:
+            return
+        number = str(self._data['round_number'])
+        self._show_notice('round ' + number + ' / protect the cities')
+        self._notice_seconds = 2.0
+        self._metric_pulses = [0.25, 0.25, 0.25]
 
     def __init__(self, data, surviving_slots=None):
         """
@@ -279,6 +302,7 @@ class Wave(object):
         self._read_launch_keys(player_input)
         self._advance_world(dt)
         self._check_finished()
+        self._pulse_metrics(dt)
         self._update_hud()
 
     # DRAW METHOD TO DRAW THE GAME OBJECTS
@@ -329,7 +353,6 @@ class Wave(object):
         """
         stops previous cues and plays the one result cue for winning or
         losing
-
         parameter player_won: whether the player cleared the wave
         precondition: player_won is a bool
         """
@@ -344,7 +367,6 @@ class Wave(object):
         """
         raises ValueError for invalid speed or missiles or extra feature
         settings
-
         bad data raises ValueError (so nothing tries to build a half loaded
         wave)
         """
@@ -370,7 +392,6 @@ class Wave(object):
         """
         returns True for an int or finite float (False for bool or infinity
         or nan)
-
         parameter value: the value to check
         precondition: value can be any python value
         """
@@ -386,7 +407,6 @@ class Wave(object):
         """
         checks the start x and target slot and launch time of one bomb
         dictionary
-
         parameter information: one entry from the missiles list
         precondition: information can be any value read from the json file
         """
@@ -411,13 +431,10 @@ class Wave(object):
         if target_slot < 0 or target_slot > 8:
             raise ValueError('Missile target must be from 0 through 8.')
         self._check_splinter_data(information)
-        self._check_motion_data(information)
 
     def _check_feature_data(self):
         """
-        checks that every optional feature key is known and every flag is
-        bool
-
+        checks that every optional feature key is known and every flag is bool
         raises ValueError for bad feature data + like an unknown name or a
         value that is not a bool
         """
@@ -432,23 +449,6 @@ class Wave(object):
                 raise ValueError('Unknown feature: ' + current_name)
             if type(feature_information[current_name]) != bool:
                 raise ValueError('Feature flags must be true or false.')
-
-    def _check_motion_data(self, information):
-        """checks the optional custom speed and acceleration of one missile
-
-        parameter information: a missile entry already checked for basic keys
-        precondition: information is a dict
-        """
-        if 'speed_scale' in information:
-            scale = information['speed_scale']
-            if not self._is_finite_number(scale) or scale <= 0:
-                raise ValueError('speed_scale must be a positive number')
-        if 'acceleration' in information:
-            acceleration = information['acceleration']
-            if not self._is_finite_number(acceleration):
-                raise ValueError('acceleration must be a finite number')
-            if abs(acceleration) > 20:
-                raise ValueError('acceleration must be from -20 to 20')
 
     def _check_flyer_data(self):
         """checks every custom aircraft and its planned drop orders"""
@@ -506,8 +506,9 @@ class Wave(object):
             self._flyers.append(SkyCourier(flyer_data))
 
     def _update_flyers(self, dt):
-        """moves visible bonus enemies and handles their bomb drops + hits
+        """moves each aircraft and checks for rocket hits and bomb drops
 
+        a rocket hit cancels the rest of that aircraft drop orders
         parameter dt: seconds in the current physics step
         precondition: dt is positive and no greater than PHYSICS_STEP
         """
@@ -518,6 +519,7 @@ class Wave(object):
             if flyer.getActive() and self._flyer_hit(flyer):
                 flyer.destroy()
                 self._split_flash.append([flyer.x, flyer.y, 0.55])
+                # omg it finally got hit 😭
                 self._sounds.play('intercept')
             if flyer.getAlive():
                 self._drop_from_flyer(flyer)
@@ -527,10 +529,11 @@ class Wave(object):
                 position = position + 1
 
     def _drop_from_flyer(self, flyer):
-        """turns each due flyer order into a regular bomb aimed at its slot
+        """checks the drop times and makes a bomb for each order that is due
 
-        parameter flyer: the moving courier that owns the drop orders
-        precondition: flyer is a SkyCourier
+        bombs start at the aircraft position and head toward a fixed target
+        parameter flyer: the SkyCourier with the list of drop orders
+        precondition: flyer is a SkyCourier that has started its flight
         """
         for order in flyer.takeDueDrops(self._elapsed_time):
             slot = order['target']
@@ -540,19 +543,26 @@ class Wave(object):
             self._falling_bombs.append(bomb)
             if flyer.getKind() == 'drone':
                 self._sounds.play('drone')
+            elif flyer.getKind() == 'plane':
+                self._sounds.play('plane')
             else:
                 self._sounds.play('satellite')
 
     def _flyer_hit(self, flyer):
-        """returns True if an exploding rocket covers the flyer center
+        """returns True if a rocket blast hits the body of this aircraft
 
-        parameter flyer: currently visible custom enemy
-        precondition: flyer is a SkyCourier
+        tests its center and four edge points so a wing can get hit too
+        parameter flyer: the active plane or drone or satellite to check
+        precondition: flyer is a SkyCourier that is visible in the game
         """
+        spots = [(flyer.x, flyer.y), (flyer.left, flyer.y),
+                 (flyer.right, flyer.y), (flyer.x, flyer.top),
+                 (flyer.x, flyer.bottom)]
         for rocket in self._rockets:
             if rocket.getExploding():
-                if rocket.contains((flyer.x, flyer.y)):
-                    return True
+                for point in spots:
+                    if rocket.contains(point):
+                        return True
         return False
 
     def _make_defenses(self):
@@ -595,9 +605,6 @@ class Wave(object):
                                         information['children'])
             else:
                 new_bomb = Bomb(*arguments)
-            scale = information.get('speed_scale', 1)
-            acceleration = information.get('acceleration', 0)
-            new_bomb.setMotion(scale, acceleration)
             self._pending_bombs.append(new_bomb)
 
     def _make_bonus_state(self):
@@ -630,7 +637,6 @@ class Wave(object):
         """
         moves the aim marker with held arrows and clamps it inside the safe
         area
-
         the starter speeds 0.2 and 10 are for a nominal frame (so
         AIM_FRAME_SCALE turns them into movement over time using a nominal 60
         fps)
@@ -663,7 +669,6 @@ class Wave(object):
         """
         returns the horizontal direction and vertical direction and arrow
         held flag
-
         for example + left and right cancel the horizontal movement (but the
         last value is still True because arrows are being held)
         parameter player_input: current keyboard information
@@ -704,7 +709,6 @@ class Wave(object):
     def _read_launch_keys(self, player_input):
         """
         fires once per new press of 1 or 2 or 3 (using the matching silo)
-
         parameter player_input: current keyboard information
         precondition: player_input supports is_key_pressed
         """
@@ -718,7 +722,6 @@ class Wave(object):
     def _launch_from_silo(self, silo_number):
         """
         launches one rocket toward a fixed aim point and subtracts one ammo
-
         the destination gets saved now (so moving the aim later leaves this
         rocket headed to the same spot)
         parameter silo_number: the index of the silo to fire from
@@ -756,7 +759,6 @@ class Wave(object):
     def _advance_world(self, dt):
         """
         repeats short time steps until dt has passed or the wave has ended
-
         parameter dt: seconds of active gameplay to run
         precondition: dt is a finite nonnegative number
         """
@@ -776,7 +778,6 @@ class Wave(object):
     def _step_world(self, step_seconds):
         """
         advances the clocks and rockets and bombs before checking collisions
-
         parameter step_seconds: time for this small movement step
         precondition: step_seconds is positive and at most PHYSICS_STEP
         """
@@ -797,7 +798,6 @@ class Wave(object):
     def _move_rockets(self, step_seconds):
         """
         advances each rocket and plays the explosion sound once on arrival
-
         a blast already growing had its sound (so it does not get another one
         here)
         parameter step_seconds: seconds for this movement step
@@ -829,7 +829,6 @@ class Wave(object):
     def _move_bombs(self, step_seconds):
         """
         moves released bombs only for elapsed time after their own drop times
-
         parameter step_seconds: time for this movement step
         precondition: step_seconds is a finite nonnegative number
         """
@@ -848,6 +847,7 @@ class Wave(object):
         """
         removes every bomb whose center is inside a growing rocket explosion
         """
+        # ugh why do these bombs keep coming back 😭
         bomb_position = 0
         while bomb_position < len(self._falling_bombs):
             current_bomb = self._falling_bombs[bomb_position]
@@ -861,7 +861,6 @@ class Wave(object):
     def _is_inside_explosion(self, current_bomb):
         """
         returns True if any exploding rocket contains the bomb center
-
         parameter current_bomb: the bomb to check
         precondition: current_bomb is a Bomb
         """
@@ -899,7 +898,6 @@ class Wave(object):
         """
         loses immediately at zero cities or wins only after every bomb and
         rocket ends
-
         a waiting bomb counts too (so a quiet moment between launches is not
         a win)
         """
@@ -939,7 +937,6 @@ class Wave(object):
     def _read_bonus_keys(self, player_input):
         """
         handles f and b and tab and x and space only for enabled features
-
         parameter player_input: current keyboard information
         precondition: player_input supports the key query methods of GInput
         """
@@ -987,7 +984,6 @@ class Wave(object):
         """
         moves the aim marker to the next saved location (not any flying
         rockets)
-
         basically + only the aim jumps back and launched rockets keep the
         saved destinations
         """
@@ -1009,7 +1005,6 @@ class Wave(object):
     def _update_bubble_charge(self, step_seconds):
         """
         spends charge during the slow field and restores charge after release
-
         parameter step_seconds: real active time for this movement step
         precondition: step_seconds is positive
         """
@@ -1032,14 +1027,12 @@ class Wave(object):
         """
         returns normal speed outside the powered field (22 percent inside at
         full charge)
-
         only bombs in the bubble slow down (so the launch clock + rockets +
         blasts all keep the original timing)
         parameter current_bomb: the bomb that needs a speed
         precondition: current_bomb is a Bomb
         """
-        age = self._elapsed_time - current_bomb.getStartTime()
-        normal_speed = current_bomb.getMotionSpeed(self._bomb_speed, age)
+        normal_speed = self._bomb_speed
         if self._bubble_fraction <= 0:
             return normal_speed
         horizontal_gap = current_bomb.x - self._target.x
@@ -1055,9 +1048,7 @@ class Wave(object):
 
     def _record_interception(self, current_bomb):
         """
-        counts an intercepted bomb and optionally stores a star and awards
-        ammo
-
+        counts an intercepted bomb and optionally stores a star and awards ammo
         parameter current_bomb: the stopped bomb + before it is removed
         precondition: current_bomb is a Bomb
         """
@@ -1102,18 +1093,17 @@ class Wave(object):
     def _show_notice(self, message):
         """
         saves a lowercase message for 2.8 seconds of active play
-
         parameter message: the feedback to show
         precondition: message is a string that fits on one display line
         """
         self._notice = message.lower()
         self._notice_seconds = 2.8
+        self._notice_pulse = 0.25
 
     def _update_notice(self, dt):
         """
         subtracts elapsed play time from the notice timer and clears expired
         text
-
         parameter dt: seconds of active gameplay that have passed
         precondition: dt is a finite nonnegative number
         """
@@ -1149,19 +1139,18 @@ class Wave(object):
         creates the top count labels and optional tool cards for the current
         wave
         """
-        self._hud_parts = self._rounded_parts(GAME_WIDTH / 2, 807,
-                                               GAME_WIDTH - 48, 70, 18,
-                                               UI_SURFACE)
+        self._hud_parts = self._rounded_parts(GAME_WIDTH / 2, 804,
+                                               GAME_WIDTH - 48, 100, 18, UI_SURFACE)
         self._hud_panel = self._hud_parts[0]
         self._mode_label = self._make_label(self.getModeName(), 56,
-                                           820, 22, UI_TEXT)
+                                           817, 22, UI_TEXT)
         self._mode_label.font_name = THEME_FONT
         self._mode_label.left = 56
         controls = 'arrows aim   1 / 2 / 3 fire   p pause'
         self._controls_label = self._make_label(controls, 56,
                                                789, 12, UI_MUTED)
         self._controls_label.left = 56
-        self._audio_label = self._make_label('', 451, 788, 12, UI_ACCENT)
+        self._audio_label = self._make_label('', 451, 789, 12, UI_ACCENT)
         self._make_metric_labels()
         self._make_tool_cards()
         self._make_bubble_meter()
@@ -1171,7 +1160,6 @@ class Wave(object):
     def _make_label(self, text, x, y, size, color):
         """
         returns a lowercase GLabel with the supplied readable font
-
         parameter text: the words to show and must be a string
         parameter x: horizontal center and must be a number
         parameter y: vertical center and must be a number
@@ -1186,23 +1174,30 @@ class Wave(object):
 
     def _make_metric_labels(self):
         """
-        sets aside top bar labels for living cities and ammo and incoming
-        bombs
+        sets aside top bar labels for living cities and ammo and incoming bombs
         """
         self._metric_labels = []
         self._metric_titles = []
+        self._metric_icons = []
         self._hud_rules = []
+        self._metric_previous = ['', '', '']
+        self._metric_pulses = [0.16, 0.16, 0.16]
         metric_names = ['cities', 'ammo', 'incoming']
         for metric_number in range(3):
             metric_x = 658 + 172 * metric_number
-            value_label = self._make_label('', metric_x, 819, 26, UI_TEXT)
+            value_label = self._make_label('', metric_x, 816, 26, UI_TEXT)
             value_label.font_name = THEME_FONT
             self._metric_labels.append(value_label)
+            icon_files = ['city@2x.png', 'missile-small@2x.png',
+                          'target@2x.png']
+            icon = GImage(source=icon_files[metric_number],
+                          x=metric_x - 54, y=791, width=20, height=20)
+            self._metric_icons.append(icon)
             metric_name = metric_names[metric_number]
             title_label = self._make_label(metric_name, metric_x,
-                                           789, 11, UI_MUTED)
+                                           791, 11, UI_MUTED)
             self._metric_titles.append(title_label)
-            rule = GRectangle(x=metric_x - 86, y=807, width=1, height=38,
+            rule = GRectangle(x=metric_x - 86, y=804, width=1, height=49,
                               fillcolor=UI_BORDER)
             self._hud_rules.append(rule)
 
@@ -1234,34 +1229,31 @@ class Wave(object):
     def _make_tool_card(self, tool_name, center_x, width):
         """
         creates one value label and one key hint for an enabled bonus feature
-
         parameter tool_name: the feature flag of this card
         precondition: tool_name is an enabled key in _features
         parameter center_x: the horizontal center and must be a number
         parameter width: the card width and must be a positive number
         """
-        panels = self._rounded_parts(center_x, 733, width, 54, 12,
-                                     UI_SURFACE_SOFT)
+        panels = self._rounded_parts(center_x, 714, width, 66, 14, UI_SURFACE_SOFT)
         for panel in panels:
             self._tool_panels.append(panel)
-        label = self._make_label('', center_x, 745, 16, UI_ACCENT)
+        label = self._make_label('', center_x, 729, 16, UI_ACCENT)
         self._tool_labels[tool_name] = label
-        hint = self._make_label('', center_x, 721, 11, UI_MUTED)
+        hint = self._make_label('', center_x, 699, 11, UI_MUTED)
         self._tool_hint_labels[tool_name] = hint
 
     def _make_notice_label(self):
         """
         prepares the small message card beneath the main status bar
         """
-        notice_y = 741
+        notice_y = 723
         if self._custom_enabled:
-            notice_y = 678
-        self._notice_panel = GRectangle(x=GAME_WIDTH / 2, y=notice_y,
-                                        width=610, height=30,
-                                        fillcolor=UI_SURFACE,
-                                        linecolor=UI_BORDER, linewidth=0.5)
+            notice_y = 645
+        self._notice_parts = self._rounded_parts(GAME_WIDTH / 2,
+                                                  notice_y, 610, 36, 12, UI_SURFACE)
         self._notice_label = self._make_label('', GAME_WIDTH / 2,
                                              notice_y, 14, UI_AMBER)
+        self._notice_pulse = 0
 
     def _make_bubble_meter(self):
         """
@@ -1272,10 +1264,10 @@ class Wave(object):
         if self._features['time_bubble']:
             center_x = self._tool_centers['time_bubble']
             self._tool_hint_labels['time_bubble'].x = center_x - 67
-        self._bubble_track = GRectangle(x=center_x + 26, y=721,
+        self._bubble_track = GRectangle(x=center_x + 26, y=699,
                                         width=96, height=3,
                                         fillcolor=UI_BORDER)
-        self._bubble_fill = GRectangle(x=center_x + 26, y=721,
+        self._bubble_fill = GRectangle(x=center_x + 26, y=699,
                                        width=96, height=3,
                                        fillcolor=UI_ACCENT)
 
@@ -1313,31 +1305,53 @@ class Wave(object):
 
     def _update_hud(self):
         """
-        recalculates city and ammo and threat counts for the visible status
-        bar
+        recalculates city and ammo and threat counts for the visible status bar
         """
         total_ammunition = 0
         for current_silo in self._silos:
             total_ammunition = total_ammunition + current_silo.getAmmo()
         remaining_threats = len(self._pending_bombs) + len(self._falling_bombs)
         remaining_threats = remaining_threats + len(self._flyers)
-        self._metric_labels[0].text = str(self.getCitiesLeft()) + ' / 6'
-        self._metric_labels[1].text = str(total_ammunition)
-        self._metric_labels[2].text = str(remaining_threats)
+        words = [str(self.getCitiesLeft()) + ' / 6',
+                 str(total_ammunition), str(remaining_threats)]
+        for pos in range(3):
+            if self._metric_previous[pos] != words[pos]:
+                if self._metric_previous[pos] != '':
+                    self._metric_pulses[pos] = 0.23
+                self._metric_previous[pos] = words[pos]
+            self._metric_labels[pos].text = words[pos]
         self._notice_label.text = self._notice.lower()
         self._update_audio_label()
         self._update_bonus_hud()
+
+    def _pulse_metrics(self, dt):
+        """shrinks a count back to normal size after the value changes
+
+        parameter dt: seconds since the previous frame (at least zero)
+        precondition: dt is a finite number greater than or equal to zero
+        """
+        for pos in range(3):
+            time_left = self._metric_pulses[pos] - dt
+            if time_left < 0:
+                time_left = 0
+            self._metric_pulses[pos] = time_left
+            size = 26 + int(time_left * 35)
+            self._metric_labels[pos].font_size = size
+        self._notice_pulse = max(0, self._notice_pulse - dt)
+        self._notice_label.font_size = 14 + int(self._notice_pulse * 14)
 
     def _update_audio_label(self):
         """
         shows mute status or reports that no audio device or cue is available
         """
+        words = 'v sound on'
         if not self._sounds.getAvailable():
-            self._audio_label.text = 'audio unavailable'
-        elif self._sounds.getEnabled():
-            self._audio_label.text = 'v  sound on'
-        else:
-            self._audio_label.text = 'v  sound off'
+            words = 'audio unavailable'
+        elif not self._sounds.getEnabled():
+            words = 'v sound off'
+        self._controls_label.text = (
+            'arrows aim   1 / 2 / 3 fire   p pause   ' + words)
+        self._audio_label.text = ''
 
     def _update_bonus_hud(self):
         """
@@ -1411,9 +1425,7 @@ class Wave(object):
 
     def _draw_bonus_guides(self, view):
         """
-        draws only the optional forecast and bookmark and field and star
-        guides
-
+        draws only the optional forecast and bookmark and field and star guides
         parameter view: the place to draw the guides
         precondition: view is a GView
         """
@@ -1433,7 +1445,6 @@ class Wave(object):
     def _draw_forecasts(self, view):
         """
         draws harmless prediction rings at bomb positions 1.5 seconds ahead
-
         this uses the current speed for the next FORECAST_SECONDS (but moving
         the bubble can change that speed (so the rings are just an estimate))
         parameter view: the place to draw the forecasts
@@ -1498,7 +1509,6 @@ class Wave(object):
         """
         draws a connected set of harmless points at recent interception
         locations
-
         parameter view: the place to draw the stars
         precondition: view is a GView
         """
@@ -1541,6 +1551,8 @@ class Wave(object):
         self._mode_label.draw(view)
         self._controls_label.draw(view)
         self._audio_label.draw(view)
+        for icon in self._metric_icons:
+            icon.draw(view)
         for current_label in self._metric_labels:
             current_label.draw(view)
         for current_label in self._metric_titles:
@@ -1549,7 +1561,8 @@ class Wave(object):
         for current_label in self._slot_labels:
             current_label.draw(view)
         if self._notice != '':
-            self._notice_panel.draw(view)
+            for piece in self._notice_parts:
+                piece.draw(view)
             self._notice_label.draw(view)
         if self._forecast_visible:
             for weather_label in self._weather_labels:
@@ -1585,8 +1598,7 @@ class Wave(object):
 
     def _check_splinter_data(self, information):
         """
-        checks that a custom splitting bomb has a valid height and child
-        slots
+        checks that a custom splitting bomb has a valid height and child slots
 
         parameter information: dictionary describing one scheduled bomb
         precondition: information is a dictionary already checked for x and
@@ -1633,8 +1645,6 @@ class Wave(object):
                     child = Bomb(parent.x, parent.y,
                                  destination.x, destination.top,
                                  self._elapsed_time, slot)
-                    scale, acceleration = parent.getMotionSettings()
-                    child.setMotion(scale, acceleration)
                     self._falling_bombs.append(child)
                 self._split_flash.append([parent.x, parent.y, 0.55])
                 self._show_notice('split bomb! more targets incoming.')
@@ -1736,3 +1746,5 @@ class Wave(object):
             ring.draw(view)
 
 # i seriously cannot look at another missile rn 😭
+
+# ugh every time i think its done theres another bug 😭

@@ -131,45 +131,38 @@ except:
 
 ### ADD MORE CONSTANTS (PROPERLY COMMENTED) AS NECESSARY ###
 
-
-# keep all the old state numbers the same so original waves still work
+# the original state numbers stay the same for classic waves
 STATE_SCORING = 6
 
-
-### a couple of timing helpers ###
-
-# aim speeds use a basic 60 fps scale
-# this turns movement into seconds without changing the speed limits
-
+### extra time settings ###
+# aim still uses the given limits (this just handles seconds)
 AIM_FRAME_SCALE = 60
-
-
 PHYSICS_STEP = 1 / 120
 
-### night post extras and the wave flags have to turn these on ###
-
-
+### extra tools only enabled by custom json ###
 FORECAST_SECONDS = 1.5
 
-# a full bubble has this many seconds of charge and holding space uses it
+# extra guides may be shown only if their json feature flag is true
+# forecasts show a possible position but never destroy a bomb
+# saved aiming spots do not redirect rockets already in the air
+# the field can slow bombs but cannot stop or damage them
+# charge is measured in seconds and never goes below zero
+# rocket refunds never put more than AMMO_COUNT in a silo
+# the three small counters are only graphics (not game rules)
+# a satellite or drone is allowed only if custom json lists it
+# the slow field has four seconds of charge
 BUBBLE_CAPACITY = 4.0
-
 BUBBLE_RADIUS = 125
-
 BUBBLE_SPEED_FACTOR = 0.22
-# seconds of charge added after releasing space
-
 BUBBLE_RECHARGE = 0.4
 
-
+# three stopped bombs return one rocket if there is room
 RECYCLE_GROUP_SIZE = 3
 
-
+### the colors for the custom ui ###
 HUD_MINT = (0.98, 0.92, 0.50, 1)
 HUD_AMBER = (0.95, 0.73, 0.37, 1)
 HUD_PAPER = (0.93, 0.96, 0.95, 1)
-
-
 
 UI_BG = introcs.RGB(9, 17, 26)
 UI_SURFACE = introcs.RGB(12, 22, 34, 255)
@@ -181,8 +174,7 @@ UI_ACCENT = introcs.RGB(250, 235, 128)
 UI_AMBER = introcs.RGB(243, 186, 95)
 UI_DANGER = introcs.RGB(255, 149, 135)
 
-
-# title font is a supplied ttf so it works with the course game2d package
+# this one is from the supplied fonts folder
 DISPLAY_FONT = 'Neonix.ttf'
 
-# ok how are there this many numbers 💀
+# pls why does this file need this many settings 😭

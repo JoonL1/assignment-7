@@ -17,12 +17,12 @@ date: december 6, 2026.
 """
 from consts import *
 from game2d import *
+import math
 
 
 # PRIMARY RULE: Models are not allowed to access anything in any module other 
 # than consts.py. If you need extra information from a wave object, then it 
 # should be a parameter in your method.
-
 class Silo(GImage):
     """
     A class representing a silo
@@ -73,7 +73,6 @@ class Silo(GImage):
         self._ammunition_label.text = number_to_display
 
     # INITIALIZER TO SET THE ATTRIBUTES
-    
     def __init__(self, x):
         """
         makes a full silo centered at x with its bottom at screen height zero
@@ -88,7 +87,6 @@ class Silo(GImage):
         self._make_ammo_display(x)
 
     # ADDITIONAL METHODS AS NEEDED
-    
     def draw(self, view):
         """
         draws the silo picture and then its ammunition number and progress
@@ -177,7 +175,6 @@ class City(GImage):
         return is_this_city_alive
 
     # INITIALIZER TO SET THE ATTRIBUTES
-    
     def __init__(self, x):
         """
         creates a living city centered at x with its bottom at CITY_OFFSET
@@ -192,7 +189,6 @@ class City(GImage):
         self._alive = True
 
     # ADDITIONAL METHODS AS NEEDED
-    
     def destroy(self):
         """
         sets the city alive flag to False (a later hit cannot restore it)
@@ -246,7 +242,6 @@ class Target(GImage):
         self._movement_speed = speed
 
     # INITIALIZER TO SET THE ATTRIBUTES
-    
     def __init__(self, x, y):
         """
         creates the aiming reticule at x and y with movement speed zero
@@ -262,8 +257,6 @@ class Target(GImage):
         
 
     # ADDITIONAL METHODS AS NEEDED
-
-
 class Bomb(GEllipse):
     """
     A class representing a dropping bomb
@@ -359,7 +352,6 @@ class Bomb(GEllipse):
             return (future_x, future_y)
 
     # INITIALIZER TO SET THE ATTRIBUTES
-    
     def __init__(self, start_x, start_y, target_x, target_y,
                  drop_time, target_slot):
         """
@@ -391,40 +383,8 @@ class Bomb(GEllipse):
         initial_tail_points = [start_x, start_y, start_x, start_y]
         self._tail = GPath(points=initial_tail_points,
                            linewidth=BOMB_RADIUS, linecolor=BOMB_TAIL)
-        self._speed_scale = 1.0
-        self._acceleration = 0.0
-
-    # _speed_scale: positive multiplier used only by new custom wave entries
-    # _acceleration: change in pixels per second after each second of flight
-
     # ADDITIONAL METHODS AS NEEDED
-    def setMotion(self, scale, acceleration):
-        """sets custom speed settings for this bomb (defaults are unchanged)
 
-        parameter scale: positive speed multiplier from the custom json
-        precondition: scale is a positive number
-        parameter acceleration: speed change per second of flight
-        precondition: acceleration is a finite number
-        """
-        self._speed_scale = scale
-        self._acceleration = acceleration
-
-    def getMotionSpeed(self, normal_speed, seconds):
-        """returns speed after adjusting for this bomb age (at least 8 px/s)
-
-        parameter normal_speed: positive pixels per second of the wave
-        parameter seconds: nonnegative seconds since this bomb dropped
-        """
-        age = max(0, seconds)
-        new_speed = normal_speed * self._speed_scale
-        new_speed = new_speed + age * self._acceleration
-        return max(8, new_speed)
-
-    def getMotionSettings(self):
-        """returns the custom speed scale and acceleration for split children"""
-        return (self._speed_scale, self._acceleration)
-
-    
     def update(self, dt, speed):
         """
         moves the bomb by speed times dt toward its target without
@@ -500,6 +460,9 @@ class Rocket(GEllipse):
     # invariant: _exploding is a bool and True means (x + y) is the destination
     # _tail: a line from the silo to where the rocket is now
     # invariant: _tail is a GPath + drawn only when _exploding is False
+    # _missile_image: a GImage of the supplied missile shown during flight
+    # the image angle is fixed at launch (nose points toward the saved aim)
+    # invariant: _missile_image follows the rocket and is hidden during blasts
     # invariant: width == height and the radius stays from ROCKET_MIN_RADIUS
     
 
@@ -526,7 +489,6 @@ class Rocket(GEllipse):
         return False
 
     # INITIALIZER TO SET THE ATTRIBUTES
-    
     def __init__(self, start_x, start_y, target_x, target_y):
         """
         creates a rocket from the silo position to one fixed aim position
@@ -552,9 +514,15 @@ class Rocket(GEllipse):
         self._tail = GPath(points=initial_tail_points,
                            linewidth=ROCKET_MIN_RADIUS,
                            linecolor=ROCKET_TAIL)
+        self._missile_image = GImage(x=start_x, y=start_y,
+                                      width=13, height=28,
+                                      source='missile@2x.png')
+        dx = target_x - start_x
+        dy = target_y - start_y
+        degrees = math.degrees(math.atan2(dy, dx))
+        self._missile_image.angle = degrees - 90
 
     # ADDITIONAL METHODS AS NEEDED
-    
     def update(self, dt):
         """
         moves the rocket toward its fixed aim point or grows its blast
@@ -572,13 +540,16 @@ class Rocket(GEllipse):
 
     def draw(self, view):
         """
-        draws the moving rocket and tail or the explosion without its tail
+        draws the missile picture and tail in flight (or just the blast after)
 
         parameter view: where to draw this rocket
         precondition: view is a GView
         """
         if not self._exploding:
             self._tail.draw(view)
+            self._missile_image.x = self.x
+            self._missile_image.y = self.y
+            self._missile_image.draw(view)
         super().draw(view)
 
     def _move_toward_destination(self, dt):
@@ -707,6 +678,9 @@ class SoundEffects(object):
         self._load_cue('reward', 'ping.wav', 0.40)
         self._load_cue('drone', 'drone.wav', 0.16)
         self._load_cue('satellite', 'satellite.wav', 0.16)
+        self._load_cue('plane', 'afterburner.wav', 0.16)
+        self._load_cue('score_rocket', 'ping.wav', 0.11)
+        self._load_cue('score_city', 'blast1.wav', 0.15)
 
     def play(self, cue):
         """
@@ -797,8 +771,6 @@ class SoundEffects(object):
         print(str(problem))
 
 
-
-
 class SplinterBomb(Bomb):
     """
     an orange incoming bomb that splits into a few normal bombs
@@ -810,6 +782,13 @@ class SplinterBomb(Bomb):
     # _split_y: a number above the top of the target + below GAME_HEIGHT
     # _child_slots: a list of two or three valid target slot integers
     # _split_done: bool and True after this bomb has split
+
+    def getChildSlots(self):
+        """
+        returns a copy of the target slots assigned to its child bombs
+        """
+        the_slots_to_use = self._child_slots[:]
+        return the_slots_to_use
 
     def __init__(self, x, y, target_x, target_y, time, slot,
                  split_y, children):
@@ -848,29 +827,22 @@ class SplinterBomb(Bomb):
             return True
         return False
 
-    def getChildSlots(self):
-        """
-        returns a copy of the target slots assigned to its child bombs
-        """
-        the_slots_to_use = self._child_slots[:]
-        return the_slots_to_use
-
     def markSplit(self):
         """
         marks this parent as already split so it cannot split a second time
         """
         self._split_done = True
 
-# bro i am so done with these circles 😭
-
+# i cant take this anymore 😭
 
 class SkyCourier(GImage):
     """
-    a plane or drone or satellite that drops bombs in a custom wave
+    a plane or drone or satellite that drops bombs in custom waves only
 
-    each courier gets a start time and its own list of drop orders
-    the plane moves sideways and the drone bobs up and down
-    the satellite moves slowly and can drop more than one bomb
+    each aircraft has a start time and a list of drop orders from the json
+    a plane flies left or right and its picture faces that same direction
+    a drone makes short dives and changes direction during its flight
+    a satellite mostly hovers and can drop several bombs before it leaves
     """
     # _kind: one of plane or drone or satellite
     # _speed: horizontal pixels per second (nonzero)
@@ -879,8 +851,22 @@ class SkyCourier(GImage):
     # _active: bool (False until the start time)
     # _alive: bool (False after a rocket explosion hits it)
     # _base_y: original vertical center in pixels
-    # _motion: vertical movement direction (1 or -1)
+    # _motion: 1 means the aircraft rises and -1 means it dives
+    # _drone_clock: seconds since the last sharp drone turn (0 to 0.90)
+    # _drone_moves: number of drone turns since it appeared (int >= 0)
     # _seconds_empty: seconds with no pending drops (nonnegative)
+    # invariant: _kind is plane or drone or satellite
+    # invariant: _speed is a nonzero horizontal speed in pixels each second
+    # invariant: _start is a nonnegative number of seconds
+    # invariant: _drops contains json dictionaries with time and target
+    # invariant: _active is a bool that stays True after its first appearance
+    # invariant: _alive is a bool that becomes False when hit
+    # invariant: _base_y is the first vertical center of this aircraft
+    # invariant: _motion is either 1 or -1
+    # invariant: _drone_clock is the elapsed time since the last turn
+    # invariant: _drone_moves is an int that counts direction changes
+    # invariant: _seconds_empty is nonnegative and counts quiet flight time
+    # invariant: a destroyed courier cannot launch any more bombs
 
     def getAlive(self):
         """returns True if the courier has not been shot down"""
@@ -913,7 +899,11 @@ class SkyCourier(GImage):
                   'drone': ('drone@2x.png', 68, 68),
                   'satellite': ('satellite@2x.png', 94, 54)}
         picture = images[self._kind]
-        super().__init__(x=info['x'], y=info['y'], source=picture[0],
+        picture_file = picture[0]
+        if self._kind == 'plane' and info['speed'] > 0:
+            # why is this plane backwards again 😭
+            picture_file = 'plane-right@2x.png'
+        super().__init__(x=info['x'], y=info['y'], source=picture_file,
                          width=picture[1], height=picture[2])
         self._speed = info['speed']
         self._start = info['start']
@@ -921,7 +911,9 @@ class SkyCourier(GImage):
         self._active = False
         self._alive = True
         self._base_y = info['y']
-        self._motion = 1
+        self._motion = -1
+        self._drone_clock = 0
+        self._drone_moves = 0
         self._seconds_empty = 0
 
     def update(self, dt, elapsed):
@@ -933,25 +925,55 @@ class SkyCourier(GImage):
         if not self._alive or elapsed < self._start:
             return
         self._active = True
-        self.x = self.x + self._speed * dt
+        if self._kind == 'satellite':
+            self._hover_satellite(dt)
+        else:
+            self.x = self.x + self._speed * dt
         if self._kind == 'drone':
             self._move_drone(dt)
         if not self._drops:
             self._seconds_empty = self._seconds_empty + dt
 
     def _move_drone(self, dt):
-        """moves a small distance up or down and reverses at the limits"""
-        self.y = self.y + 42 * self._motion * dt
-        if self.y > self._base_y + 26:
-            self._motion = -1
-        if self.y < self._base_y - 26:
+        """makes the drone dive and then turn suddenly every 0.75 seconds
+
+        parameter dt: the number of seconds in this step (at least zero)
+        the drone dives up to 170 pixels below its first height then climbs
+        """
+        self._drone_clock = self._drone_clock + dt
+        if self._drone_clock >= 0.90:
+            # ugh the drone keeps changing its mind 😭
+            self._drone_clock = 0
+            self._motion = -self._motion
+            self._drone_moves = self._drone_moves + 1
+        dive_speed = 110
+        if self._drone_moves % 3 == 0:
+            dive_speed = 210
+        self.y = self.y + dive_speed * self._motion * dt
+        self.x = self.x + 68 * self._motion * dt
+        if self.y < self._base_y - 170:
             self._motion = 1
+        if self.y > self._base_y + 45:
+            self._motion = -1
+
+    def _hover_satellite(self, dt):
+        """moves a satellite sideways and slightly up or down
+
+        parameter dt: the number of seconds in this step (at least zero)
+        """
+        self.x = self.x + self._speed * dt * 0.30
+        self.y = self.y + self._motion * 9 * dt
+        if self.y < self._base_y - 9:
+            self._motion = 1
+        if self.y > self._base_y + 9:
+            self._motion = -1
 
     def takeDueDrops(self, elapsed):
-        """returns ready drop orders and removes them from the pending list
+        """returns every bomb order whose drop time has arrived
 
-        parameter elapsed: seconds since this wave started
-        precondition: elapsed is nonnegative
+        each returned order leaves the stored list so it cannot drop again
+        parameter elapsed: seconds since this wave started (at least zero)
+        precondition: elapsed is a nonnegative number
         """
         ready = []
         if not self._active or not self._alive:
@@ -974,3 +996,5 @@ class SkyCourier(GImage):
         """draws the sprite only after it appears and before it is destroyed"""
         if self._active and self._alive:
             super().draw(view)
+
+# i cant believe the planes finally face the right way 😭

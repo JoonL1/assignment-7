@@ -74,26 +74,56 @@ class MissileShield(GameApp):
     # LIST MORE ATTRIBUTES (AND THEIR INVARIANTS) HERE IF NECESSARY
     # _sky_tint: a GRectangle over the sunset (so the sky is less bright)
     # _screen_labels: a list of GLabels for whatever screen is up
+    # invariant: _screen_labels is a list and each value is a GLabel
     # _screen_shapes: list of rectangles + ellipses + paths for decoration
+    # invariant: _screen_shapes only holds objects with a draw method
     # _selected_wave_file: a nonempty filename and keep the case as given
+    # invariant: _selected_wave_file is a filename and never empty
     # _sounds_enabled: a bool and the mute choice sticks between waves
+    # invariant: _sounds_enabled is always a bool
     # _audio_label: status label on a menu (None during active play)
+    # invariant: _audio_label is a GLabel or None
     # _state also allows STATE_SCORING and counting a finished round
     # _campaign_rounds: list of data dictionaries for the current campaign
+    # invariant: _campaign_rounds is a list of wave dictionaries
     # _endless_campaign: bool + True if the last round repeats faster
+    # invariant: _endless_campaign is a bool
     # _round_number: nonnegative int + current round index starting at zero
+    # invariant: _round_number is an int at least zero
     # _saved_cities: None before round one (list of saved city slots later)
+    # invariant: _saved_cities is None or a list of original city slots
     # _total_score: nonnegative integer for all finished rounds so far
-    # _score_icons: GImage objects added one by one during score counting
+    # invariant: _total_score is an int at least zero
+    # _score_icons: two GImages that briefly grow when a score beat happens
+    # invariant: _score_icons is a list of no more than two GImages
+    # _score_rocket_text: GLabel counting leftover rockets already scored
+    # invariant: _score_rocket_text is a GLabel during score counting
+    # _score_city_text: GLabel counting surviving cities already scored
+    # invariant: _score_city_text is a GLabel during score counting
     # _round_ammo: 0 to 30 rockets left when a round ends
+    # invariant: _round_ammo is an int from 0 to 30
     # _round_cities: 0 to 6 cities left when a round ends
+    # invariant: _round_cities is an int from zero to six
     # _counted_ammo: number of rocket icons already counted this round
+    # invariant: _counted_ammo is never larger than _round_ammo
     # _counted_cities: number of city icons already counted this round
+    # invariant: _counted_cities is never larger than _round_cities
     # _score_time: nonnegative seconds collected for the next score beat
-    # _score_hold: seconds after counting ends before moving on
+    # invariant: _score_time is nonnegative seconds
+    # _score_hold: seconds after all score beats end (never negative)
+    # invariant: _score_hold is nonnegative seconds
+    # _score_was_loss: True if the current tally follows the loss of all cities
+    # invariant: _score_was_loss is a bool
+    # _final_shown: number currently displayed on the final score (int >= 0)
+    # invariant: _final_shown is an int from zero to _total_score
+    # _final_counting: bool (False on menus and loading errors)
+    # invariant: _final_counting is a bool
     # _high_score: greatest total saved on this computer (int at least zero)
+    # invariant: _high_score is a nonnegative int
     # _menu_glow: a decorative ring that changes size on the menu
+    # invariant: _menu_glow is a GEllipse or None
     # _menu_time: seconds spent showing the welcome menu
+    # invariant: _menu_time is nonnegative seconds
     
     # DO NOT MAKE A NEW INITIALIZER!
     
@@ -128,6 +158,9 @@ class MissileShield(GameApp):
         self._round_number = 0
         self._saved_cities = None
         self._total_score = 0
+        self._score_was_loss = False
+        self._final_shown = 0
+        self._final_counting = False
         self._score_icons = []
         self._prepare_backdrop()
         self._open_menu()
@@ -195,7 +228,7 @@ class MissileShield(GameApp):
         elif self._state == STATE_SCORING:
             self._update_scoring(dt)
         elif self._state == STATE_COMPLETE:
-            self._update_complete()
+            self._update_complete(dt)
 
     def draw(self):
         """
@@ -227,8 +260,6 @@ class MissileShield(GameApp):
             self._text.draw(self.view)
 
     # HELPER METHODS FOR THE STATES GO HERE
-
-    
     def on_stop(self):
         """
         stops the sound of the current wave when the window closes
@@ -236,7 +267,6 @@ class MissileShield(GameApp):
         if hasattr(self, '_wave'):
             self._stop_wave_audio()
 
-    
     def _clear_messages(self):
         """
         removes labels and shapes from the previous menu or panel (not the
@@ -249,7 +279,6 @@ class MissileShield(GameApp):
         self._audio_label = None
         self._score_icons = []
 
-    
     def _open_menu(self):
         """
         drops the old wave and shows the two start choices (resetting the
@@ -265,6 +294,8 @@ class MissileShield(GameApp):
         self._round_number = 0
         self._saved_cities = None
         self._total_score = 0
+        self._score_was_loss = False
+        self._final_counting = False
         self._menu_time = 0
         self._make_menu_decoration()
         self._make_menu_heading()
@@ -272,13 +303,11 @@ class MissileShield(GameApp):
         self._make_custom_card()
         self._make_menu_controls()
         self._add_center_label('personal best  ' + str(self._high_score),
-                               407, 17, UI_ACCENT, THEME_FONT)
+                               533, 19, UI_ACCENT, THEME_FONT)
 
-    
     def _update_menu(self, dt):
         """
         keeps the menu moving and checks s for classic or c for campaign
-
         parameter dt: seconds since the previous screen update
         precondition: dt is a nonnegative number
         """
@@ -288,12 +317,10 @@ class MissileShield(GameApp):
         elif self.input.is_key_pressed('c'):
             self._begin_loading('nightpost_campaign.json')
 
-    
     def _begin_loading(self, filename):
         """
         saves the requested filename and opens a loading screen for the next
         update
-
         parameter filename: the exact file to start or retry
         precondition: filename is a nonempty string
         """
@@ -306,6 +333,8 @@ class MissileShield(GameApp):
         self._round_number = 0
         self._saved_cities = None
         self._total_score = 0
+        self._score_was_loss = False
+        self._final_counting = False
         self._state = STATE_LOADING
         self._make_panel(240)
         self._add_center_label('getting ready', 483, 14, UI_ACCENT)
@@ -313,7 +342,6 @@ class MissileShield(GameApp):
                                      self.width / 2, 427, 36, UI_TEXT)
         self._add_center_label(filename, 375, 16, UI_MUTED)
 
-    
     def _load_wave(self):
         """
         reads the chosen json and creates a playable wave (or displays its
@@ -345,7 +373,6 @@ class MissileShield(GameApp):
         """
         returns the json dictionary from Data (or raises an error if the file
         fails)
-
         is_json checks the Data folder of this app. no matching file means
         FileNotFoundError and a failed parse or json null means ValueError
         other errors show their original exception names in the terminal read
@@ -362,12 +389,10 @@ class MissileShield(GameApp):
             raise ValueError(invalid_file + self._selected_wave_file)
         return wave_information
 
-    
     def _update_active(self, dt):
         """
         pressing p pauses the wave (otherwise advances the wave and checks
         its result)
-
         parameter dt: seconds since the previous update and must be
         nonnegative
         precondition: dt is a finite number at least zero
@@ -377,7 +402,8 @@ class MissileShield(GameApp):
             return
         self._wave.update(self.input, dt)
         if self._wave.getLost():
-            self._finish_wave(False)
+            # the cities are gone already so we can count the last score now
+            self._begin_scoring()
         elif self._wave.getWon():
             self._begin_scoring()
 
@@ -406,7 +432,6 @@ class MissileShield(GameApp):
         self._add_key_hint('m', 'back to menu', 622, 203)
         self._make_audio_label(165)
 
-    
     def _update_paused(self):
         """
         pressing r schedules a resume (pressing m returns to the menu)
@@ -416,7 +441,6 @@ class MissileShield(GameApp):
         elif self.input.is_key_pressed('m'):
             self._open_menu()
 
-    
     def _continue_wave(self):
         """
         removes the pause screen and resumes the same wave without resetting
@@ -430,41 +454,60 @@ class MissileShield(GameApp):
         """
         shows a final win or loss result with the running score and remaining
         cities
-
         parameter player_won: whether the player cleared this wave
         precondition: player_won is a bool and _wave is a Wave
         """
         self._wave.finishSounds(player_won)
-        if not player_won:
+        if not player_won and not self._score_was_loss:
             self._total_score = self._total_score + self._wave.getScore()
         self._save_high_score()
         self._clear_messages()
         self._state = STATE_COMPLETE
         self._make_panel(520)
-        self._add_center_label('final results', 651, 14, UI_ACCENT)
+        self._add_card(421, 446, 302, 184, True)
+        self._add_card(740, 446, 275, 184, False)
+        self._add_center_label('final results', 653, 14, UI_ACCENT)
         if player_won:
             self._make_win_message()
         else:
             self._make_loss_message()
-        self._add_rule(356, 250, 652)
-        self._add_key_hint('r', 'play again', 374, 301, True)
-        self._add_key_hint('m', 'back to menu', 622, 301)
+        self._add_key_hint('r', 'play again', 390, 292, True)
+        self._add_key_hint('m', 'menu', 654, 292)
+        self._final_shown = 0
+        self._final_counting = True
+        self._text.text = '0'
 
-    
-    def _update_complete(self):
+    def _update_complete(self, dt):
+        """checks restart keys and counts the final score toward its real total
+
+        parameter dt: seconds since the last animation frame (at least zero)
         """
-        pressing r retries the selected file (pressing m resets to the menu)
-        """
+        self._animate_final_number(dt)
         if self.input.is_key_pressed('r'):
             self._begin_loading(self._selected_wave_file)
         elif self.input.is_key_pressed('m'):
             self._open_menu()
 
-    
+    def _animate_final_number(self, dt):
+        """moves the number on final results toward the real score
+
+        this only changes the visible label (not the saved or earned points)
+        parameter dt: seconds since last frame (a nonnegative number)
+        """
+        if not self._final_counting:
+            return
+        steps = int(self._total_score * dt * 1.5)
+        if steps < 1:
+            steps = 1
+        self._final_shown = self._final_shown + steps
+        if self._final_shown >= self._total_score:
+            self._final_shown = self._total_score
+            self._final_counting = False
+        self._text.text = str(self._final_shown)
+
     def _show_load_error(self, loading_step, error_details, next_step):
         """
         shows the failing filename and exception with retry and menu controls
-
         parameter loading_step: the short description of the failed step
         parameter error_details: the exception type and its message
         parameter next_step: the suggestion for fixing the problem
@@ -474,6 +517,7 @@ class MissileShield(GameApp):
         self._clear_messages()
         self._wave = None
         self._state = STATE_COMPLETE
+        self._final_counting = False
         self._make_panel(594)
         self._add_center_label('could not open this sky.', 623, 37,
                                UI_TEXT, THEME_FONT)
@@ -489,7 +533,6 @@ class MissileShield(GameApp):
         self._add_key_hint('m', 'back to menu', 622, 220)
         self._make_audio_label(165)
 
-    
     def _add_error_details(self, error_details):
         """
         puts the exception on at most three short lowercase lines (clipping
@@ -517,7 +560,6 @@ class MissileShield(GameApp):
             line_height = 468 - 28 * line_number
             self._add_center_label(current_line, line_height, 18, UI_AMBER)
 
-    
     def _make_menu_decoration(self):
         """
         adds two dark rounded mode cards and the small sky drawing
@@ -583,7 +625,7 @@ class MissileShield(GameApp):
         wave
         """
         self._add_keycap('s', 104, 348, False)
-        self._add_left_label('classic defense', 134, 348, 23,
+        self._add_left_label('classic', 134, 348, 23,
                              UI_TEXT, THEME_FONT)
         self._add_left_label('stop falling bombs before they hit the cities.',
                              96, 305, 17, UI_MUTED, limit=420)
@@ -622,7 +664,6 @@ class MissileShield(GameApp):
         self._add_center_label('keep at least one city standing.',
                                284, 15, UI_ACCENT)
 
-    
     def _make_standard_help(self):
         """
         describes firing rockets into bomb paths and saving at least one city
@@ -636,37 +677,39 @@ class MissileShield(GameApp):
         self._add_center_label('keep at least one city standing.',
                                308, 19, UI_ACCENT)
         
-
-    # the score and survival counts come from the wave through getters
     def _make_win_message(self):
-        """
-        displays the total score and number of cities and rounds saved
-        """
-        self._add_center_label('wave cleared', 595, 42,
+        """shows total points on the left and saved cities on the right"""
+        self._add_center_label('wave cleared', 595, 40,
                                UI_TEXT, DISPLAY_FONT)
-        self._add_center_label('total score', 538, 15, UI_MUTED)
-        score_words = str(self._total_score)
-        self._text = self._make_label(score_words, self.width / 2,
-                                     476, 82, UI_ACCENT, THEME_FONT)
-        saved = str(self._wave.getCitiesLeft()) + ' cities saved'
-        rounds = str(self._round_number + 1) + ' rounds cleared'
-        self._add_center_label(saved + '   +   ' + rounds,
-                               396, 19, UI_MUTED)
+        self._make_result_numbers()
 
     def _make_loss_message(self):
-        """
-        displays the total score and number of rounds after all cities are
-        gone
-        """
-        self._add_center_label('all cities destroyed', 587, 40,
+        """shows the total score after every city has already been lost"""
+        self._add_center_label('all cities destroyed', 595, 37,
                                UI_DANGER, DISPLAY_FONT)
-        self._add_center_label('total score', 527, 15, UI_MUTED)
-        self._text = self._make_label(str(self._total_score),
-                                     self.width / 2, 470, 74,
-                                     UI_ACCENT, THEME_FONT)
-        rounds = str(self._round_number) + ' rounds cleared'
-        self._add_center_label('0 cities saved   +   ' + rounds,
-                               408, 19, UI_MUTED)
+        self._make_result_numbers()
+
+    def _make_result_numbers(self):
+        """centers the score name and number as one group inside the left card
+
+        the card center is (421, 446). its small label is above the number
+        and both words fit in the card with a gap between them
+        """
+        # pls help why was this so hard to center 😭
+        score_name = self._make_label('total score', 421, 494,
+                                      17, UI_MUTED)
+        self._screen_labels.append(score_name)
+        self._text = self._make_label(str(self._total_score), 421, 428,
+                                      76, UI_ACCENT, THEME_FONT)
+        self._add_left_label('cities saved', 663, 516, 17, UI_MUTED)
+        saved = str(self._wave.getCitiesLeft()) + ' / 6'
+        self._add_left_label(saved, 663, 472, 34, UI_TEXT, THEME_FONT)
+        self._add_left_label('rounds cleared', 663, 418, 17, UI_MUTED)
+        count = self._round_number
+        if not self._score_was_loss:
+            count = count + 1
+        self._add_left_label(str(count), 663, 377, 32, UI_TEXT, THEME_FONT)
+        # i can't believe the other numbers lined up finally 😭
 
     def _make_panel(self, panel_height):
         """
@@ -741,7 +784,6 @@ class MissileShield(GameApp):
         key_label = self._make_label(key, x, y, 14, key_color, THEME_FONT)
         self._screen_labels.append(key_label)
 
-    
     def _add_key_hint(self, key, words, x, y, highlighted=False):
         """
         puts one action label next to its keyboard key badge
@@ -761,7 +803,6 @@ class MissileShield(GameApp):
             label_color = UI_TEXT
         self._add_left_label(words, label_left, y, 17, label_color)
 
-    
     def _read_audio_toggle(self):
         """
         switches sound once each time v is newly pressed (not every held
@@ -774,7 +815,6 @@ class MissileShield(GameApp):
             if self._audio_label is not None:
                 self._audio_label.text = self._get_audio_words()
 
-    
     def _stop_wave_audio(self):
         """
         stops sounds already playing but keeps the current mute setting
@@ -782,7 +822,6 @@ class MissileShield(GameApp):
         if self._wave is not None:
             self._wave.stopSounds()
 
-    
     def _get_audio_words(self):
         """
         returns the text for muted sound or enabled sound or unavailable
@@ -800,7 +839,6 @@ class MissileShield(GameApp):
         words_for_sound = 'sound on   /   v to mute'
         return words_for_sound
 
-    
     def _make_audio_label(self, y):
         """
         puts the current sound status in the panel footer
@@ -849,7 +887,6 @@ class MissileShield(GameApp):
         current_label.left = left
         self._screen_labels.append(current_label)
 
-    
     def _make_label(self, words, x, y, size, color,
                     font=BASIC_FONT, limit=1008):
         """
@@ -882,7 +919,6 @@ class MissileShield(GameApp):
             current_label.font_size = chosen_size
         label_for_this_spot = current_label
         return label_for_this_spot
-
 
     def _add_card_corners(self, x, y, width, height, radius, color):
         """
@@ -973,12 +1009,13 @@ class MissileShield(GameApp):
         if number_in_file >= len(self._campaign_rounds):
             number_in_file = len(self._campaign_rounds) - 1
         information = dict(self._campaign_rounds[number_in_file])
-        information['round_number'] = self._round_number + 1
+        if self._endless_campaign or len(self._campaign_rounds) > 1:
+            information['round_number'] = self._round_number + 1
         if self._round_number >= len(self._campaign_rounds):
-            information = dict(information)
             extra_rounds = self._round_number - len(self._campaign_rounds) + 1
             information['speed'] = information['speed'] + 5 * extra_rounds
         self._wave = Wave(information, self._saved_cities)
+        self._wave.showRoundStart()
         self._wave.setSoundsEnabled(self._sounds_enabled)
         self._wave.startSounds()
         self._clear_messages()
@@ -986,10 +1023,12 @@ class MissileShield(GameApp):
 
     def _begin_scoring(self):
         """
-        remembers leftover ammunition and living cities before starting score
-        counting
+        saves the ammo and city counts before the score starts its animation
+
+        loss already ended the wave so its final points can still count here
         """
         self._wave.stopSounds()
+        self._score_was_loss = self._wave.getLost()
         self._saved_cities = self._wave.getSurvivingSlots()
         total_ammunition = 0
         for ammo_count in self._wave.getAmmoCounts():
@@ -1006,30 +1045,71 @@ class MissileShield(GameApp):
 
     def _make_scoring_panel(self):
         """
-        draws the round score panel before any score icons have been counted
+        makes the score display with one large icon for each point source
+
+        the numbers start at zero (and grow one item each beat)
+        rockets are 5 points each and surviving cities are 100 points each
         """
         self._make_panel(530)
         number = str(self._round_number + 1)
-        self._add_center_label('round ' + number + ' cleared', 650,
-                               35, UI_TEXT, DISPLAY_FONT)
-        self._add_center_label('total score', 588, 16, UI_MUTED)
+        heading = 'round ' + number + ' cleared'
+        if self._score_was_loss:
+            heading = 'final score'
+        self._add_center_label(heading, 650, 35, UI_TEXT, DISPLAY_FONT)
+        self._add_center_label('total score', 583, 16, UI_MUTED)
         self._text = self._make_label(str(self._total_score),
-                                     self.width / 2, 529, 63,
+                                     self.width / 2, 525, 63,
                                      UI_ACCENT, THEME_FONT)
-        self._add_center_label('remaining rockets   +   surviving cities',
-                               467, 17, UI_MUTED)
+        self._make_score_rows()
         if self._has_next_round():
-            self._add_key_hint('n / r', 'next round', 386, 252, True)
+            self._add_key_hint('n / r', 'next round', 386, 325, True)
         else:
-            self._add_key_hint('n / r', 'see results', 386, 252, True)
-        self._add_key_hint('m', 'menu', 692, 252)
+            self._add_key_hint('n / r', 'see results', 386, 325, True)
+        self._add_key_hint('m', 'menu', 692, 325)
+
+    def _make_score_rows(self):
+        """
+        puts the rocket count next to a rocket picture (same for cities)
+
+        the labels change as the score animation counts each item
+        """
+        self._score_icons = []
+        rocket = GImage(source='missile@2x.png', x=330, y=421,
+                        width=24, height=46)
+        city = GImage(source='city@2x.png', x=659, y=421,
+                      width=48, height=46)
+        self._score_icons.append(rocket)
+        self._score_icons.append(city)
+        self._score_rocket_text = self._make_label('', 478, 421,
+                                                  19, UI_TEXT)
+        self._score_city_text = self._make_label('', 796, 421,
+                                                19, UI_TEXT)
+        self._screen_labels.append(self._score_rocket_text)
+        self._screen_labels.append(self._score_city_text)
+        self._refresh_score_rows()
+
+    def _refresh_score_rows(self):
+        """shows how many rockets and cities have been counted so far"""
+        rockets = str(self._counted_ammo) + '/' + str(self._round_ammo)
+        cities = str(self._counted_cities) + '/' + str(self._round_cities)
+        self._score_rocket_text.text = rockets + ' rockets  (+5 each)'
+        self._score_city_text.text = cities + ' cities  (+100 each)'
+
+    def _shrink_score_icons(self, dt):
+        """gently shrinks the picture after each score beat
+
+        parameter dt: seconds since the last frame (a nonnegative number)
+        """
+        for icon in self._score_icons:
+            if icon.height > 46:
+                icon.height = max(46, icon.height - 80 * dt)
 
     def _update_scoring(self, dt):
         """
-        counts one icon every 0.085 seconds and waits for the next round key
+        adds one rocket or city score beat every 0.085 seconds
 
-        n or r finishes any remaining tally then opens the next round
-        a single wave ends on its own after the tally and a short hold
+        n or r skips the rest of the tally and moves to the next screen
+        a failed or single wave shows the final results after a short hold
         parameter dt: elapsed seconds from the last frame
         precondition: dt is a nonnegative number
         """
@@ -1040,6 +1120,7 @@ class MissileShield(GameApp):
             self._finish_score_count()
             self._move_past_score()
             return
+        self._shrink_score_icons(dt)
         self._score_time = self._score_time + dt
         while self._score_time >= 0.085:
             self._score_time = self._score_time - 0.085
@@ -1054,52 +1135,41 @@ class MissileShield(GameApp):
 
     def _count_score_item(self):
         """
-        counts one rocket for SCORE_AMMO or one city for SCORE_CITY (then
-        returns True)
+        adds one leftover rocket (5 points) or one living city (100 points)
 
-        the return is False after all rockets and surviving cities were
-        counted
-        this method adds exactly one score icon and one score sound if it
-        returns True
+        returns True if it counted something and False if the tally is done
+        each item updates its count and makes the matching sound and image pulse
         """
         if self._counted_ammo < self._round_ammo:
-            index = self._counted_ammo
             self._counted_ammo = self._counted_ammo + 1
             self._total_score = self._total_score + SCORE_AMMO
-            self._add_score_icon('missile-small@2x.png', index, 0)
+            self._add_score_icon('missile@2x.png', self._counted_ammo, 0)
+            self._wave.playScoreTick(0)
         elif self._counted_cities < self._round_cities:
-            index = self._counted_cities
             self._counted_cities = self._counted_cities + 1
             self._total_score = self._total_score + SCORE_CITY
-            self._add_score_icon('city-base@2x.png', index, 1)
+            self._add_score_icon('city@2x.png', self._counted_cities, 1)
+            self._wave.playScoreTick(1)
         else:
             self._save_high_score()
             return False
         self._text.text = str(self._total_score)
-        self._wave.playScoreTick()
+        self._refresh_score_rows()
         return True
 
     def _add_score_icon(self, filename, index, kind):
         """
-        adds a small rocket icon or city icon at the right position in the
-        score grid
+        makes one existing score icon grow briefly for its next counted item
 
-        parameter filename: the exact name of a json or asset file (a
-        nonempty string)
-        parameter index: zero based index of this icon in its row (an int at
-        least zero)
-        parameter kind: icon type (zero for rocket or one for city)
-        precondition: filename is a nonempty string (and index is an int at
-        least zero (and kind is zero for rocket or one for city))
+        parameter filename: supplied sprite name for this item (a string)
+        parameter index: number of these items already counted (int >= 1)
+        parameter kind: 0 for a rocket or 1 for a city
+        precondition: kind is 0 or 1 and index is at least 1
         """
-        icon_x = 261 + (index % 15) * 45
-        icon_y = 413 - (index // 15) * 40
-        if kind == 1:
-            icon_x = 430 + index * 58
-            icon_y = 317
-        icon = GImage(source=filename, x=icon_x, y=icon_y,
-                      width=27, height=27)
-        self._score_icons.append(icon)
+        if kind == 0:
+            self._score_icons[0].height = 58
+        else:
+            self._score_icons[1].height = 58
 
     def _finish_score_count(self):
         """
@@ -1114,14 +1184,17 @@ class MissileShield(GameApp):
         self._counted_ammo = self._round_ammo
         self._counted_cities = self._round_cities
         self._text.text = str(self._total_score)
+        self._refresh_score_rows()
 
     def _has_next_round(self):
         """
-        returns True when the selected json has another campaign round
+        returns True only if this was a win and another campaign round exists
 
-        endless campaigns always have a next round because they repeat the
-        final listed wave at higher speed
+        endless campaigns reuse the last wave after the designed rounds
+        loss never allows another round because no cities remain
         """
+        if self._score_was_loss:
+            return False
         more_rounds = self._round_number + 1 < len(self._campaign_rounds)
         if self._endless_campaign:
             more_rounds = True
@@ -1129,10 +1202,14 @@ class MissileShield(GameApp):
 
     def _move_past_score(self):
         """
-        starts another campaign round or shows the finished result
+        starts the next campaign round after a win or shows final results
+
+        losing always goes to final results because every city is gone
         """
         self._save_high_score()
-        if self._has_next_round():
+        if self._score_was_loss:
+            self._finish_wave(False)
+        elif self._has_next_round():
             self._round_number = self._round_number + 1
             try:
                 self._start_round()
