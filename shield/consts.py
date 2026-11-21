@@ -131,50 +131,58 @@ except:
 
 ### ADD MORE CONSTANTS (PROPERLY COMMENTED) AS NECESSARY ###
 
+
+# keep all the old state numbers the same so original waves still work
+STATE_SCORING = 6
+
+
 ### a couple of timing helpers ###
 
-# those small aim speeds assume 60 frames per second, so keep that feel.
-# this turns movement into seconds without changing the speed limits.
-# so 60 old frames take the same amount of time as one second.
+# aim speeds use a basic 60 fps scale
+# this turns movement into seconds without changing the speed limits
+
 AIM_FRAME_SCALE = 60
 
-# tiny steps help a blast catch a bomb even if one frame takes a while.
+
 PHYSICS_STEP = 1 / 120
 
-### night post extras; the wave flags have to turn these on ###
+### night post extras and the wave flags have to turn these on ###
 
-# forecast rings look this far ahead using the current speed of each bomb.
+
 FORECAST_SECONDS = 1.5
 
-# a full bubble has this many seconds of charge; holding space uses it.
+# a full bubble has this many seconds of charge and holding space uses it
 BUBBLE_CAPACITY = 4.0
-# how far the bubble reaches from the reticule, in pixels
+
 BUBBLE_RADIUS = 125
-# bombs inside a charged bubble move at this fraction of the usual speed.
+
 BUBBLE_SPEED_FACTOR = 0.22
-# seconds of charge gained per real second while space is not held
-# letting go fills it back up; holding it empty does nothing.
+# seconds of charge added after releasing space
+
 BUBBLE_RECHARGE = 0.4
 
-# every three catches give one rocket to the silo with the least ammo.
+
 RECYCLE_GROUP_SIZE = 3
 
-# rgba colors for the extra guides and the usual controls
-HUD_MINT = (0.57, 0.91, 0.84, 1)
-HUD_AMBER = (0.92, 0.76, 0.54, 1)
+
+HUD_MINT = (0.98, 0.92, 0.50, 1)
+HUD_AMBER = (0.95, 0.73, 0.37, 1)
 HUD_PAPER = (0.93, 0.96, 0.95, 1)
 
-# same few colors everywhere, so the menu and controls look related.
-# the fourth number in introcs.RGB says how see-through it is (0-255).
+
+
 UI_BG = introcs.RGB(9, 17, 26)
-UI_SURFACE = introcs.RGB(16, 29, 42, 244)
-UI_SURFACE_SOFT = introcs.RGB(21, 38, 51, 225)
+UI_SURFACE = introcs.RGB(12, 22, 34, 255)
+UI_SURFACE_SOFT = introcs.RGB(27, 36, 49, 255)
 UI_BORDER = introcs.RGB(56, 78, 87, 190)
 UI_TEXT = introcs.RGB(237, 245, 241)
 UI_MUTED = introcs.RGB(150, 173, 181)
-UI_ACCENT = introcs.RGB(145, 231, 215)
-UI_AMBER = introcs.RGB(235, 194, 137)
-UI_DANGER = introcs.RGB(236, 158, 150)
+UI_ACCENT = introcs.RGB(250, 235, 128)
+UI_AMBER = introcs.RGB(243, 186, 95)
+UI_DANGER = introcs.RGB(255, 149, 135)
 
-# ok the colors finally match across the screens 😭
-# omg this took so long 😭
+
+# title font is a supplied ttf so it works with the course game2d package
+DISPLAY_FONT = 'Neonix.ttf'
+
+# ok how are there this many numbers 💀
